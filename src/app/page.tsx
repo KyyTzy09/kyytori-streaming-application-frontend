@@ -1,7 +1,5 @@
-import Image from "next/image";
+import IndexView from "@/components/views/index-page";
 
-export default function Home() {
-  return (
-    <div className="w-full min-h-screen"></div>
-  );
+export default function Index() {
+  return <IndexView />;
 }
