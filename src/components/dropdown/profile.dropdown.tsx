@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/common/shadcn/button";
 import {
   DropdownMenu,
@@ -7,10 +9,30 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/common/shadcn/dropdown-menu";
-import { LucideOption, Menu, Option } from "lucide-react";
+import { Bookmark, Command, Menu, User } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function ProfileDropdown() {
+  const router = useRouter();
+  const items = [
+    {
+      name: "Profile",
+      path: "/dashboard",
+      icon: User,
+    },
+    {
+      name: "Favorite",
+      path: "/dashboard/favorite",
+      icon: Bookmark,
+    },
+    {
+      name: "Comment",
+      path: "/dashboard/comment",
+      icon: Command,
+    },
+  ];
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,7 +50,18 @@ export default function ProfileDropdown() {
           <Menu className="w-4 h-4" />
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-red-500" />
-        <DropdownMenuItem>Tess</DropdownMenuItem>
+        {items.map((item) => {
+          return (
+            <DropdownMenuItem
+              key={item.name}
+              onClick={() => router.push(item.path)}
+              className="w-full cursor-pointer focus:bg-red-500 flex items-center justify-start gap-2 transition duration-700"
+            >
+              <item.icon className="w-5 h-5 text-white" />
+              <p className="text-white font-semibold">{item.name}</p>
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );

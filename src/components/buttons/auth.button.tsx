@@ -26,7 +26,7 @@ export default function AuthButton() {
           <p>SignIn</p>
           <LogIn />
         </Button>
-        <ProfileDropdown />
+
       </div>
     </section>
   );

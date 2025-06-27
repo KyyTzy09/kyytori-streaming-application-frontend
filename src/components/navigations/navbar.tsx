@@ -5,7 +5,7 @@ import AuthButton from "../buttons/auth.button";
 export default function Navbar() {
   return (
     <nav className="w-full h-20 border-b">
-      <div className="w-full h-full p-5 flex items-center justify-between">
+      <div className="w-full h-full p-8 flex items-center justify-between">
         <p className="text-red-500 light:text-black font-bold text-xl">
           KyyTori<span className="text-white">.id</span>
         </p>
