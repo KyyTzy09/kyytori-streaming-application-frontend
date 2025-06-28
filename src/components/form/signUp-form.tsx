@@ -1,18 +1,31 @@
 "use client";
 
 import useFormHandle from "@/common/composables/authFormHandle";
+import { fetcher } from "@/common/helpers/axios";
 import { signUpSchema } from "@/common/schemas/auth.schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
 import { Loader } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { toast } from "react-toastify";
 
 export default function SignUpForm() {
+  const router = useRouter();
   const { fieldError, handleChange, Loading, handleSubmit } = useFormHandle(
     signUpSchema,
-    { email: "", password: "", firstName: "", lastName: "" }
+    { email: "", password: "", firstName: "", lastName: "" },
+    async (objectData) => {
+      const { data } = await fetcher.post(`/auth/register`, objectData);
+      toast(data.message, {
+        type: "success",
+        isLoading: Loading,
+        autoClose: 2000,
+      });
+      router.push("/signin");
+    }
   );
   return (
     <form
@@ -34,6 +47,7 @@ export default function SignUpForm() {
           placeholder="Masukan Nama Depan"
           onChange={handleChange}
           className="max-w-[350px] h-12"
+          required
         />
         {fieldError.firstName && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
@@ -48,6 +62,7 @@ export default function SignUpForm() {
           placeholder="Masukan Nama Belakang"
           onChange={handleChange}
           className="max-w-[350px] h-12"
+          required
         />
         {fieldError.lastName && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
@@ -62,6 +77,7 @@ export default function SignUpForm() {
           placeholder="Masukan Email"
           onChange={handleChange}
           className="max-w-[350px] h-12"
+          required
         />
         {fieldError.email && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
@@ -88,7 +104,7 @@ export default function SignUpForm() {
         {Loading ? (
           <Loader className="animate-spin" size={20} />
         ) : (
-          <p>SignIn</p>
+          <p>SignUp</p>
         )}
       </Button>
       <div className="text-[13px] text-gray-600 font-semibold flex w-full justify-center gap-1 items-center">

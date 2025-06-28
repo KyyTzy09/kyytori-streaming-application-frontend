@@ -1,18 +1,36 @@
 "use client";
 
 import useFormHandle from "@/common/composables/authFormHandle";
+import { fetcher } from "@/common/helpers/axios";
 import { signInSchema } from "@/common/schemas/auth.schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
+import { useSession } from "@/hooks/session";
+import { setCookies } from "@/lib/cookies";
 import { Loader } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { toast } from "react-toastify";
 
-export default function SigninForm() {
+export default function SignInForm() {
+  const router = useRouter();
   const { fieldError, handleChange, Loading, handleSubmit } = useFormHandle(
     signInSchema,
-    { email: "", password: "" }
+    { email: "", password: "" },
+    async (objectData) => {
+      const { data } = await fetcher.post(`/auth/login`, objectData);
+      await setCookies(data.token);
+      const session = await useSession();
+      toast(`Selamat Datang ${session.profile.userName} !!`, {
+        type: "success",
+        position: "top-center",
+        isLoading: Loading,
+        autoClose: 2000,
+      });
+      router.push("/");
+    }
   );
   return (
     <form

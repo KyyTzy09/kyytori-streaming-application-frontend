@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { Button } from "@/common/shadcn/button";
 import { LogIn } from "lucide-react";
@@ -26,7 +26,7 @@ export default function AuthButton() {
           <p>SignIn</p>
           <LogIn />
         </Button>
-
+        <ProfileDropdown />
       </div>
     </section>
   );

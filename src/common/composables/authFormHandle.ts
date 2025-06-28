@@ -1,12 +1,16 @@
 'use client'
 
-import React, { useState } from "react"
-import { z, ZodSchema } from "zod";
+import React from "react"
+import { z } from "zod";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
-export default function useFormHandle<Tform extends Record<string, string>>(schema: ZodSchema<Tform>, initialValues: Tform) {
-    const [form, setForm] = React.useState(initialValues)
-    const [fieldError, setFieldError] = useState<Partial<Record<keyof Tform, string>>>({})
-    const [Loading, setLoading] = React.useState<boolean>(false);
+
+export default function useFormHandle<Tform extends Record<string, string>>(schema: z.ZodSchema<Tform>, initialValues: Tform, submited: (data: Tform) => Promise<void>) {
+    const [form, setForm] = React.useState<Record<keyof Tform, string>>(initialValues)
+    const [fieldError, setFieldError] = React.useState<Partial<Record<keyof Tform, string>>>({})
+    const [Loading, setLoading] = React.useState<boolean>(false)
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const updatedForm = {
@@ -31,13 +35,13 @@ export default function useFormHandle<Tform extends Record<string, string>>(sche
     }
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+        e.preventDefault()
         setLoading(true)
         try {
             const formData = new FormData(e.currentTarget)
-            const data = Object.fromEntries(formData.entries())
-            schema.parse(data)
-            alert("ini data" + JSON.stringify(data))
+            const objectData = Object.fromEntries(formData.entries()) as Tform
+            schema.parse(objectData)
+            return await submited(objectData)
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const errors: Record<string, string> = {}
@@ -48,32 +52,19 @@ export default function useFormHandle<Tform extends Record<string, string>>(sche
                 })
                 setFieldError(errors as Partial<Record<keyof Tform, string>>)
             }
+            if (axios.isAxiosError(error)) {
+                const message = error.response?.data.message
+                toast(message, {
+                    type: "error",
+                    isLoading: Loading,
+                    autoClose: 2000
+                })
+            }
         } finally {
             setLoading(false)
         }
     }
 
-    // function handleChange(field: keyof authForm) {
-    //     return () => {
-    //         if (!formRef.current) return;
-    //         const formData = new FormData(formRef.current)
-    //         const data = Object.fromEntries(formData.entries()) as authForm
-    //         try {
-    //             authSchema.parse(data)
-    //             setFieldError({})
-    //         } catch (error) {
-    //             if (error instanceof z.ZodError) {
-    //                 const fieldError: Record<string, string> = {}
-    //                 error.errors.forEach((err) => {
-    //                     if (err.path.length > 0) {
-    //                         fieldError[err.path[0]] = err.message
-    //                     }
-    //                 })
-    //                 setFieldError(fieldError)
-    //             }
-    //         }
-    //     }
-    // }
 
-    return { fieldError, Loading, handleChange, handleSubmit }
+    return { fieldError, handleChange, Loading, handleSubmit }
 }

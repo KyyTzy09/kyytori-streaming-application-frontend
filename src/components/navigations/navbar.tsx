@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 import React from "react";
 import AuthButton from "../buttons/auth.button";
 
-export default function Navbar() {
+export default async function Navbar() {
   return (
     <nav className="w-full h-20 border-b">
       <div className="w-full h-full p-8 flex items-center justify-between">
