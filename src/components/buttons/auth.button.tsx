@@ -14,14 +14,14 @@ export default function AuthButton() {
       <div className="w-full flex items-center justify-center gap-2">
         <Button
           className="bg-transparent cursor-pointer border-red-500 border-2 hover:bg-transparent hover:opacity-70 flex items-center justify-between transition duration-700"
-          onClick={() => router.push("/auth/signup")}
+          onClick={() => router.push("/signup")}
         >
           <p>SignUp</p>
           <LogIn />
         </Button>
         <Button
           className="bg-red-600 cursor-pointer border-white border-2 text-white hover:bg-red-300 flex items-center justify-between transition duration-700"
-          onClick={() => router.push("/auth/signin")}
+          onClick={() => router.push("/signin")}
         >
           <p>SignIn</p>
           <LogIn />
