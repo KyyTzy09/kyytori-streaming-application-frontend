@@ -2,23 +2,21 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { Roles } from "./common/constant/role";
-import { useSession } from "./hooks/session";
+import { getSession } from "./lib/session";
 
-export default async function Middleware(req: NextRequest, res: NextResponse) {
+export default async function Middleware(req: NextRequest) {
     const pathName = req.nextUrl.pathname
-    const session = await useSession()
+    const session = await getSession()
 
     // Cek apakah sudah login atau belum
-    if (!session) {
-        return NextResponse.redirect("/signIn")
-    }
 
     if (pathName.startsWith("/dashboard/admin") && session.role !== Roles.Admin) {
-        return NextResponse.redirect("/signin")
-    }
-    
-    if (pathName.startsWith("/dashboard") && !session) {
-        return NextResponse.redirect("/signin")
+        return NextResponse.redirect(new URL("/signin", req.url))
     }
 
+    if (pathName.startsWith("/dashboard") && !session) {
+        return NextResponse.redirect(new URL("/signin", req.url))
+    }
+
+    NextResponse.next()
 }

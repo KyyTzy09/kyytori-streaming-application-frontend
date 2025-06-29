@@ -1,13 +1,11 @@
 "use client";
 
-import useFormHandle from "@/common/composables/authFormHandle";
-import { fetcher } from "@/common/helpers/axios";
+import useFormHandle from "@/common/composables/auth-form";
 import { signInSchema } from "@/common/schemas/auth.schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
-import { useSession } from "@/hooks/session";
-import { setCookies } from "@/lib/cookies";
+import { signInSession } from "@/lib/session";
 import { Loader } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,9 +18,7 @@ export default function SignInForm() {
     signInSchema,
     { email: "", password: "" },
     async (objectData) => {
-      const { data } = await fetcher.post(`/auth/login`, objectData);
-      await setCookies(data.token);
-      const session = await useSession();
+      const session = await signInSession(objectData);
       toast(`Selamat Datang ${session.profile.userName} !!`, {
         type: "success",
         position: "top-center",

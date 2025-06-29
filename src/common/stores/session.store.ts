@@ -6,7 +6,7 @@ interface UserStoreProps {
     setUser: (user: User) => void
 }
 
-export const useUserStore = create<UserStoreProps>((set) => ({
+export const useSessionStore = create<UserStoreProps>((set) => ({
     user: null,
-    setUser: (user) => set({ user })
+    setUser: (user) => set({ user }),
 }))

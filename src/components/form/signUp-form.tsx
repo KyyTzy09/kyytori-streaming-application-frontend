@@ -1,6 +1,6 @@
 "use client";
 
-import useFormHandle from "@/common/composables/authFormHandle";
+import useFormHandle from "@/common/composables/auth-form";
 import { fetcher } from "@/common/helpers/axios";
 import { signUpSchema } from "@/common/schemas/auth.schema";
 import { Button } from "@/common/shadcn/button";

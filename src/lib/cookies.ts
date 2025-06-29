@@ -19,3 +19,8 @@ export async function getCookies() {
     const token = ((await cookie).get("session_token")?.value)
     return token
 }
+
+export async function deleteCookies() {
+    const cookie = cookies()
+    return (await cookie).delete("session_token")
+}

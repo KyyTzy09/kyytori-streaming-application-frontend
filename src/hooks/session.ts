@@ -1,18 +1,23 @@
-'use server'
+'use client'
 
-import { fetcher } from "@/common/helpers/axios";
-import { getCookies } from "@/lib/cookies";
+import { signOutSession } from "@/lib/session"
+import { toast } from "react-toastify"
 
-export async function useSession() {
-    try {
-        const token = await getCookies()
-        const { data } = await fetcher.get("/user/profile", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        return await data.data
-    } catch (error) {
-        return;
+export default function useSession() {
+    async function SignOut() {
+        try {
+            await signOutSession()
+            toast("Logout success", {
+                type: "success",
+                autoClose: 2000
+            })
+        } catch (error: any) {
+            toast(error.message, {
+                type: "error",
+                autoClose: 2000
+            })
+        }
     }
+
+    return { SignOut }
 }
