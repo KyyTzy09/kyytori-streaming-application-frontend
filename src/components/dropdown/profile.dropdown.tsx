@@ -15,6 +15,7 @@ import React from "react";
 import AvatarSkeleton from "../skeleton/avatar.skeleton";
 import useSession from "@/hooks/session";
 import { User } from "@/common/types/user";
+import { FaComment } from "react-icons/fa";
 
 
 export default function ProfileDropdown({ user } : { user : User}) {
@@ -35,7 +36,7 @@ export default function ProfileDropdown({ user } : { user : User}) {
     {
       name: "Comment",
       path: "/dashboard/comment",
-      icon: Command,
+      icon: FaComment,
     },
   ];
 

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import ProfileDropdown from "../dropdown/profile.dropdown";
 import { User } from "@/common/types/user";
-import { useSessionStore } from "@/common/stores/session.store";
+
 
 export default function AuthButton({ data }: { data: User }) {
   const router = useRouter();
