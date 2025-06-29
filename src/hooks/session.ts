@@ -9,12 +9,14 @@ export default function useSession() {
             await signOutSession()
             toast("Logout success", {
                 type: "success",
-                autoClose: 2000
+                autoClose: 2000,
+                position: "top-center"
             })
         } catch (error: any) {
             toast(error.message, {
                 type: "error",
-                autoClose: 2000
+                autoClose: 2000,
+                position: "top-center"
             })
         }
     }

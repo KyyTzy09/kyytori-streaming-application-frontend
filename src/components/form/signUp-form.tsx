@@ -100,7 +100,11 @@ export default function SignUpForm() {
           </p>
         )}
       </div>
-      <Button className="w-full bg-red-600 hover:bg-red-400 " type="submit">
+      <Button
+        className="w-full bg-red-600 hover:bg-red-400"
+        disabled={Loading}
+        type="submit"
+      >
         {Loading ? (
           <Loader className="animate-spin" size={20} />
         ) : (
