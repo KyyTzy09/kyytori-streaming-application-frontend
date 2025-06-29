@@ -7,10 +7,8 @@ import React from "react";
 import ProfileDropdown from "../dropdown/profile.dropdown";
 import { User } from "@/common/types/user";
 
-
 export default function AuthButton({ data }: { data: User }) {
   const router = useRouter();
-
   return (
     <section className="flex">
       <div className="w-full flex items-center justify-center gap-2">
@@ -32,7 +30,7 @@ export default function AuthButton({ data }: { data: User }) {
             </Button>
           </>
         ) : (
-          <ProfileDropdown user={data}/>
+          <ProfileDropdown user={data} />
         )}
       </div>
     </section>

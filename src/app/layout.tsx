@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navigations/navbar";
 import { ToastContainer } from "react-toastify";
+import { getSession } from "@/lib/session";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,14 +25,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const data = await getSession();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
         <ToastContainer />
-        <Navbar />
-        <section className="w-full min-h-screen p-5">{children}</section>
+        <Navbar data={data}/>
+        <section className="w-full min-h-screen">{children}</section>
       </body>
     </html>
   );

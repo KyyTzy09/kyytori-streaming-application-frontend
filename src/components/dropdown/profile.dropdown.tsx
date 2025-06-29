@@ -17,9 +17,8 @@ import useSession from "@/hooks/session";
 import { User } from "@/common/types/user";
 import { FaComment } from "react-icons/fa";
 
-
-export default function ProfileDropdown({ user } : { user : User}) {
-  const {SignOut} = useSession()
+export default function ProfileDropdown({ user }: { user: User }) {
+  const { SignOut } = useSession();
 
   const router = useRouter();
   const items = [
@@ -74,7 +73,7 @@ export default function ProfileDropdown({ user } : { user : User}) {
           );
         })}
         <DropdownMenuItem
-          onClick={async() => await SignOut() }
+          onClick={async () => await SignOut()}
           className="w-full cursor-pointer focus:bg-red-500 flex items-center justify-start gap-2 transition duration-700 mt-4 border-white border"
         >
           <LogOut className="w-5 h-5 text-white" />

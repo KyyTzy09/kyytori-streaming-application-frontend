@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function IndexView() {
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen p-5">
       <div className="w-full h-full flex items-center justify-between">
         <section className="w-1/2 h-full flex items-center md:px-28 md:py-56 ">
           <div className="w-full flex flex-col items-center justify-center gap-2">
