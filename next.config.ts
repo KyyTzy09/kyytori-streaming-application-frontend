@@ -2,11 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    localPatterns: [
-      {
-        pathname: "res.cloudinary.com"
-      }
-    ]
+    domains : ["res.cloudinary.com", "cdn-icons-png.flaticon.com"]
   }
 };
 

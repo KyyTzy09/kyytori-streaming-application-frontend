@@ -23,6 +23,7 @@ export default function SignUpForm() {
         type: "success",
         isLoading: Loading,
         autoClose: 2000,
+        position : "top-center"
       });
       router.push("/signin");
     }
@@ -34,7 +35,7 @@ export default function SignUpForm() {
     >
       <div className="w-full flex items-center gap-1">
         <h1 className="text-2xl font-semibold">
-          SignIn To{" "}
+          Daftar ke{" "}
           <span className="text-xl font-bold text-red-600">KyyTori</span>
         </h1>
       </div>
@@ -112,9 +113,9 @@ export default function SignUpForm() {
         )}
       </Button>
       <div className="text-[13px] text-gray-600 font-semibold flex w-full justify-center gap-1 items-center">
-        <p>have an account?</p>
+        <p>sudah punya akun?</p>
         <Link href={"/signin"} className="text-[#9e1313] hover:underline">
-          SignIn
+          Masuk
         </Link>
       </div>
     </form>

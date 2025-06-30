@@ -1,9 +1,6 @@
-import React from 'react'
+import ProfileView from "@/components/views/dashboard/profile-page";
+import React from "react";
 
 export default function DashboardPage() {
-  return (
-    <div>
-      p Halooo
-    </div>
-  )
+  return <ProfileView />;
 }

@@ -18,14 +18,14 @@ export default function AuthButton({ data }: { data: User }) {
               className="bg-transparent cursor-pointer border-red-500 border-2 hover:bg-transparent hover:opacity-70 flex items-center justify-between transition duration-700"
               onClick={() => router.push("/signup")}
             >
-              <p>SignUp</p>
+              <p>Daftar</p>
               <LogIn />
             </Button>
             <Button
               className="bg-red-600 cursor-pointer border-white border-2 text-white hover:bg-red-300 flex items-center justify-between transition duration-700"
               onClick={() => router.push("/signin")}
             >
-              <p>SignIn</p>
+              <p>Masuk</p>
               <LogIn />
             </Button>
           </>

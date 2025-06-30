@@ -9,6 +9,9 @@ export default async function Middleware(req: NextRequest) {
     const session = await getSession()
 
     // Cek apakah sudah login atau belum
+    if (pathName === "/signin" && session || pathName === "/signup" && session) {
+        return NextResponse.redirect(new URL("/dashboard", req.url))
+    }
 
     if (pathName.startsWith("/dashboard/admin") && session.role !== Roles.Admin) {
         return NextResponse.redirect(new URL("/signin", req.url))

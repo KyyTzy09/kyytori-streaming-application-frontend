@@ -35,7 +35,7 @@ export default function SignInForm() {
     >
       <div className="w-full flex items-center gap-1">
         <h1 className="text-2xl font-semibold">
-          SignIn To{" "}
+          Masuk Ke{" "}
           <span className="text-xl font-bold text-red-600">KyyTori</span>
         </h1>
       </div>
@@ -79,7 +79,7 @@ export default function SignInForm() {
             className="text-[13px] hover:underline"
             href={"/auth/forgotPassword"}
           >
-            Forgot your Password?
+            Lupa password?
           </Link>
         </div>
       </div>
@@ -91,13 +91,13 @@ export default function SignInForm() {
         {Loading ? (
           <Loader className="animate-spin" size={20} />
         ) : (
-          <p>SignIn</p>
+          <p>Masuk</p>
         )}
       </Button>
       <div className="text-[13px] text-gray-600 font-semibold flex w-full justify-center gap-1 items-center">
-        <p>Don't have an account?</p>
+        <p>Belum punya akun?</p>
         <Link href={"/signup"} className="text-[#9e1313] hover:underline">
-          SignUp
+          Daftar
         </Link>
       </div>
     </form>

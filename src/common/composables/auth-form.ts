@@ -55,7 +55,8 @@ export default function useFormHandle<Tform extends Record<string, string>>(sche
                 toast(message, {
                     type: "error",
                     isLoading: Loading,
-                    autoClose: 2000
+                    autoClose: 2000,
+                    position : "top-center"
                 })
             }
         } finally {
