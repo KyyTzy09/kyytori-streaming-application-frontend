@@ -7,6 +7,7 @@ import AvatarForm from "@/components/form/avatar-form";
 import { Settings } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
 interface ProfileSectionProps {
   data: User;
@@ -17,6 +18,12 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
   return (
     <>
       <div className="absolute w-full h-screen flex items-center justify-center bg-[#232323] z-10 top-0 bottom-0 left-0 right-0">
+        <TransformWrapper
+        initialScale={1}
+        
+        >
+
+        </TransformWrapper>
         <Image
           src={data.profile.avatar}
           alt={data.profile.userName || "Name"}
