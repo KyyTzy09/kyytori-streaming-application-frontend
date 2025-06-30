@@ -1,7 +1,6 @@
 import { User } from "@/common/types/user";
 import ProfileHeader from "@/components/headers/profile.header";
 import { getSession } from "@/lib/session";
-import Image from "next/image";
 import React from "react";
 import ProfileSection from "./profile.section";
 
