@@ -1,11 +1,13 @@
 "use client";
 
 import useFormHandle from "@/common/composables/auth-form";
+import { fetcher } from "@/common/helpers/axios";
 import { signInSchema } from "@/common/schemas/auth.schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
-import { signInSession } from "@/lib/session";
+import { setCookies } from "@/lib/cookies";
+import { getSession } from "@/lib/session";
 import { Loader } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,7 +20,9 @@ export default function SignInForm() {
     signInSchema,
     { email: "", password: "" },
     async (objectData) => {
-      const session = await signInSession(objectData);
+      const { data } = await fetcher.post(`/auth/login`, objectData);
+      await setCookies(data.token);
+      const session = await getSession();
       toast(`Selamat Datang ${session.profile.userName} !!`, {
         type: "success",
         position: "top-center",
@@ -88,11 +92,7 @@ export default function SignInForm() {
         disabled={Loading}
         type="submit"
       >
-        {Loading ? (
-          <Loader className="animate-spin" size={20} />
-        ) : (
-          <p>Masuk</p>
-        )}
+        {Loading ? <Loader className="animate-spin" size={20} /> : <p>Masuk</p>}
       </Button>
       <div className="text-[13px] text-gray-600 font-semibold flex w-full justify-center gap-1 items-center">
         <p>Belum punya akun?</p>

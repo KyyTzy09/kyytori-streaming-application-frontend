@@ -5,6 +5,7 @@ import React, { ElementType } from "react";
 
 interface DashboardHeaderProps {
   title: string;
+  description : string
   actionText: string;
   action: () => void;
   Icon: ElementType;
@@ -12,13 +13,17 @@ interface DashboardHeaderProps {
 
 export default function DashboardHeader({
   title,
+  description,
   actionText,
   action,
   Icon,
 }: DashboardHeaderProps) {
   return (
     <div className="w-full flex items-center justify-between mb-5">
-      <p className="text-red-500 font-semibold text-xl">{title}</p>
+      <div className="flex flex-col items-start justify-center">
+        <p className="text-red-500 font-semibold text-xl">{title}</p>
+        <p className="text-white font-semibold text-sm">{description}</p>
+      </div>
       <Button
         className="flex items-center justify-center bg-red-500 hover:bg-red-300 text-white font-semibold transition duration-700"
         onClick={action}

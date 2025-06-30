@@ -19,14 +19,6 @@ export async function getSession() {
     }
 }
 
-// Untuk signIn 
-export async function signInSession(objectData: {}) {
-    const { data } = await fetcher.post(`/auth/login`, objectData);
-    await setCookies(data.token)
-    const session = await getSession();
-    return await session as User
-}
-
 // Untuk logout
 export async function signOutSession() {
     await deleteCookies()
