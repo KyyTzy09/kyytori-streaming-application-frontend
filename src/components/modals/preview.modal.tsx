@@ -8,6 +8,7 @@ import React from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 interface PreviewImageProps {
+  isOpen: boolean;
   image: string;
   Width: number;
   height: number;
@@ -15,12 +16,17 @@ interface PreviewImageProps {
 
 export default function PreviewImageModal({
   image,
+  isOpen,
   Width,
   height,
 }: PreviewImageProps) {
   const [disablePan, setDisablePan] = React.useState<boolean>(true);
   return (
-    <div className="absolute w-screen h-screen flex items-center justify-center bg-[#232323] z-10 top-0 bottom-0 left-0 right-0">
+    <div
+      className={`${
+        isOpen ? "flex" : "hidden"
+      } absolute w-screen h-screen items-center justify-center bg-[#232323] z-10 top-0 bottom-0 left-0 right-0`}
+    >
       <TransformWrapper
         onZoom={(era) => {
           if (era.state.scale > 1) {
