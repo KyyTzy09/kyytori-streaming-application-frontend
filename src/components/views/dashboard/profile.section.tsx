@@ -3,7 +3,7 @@
 import { User } from "@/common/types/user";
 import AvatarDropDown from "@/components/dropdown/avatar.dropdown";
 import PreviewImageModal from "@/components/modals/preview.modal";
-import { Edit, Pencil, Settings } from "lucide-react";
+import { Pencil, Settings } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import Image from "next/image";
 import React from "react";
@@ -14,6 +14,8 @@ interface ProfileSectionProps {
 
 export default function ProfileSection({ data }: ProfileSectionProps) {
   const [preview, setPreview] = React.useState<boolean>(false);
+  const [] = React.useState();
+
   return (
     <>
       <AnimatePresence>
@@ -39,7 +41,10 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
               className="w-full h-full object-cover rounded-full"
             />
             <div className="group-hover:opacity-100 w-full h-full opacity-0 top-0 bottom-0 absolute bg-black/50 rounded-full items-center flex justify-center">
-              <AvatarDropDown setPreviewAction={setPreview}>
+              <AvatarDropDown
+                image={data.profile.avatar}
+                setPreviewAction={setPreview}
+              >
                 <Pencil className="w-5 h-5 text-white" />
               </AvatarDropDown>
             </div>

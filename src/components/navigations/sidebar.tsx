@@ -8,7 +8,7 @@ import { Bookmark, LucideLogOut, UserIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { FaComment } from "react-icons/fa";
-import AlertModal from "../modals/alert.modals";
+import AlertModal from "../modals/alert.modal";
 
 export default function DashboardSideBar({ data }: { data: User }) {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);

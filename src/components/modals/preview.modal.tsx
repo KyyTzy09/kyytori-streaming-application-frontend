@@ -1,10 +1,8 @@
 "use client";
 
 import { Button } from "@/common/shadcn/button";
-import { User } from "@/common/types/user";
-import { X, ZoomIn, ZoomOut } from "lucide-react";
+import { X } from "lucide-react";
 import { motion } from "motion/react";
-import Image from "next/image";
 import React from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
@@ -28,7 +26,7 @@ export default function PreviewImageModal({
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 100, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
+      exit={{ opacity: 0 }}
       className={`${
         isOpen ? "flex" : "hidden"
       } absolute w-screen h-screen items-center justify-center bg-[#232323] z-10 top-0 bottom-0 left-0 right-0`}
