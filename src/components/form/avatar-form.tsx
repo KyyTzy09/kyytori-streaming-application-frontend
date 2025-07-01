@@ -29,7 +29,6 @@ export default function AvatarForm({
   const [image, setImage] = React.useState<File | null>();
 
   const { UpdateAvatar } = useProfileForm();
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await UpdateAvatar({
@@ -62,7 +61,7 @@ export default function AvatarForm({
             </Button>
             <Button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !image}
               className="bg-red-600 hover:bg-red-300 transition duration-700 p-4"
             >
               {isLoading ? (

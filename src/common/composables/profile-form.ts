@@ -43,5 +43,23 @@ export default function useProfileForm() {
         }
     }
 
-    return { UpdateAvatar }
+    async function DeleteAvatar(data: { setIsLoading: (value: boolean) => void, setIsDelete: (value: boolean) => void }) {
+        data.setIsLoading(true);
+        try {
+            const token = await getCookies();
+            await fetcher.delete("/profile/delete-avatar", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            router.refresh();
+        } catch (error) {
+            return;
+        } finally {
+            data.setIsLoading(false);
+            data.setIsDelete(false);
+        }
+    }
+
+    return { UpdateAvatar, DeleteAvatar }
 }

@@ -14,7 +14,6 @@ interface ProfileSectionProps {
 
 export default function ProfileSection({ data }: ProfileSectionProps) {
   const [preview, setPreview] = React.useState<boolean>(false);
-  const [] = React.useState();
 
   return (
     <>

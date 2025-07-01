@@ -15,6 +15,7 @@ import { getCookies } from "@/lib/cookies";
 import { defaultImage } from "@/common/constant/image";
 import { useRouter } from "next/navigation";
 import AvatarForm from "../form/avatar-form";
+import useProfileForm from "@/common/composables/profile-form";
 
 interface AvatarDropDownProps {
   children: React.ReactNode;
@@ -32,23 +33,13 @@ export default function AvatarDropDown({
   const [isLoading, setIsLoading] = React.useState<boolean>(false); // State untuk loading form
 
   const router = useRouter();
+  const { DeleteAvatar } = useProfileForm();
 
   const handleDelete = async () => {
-    setIsLoading(true);
-    try {
-      const token = await getCookies();
-      await fetcher.delete("/profile/delete-avatar", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      router.refresh();
-    } catch (error) {
-      return;
-    } finally {
-      setIsLoading(false);
-      setIsDelete(false);
-    }
+    await DeleteAvatar({
+      setIsDelete: setIsDelete,
+      setIsLoading: setIsLoading,
+    });
   };
   const items = [
     {
