@@ -15,9 +15,11 @@ interface ProfileSectionProps {
 
 export default function ProfileSection({ data }: ProfileSectionProps) {
   const [preview, setPreview] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   return (
     <>
+      <ProfileForm data={data} isOpen={isOpen} setIsOpenAction={setIsOpen} />
       <AnimatePresence>
         {preview && (
           <PreviewImageModal
@@ -30,9 +32,10 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
         )}
       </AnimatePresence>
       <section className="w-full h-full bg-gray-50 p-5 rounded-md relative">
-        <ProfileForm data={data}>
-          <Settings className="w-5 h-5 md:w-6 md:h-6 hover:text-red-500 cursor-pointer absolute top-2 right-2 transition duration-700" />
-        </ProfileForm>
+        <Settings
+          onClick={() => setIsOpen(true)}
+          className="w-5 h-5 md:w-6 md:h-6 hover:text-red-500 cursor-pointer absolute top-2 right-2 transition duration-700"
+        />
         <div className="w-ful h-full flex flex-col md:flex-row items-center gap-5 md:gap-10 ">
           <div className="group w-52 h-52 md:w-40 md:h-40 rounded-full relative">
             <Image

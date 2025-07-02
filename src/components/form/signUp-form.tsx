@@ -2,7 +2,7 @@
 
 import useFormHandle from "@/common/composables/auth-form";
 import { fetcher } from "@/common/helpers/axios";
-import { signUpSchema } from "@/common/schemas/auth.schema";
+import { signUpSchema } from "@/common/schemas/auth-schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";

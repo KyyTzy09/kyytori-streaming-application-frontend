@@ -29,15 +29,13 @@ export default function AvatarDropDown({
   setPreviewAction,
 }: AvatarDropDownProps) {
   const [isUpload, setIsUpload] = React.useState<boolean>(false); // State untuk menampilkan form update gambar
-  const [isDelete, setIsDelete] = React.useState<boolean>(false); // State untuk menampilkan alert dialog
-  const [isLoading, setIsLoading] = React.useState<boolean>(false); // State untuk loading form
+  const [isDelete, setIsDelete] = React.useState<boolean>(false); // State untuk menampilkan alert dialog// State untuk loading form
 
-  const { DeleteAvatar } = useProfileForm();
+  const { DeleteAvatar, isLoading } = useProfileForm();
 
   const handleDelete = async () => {
     await DeleteAvatar({
       setIsDelete: setIsDelete,
-      setIsLoading: setIsLoading,
     });
   };
   const items = [
@@ -57,25 +55,19 @@ export default function AvatarDropDown({
 
   return (
     <>
-      {isUpload && (
-        <AvatarForm
-          avatar={image}
-          isOpen={isUpload}
-          isLoading={isLoading}
-          setIsLoadingAction={setIsLoading}
-          setIsOpenAction={setIsUpload}
-        />
-      )}
-      {isDelete && (
-        <AlertModal
-          title="Apakah anda yakin?"
-          description="Tindakan ini tidak dapat dibatalkan"
-          isOpen={isDelete}
-          isLoading={isLoading}
-          setIsOpenAction={setIsDelete}
-          alertAction={handleDelete}
-        />
-      )}
+      <AvatarForm
+        avatar={image}
+        isOpen={isUpload}
+        setIsOpenAction={setIsUpload}
+      />
+      <AlertModal
+        title="Apakah anda yakin?"
+        description="Tindakan ini tidak dapat dibatalkan"
+        isOpen={isDelete}
+        isLoading={isLoading}
+        setIsOpenAction={setIsDelete}
+        alertAction={handleDelete}
+      />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
         <DropdownMenuContent className="bg-black" align={"start"}>

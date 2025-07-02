@@ -1,11 +1,11 @@
 "use client";
 
+import useProfileForm from "@/common/composables/profile-form";
 import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/common/shadcn/alert-dialog";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
@@ -18,22 +18,51 @@ import React from "react";
 
 interface ProfileFormProps {
   data: User;
-  children: React.ReactNode;
+  isOpen: boolean;
+  setIsOpenAction: (value: boolean) => void;
 }
 
-export default function ProfileForm({ data, children }: ProfileFormProps) {
+export default function ProfileForm({
+  isOpen,
+  setIsOpenAction,
+  data,
+}: ProfileFormProps) {
   const [name, setName] = React.useState<string>(data.profile.userName || "");
   const [info, setInfo] = React.useState<string>(data.profile.info || "");
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  const { isLoading, fieldError, UpdateProfile, updateProfileChange } =
+    useProfileForm();
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateProfileChange({ value: e.target.value, setValue: setName });
+  };
+
+  const handleInfoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    updateProfileChange({ value: e.target.value, setValue: setInfo });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await UpdateProfile({ name, info, setIsOpen: setIsOpenAction });
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      setName(data.profile.userName || "");
+      setInfo(data.profile.info || "");
+    }
+  }, [isOpen, data.profile.userName, data.profile.info]);
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+    <AlertDialog open={isOpen}>
       <AlertDialogContent className="bg-white">
-        <AlertDialogTitle className="text-red-500 font-semibold">
-          Profile Form
+        <AlertDialogTitle className="text-red-600 font-semibold">
+          Update Profile
         </AlertDialogTitle>
-        <form className="w-full h-full flex flex-col items-center justify-between gap-5">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full h-full flex flex-col items-center justify-between gap-5"
+        >
           <div className="w-48 h-48 md:w-40 md:h-40">
             <Image
               src={data.profile.avatar}
@@ -52,31 +81,41 @@ export default function ProfileForm({ data, children }: ProfileFormProps) {
                 Nama
               </Label>
               <Input
-                name="name"
-                className="focus-visible:border-red-500 focus-visible:ring-red-500/70"
+                id="name"
+                className="focus-visible:border-red-600 focus-visible:ring-red-600/70"
                 value={name}
-                onChange={() => {}}
+                onChange={handleNameChange}
               />
+              {fieldError.name && (
+                <p className="text-red-600 text-[13px] font-semibold self-start">
+                  {fieldError.name}
+                </p>
+              )}
             </div>
             <div className="w-full flex flex-col items-center justify-center gap-2">
               <Label
                 htmlFor="info"
-                className="w-full text-red-500 font-semibold text-start"
+                className="w-full text-red-600 font-semibold text-start"
               >
                 Info
               </Label>
               <Textarea
-                title="info"
+                id="info"
                 className="focus-visible:border-red-500 focus-visible:ring-red-500/70 h-32"
                 value={info}
-                onChange={() => {}}
+                onChange={handleInfoChange}
               />
+              {fieldError.info && (
+                <p className="text-red-600 text-[13px] font-semibold self-start">
+                  {fieldError.info}
+                </p>
+              )}
             </div>
           </div>
           <div className="w-full flex items-center justify-end gap-2">
             <AlertDialogCancel
               type="button"
-              onClick={() => {}}
+              onClick={() => setIsOpenAction(false)}
               className="bg-red-500 hover:bg-red-300 hover:text-white transition duration-700 p-4 text-white"
             >
               Batal
@@ -84,8 +123,7 @@ export default function ProfileForm({ data, children }: ProfileFormProps) {
             <Button
               disabled={
                 isLoading ||
-                name === data.profile.userName ||
-                info === data.profile.info
+                (name === data.profile.userName && info === data.profile.info)
               }
               type="submit"
               className="bg-red-600 hover:bg-red-300 transition duration-700 p-4"

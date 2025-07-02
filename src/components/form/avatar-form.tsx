@@ -14,29 +14,24 @@ import { Loader } from "lucide-react";
 interface AvatarFormProps {
   avatar: string;
   isOpen: boolean;
-  isLoading: boolean;
-  setIsLoadingAction: (valie: boolean) => void;
   setIsOpenAction: (value: boolean) => void;
 }
 
 export default function AvatarForm({
   avatar,
   isOpen,
-  isLoading,
-  setIsLoadingAction,
   setIsOpenAction,
 }: AvatarFormProps) {
   const [image, setImage] = React.useState<File | null>(null);
 
-  const { UpdateAvatar } = useProfileForm();
+  const { UpdateAvatar, isLoading } = useProfileForm();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await UpdateAvatar({
       file: image as File,
       setIsOpen: setIsOpenAction,
-      loading: isLoading,
-      setLoading: setIsLoadingAction,
     });
+    setImage(null);
   };
 
   return (
@@ -54,6 +49,7 @@ export default function AvatarForm({
           </div>
           <div className="w-full flex items-center justify-center gap-2">
             <Button
+              type="button"
               onClick={() => setIsOpenAction(false)}
               className="bg-red-500 hover:bg-red-300 transition duration-700 p-4"
             >
