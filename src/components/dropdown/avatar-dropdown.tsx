@@ -9,7 +9,7 @@ import {
 } from "@/common/shadcn/dropdown-menu";
 import { Edit, Eye, Trash } from "lucide-react";
 import React from "react";
-import AlertModal from "../modals/alert.modal";
+import AlertModal from "../modals/alert-modal";
 import { fetcher } from "@/common/helpers/axios";
 import { getCookies } from "@/lib/cookies";
 import { defaultImage } from "@/common/constant/image";
@@ -32,7 +32,6 @@ export default function AvatarDropDown({
   const [isDelete, setIsDelete] = React.useState<boolean>(false); // State untuk menampilkan alert dialog
   const [isLoading, setIsLoading] = React.useState<boolean>(false); // State untuk loading form
 
-  const router = useRouter();
   const { DeleteAvatar } = useProfileForm();
 
   const handleDelete = async () => {

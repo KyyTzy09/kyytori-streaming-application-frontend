@@ -2,7 +2,7 @@ import { User } from "@/common/types/user";
 import ProfileHeader from "@/components/headers/profile.header";
 import { getSession } from "@/lib/session";
 import React from "react";
-import ProfileSection from "./profile.section";
+import ProfileSection from "./profile-section";
 
 export default async function ProfileView() {
   const data = (await getSession()) as User;

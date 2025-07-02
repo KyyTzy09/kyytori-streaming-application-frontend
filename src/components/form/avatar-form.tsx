@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import ImageUploader from "../buttons/upload.button";
+import ImageUploader from "../buttons/upload-button";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -26,7 +26,7 @@ export default function AvatarForm({
   setIsLoadingAction,
   setIsOpenAction,
 }: AvatarFormProps) {
-  const [image, setImage] = React.useState<File | null>();
+  const [image, setImage] = React.useState<File | null>(null);
 
   const { UpdateAvatar } = useProfileForm();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

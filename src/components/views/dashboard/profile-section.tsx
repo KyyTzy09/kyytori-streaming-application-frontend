@@ -1,8 +1,8 @@
 "use client";
 
 import { User } from "@/common/types/user";
-import AvatarDropDown from "@/components/dropdown/avatar.dropdown";
-import PreviewImageModal from "@/components/modals/preview.modal";
+import AvatarDropDown from "@/components/dropdown/avatar-dropdown";
+import PreviewImageModal from "@/components/modals/preview-modal";
 import { Pencil, Settings } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import Image from "next/image";
@@ -30,8 +30,8 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
       </AnimatePresence>
       <section className="w-full h-full bg-gray-50 p-5 rounded-md relative">
         <Settings className="w-5 h-5 md:w-6 md:h-6 hover:text-red-500 cursor-pointer absolute top-2 right-2 transition duration-700" />
-        <div className="w-ful h-full flex items-center gap-5 md:gap-10 ">
-          <div className="group w-32 h-32 md:w-40 md:h-40 rounded-full relative">
+        <div className="w-ful h-full flex flex-col md:flex-row items-center gap-5 md:gap-10 ">
+          <div className="group w-52 h-52 md:w-40 md:h-40 rounded-full relative">
             <Image
               src={data.profile.avatar}
               alt={data.profile.userName || "Name"}
@@ -48,11 +48,11 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
               </AvatarDropDown>
             </div>
           </div>
-          <div className="flex flex-col items-start justify-start max-w-[80%] h-32 md:h-40 pt-4">
+          <div className="flex flex-col items-center md:items-start justify-start max-w-[80%] h-32 md:h-40 pt-4">
             <p className="text-red-500 text-lg font-bold">
               {data.profile.userName}
             </p>
-            <p className="text-gray-500 text-sm font-semibold">
+            <p className="text-gray-500 text-center md:text-start text-sm font-semibold">
               {data.profile.info}
             </p>
           </div>
