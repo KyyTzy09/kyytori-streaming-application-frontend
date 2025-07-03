@@ -65,16 +65,16 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
                 0
                 <Bookmark
                   strokeWidth={1}
-                  fill="red"
-                  className="w-5 h-5 text-red-500"
+                  fill="black"
+                  className="w-5 h-5"
                 />
               </Label>
               <Label className="text-black flex items-center gap-2 justify-start">
                 0
                 <FaComment
                   strokeWidth={1}
-                  fill="red"
-                  className="w-5 h-5 text-red-500"
+                  fill="black"
+                  className="w-5 h-5"
                 />
               </Label>
             </div>
