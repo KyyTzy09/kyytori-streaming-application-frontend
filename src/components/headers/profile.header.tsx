@@ -12,7 +12,7 @@ export default function ProfileHeader({ title }: ProfileHeaderProps) {
   const router = useRouter();
   const pathName = usePathname();
   const handleAction = () => {
-    if (pathName === "/dashboard") router.push("/");
+    if (pathName === "/dashboard") router.push("/home");
     else router.back();
   };
   return (
