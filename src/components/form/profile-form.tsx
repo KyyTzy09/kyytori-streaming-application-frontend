@@ -69,7 +69,7 @@ export default function ProfileForm({
               alt={data.profile.userName || "Name"}
               width={400}
               height={400}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-full"
             />
           </div>
           <div className="w-full flex flex-col gap-5">
@@ -97,7 +97,7 @@ export default function ProfileForm({
                 htmlFor="info"
                 className="w-full text-red-600 font-semibold text-start"
               >
-                Info
+                Info ({info.length} / 300)
               </Label>
               <Textarea
                 id="info"

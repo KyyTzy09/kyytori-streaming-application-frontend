@@ -18,7 +18,15 @@ interface ProfileSectionProps {
 export default function ProfileSection({ data }: ProfileSectionProps) {
   const [preview, setPreview] = React.useState<boolean>(false);
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [showInfo, setShowInfo] = React.useState<boolean>(false);
 
+  const handleShowInfo = (infoLength: number) => {
+    if (!showInfo) {
+      setShowInfo(true)
+    } else {
+      setShowInfo(false);
+    }
+  };
   return (
     <>
       <ProfileForm data={data} isOpen={isOpen} setIsOpenAction={setIsOpen} />
@@ -38,7 +46,7 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
           onClick={() => setIsOpen(true)}
           className="w-5 h-5 md:w-6 md:h-6 hover:text-red-500 cursor-pointer absolute top-2 right-2 transition duration-700"
         />
-        <div className="w-ful h-full flex flex-col md:flex-row items-center gap-5 md:gap-10 ">
+        <div className="w-ful h-full flex flex-col md:flex-row items-center gap-5 md:gap-10 mb-5">
           <div className="group w-52 h-52 md:w-40 md:h-40 rounded-full relative">
             <Image
               src={data.profile.avatar}
@@ -56,31 +64,43 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
               </AvatarDropDown>
             </div>
           </div>
-          <div className="w-full flex flex-col items-center md:items-start justify-start max-w-[80%] h-40 mt-4 gap-3">
+          <div
+            className={`${
+              showInfo ? "h-full" : "h-40"
+            }w-full flex flex-col items-center md:items-start justify-start max-w-[80%] mt-4 gap-3`}
+          >
             <p className="text-red-500 text-lg font-bold">
               {data.profile.userName}
             </p>
             <div className="w-full flex items-center justify-center md:justify-start gap-3">
               <Label className="text-black flex items-center gap-1 justify-start">
                 0
-                <Bookmark
-                  strokeWidth={1}
-                  fill="black"
-                  className="w-5 h-5"
-                />
+                <Bookmark strokeWidth={1} fill="black" className="w-5 h-5" />
               </Label>
               <Label className="text-black flex items-center gap-2 justify-start">
                 0
-                <FaComment
-                  strokeWidth={1}
-                  fill="black"
-                  className="w-5 h-5"
-                />
+                <FaComment strokeWidth={1} fill="black" className="w-5 h-5" />
               </Label>
             </div>
-            <p className="text-gray-500 text-center md:text-start text-xs md:text-sm font-semibold line-clamp-4">
+            <p
+              className={`text-gray-500 text-center md:text-start text-xs md:text-sm font-semibold ${
+                !showInfo && data.profile.info.length > 200
+                  ? "line-clamp-4"
+                  : "line-clamp-none"
+              }`}
+            >
               {data.profile.info}
             </p>
+            {data.profile.info.length > 200 && (
+              <div className="md:hidden w-full flex items-center justify-end">
+                <p
+                  onClick={() => handleShowInfo(data.profile.info.length)}
+                  className="text-[12px] md:text-sm hover:underline hover:cursor-pointer"
+                >
+                  {showInfo ? "lihat beberapa" : "Lihat selengkapnya"}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>

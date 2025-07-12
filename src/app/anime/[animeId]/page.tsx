@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import React from "react";
 
 interface detailAnimeProps {
@@ -6,8 +7,8 @@ interface detailAnimeProps {
   };
 }
 
-export default function DetailAnime({ params }: detailAnimeProps) {
-  const { animeId } = params;
+export default async function DetailAnime({ params }: detailAnimeProps) {
+  const { animeId } = await params;
   const id = decodeURI(animeId);
   return (
     <div className="w-full">
@@ -15,3 +16,8 @@ export default function DetailAnime({ params }: detailAnimeProps) {
     </div>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Detail",
+  description: "Detail anime page",
+};

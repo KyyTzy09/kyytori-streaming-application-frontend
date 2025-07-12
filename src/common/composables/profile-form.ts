@@ -62,7 +62,11 @@ export default function useProfileForm() {
 
     // Untuk handle change di
     async function updateProfileChange(data: { value: string, setValue: (value: string) => void }) {
-        data.setValue(data.value)
+        if (data.value.length <= 300) {
+            data.setValue(data.value)
+        } else {
+            return
+        }
     }
 
     async function UpdateAvatar(data: { file: File, setIsOpen: (value: boolean) => void }) {
