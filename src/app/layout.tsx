@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navigations/navbar";
 import { ToastContainer } from "react-toastify";
 import { getSession } from "@/lib/session";
+import QueryProvider from "@/common/providers/query-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,8 +33,10 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#121111]`}
       >
         <ToastContainer />
-        <Navbar data={data}/>
-        <section className="w-full min-h-screen">{children}</section>
+        <Navbar data={data} />
+        <section className="w-full min-h-screen">
+          <QueryProvider>{children}</QueryProvider>
+        </section>
       </body>
     </html>
   );
