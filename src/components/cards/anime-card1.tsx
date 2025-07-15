@@ -1,12 +1,12 @@
-import { dummyAnime } from "@/common/constant/anime";
 import { fetcher } from "@/common/helpers/axios";
 import { Card, CardContent } from "@/common/shadcn/card";
 import { Anime } from "@/common/types/anime";
+import { PlayCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default async function NewAnimeCard() {
+export default async function AnimeCard1() {
   const { data } = await fetcher.get(`/anime/anime-ongoing`);
   const animeData: Anime[] = data.data;
   return (
@@ -19,11 +19,25 @@ export default async function NewAnimeCard() {
                 key={item.id}
                 className="group bg-transparent p-0 rounded border-none relative"
               >
-                <div className="absolute p-2 z-10 rounded-sm translate-y-10 opacity-0 flex flex-col gap-2 w-full group-hover:opacity-100 group-hover:translate-y-0 bg-black/90 top-0 bottom-0 transition duration-700">
-                  <p className="text-red-500 font-semibold text-sm text-center">
+                <div className="absolute p-2 md:p-4 z-10 rounded-sm translate-y-10 opacity-0 flex flex-col justify-between gap-2 w-full group-hover:opacity-100 group-hover:translate-y-0 bg-black/90 top-0 bottom-0 transition duration-700">
+                  <p className="text-red-500 font-semibold text-[13px] md:text-[16px] text-center">
                     {item.titleJap || item.titleEng || item.title}
                   </p>
-                  <p className="line-clamp-5 font-semibold text-sm text-center text-white"></p>
+                  {item.synopsis.length > 0 && (
+                    <p className="text-white line-clamp-3 text-start text-[12px] md:text-sm">
+                      {item.synopsis[0]["text"]}
+                    </p>
+                  )}
+                  <div className="w-full grid grid-cols-2 gap-2">
+                    {item.genres.length > 0 &&
+                      item.genres.map((gen) => {
+                        return (
+                            <p key={gen.genreName} className="text-white flex items-center line-clamp-1 text-center justify-center text-[8px] md:text-[12px] p-1 font-semibold bg-red-500 rounded-sm">
+                              {gen.genreName || ""}
+                            </p>
+                        );
+                      }).slice(0, 4)}
+                  </div>
                 </div>
                 <CardContent className="w-full flex flex-col p-2">
                   <Image

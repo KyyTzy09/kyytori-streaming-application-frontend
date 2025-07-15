@@ -1,4 +1,4 @@
-import NewAnimeCard from "@/components/cards/new-anime-card";
+import NewAnimeCard from "@/components/cards/anime-card1";
 import React from "react";
 
 export default function HomeView() {
