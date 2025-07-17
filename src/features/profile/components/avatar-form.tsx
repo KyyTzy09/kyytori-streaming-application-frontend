@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import ImageUploader from "../buttons/upload-button";
+import ImageUploader from "@/common/ui/buttons/upload-button";
 import {
   AlertDialog,
   AlertDialogContent,

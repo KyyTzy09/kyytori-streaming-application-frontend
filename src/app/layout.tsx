@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navigations/navbar";
+import Navbar from "@/common/ui/navigations/navbar";
 import { ToastContainer } from "react-toastify";
 import { getSession } from "@/lib/session";
 import QueryProvider from "@/common/providers/query-provider";

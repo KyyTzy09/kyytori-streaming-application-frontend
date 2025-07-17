@@ -1,5 +1,5 @@
-import { animeService } from "@/common/services/anime-service";
-import AnimeCard1 from "@/components/cards/anime-card1";
+import { animeService } from "@/features/anime/services/anime-service";
+import AnimeCard1 from "@/features/anime/components/cards/anime-card1";
 import React from "react";
 
 export default async function HomeView() {

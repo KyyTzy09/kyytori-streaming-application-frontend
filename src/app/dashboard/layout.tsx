@@ -1,4 +1,4 @@
-import DashboardSideBar from "@/components/navigations/sidebar";
+import DashboardSideBar from "@/common/ui/navigations/sidebar";
 import { getSession } from "@/lib/session";
 import React from "react";
 

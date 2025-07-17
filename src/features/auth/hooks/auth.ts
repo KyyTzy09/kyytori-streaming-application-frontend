@@ -3,7 +3,7 @@
 import { signOutSession } from "@/lib/session"
 import { toast } from "react-toastify"
 
-export default function useSession() {
+export default function useAuth() {
     async function SignOut() {
         try {
             await signOutSession()

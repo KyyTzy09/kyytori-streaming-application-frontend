@@ -2,9 +2,9 @@
 
 import { Label } from "@/common/shadcn/label";
 import { User } from "@/common/types/user";
-import AvatarDropDown from "@/components/dropdown/avatar-dropdown";
-import ProfileForm from "@/components/form/profile-form";
-import PreviewImageModal from "@/components/modals/preview-modal";
+import AvatarDropDown from "@/features/profile/components/avatar-dropdown";
+import ProfileForm from "@/features/profile/components/profile-form";
+import PreviewImageModal from "../../modals/preview-modal";
 import { Bookmark, Pencil, Settings } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import Image from "next/image";

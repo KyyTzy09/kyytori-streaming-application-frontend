@@ -1,5 +1,5 @@
 import { User } from "@/common/types/user";
-import ProfileHeader from "@/components/headers/profile.header";
+import ProfileHeader from "../../headers/profile.header";
 import { getSession } from "@/lib/session";
 import React from "react";
 import ProfileSection from "./profile-section";

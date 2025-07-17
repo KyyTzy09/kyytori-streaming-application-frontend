@@ -11,7 +11,7 @@ export type Anime = {
     episode: number
     link: string
     type: string
-    rating: string
+    rating: number
     status: string
     duration: string
     season: string

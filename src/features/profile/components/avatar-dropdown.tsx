@@ -9,12 +9,9 @@ import {
 } from "@/common/shadcn/dropdown-menu";
 import { Edit, Eye, Trash } from "lucide-react";
 import React from "react";
-import AlertModal from "../modals/alert-modal";
-import { fetcher } from "@/common/helpers/axios";
-import { getCookies } from "@/lib/cookies";
+import AlertModal from "@/common/ui/modals/alert-modal";
 import { defaultImage } from "@/common/constant/image";
-import { useRouter } from "next/navigation";
-import AvatarForm from "../form/avatar-form";
+import AvatarForm from "./avatar-form";
 import useProfileForm from "@/common/composables/profile-form";
 
 interface AvatarDropDownProps {
