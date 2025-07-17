@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import DashboardHeader from "./header";
+import DashboardHeader from "../../../common/ui/headers/header";
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowBigLeft } from "lucide-react";
 

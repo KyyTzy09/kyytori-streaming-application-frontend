@@ -1,7 +1,7 @@
 'use client'
 
 import { getCookies } from "@/lib/cookies";
-import { fetcher } from "../helpers/axios";
+import { apiClient } from "../helpers/axios";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -20,10 +20,11 @@ export default function useProfileForm() {
         try {
             updateProfileSchema.parse({ name: data.name, info: data.info })
             const token = await getCookies()
-            await fetcher.patch("/profile/update-info", {
-                name: data.name,
-                info: data.info
-            }, {
+            await apiClient({
+                url: "/profile/update-info", method: "patch", data: {
+                    name: data.name,
+                    info: data.info
+                },
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -75,11 +76,11 @@ export default function useProfileForm() {
             const formData = new FormData();
             formData.append("image", data.file);
             const token = await getCookies();
-            await fetcher.patch("/profile/update-avatar", formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            await apiClient({
+                url: "/profile/update-avatar", data: formData, method: "patch", headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
 
             toast("Update Avatar Berhasil", {
                 autoClose: 2000,
@@ -109,11 +110,7 @@ export default function useProfileForm() {
         setIsLoading(true);
         try {
             const token = await getCookies();
-            await fetcher.delete("/profile/delete-avatar", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            await apiClient({ url: "/profile/delete-avatar", headers: { Authorization: `Bearer ${token}` } })
             router.refresh();
         } catch (error) {
             return;

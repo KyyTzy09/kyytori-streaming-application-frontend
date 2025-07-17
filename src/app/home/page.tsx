@@ -1,24 +1,21 @@
-import { animeService } from "@/features/anime/services/anime-service";
-import AnimeCard1 from "@/features/anime/components/cards/anime-card1";
-import React from "react";
+"use client";
 
-export default async function Home() {
-  const onGoing = await animeService.onGoing();
+import AnimeCard1 from "@/features/anime/components/anime-card1";
+import React from "react";
+import { useGetOngoingAnime } from "@/features/anime/hooks/useGetAnime";
+import { Anime } from "@/common/types/anime";
+import AnimeHeader from "@/features/anime/components/anime-header";
+
+export default function Home() {
+  const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
   return (
     <div className="w-full flex flex-col p-5 items-center gap-5">
       {/* Carousel */}
       <section className="w-full h-52 bg-gray-600 animate-pulse"></section>
-      <div className="w-full flex items-center justify-between">
-        <p className="text-white font-semibold text-lg md:text-xl">
-          Anime{" "}
-          <span className="text-red-500">
-            <i>On-Going</i>
-          </span>
-        </p>
-      </div>
+      <AnimeHeader front="Anime" back="On-going" url="/anime/ongoing" linkText="Lihat semua"/>
       {/* Card anime update */}
       <section className="w-full min-h-screen">
-        <AnimeCard1 data={onGoing} />
+        <AnimeCard1 data={ongoing?.data as Anime[]} isLoading={ongoingLoad} />
       </section>
     </div>
   );

@@ -1,6 +1,6 @@
-import { fetcher } from "@/common/helpers/axios";
 import { Card, CardContent } from "@/common/shadcn/card";
 import { Anime } from "@/common/types/anime";
+import CardSkeleton from "@/common/ui/skeleton/card-skeleton";
 import { PlayCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,13 +8,17 @@ import React from "react";
 
 interface AnimeCard1Props {
   data: Anime[];
+  isLoading: boolean;
 }
 
-export default async function AnimeCard1({ data }: AnimeCard1Props) {
+export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
+  if (isLoading) {
+    return <CardSkeleton />;
+  }
   return (
     <div className="w-full gap-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
       {data
-        .map((item) => {
+        ?.map((item) => {
           return (
             <Link key={item.title} href={`/anime/${item.link}`}>
               <Card

@@ -1,6 +1,6 @@
 import { User } from "@/common/types/user";
-import ProfileHeader from "../../../common/ui/headers/profile.header";
-import { getSession } from "@/lib/session";
+import ProfileHeader from "./profile.header";
+import { getSession } from "@/features/auth/hooks/getSession";
 import React from "react";
 import ProfileSection from "./profile-section";
 

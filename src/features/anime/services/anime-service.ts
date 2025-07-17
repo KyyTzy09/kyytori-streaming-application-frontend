@@ -1,15 +1,12 @@
-import { fetcher } from "../../../common/helpers/axios"
+import { apiClient } from "@/common/helpers/axios"
 import { Anime } from "../../../common/types/anime"
 
-
 export const animeService = {
-    async onGoing() {
-        const { data } = await fetcher.get(`/anime/anime-ongoing`)
-        return data.data as Anime[]
+    async onGoing(data: { page?: number }) {
+        return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-ongoing?page=${data.page || 1}` })
     },
-    
-    async detail(animeTitle: string) {
-        const { data } = await fetcher.get(`/anime/anime-detail/${animeTitle}`)
-        return data.data as Anime
+
+    async detail(animeTitle: string): Promise<{ data: Anime }> {
+        return await apiClient<{ data: Anime }>({ url: `/anime/anime-detail/${animeTitle}` })
     }
 }

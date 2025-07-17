@@ -1,7 +1,7 @@
 import { User } from "@/common/types/user";
-import ProfileHeader from "@/common/ui/headers/profile.header";
+import ProfileHeader from "@/features/profile/components/profile.header";
 import ProfileSection from "@/features/profile/components/profile-section";
-import { getSession } from "@/lib/session";
+import { getSession } from "@/features/auth/hooks/getSession";
 import React from "react";
 
 export default async function DashboardPage() {

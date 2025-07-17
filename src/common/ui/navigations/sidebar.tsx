@@ -3,7 +3,7 @@
 import { Button } from "@/common/shadcn/button";
 import { Separator } from "@/common/shadcn/separator";
 import { User } from "@/common/types/user";
-import useSession from "@/features/auth/hooks/auth";
+import { useSignOut } from "@/features/auth/hooks/useSignOut";
 import { Bookmark, LucideLogOut, UserIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
@@ -15,7 +15,6 @@ export default function DashboardSideBar({ data }: { data: User }) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
   const pathName = usePathname();
-  const { SignOut } = useSession();
 
   const sideBarItems = [
     {
@@ -38,7 +37,7 @@ export default function DashboardSideBar({ data }: { data: User }) {
   const handleLogout = async () => {
     setIsLoading(true);
     try {
-      await SignOut();
+      await useSignOut();
       router.push("/");
     } catch (error) {
       return;

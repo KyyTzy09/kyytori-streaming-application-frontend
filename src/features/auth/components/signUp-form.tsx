@@ -1,8 +1,7 @@
 "use client";
 
 import useFormHandle from "@/common/composables/auth-form";
-import { fetcher } from "@/common/helpers/axios";
-import { signUpSchema } from "@/common/schemas/auth-schema";
+import { registerSchema } from "@/common/schemas/auth-schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
@@ -11,19 +10,20 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
+import { registerService } from "../services/auth.service";
 
 export default function SignUpForm() {
   const router = useRouter();
   const { fieldError, handleChange, Loading, handleSubmit } = useFormHandle(
-    signUpSchema,
+    registerSchema,
     { email: "", password: "", firstName: "", lastName: "" },
     async (objectData) => {
-      const { data } = await fetcher.post(`/auth/register`, objectData);
+      const { data } = await registerService(objectData);
       toast(data.message, {
         type: "success",
         isLoading: Loading,
         autoClose: 2000,
-        position : "top-center"
+        position: "top-center",
       });
       router.push("/signin");
     }
