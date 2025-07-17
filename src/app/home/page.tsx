@@ -1,4 +1,3 @@
-import HomeView from "@/components/views/home/home-page";
 import { animeService } from "@/features/anime/services/anime-service";
 import AnimeCard1 from "@/features/anime/components/cards/anime-card1";
 import React from "react";
