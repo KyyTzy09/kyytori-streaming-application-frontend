@@ -6,7 +6,15 @@ export const animeService = {
         return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-ongoing?page=${data.page || 1}` })
     },
 
-    async detail(animeTitle: string): Promise<{ data: Anime }> {
-        return await apiClient<{ data: Anime }>({ url: `/anime/anime-detail/${animeTitle}` })
-    }
+    async topAnime(data: { page?: number }) {
+        return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-top?page=${data.page || 1}` })
+    },
+
+    async completed(data: { page?: number }) {
+        return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-completed?page=${data.page || 1}` })
+    },
+    
+    async detail(data: { animeTitle: string }) {
+        return await apiClient<{ data: Anime }>({ url: `/anime/anime-detail/${data.animeTitle}` })
+    },
 }

@@ -30,14 +30,14 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                     <p className="text-red-500 font-semibold text-[13px] md:text-[16px] text-center">
                       {item.titleJap || item.titleEng || item.title}
                     </p>
-                    {item.synopsis.length > 0 && (
+                    {item?.synopsis?.length > 0 && (
                       <p className="text-white line-clamp-3 text-start text-[15px] md:text-sm">
                         {item.synopsis[0]["text"]}
                       </p>
                     )}
                   </div>
                   <div className="w-full grid grid-cols-2 gap-2">
-                    {item.genres.length > 0 &&
+                    {item?.genres?.length > 0 &&
                       item.genres
                         .map((gen) => {
                           return (
