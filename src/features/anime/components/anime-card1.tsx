@@ -31,7 +31,7 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                       {item.titleJap || item.titleEng || item.title}
                     </p>
                     {item?.synopsis?.length > 0 && (
-                      <p className="text-white line-clamp-3 text-start text-[15px] md:text-sm">
+                      <p className="text-white line-clamp-3 text-start text-[10px] md:text-sm">
                         {item.synopsis[0]["text"]}
                       </p>
                     )}
@@ -43,7 +43,7 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                           return (
                             <p
                               key={gen.genreName}
-                              className="text-white flex items-center line-clamp-1 text-center justify-center text-[8px] md:text-[12px] p-1 font-semibold bg-red-500 rounded-sm"
+                              className="text-white flex items-center line-clamp-1 text-center justify-center text-[7px] md:text-[9px] p-1 font-semibold bg-red-500 rounded-sm"
                             >
                               {gen.genreName || ""}
                             </p>

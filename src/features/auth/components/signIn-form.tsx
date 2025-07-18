@@ -21,11 +21,7 @@ export default function SignInForm() {
     loginSchema,
     { email: "", password: "" },
     async (objectData) => {
-      const { data } = await apiClient<{ data: { token: string } }>({
-        url: "/auth/login",
-        data: objectData,
-        method : "post"
-      });
+      const data = await loginService(objectData);
       await setCookies(data.token);
       const session = await getSession();
       toast(`Selamat Datang ${session?.profile.userName} !!`, {

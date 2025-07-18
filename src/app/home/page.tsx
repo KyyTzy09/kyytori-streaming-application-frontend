@@ -9,6 +9,7 @@ import {
 } from "@/features/anime/hooks/useGetAnime";
 import { Anime } from "@/common/types/anime";
 import AnimeHeader from "@/features/anime/components/anime-header";
+import { Separator } from "@/common/shadcn/separator";
 
 export default function Home() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
@@ -21,17 +22,18 @@ export default function Home() {
       <AnimeHeader
         front="Anime"
         back="On-going"
-        url="/anime/ongoing"
+        url="/anime-ongoing"
         linkText="Lihat semua"
       />
       {/* Card anime update */}
       <section className="w-full min-h-screen">
         <AnimeCard1 data={ongoing?.data as Anime[]} isLoading={ongoingLoad} />
       </section>
+      <Separator className="px-2 border-red-500 border" />
       <AnimeHeader
         front="Anime"
         back="Completed"
-        url="/anime/top"
+        url="/anime-completed"
         linkText="Lihat semua"
       />
       <section className="w-full min-h-screen">
@@ -40,6 +42,7 @@ export default function Home() {
           isLoading={completedLoad}
         />
       </section>
+      <Separator className="px-2 border-red-500 border" />
     </div>
   );
 }

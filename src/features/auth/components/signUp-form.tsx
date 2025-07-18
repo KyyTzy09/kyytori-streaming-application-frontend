@@ -18,7 +18,7 @@ export default function SignUpForm() {
     registerSchema,
     { email: "", password: "", firstName: "", lastName: "" },
     async (objectData) => {
-      const { data } = await registerService(objectData);
+      const data = await registerService(objectData);
       toast(data.message, {
         type: "success",
         isLoading: Loading,
