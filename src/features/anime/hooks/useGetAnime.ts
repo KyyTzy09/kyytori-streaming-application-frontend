@@ -32,3 +32,11 @@ export const useGetTopAnime = (page?: number) => {
         staleTime: 2 * 60 * 1000
     })
 }
+
+export const useGetEpsLink = (epsTitle: string) => {
+    return useQuery({
+        queryKey: ["epslink", epsTitle],
+        queryFn: async () => await animeService.epsLink({ epsTitle }),
+        staleTime: 2 * 60 * 1000
+    })
+}
