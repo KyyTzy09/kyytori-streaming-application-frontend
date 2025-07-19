@@ -23,6 +23,6 @@ export const animeService = {
     },
 
     async epsLink(data: { epsTitle: string }) {
-        return await apiClient<{ data: Epslink[] }>({ url: `/eps-link/${data.epsTitle}` })
+        return await apiClient<{ data: Epslink[], pagination: { prev: string, next: string } }>({ url: `/eps-link/${data.epsTitle}` })
     }
 }

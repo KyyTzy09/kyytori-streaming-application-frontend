@@ -5,15 +5,16 @@ import React from "react";
 import AuthButton from "@/features/auth/components/auth-button";
 import { User } from "@/common/types/user";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Navbar({ data }: { data: User }) {
   const pathname = usePathname();
   return (
     <nav className={`w-full h-20 border-b ${pathname.startsWith("/dashboard") && "hidden"}`}>
       <div className="w-full h-full p-8 flex items-center justify-between">
-        <p className="text-red-500 light:text-black font-bold text-xl">
+        <Link href={"/home"} className="text-red-500 light:text-black font-bold text-xl">
           KyyTori<span className="text-white">.id</span>
-        </p>
+        </Link>
         <div className="flex items-center justify-between gap-5">
           <Search className="w-5 h-5 text-white" />
           <AuthButton data={data} />

@@ -9,16 +9,14 @@ import { Play, PlayCircle } from "lucide-react";
 
 interface detailAnimeProps {
   params: {
-    animeId: string;
+    animeTitle: string;
   };
 }
 
 export default async function DetailAnime({ params }: detailAnimeProps) {
-  const { animeId } = await params;
-  const { data: detail } = await animeService.detail({ animeTitle: animeId });
-  const { data: episodes } = await animeService.episodes({
-    animeTitle: animeId,
-  });
+  const { animeTitle } = await params;
+  const { data: detail } = await animeService.detail({ animeTitle });
+  const { data: episodes } = await animeService.episodes({ animeTitle });
 
   const detailList = [
     {
@@ -59,7 +57,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
             height={450}
             quality={100}
           />
-          <div className="absolute w-full h-full bg-black/88">
+          <div className="absolute w-full h-full bg-black/88 hidden md:block">
             <div className="w-full flex flex-col justify-center items-center p-2 gap-5">
               <p className="text-white font-semibold drop-shadow-white drop-shadow-sm text-4xl">
                 {detail.title}
@@ -111,7 +109,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
           </div>
         </div>
         <div className="w-full h-full flex items-center relative">
-          <div className="w-52 flex flex-col absolute z-10 top-0 left-[100px] -translate-y-36">
+          <div className="hidden md:flex w-52 flex-col absolute z-10 top-0 left-[100px] -translate-y-36">
             <Image
               src={detail.image || defaultImage}
               alt={detail.title || "title"}
@@ -125,7 +123,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
               <h1 className="text-white font-semibold text-sm md:text-[15px]">
                 Rating {detail.rating}
               </h1>
-              <AnimeRating rating={detail.rating} />
+              <AnimeRating rating={detail.rating ?? 0} />
             </div>
           </div>
           <div className="w-full md:pl-[24rem] py-3">
@@ -148,15 +146,15 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
       {/* Episodes section */}
       <section className="w-full h-full bg-[#232323] mt-20 p-5">
         <p className="text-red-500 font-bold text-xl">Episode :</p>
-        <div className="w-full py-2 grid grid-cols-4 mt-10 gap-5">
+        <div className="w-full py-2 grid grid-cols-2 md:grid-cols-4 mt-10 gap-5">
           {episodes.map((ep) => {
             return (
               <Link
-                href={`/anime/${animeId}/episode/${ep.link}`}
+                href={`/anime/${animeTitle}/episode/${ep.link}`}
                 key={ep.title}
                 className="group w-full flex flex-col items-center justify-start gap-3 bg-black/70 border-red-600 border rounded-md overflow-hidden relative"
               >
-                <div className="flex p-1 text-white font-mono items-center justify-center bg-red-500 group-hover:bg-red-300 transition duration-700 z-10 absolute top-0 right-0 rounded-bl-sm">
+                <div className="flex text-sm p-2 text-white font-mono items-center justify-center bg-red-500 group-hover:bg-red-300 transition duration-700 z-10 absolute top-0 right-0 rounded-bl-sm">
                   Episode {ep.episode}
                 </div>
                 <div className="w-full h-32 relative">
@@ -169,8 +167,8 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                   />
                 </div>
                 <div className="flex w-full items-center justify-start gap-3 p-2">
-                  <PlayCircle className="w-5 h-5 text-white group-hover:text-red-500 transition-transform" />
-                  <p className="line-clamp-1 text-white font-semibold group-hover:text-red-500 transition-transform">
+                  <PlayCircle className="w-4 h-4 md:w-5 md:h-5 text-white group-hover:text-red-500 transition-transform" />
+                  <p className="line-clamp-1 text-[10px] md:text-sm text-white font-semibold group-hover:text-red-500 transition-transform">
                     {ep.title.replace(/\-+/g, " ")}
                   </p>
                 </div>

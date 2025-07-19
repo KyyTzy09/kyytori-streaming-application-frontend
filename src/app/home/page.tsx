@@ -16,7 +16,7 @@ export default function Home() {
   const { data: completed, isPending: completedLoad } = useGetCompletedAnime();
 
   return (
-    <div className="w-full flex flex-col p-5 items-center gap-5">
+    <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       {/* Carousel */}
       <section className="w-full h-52 bg-gray-600 animate-pulse"></section>
       <AnimeHeader
