@@ -50,15 +50,7 @@ export default function useFormHandle<Tform extends Record<string, string>>(sche
                 })
                 setFieldError(errors as Partial<Record<keyof Tform, string>>)
             }
-            if (axios.isAxiosError(error)) {
-                const message = error.response?.data.message
-                toast(message, {
-                    type: "error",
-                    isLoading: Loading,
-                    autoClose: 2000,
-                    position : "top-center"
-                })
-            }
+            
         } finally {
             setLoading(false)
         }

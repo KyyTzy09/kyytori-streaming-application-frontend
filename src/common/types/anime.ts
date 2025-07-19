@@ -11,7 +11,7 @@ export type Anime = {
     episode: number
     link: string
     type: string
-    rating: number
+    rating: string
     status: string
     duration: string
     season: string
@@ -19,6 +19,27 @@ export type Anime = {
     genres: AnimeGenres[]
 }
 
+export type Episodes = {
+    title: string
+    episode: number
+    link: string
+    createdAt: string
+
+    Anime: Anime
+    animeId: string
+
+    EpsLink: Epslink[]
+}
+
+export type Epslink = {
+    id: string
+    index: number
+    epsName: string
+    name: string
+    url: string
+
+    Episode: Episodes
+}
 
 export type Synopsis = {
     id: string

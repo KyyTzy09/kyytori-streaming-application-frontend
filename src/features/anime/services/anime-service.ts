@@ -1,5 +1,5 @@
 import { apiClient } from "@/common/helpers/axios"
-import { Anime } from "../../../common/types/anime"
+import { Anime, Episodes } from "../../../common/types/anime"
 
 export const animeService = {
     async onGoing(data: { page?: number }) {
@@ -13,8 +13,12 @@ export const animeService = {
     async completed(data: { page?: number }) {
         return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-completed?page=${data.page || 1}` })
     },
-    
+
     async detail(data: { animeTitle: string }) {
         return await apiClient<{ data: Anime }>({ url: `/anime/anime-detail/${data.animeTitle}` })
     },
+    
+    async episodes(data: { animeTitle: string }) {
+        return await apiClient<{ data: Episodes[] }>({ url: `/episode/${data.animeTitle}` })
+    }
 }

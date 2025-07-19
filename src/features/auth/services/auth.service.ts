@@ -14,7 +14,11 @@ export const getSessionService = async (token: string) => {
 }
 
 export const loginService = async (data: loginType) => {
-    return await apiClient<{ token: string }>({ url: "/auth/login", data, method: "post" })
+    try {
+        return await apiClient<{ token: string }>({ url: "/auth/login", data, method: "post" })
+    } catch (error) {
+        throw error
+    }
 }
 
 export const registerService = async (data: registerType) => {
