@@ -2,8 +2,11 @@
 
 import { Button } from "@/common/shadcn/button";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
-import { useGetEpsLink } from "@/features/anime/hooks/useGetAnime";
-import { ArrowLeft, ArrowRight, List } from "lucide-react";
+import {
+  useGetDetailAnime,
+  useGetEpsLink,
+} from "@/features/anime/hooks/useGetAnime";
+import { AlertCircleIcon, ArrowLeft, ArrowRight, List } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
 
@@ -14,6 +17,7 @@ export default function Episodepage() {
     epsTitle: string;
   }>();
   const { data: epsLink } = useGetEpsLink(epsTitle);
+  const { data: detail } = useGetDetailAnime(animeTitle);
 
   const [iframe, setIframe] = React.useState<string | undefined>();
 
@@ -76,7 +80,7 @@ export default function Episodepage() {
             );
           })}
         </div>
-        <div className="flex items-center justify-center w-full h-64 md:h-[500px]">
+        <div className="flex flex-col items-center justify-center w-full h-64 md:h-[500px]">
           {iframe && epsLink?.data.length !== 0 ? (
             <iframe
               className="w-full md:w-[60%] h-full bg-black"
@@ -88,6 +92,10 @@ export default function Episodepage() {
           ) : (
             <ImageSkeleton width={"60%"} height={"full"} />
           )}
+          <p className="flex  gap-1 text-gray-300 font-semibold text-sm w-[60%] text-start mt-1">
+            <AlertCircleIcon  className="text-yellow-400 w-5 h-5"/>
+            Jika iframe server ini error silahkan ganti ke server yang lainnya !
+          </p>
         </div>
         <div className="w-full flex items-center justify-between md:justify-center md:gap-5">
           {pagination.map((item) => {
@@ -98,7 +106,7 @@ export default function Episodepage() {
                 onClick={() => router.push(item.value!)}
                 disabled={!item.value}
               >
-                <item.Icon className="w-5 h-5"/>
+                <item.Icon className="w-5 h-5" />
                 {item.name}
               </Button>
             );
@@ -115,6 +123,19 @@ export default function Episodepage() {
             <span className="text-red-500">Gratis?</span> nonton di{" "}
             <span className="text-red-500">Kyytori</span> aja.
           </p>
+          <div className="mt-2 flex flex-col">
+            {detail?.data.synopsis.length! > 0 &&
+              detail?.data.synopsis.map((sin) => {
+                return (
+                  <p
+                    key={sin.id}
+                    className="text-white font-semibold text-[10px] md:text-sm text-justify"
+                  >
+                    {sin.text}
+                  </p>
+                );
+              })}
+          </div>
         </div>
       </section>
     </div>

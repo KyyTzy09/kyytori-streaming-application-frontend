@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { animeService } from "../services/anime-service";
-import { Anime } from "@/common/types/anime";
 
 export const useGetDetailAnime = (animeTitle: string) => {
     return useQuery({
         queryKey: ["detail", animeTitle],
-        queryFn: async () => animeService.detail({ animeTitle })
+        queryFn: async () => await animeService.detail({ animeTitle }),
+        staleTime: 2 * 60 * 1000
     })
 }
 
