@@ -33,6 +33,14 @@ export const useGetTopAnime = (page?: number) => {
     })
 }
 
+export const useGetAnimeList = (page?: number) => {
+    return useQuery({
+        queryKey: ["animeList", page],
+        queryFn: async () => await animeService.listAnime({ page }),
+        staleTime: 2 * 60 * 1000
+    })
+}
+
 export const useGetEpsLink = (epsTitle: string) => {
     return useQuery({
         queryKey: ["epslink", epsTitle],

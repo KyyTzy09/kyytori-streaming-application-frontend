@@ -20,9 +20,9 @@ export const animeService = {
     },
 
     async listAnime(data: getPage) {
-        return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-list?page=${data.page || 1}` })
+        return await apiClient<{ data: Anime[], pagination: { prevPage: string, nextPage: string } }>({ url: `/anime/anime-list?page=${data.page || 1}` })
     },
-    
+
     async detail(data: { animeTitle: string }) {
         return await apiClient<{ data: Anime }>({ url: `/anime/anime-detail/${data.animeTitle}` })
     },
@@ -32,6 +32,6 @@ export const animeService = {
     },
 
     async epsLink(data: { epsTitle: string }) {
-        return await apiClient<{ data: Epslink[], pagination: { prev: string, next: string } }>({ url: `/eps-link/${data.epsTitle}` })
+        return await apiClient<{ data: Epslink[], pagination: { prevPage: string, nextPage: string } }>({ url: `/eps-link/${data.epsTitle}` })
     }
 }

@@ -16,6 +16,7 @@ export default function Navbar({ data }: { data: User }) {
           KyyTori<span className="text-white">.id</span>
         </Link>
         <div className="flex items-center justify-between gap-5">
+          <Link href={'/list'} className="text-white font-semibold hover:text-red-500 hover:underline">Daftar Anime</Link>
           <Search className="w-5 h-5 text-white" />
           <AuthButton data={data} />
         </div>

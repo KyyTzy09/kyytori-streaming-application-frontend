@@ -25,8 +25,8 @@ export default function Episodepage() {
     {
       name: "Sebelumnya",
       value:
-        epsLink?.pagination.prev &&
-        `/anime/${animeTitle}/episode/${epsLink.pagination.prev}`,
+        epsLink?.pagination.prevPage &&
+        `/anime/${animeTitle}/episode/${epsLink.pagination.prevPage}`,
       Icon: ArrowLeft,
     },
     {
@@ -37,8 +37,8 @@ export default function Episodepage() {
     {
       name: "Selanjutnya",
       value:
-        epsLink?.pagination.next &&
-        `/anime/${animeTitle}/episode/${epsLink.pagination.next}`,
+        epsLink?.pagination.nextPage &&
+        `/anime/${animeTitle}/episode/${epsLink.pagination.nextPage}`,
       Icon: ArrowRight,
     },
   ];
@@ -93,7 +93,7 @@ export default function Episodepage() {
             <ImageSkeleton width={"60%"} height={"full"} />
           )}
           <p className="flex  gap-1 text-gray-300 font-semibold text-sm w-[60%] text-start mt-1">
-            <AlertCircleIcon  className="text-yellow-400 w-5 h-5"/>
+            <AlertCircleIcon className="text-yellow-400 w-5 h-5" />
             Jika iframe server ini error silahkan ganti ke server yang lainnya !
           </p>
         </div>
