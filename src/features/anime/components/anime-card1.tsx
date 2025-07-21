@@ -53,17 +53,22 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                   </div>
                 </div>
                 <CardContent className="w-full flex flex-col p-2">
-                  <div className="w-full h-40 md:h-60 overflow-hidden">
+                  <div className="w-full h-40 md:h-60 overflow-hidden relative">
                     <Image
                       src={item.image}
                       alt={item.title}
                       width={400}
                       height={400}
-                      className="w-full h-full object-cover group-hover:scale-105 relative transition duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
-                  </div>
-                  <div className="group-hover:text-red-500 group-hover:bg-white absolute top-2 left-2 p-1 rounded-r-sm bg-red-500 text-sm font-semibold text-white flex items-center justify-center transition duration-700">
-                    {item.status}
+                    {item.updatedEps && (
+                      <div className="group-hover:text-white group-hover:bg-red-500 absolute bottom-0 right-0 px-2 rounded-tl-sm bg-black/80 text-sm font-semibold text-red-500 flex items-center justify-center transition duration-700">
+                        Eps {item.updatedEps}
+                      </div>
+                    )}
+                    <div className="group-hover:text-red-500 group-hover:bg-white absolute top-0 left-0 p-1 rounded-br-sm bg-red-500 text-sm font-semibold text-white flex items-center justify-center transition duration-700">
+                      {item.status}
+                    </div>
                   </div>
                   <p className="text-white line-clamp-1">{item.title}</p>
                 </CardContent>

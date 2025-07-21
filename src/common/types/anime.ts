@@ -7,7 +7,7 @@ export type Anime = {
     titleEng: string
 
     synopsis: Synopsis[]
-
+    updatedEps : number | string
     episode: number
     link: string
     type: string

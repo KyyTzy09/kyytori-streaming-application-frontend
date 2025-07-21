@@ -6,14 +6,13 @@ import {
   useGetAnimeSchedule,
   useGetCompletedAnime,
   useGetOngoingAnime,
-  useGetTopAnime,
 } from "@/features/anime/hooks/useGetAnime";
-import { Anime, scheduleType } from "@/common/types/anime";
+import { Anime } from "@/common/types/anime";
 import AnimeHeader from "@/features/anime/components/anime-header";
 import { Separator } from "@/common/shadcn/separator";
 import { convertDay } from "@/common/helpers/day";
 
-export default function Home() {
+export default function HomePage() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
   const { data: completed, isPending: completedLoad } = useGetCompletedAnime();
   const { data: schedule, isPending: scheduleLoad } = useGetAnimeSchedule();
