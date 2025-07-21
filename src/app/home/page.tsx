@@ -22,7 +22,7 @@ export default function Home() {
       <AnimeHeader
         front="Anime"
         back="On-going"
-        url="/anime-ongoing"
+        url="/ongoing"
         linkText="Lihat semua"
       />
       {/* Card anime update */}
@@ -33,7 +33,7 @@ export default function Home() {
       <AnimeHeader
         front="Anime"
         back="Completed"
-        url="/anime-completed"
+        url="/completed"
         linkText="Lihat semua"
       />
       <section className="w-full min-h-screen">
