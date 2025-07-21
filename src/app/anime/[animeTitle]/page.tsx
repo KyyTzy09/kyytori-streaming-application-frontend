@@ -108,7 +108,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                   detail.genres.map((gen) => {
                     return (
                       <Link
-                        href={`/genre?genre=${gen.genreName}`}
+                        href={`/gen/${gen.genreName}`}
                         key={gen.genreName}
                         className="flex text-sm items-center justify-center text-white p-1 font-mono rounded-sm bg-black/70 border-red-500 border drop-shadow-red-500 drop-shadow-sm"
                       >

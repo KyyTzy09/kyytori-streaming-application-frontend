@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import DashboardHeader from "../../../common/ui/headers/header";
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowBigLeft } from "lucide-react";
+import NavigationHeader from "@/common/ui/headers/header";
 
 interface ProfileHeaderProps {
   title: string;
@@ -16,7 +16,7 @@ export default function ProfileHeader({ title }: ProfileHeaderProps) {
     else router.back();
   };
   return (
-    <DashboardHeader
+    <NavigationHeader
       description="Lihat informasi tentang dirimu"
       title={title}
       actionText="Kembali"

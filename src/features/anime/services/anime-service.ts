@@ -5,7 +5,7 @@ interface getPage {
     page?: number
 }
 
-interface pagination {
+export interface pagination {
     prevPage: number
     nextPage: number
     maxPage?: number
