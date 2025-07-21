@@ -1,6 +1,7 @@
 "use client";
 
 import AnimeCard1 from "@/features/anime/components/anime-card1";
+import { motion } from "motion/react";
 import React from "react";
 import {
   useGetAnimeSchedule,
@@ -21,17 +22,36 @@ export default function HomePage() {
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       {/* Carousel */}
       <section className="w-full h-52 bg-gray-600 animate-pulse"></section>
-      <AnimeHeader
-        front="Anime Hari ini"
-        back={`(${convertDay(new Date()).name})`}
-        url="/schedule"
-        linkText="Lihat semua"
-      />
-      <AnimeCard1
-        data={schedule?.data[convertDay(new Date()).value] as Anime[]}
-        isLoading={scheduleLoad}
-      />
-      <Separator className="px-2 border-red-500 border" />
+      <motion.div
+        animate={{
+          boxShadow: [
+            "0 0 10px rgba(255,0,0,0.5)",
+            "0 0 20px rgba(255,0,0,0.9)",
+            "0 0 10px rgba(255,0,0,0.5)",
+          ],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="w-full h-full rounded-sm flex flex-col gap-2 border border-red-500 p-5 relative overflow-hidden"
+      >
+        <div className="bg-red-500 h-2 absolute bottom-0 right-0 translate-x-[43.5rem] w-full -rotate-45"></div>
+        <div className="bg-red-500 h-2 absolute bottom-0 right-0 translate-x-[45rem] w-full -rotate-45"></div>
+        <div className="w-full flex px-1">
+          <AnimeHeader
+            front="Anime Update Hari Ini"
+            back={`(${convertDay(new Date()).name})🔥🔥`}
+            url="/schedule"
+            linkText="Lihat semua"
+          />
+        </div>
+        <AnimeCard1
+          data={schedule?.data[convertDay(new Date()).value] as Anime[]}
+          isLoading={scheduleLoad}
+        />
+      </motion.div>
       <AnimeHeader
         front="Anime"
         back="On-going"

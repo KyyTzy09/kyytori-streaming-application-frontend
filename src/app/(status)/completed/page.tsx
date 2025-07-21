@@ -33,6 +33,7 @@ export default function CompletedAnimePage() {
         : null,
     },
   ];
+  
   if (completed?.data.length === 0) {
     return <NotFound />;
   }

@@ -29,6 +29,7 @@ export default function GenresPage() {
             genres?.data.map((gen) => {
               return (
                 <Button
+                  key={gen.name}
                   onClick={() => router.push(`/gen/${gen.name}`)}
                   className="w-full rounded-sm cursor-pointer flex items-center justify-between p-2 bg-transparent border-2 border-red-500 font-semibold text-white  hover:border-white hover:text-red-500 hover:scale-105 transition duration-700"
                 >
