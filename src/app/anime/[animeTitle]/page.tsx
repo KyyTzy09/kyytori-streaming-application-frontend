@@ -6,6 +6,11 @@ import AnimeRating from "@/features/anime/components/anime.rating";
 import Link from "next/link";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
 import { Play, PlayCircle } from "lucide-react";
+import axios from "axios";
+import { apiClient } from "@/common/helpers/axios";
+import { Anime, Episodes } from "@/common/types/anime";
+import { episodeService } from "@/features/episodes/services/eps-service";
+import EpisodeCard from "@/features/episodes/components/episode-card";
 
 interface detailAnimeProps {
   params: {
@@ -15,8 +20,14 @@ interface detailAnimeProps {
 
 export default async function DetailAnime({ params }: detailAnimeProps) {
   const { animeTitle } = await params;
-  const { data: detail } = await animeService.detail({ animeTitle });
-  const { data: episodes } = await animeService.episodes({ animeTitle });
+  const decodedTitle = decodeURIComponent(animeTitle);
+  const { data: detail } = await animeService.detail({
+    animeTitle: decodedTitle,
+  });
+
+  const { data: episodes } = await episodeService.episodes({
+    animeTitle: decodedTitle,
+  });
 
   const detailList = [
     {
@@ -145,37 +156,14 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
       </section>
       {/* Episodes section */}
       <section className="w-full h-full bg-[#232323] mt-20 p-5">
-        <p className="text-red-500 font-bold text-xl">Episode :</p>
-        <div className="w-full py-2 grid grid-cols-2 md:grid-cols-4 mt-10 gap-5">
-          {episodes.map((ep) => {
-            return (
-              <Link
-                href={`/anime/${animeTitle}/episode/${ep.link}`}
-                key={ep.title}
-                className="group w-full flex flex-col items-center justify-start gap-3 bg-black/70 border-red-600 border rounded-md overflow-hidden relative"
-              >
-                <div className="flex text-sm p-2 text-white font-mono items-center justify-center bg-red-500 group-hover:bg-red-300 transition duration-700 z-10 absolute top-0 right-0 rounded-bl-sm">
-                  Episode {ep.episode}
-                </div>
-                <div className="w-full h-32 relative">
-                  <Image
-                    src={detail.image || defaultImage}
-                    alt={ep.title}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-110"
-                    width={300}
-                    height={420}
-                  />
-                </div>
-                <div className="flex w-full items-center justify-start gap-3 p-2">
-                  <PlayCircle className="w-4 h-4 md:w-5 md:h-5 text-white group-hover:text-red-500 transition-transform" />
-                  <p className="line-clamp-1 text-[10px] md:text-sm text-white font-semibold group-hover:text-red-500 transition-transform">
-                    {ep.title.replace(/\-+/g, " ")}
-                  </p>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+        <p className="text-red-500 font-bold text-xl">
+          Episode ({episodes.length}):
+        </p>
+        <EpisodeCard
+          animeTitle={animeTitle}
+          episodes={episodes}
+          anime={detail}
+        />
       </section>
     </div>
   );

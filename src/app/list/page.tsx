@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+import NotFound from "../not-found";
 
 export default function AnimeListPage() {
   const searchParams = useSearchParams();
@@ -17,9 +18,11 @@ export default function AnimeListPage() {
 
   const page = searchParams.get("page");
 
-  const { data: Anime, isLoading: AnimeLoading } = useGetAnimeList(
-    Number(page)
-  );
+  const {
+    data: Anime,
+    isLoading: AnimeLoading,
+    isError: AnimeError,
+  } = useGetAnimeList(Number(page));
 
   const paginationItems = [
     {
@@ -36,6 +39,9 @@ export default function AnimeListPage() {
     },
   ];
 
+  if (Anime?.data.length === 0) {
+    return <NotFound />;
+  }
   return (
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       <section className="w-full flex items-center justify-between">
@@ -62,7 +68,7 @@ export default function AnimeListPage() {
               key={item.name}
               onClick={() => {
                 scrollTo({ top: 0, behavior: "smooth" }),
-                router.push(item.value!);
+                  router.push(item.value!);
               }}
             >
               {item.name}

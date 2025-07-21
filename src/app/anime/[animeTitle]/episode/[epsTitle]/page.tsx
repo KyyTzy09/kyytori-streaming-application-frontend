@@ -2,10 +2,8 @@
 
 import { Button } from "@/common/shadcn/button";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
-import {
-  useGetDetailAnime,
-  useGetEpsLink,
-} from "@/features/anime/hooks/useGetAnime";
+import { useGetDetailAnime } from "@/features/anime/hooks/useGetAnime";
+import { useGetEpsLink } from "@/features/episodes/hooks/useGetEps";
 import { AlertCircleIcon, ArrowLeft, ArrowRight, List } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
@@ -16,7 +14,8 @@ export default function Episodepage() {
     animeTitle: string;
     epsTitle: string;
   }>();
-  const { data: epsLink } = useGetEpsLink(epsTitle);
+  const decodedEpsTitle = decodeURIComponent(epsTitle);
+  const { data: epsLink } = useGetEpsLink(decodedEpsTitle);
   const { data: detail } = useGetDetailAnime(animeTitle);
 
   const [iframe, setIframe] = React.useState<string | undefined>();
@@ -51,7 +50,7 @@ export default function Episodepage() {
     <div className="flex flex-col w-full min-h-screen p-5 gap-5">
       <section className="flex w-full items-center justify-between">
         <p className="font-semibold text-xl line-clamp-1 text-red-500">
-          {epsTitle.replace(/\-+/g, " ")}
+          {decodeURIComponent(epsTitle.replace(/\-+/g, " "))}
         </p>
         <Button
           onClick={() => router.push(`/anime/${animeTitle}`)}
@@ -114,7 +113,7 @@ export default function Episodepage() {
         </div>
         <div className="w-full md:w-[60%] flex flex-col justify-center items-center">
           <p className="text-red-500 font-semibold text-[16px] text-justify md:text-2xl line-clamp-2 w-full">
-            {epsTitle.replace(/\-+/g, " ").toUpperCase()}
+            {decodeURIComponent(epsTitle.replace(/\-+/g, " ").toUpperCase())}
           </p>
           <p className="w-full text-gray-200 text-[10px] md:text-lg">
             Nonton/Streaming Anime dengan episode{" "}
