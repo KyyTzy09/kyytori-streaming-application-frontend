@@ -11,7 +11,7 @@ export const useGetDetailAnime = (animeTitle: string) => {
 
 export const useGetOngoingAnime = (page?: number) => {
     return useQuery({
-        queryKey: ["ongoing"],
+        queryKey: ["ongoing", page],
         queryFn: async () => await animeService.onGoing({ page }),
         staleTime: 2 * 60 * 1000
     })

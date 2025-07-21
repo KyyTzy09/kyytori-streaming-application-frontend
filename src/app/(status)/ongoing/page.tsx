@@ -3,45 +3,45 @@
 import { Button } from "@/common/shadcn/button";
 import { Anime } from "@/common/types/anime";
 import AnimeCard2 from "@/features/anime/components/anime-card2";
-import { useGetCompletedAnime } from "@/features/anime/hooks/useGetAnime";
+import { useGetOngoingAnime } from "@/features/anime/hooks/useGetAnime";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import NotFound from "../not-found";
+import NotFound from "../../not-found";
 
-export default function CompletedAnimePage() {
+export default function OngoingAnimePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const page = searchParams.get("page");
-  const { data: completed, isLoading: completedLoad } = useGetCompletedAnime(
+  const { data: ongoing, isLoading: onGoingLoad } = useGetOngoingAnime(
     Number(page)
   );
 
   const paginationItems = [
     {
       name: "Sebelumnya",
-      value: completed?.pagination.prevPage
-        ? ` /completed?page=${completed?.pagination.prevPage}`
+      value: ongoing?.pagination.prevPage
+        ? ` /ongoing?page=${ongoing?.pagination.prevPage}`
         : null,
     },
     {
       name: "Selanjutnya",
-      value: completed?.pagination.nextPage
-        ? `/completed?page=${completed?.pagination.nextPage}`
+      value: ongoing?.pagination.nextPage
+        ? `/ongoing?page=${ongoing?.pagination.nextPage}`
         : null,
     },
   ];
-  if (completed?.data.length === 0) {
+  if (ongoing?.data.length === 0) {
     return <NotFound />;
   }
   return (
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       <section className="w-full flex flex-col items-center justify-between">
         <p className="text-white text-lg md:text-xl font-semibold p-1 w-full">
-          Anime <span className="text-red-500 font-mono">Completed</span>
+          Anime <span className="text-red-500 font-mono">On-going</span>
         </p>
       </section>
-      <AnimeCard2 data={completed?.data as Anime[]} isLoading={completedLoad} />
+      <AnimeCard2 data={ongoing?.data as Anime[]} isLoading={onGoingLoad} />
       <section className="w-full flex items-center justify-center gap-5">
         {paginationItems.map((item) => {
           return (
@@ -60,10 +60,10 @@ export default function CompletedAnimePage() {
         })}
         <Button
           className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700"
-          disabled={Number(page) === Number(completed?.pagination.maxPage)}
+          disabled={Number(page) === Number(ongoing?.pagination.maxPage)}
           onClick={() => {
             scrollTo({ top: 0, behavior: "smooth" }),
-              router.push(`/completed?page=${completed?.pagination.maxPage}`);
+              router.push(`/ongoing?page=${ongoing?.pagination.maxPage}`);
           }}
         >
           MaxPage

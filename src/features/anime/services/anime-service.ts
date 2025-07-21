@@ -5,10 +5,15 @@ interface getPage {
     page?: number
 }
 
+interface pagination {
+    prevPage: number
+    nextPage: number
+    maxPage?: number
+}
 
 export const animeService = {
     async onGoing(data: getPage) {
-        return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-ongoing?page=${data.page || 1}` })
+        return await apiClient<{ data: Anime[], pagination: pagination }>({ url: `/anime/anime-ongoing?page=${data.page || 1}` })
     },
 
     async topAnime(data: getPage) {
@@ -16,11 +21,11 @@ export const animeService = {
     },
 
     async completed(data: getPage) {
-        return await apiClient<{ data: Anime[], pagination: { prevPage: number, nextPage: number, maxPage?: number } }>({ url: `/anime/anime-completed?page=${data.page || 1}` })
+        return await apiClient<{ data: Anime[], pagination: pagination }>({ url: `/anime/anime-completed?page=${data.page || 1}` })
     },
 
     async listAnime(data: getPage) {
-        return await apiClient<{ data: Anime[], pagination: { prevPage: number, nextPage: number } }>({ url: `/anime/anime-list?page=${data.page || 1}` })
+        return await apiClient<{ data: Anime[], pagination: pagination }>({ url: `/anime/anime-list?page=${data.page || 1}` })
     },
 
     async detail(data: { animeTitle: string }) {
