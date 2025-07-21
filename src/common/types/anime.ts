@@ -57,3 +57,13 @@ export type Synopsis = {
     animeId: string
     text: string
 }
+
+export type scheduleType = {
+    monday: Anime[]
+    tuesday: Anime[]
+    wednesday: Anime[]
+    thursday: Anime[]
+    friday: Anime[]
+    saturday: Anime[]
+    sunday: Anime[]
+}

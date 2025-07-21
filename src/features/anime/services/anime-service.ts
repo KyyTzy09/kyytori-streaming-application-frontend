@@ -1,5 +1,5 @@
 import { apiClient } from "@/common/helpers/axios"
-import { Anime, Episodes, Epslink } from "../../../common/types/anime"
+import { Anime, Episodes, Epslink, scheduleType } from "../../../common/types/anime"
 
 interface getPage {
     page?: number
@@ -31,4 +31,8 @@ export const animeService = {
     async detail(data: { animeTitle: string }) {
         return await apiClient<{ data: Anime }>({ url: `/anime/anime-detail/${data.animeTitle}` })
     },
+
+    async schedule() {
+        return await apiClient<{ data: scheduleType }>({ url: '/anime/anime-schedule' })
+    }
 }

@@ -33,6 +33,14 @@ export const useGetTopAnime = (page?: number) => {
     })
 }
 
+export const useGetAnimeSchedule = () => {
+    return useQuery({
+        queryKey: ["schedule"],
+        queryFn: async () => await animeService.schedule(),
+        staleTime: 2 * 60 * 1000
+    })
+}
+
 export const useGetAnimeList = (page?: number) => {
     return useQuery({
         queryKey: ["animeList", page],

@@ -53,13 +53,15 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                   </div>
                 </div>
                 <CardContent className="w-full flex flex-col p-2">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={400}
-                    height={400}
-                    className="w-full h-40 md:h-60 object-cover group-hover:scale-105 relative transition duration-500"
-                  />
+                  <div className="w-full h-40 md:h-60 overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={400}
+                      height={400}
+                      className="w-full h-full object-cover group-hover:scale-105 relative transition duration-500"
+                    />
+                  </div>
                   <div className="group-hover:text-red-500 group-hover:bg-white absolute top-2 left-2 p-1 rounded-r-sm bg-red-500 text-sm font-semibold text-white flex items-center justify-center transition duration-700">
                     {item.status}
                   </div>

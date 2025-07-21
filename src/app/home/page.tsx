@@ -3,22 +3,36 @@
 import AnimeCard1 from "@/features/anime/components/anime-card1";
 import React from "react";
 import {
+  useGetAnimeSchedule,
   useGetCompletedAnime,
   useGetOngoingAnime,
   useGetTopAnime,
 } from "@/features/anime/hooks/useGetAnime";
-import { Anime } from "@/common/types/anime";
+import { Anime, scheduleType } from "@/common/types/anime";
 import AnimeHeader from "@/features/anime/components/anime-header";
 import { Separator } from "@/common/shadcn/separator";
+import { convertDay } from "@/common/helpers/day";
 
 export default function Home() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
   const { data: completed, isPending: completedLoad } = useGetCompletedAnime();
+  const { data: schedule, isPending: scheduleLoad } = useGetAnimeSchedule();
 
   return (
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       {/* Carousel */}
       <section className="w-full h-52 bg-gray-600 animate-pulse"></section>
+      <AnimeHeader
+        front="Anime Hari ini"
+        back={`(${convertDay(new Date()).name})`}
+        url="/schedule"
+        linkText="Lihat semua"
+      />
+      <AnimeCard1
+        data={schedule?.data[convertDay(new Date()).value] as Anime[]}
+        isLoading={scheduleLoad}
+      />
+      <Separator className="px-2 border-red-500 border" />
       <AnimeHeader
         front="Anime"
         back="On-going"
