@@ -68,7 +68,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
             Kembali
           </Link>
         </section>
-        <div className="w-full h-[350px] relative flex">
+        <div className="w-full h-[400px] relative flex">
           <Image
             src={detail.image || defaultImage}
             alt={detail.title || "title"}

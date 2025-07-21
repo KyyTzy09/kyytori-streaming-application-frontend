@@ -19,7 +19,7 @@ export const useGetOngoingAnime = (page?: number) => {
 
 export const useGetCompletedAnime = (page?: number) => {
     return useQuery({
-        queryKey: ["top"],
+        queryKey: ["completed", page],
         queryFn: async () => await animeService.completed({ page }),
         staleTime: 2 * 60 * 1000
     })
@@ -27,7 +27,7 @@ export const useGetCompletedAnime = (page?: number) => {
 
 export const useGetTopAnime = (page?: number) => {
     return useQuery({
-        queryKey: ["completed"],
+        queryKey: ["top", page],
         queryFn: async () => await animeService.topAnime({ page }),
         staleTime: 2 * 60 * 1000
     })
