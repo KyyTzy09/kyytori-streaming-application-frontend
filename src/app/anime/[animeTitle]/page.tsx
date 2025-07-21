@@ -5,10 +5,7 @@ import { animeService } from "@/features/anime/services/anime-service";
 import AnimeRating from "@/features/anime/components/anime.rating";
 import Link from "next/link";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
-import { Play, PlayCircle } from "lucide-react";
-import axios from "axios";
-import { apiClient } from "@/common/helpers/axios";
-import { Anime, Episodes } from "@/common/types/anime";
+import { ArrowLeft } from "lucide-react";
 import { episodeService } from "@/features/episodes/services/eps-service";
 import EpisodeCard from "@/features/episodes/components/episode-card";
 
@@ -59,6 +56,18 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
   return (
     <div className="w-full min-h-screen">
       <section className="w-full min-h-screen p-5 flex flex-col">
+        <section className="w-full flex items-center justify-between mb-5">
+          <p className="text-white text-lg md:text-xl font-semibold p-1">
+            Anime <span className="text-red-500 font-mono">{decodedTitle}</span>
+          </p>
+          <Link
+            href={"/home"}
+            className="flex text-sm text-white px-2 py-1 items-center justify-center gap-2 bg-red-500 hover:bg-red-400 rounded-sm font-semibold"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Kembali
+          </Link>
+        </section>
         <div className="w-full h-[350px] relative flex">
           <Image
             src={detail.image || defaultImage}
