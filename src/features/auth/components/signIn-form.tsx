@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 import { loginService } from "../services/auth.service";
-import { apiClient } from "@/common/helpers/axios";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -29,7 +28,7 @@ export default function SignInForm() {
         position: "top-center",
         autoClose: 2000,
       });
-      router.push("/");
+      router.push("/home");
     }
   );
   return (

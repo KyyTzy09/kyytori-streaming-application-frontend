@@ -19,14 +19,14 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
   return (
     <div className="w-full gap-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
       {data
-        ?.map((item) => {
+        ?.map((item, i) => {
           return (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, translateY: 100 }}
               animate={{ opacity: 100, translateY: 0 }}
               exit={{ opacity: 0, translateY: 100 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.2, delay : i * 0.1, ease: "easeInOut" }}
             >
               <Link href={`/anime/${item.link}`}>
                 <Card
@@ -35,7 +35,7 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                 >
                   <div className="absolute p-2 md:p-4 z-10 rounded-sm translate-y-10 opacity-0 flex flex-col justify-between gap-2 w-full group-hover:opacity-100 group-hover:translate-y-0 bg-black/90 top-0 bottom-0 transition duration-700">
                     <div className="w-full flex flex-col gap-2">
-                      <p className="text-red-500 font-semibold text-[13px] md:text-[16px] text-center">
+                      <p className="text-red-500 font-semibold text-[13px] md:text-[16px] line-clamp-2 md:line-clamp-none text-center">
                         {item.titleJap || item.titleEng || item.title}
                       </p>
                       {item?.synopsis?.length > 0 && (

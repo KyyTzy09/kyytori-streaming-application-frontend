@@ -91,16 +91,16 @@ export default function Episodepage() {
           ) : (
             <ImageSkeleton width={"60%"} height={"full"} />
           )}
-          <p className="flex  gap-1 text-gray-300 font-semibold text-sm w-[60%] text-start mt-1">
+          <p className="flex gap-1 text-gray-300 font-semibold text-[10px] md:text-sm w-full md:w-[60%] text-start mt-2">
             <AlertCircleIcon className="text-yellow-400 w-5 h-5" />
             Jika iframe server ini error silahkan ganti ke server yang lainnya !
           </p>
         </div>
-        <div className="w-full flex items-center justify-between md:justify-center md:gap-5">
+        <div className="w-full flex items-center justify-center gap-5">
           {pagination.map((item) => {
             return (
               <Button
-                className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-400 transition duration-700"
+                className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
                 key={item.name}
                 onClick={() => router.push(item.value!)}
                 disabled={!item.value}

@@ -17,11 +17,13 @@ export default function HomePage() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
   const { data: completed, isPending: completedLoad } = useGetCompletedAnime();
   const { data: schedule, isPending: scheduleLoad } = useGetAnimeSchedule();
-
+  console.log(convertDay(new Date()).value)
   return (
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       {/* Carousel */}
-      <section className="w-full h-52 bg-gray-600 animate-pulse"></section>
+      <section className="w-full h-40 md:h-52 bg-gray-600 animate-pulse"></section>
+
+      {/* Jadwal anime hari ini */}
       <motion.div
         animate={{
           boxShadow: [
@@ -35,7 +37,7 @@ export default function HomePage() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="w-full h-full rounded-sm flex flex-col gap-2 border border-red-500 p-5 relative overflow-hidden"
+        className="w-full h-full rounded-sm flex flex-col gap-2 border border-red-500 p-2 relative overflow-hidden"
       >
         <div className="bg-red-500 h-2 absolute bottom-0 right-0 translate-x-[43.5rem] w-full -rotate-45"></div>
         <div className="bg-red-500 h-2 absolute bottom-0 right-0 translate-x-[45rem] w-full -rotate-45"></div>
@@ -44,7 +46,7 @@ export default function HomePage() {
             front="Anime Update Hari Ini"
             back={`(${convertDay(new Date()).name})🔥🔥`}
             url="/schedule"
-            linkText="Lihat semua"
+            linkText="Lihat Jadwal"
           />
         </div>
         <AnimeCard1
@@ -52,17 +54,19 @@ export default function HomePage() {
           isLoading={scheduleLoad}
         />
       </motion.div>
+
+      {/* Anime Ongoing */}
       <AnimeHeader
         front="Anime"
         back="On-going"
         url="/ongoing"
         linkText="Lihat semua"
       />
-      {/* Card anime update */}
       <section className="w-full min-h-screen">
         <AnimeCard1 data={ongoing?.data as Anime[]} isLoading={ongoingLoad} />
       </section>
       <Separator className="px-2 border-red-500 border" />
+      {/* Anime Completed */}
       <AnimeHeader
         front="Anime"
         back="Completed"

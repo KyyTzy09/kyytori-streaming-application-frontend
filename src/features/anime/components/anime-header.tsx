@@ -16,7 +16,7 @@ export default function AnimeHeader({
 }: AnimeHeaderProps) {
   return (
     <div className="w-full flex items-center justify-between px-1">
-      <p className="text-white font-semibold text-lg md:text-xl">
+      <p className="text-white font-semibold text-[14px] md:text-xl">
         {front}{" "}
         <span className="text-red-500">
           <i>{back}</i>
@@ -24,7 +24,7 @@ export default function AnimeHeader({
       </p>
       <Link
         href={url}
-        className="bg-red-500 text-white p-2 rounded-sm font-semibold text-sm hover:bg-red-400 transition duration-700"
+        className="bg-red-500 text-white p-2 rounded-sm font-semibold text-[10px] md:text-sm hover:bg-red-400 transition duration-700"
       >
         {linkText}
       </Link>
