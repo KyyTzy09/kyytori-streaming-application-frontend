@@ -70,7 +70,7 @@ export default function ScheduleAnimePage() {
   return (
     <div className="w-full min-h-screen p-5">
       <NavigationHeader
-        description="Catatan: Jadwal ini belum tentu benar."
+        description="Catatan: Mohon maaf jika jadwal ini mungkin tidak 100% akurat dengan update yg ada."
         title={"Jadwal anime"}
         actionText="Kembali"
         action={handleBack}

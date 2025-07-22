@@ -22,7 +22,6 @@ export default function HomePage() {
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       {/* Carousel */}
       <section className="w-full h-40 md:h-52 bg-gray-600 animate-pulse"></section>
-
       {/* Jadwal anime hari ini */}
       <motion.div
         animate={{
