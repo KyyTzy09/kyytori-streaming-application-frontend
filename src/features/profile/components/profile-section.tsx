@@ -72,16 +72,6 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
             <p className="text-red-500 text-lg font-bold">
               {data.profile.userName}
             </p>
-            <div className="w-full flex items-center justify-center md:justify-start gap-3">
-              <Label className="text-black flex items-center gap-1 justify-start">
-                0
-                <Bookmark strokeWidth={1} fill="black" className="w-5 h-5" />
-              </Label>
-              <Label className="text-black flex items-center gap-2 justify-start">
-                0
-                <FaComment strokeWidth={1} fill="black" className="w-5 h-5" />
-              </Label>
-            </div>
             <p
               className={`text-gray-500 text-center md:text-start text-xs md:text-sm font-semibold ${
                 !showInfo && data.profile.info.length > 200
