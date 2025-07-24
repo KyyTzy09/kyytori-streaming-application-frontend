@@ -36,7 +36,7 @@ export const animeService = {
         return await apiClient<{ data: scheduleType }>({ url: '/anime/anime-schedule' })
     },
 
-    async searchAnime(data: { title: string }) {
-        return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-search?search=${data.title}` })
+    async searchAnime(data: { search: string, page?: number }) {
+        return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-search?search=${data.search}` })
     }
 }

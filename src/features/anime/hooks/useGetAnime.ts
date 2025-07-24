@@ -48,3 +48,11 @@ export const useGetAnimeList = (page?: number) => {
         staleTime: 2 * 60 * 1000
     })
 }
+
+export const useGetSearchAnime = (search: string, page?: number) => {
+    return useQuery({
+        queryKey: ["animeSearch", search, page],
+        queryFn: async () => animeService.searchAnime({ search, page }),
+        staleTime : 2 * 60 * 1000
+    })
+}
