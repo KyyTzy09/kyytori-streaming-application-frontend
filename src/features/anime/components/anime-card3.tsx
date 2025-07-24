@@ -5,7 +5,6 @@ import Card2Skeleton from "@/common/ui/skeleton/card2-skeleton";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 interface AnimeCard3Props {
