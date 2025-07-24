@@ -26,7 +26,7 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
               initial={{ opacity: 0, translateY: 100 }}
               animate={{ opacity: 100, translateY: 0 }}
               exit={{ opacity: 0, translateY: 100 }}
-              transition={{ duration: 0.2, delay : i * 0.1, ease: "easeInOut" }}
+              transition={{ duration: 0.2, delay: i * 0.1, ease: "easeInOut" }}
             >
               <Link href={`/anime/${item.link}`}>
                 <Card
@@ -74,7 +74,15 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                           Eps {item.updatedEps}
                         </div>
                       )}
-                      <div className="group-hover:text-red-500 group-hover:bg-white absolute top-0 left-0 p-1 rounded-br-sm bg-red-500 text-sm font-semibold text-white flex items-center justify-center transition duration-700">
+                      <div
+                        className={`${
+                          item.status === "Ongoing"
+                            ? "bg-yellow-400"
+                            : item.status === "Completed"
+                            ? "bg-green-400"
+                            : "bg-red-500"
+                        } group-hover:text-red-500 group-hover:bg-white absolute top-0 left-0 p-1 rounded-br-sm text-sm font-semibold text-white flex items-center justify-center transition duration-700`}
+                      >
                         {item.status}
                       </div>
                     </div>

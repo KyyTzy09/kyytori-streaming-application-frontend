@@ -33,11 +33,11 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#121111] relative`}
       >
-        <ToastContainer />
-        <Navbar data={data as User} />
-        <section className="w-full min-h-screen">
-          <QueryProvider>{children}</QueryProvider>
-        </section>
+        <QueryProvider>
+          <ToastContainer />
+          <Navbar data={data as User} />
+          <section className="w-full min-h-screen">{children}</section>
+        </QueryProvider>
       </body>
     </html>
   );

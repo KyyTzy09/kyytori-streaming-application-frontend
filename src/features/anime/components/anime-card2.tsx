@@ -41,7 +41,15 @@ export default function AnimeCard2({ data, isLoading }: AnimeCard2Props) {
                       {item.type}
                     </div>
                   </div>
-                  <div className="group-hover:text-red-500 group-hover:bg-white absolute top-2 left-2 p-1 rounded-r-sm bg-red-500 text-sm font-semibold text-white flex items-center justify-center transition duration-700">
+                  <div
+                    className={`${
+                      item.status === "Ongoing"
+                        ? "bg-yellow-400"
+                        : item.status === "Completed"
+                        ? "bg-green-400"
+                        : "bg-red-500"
+                    } group-hover:bg-white absolute top-2 left-2 p-1 rounded-r-sm text-sm font-semibold text-white flex items-center justify-center transition duration-700`}
+                  >
                     {item.status}
                   </div>
                   <p className="text-white line-clamp-1 font-sans">

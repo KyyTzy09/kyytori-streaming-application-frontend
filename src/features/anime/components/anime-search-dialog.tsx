@@ -8,9 +8,13 @@ import {
 } from "@/common/shadcn/alert-dialog";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
-import { SearchIcon, XIcon } from "lucide-react";
+import { ArrowBigRight, SearchIcon, XIcon } from "lucide-react";
 import { motion } from "motion/react";
-import React from "react";
+import { useSearchParams } from "next/navigation";
+import React, { ChangeEvent } from "react";
+import { useGetSearchAnime } from "../hooks/useGetAnime";
+import AnimeCard3 from "./anime-card3";
+import { Anime } from "@/common/types/anime";
 
 interface AnimeSearchDialogProps {
   active: boolean;
@@ -21,9 +25,26 @@ export default function AnimeSearchDialog({
   active,
   setActive,
 }: AnimeSearchDialogProps) {
+  const [search, setSearch] = React.useState<string>("");
+  const [page, setPage] = React.useState<number>(1);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const { data: anime, isPending: isLoading } = useGetSearchAnime(
+    search,
+    Number(page)
+  );
+
+  React.useEffect(() => {
+    setSearch("");
+    setPage(1);
+  }, [setSearch, setPage]);
+
   return (
     <AlertDialog open={active}>
-      <AlertDialogContent className="bg-black/80 w-[90%] h-[300px] md:top-52 max-w-none border border-red-500 overflow-hidden gap-0 p-5">
+      <AlertDialogContent className="bg-black/80 w-[90%] max-w-none border border-red-500 overflow-hidden gap-0 p-5">
         <Button
           onClick={() => setActive(false)}
           className="group w-5 h-5 absolute top-1 right-1 bg-transparent hover:bg-transparent"
@@ -33,12 +54,14 @@ export default function AnimeSearchDialog({
             className="text-white w-full h-full group-hover:text-red-500"
           />
         </Button>
-        <div className="w-full flex flex-col items-center justify-start gap-5">
-          <section className="w-full flex text-white font-semibold justify-between">
+        <div className="w-full flex flex-col items-center justify-between gap-5">
+          <AlertDialogTitle className="w-full flex text-white font-semibold justify-between mb-0">
             <p>Cari Anime</p>
-          </section>
+          </AlertDialogTitle>
           <section className="w-full flex items-center justify-center h-8 gap-2">
             <Input
+              value={search}
+              onChange={handleChange}
               placeholder="Masukan Judul Anime"
               className="text-white px-0 py-0 w-[95%] h-full border-b-2 border-r-0 border-l-0 border-t-0 rounded-b-none border-b-white focus-visible:border-b-red-500 focus-visible:ring-transparent transition duration-700"
             />
@@ -66,6 +89,12 @@ export default function AnimeSearchDialog({
               <SearchIcon strokeWidth={2} className="w-full p-1 h-full" />
             </motion.div>
           </section>
+          <div className="w-full flex items-center justify-bertween">
+            <p className="text-white text-[12px] md:text-[13px] font-semibold">
+              Ditemukan ({anime?.data.length})
+            </p>
+          </div>
+          <AnimeCard3 data={anime?.data as Anime[]} isLoading={isLoading} />
         </div>
       </AlertDialogContent>
     </AlertDialog>

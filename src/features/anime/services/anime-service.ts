@@ -37,6 +37,6 @@ export const animeService = {
     },
 
     async searchAnime(data: { search: string, page?: number }) {
-        return await apiClient<{ data: Anime[] }>({ url: `/anime/anime-search?search=${data.search}` })
+        return await apiClient<{ data: Anime[], pagination: pagination }>({ url: `/anime/anime-search?search=${data.search}&page=${data.page}` })
     }
 }
