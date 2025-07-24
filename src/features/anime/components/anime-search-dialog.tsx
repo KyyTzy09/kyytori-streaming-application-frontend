@@ -36,11 +36,11 @@ export default function AnimeSearchDialog({
           />
         </Button>
         <AlertDialogTitle className="text-gray-300 font-semibold text-sm">
-          Cari Anime Berdasarkan Judul....
+          Cari Anime
         </AlertDialogTitle>
         <div className="w-full flex flex-col gap-5">
           <section className="w-full flex items-center justify-center h-8 gap-2">
-            <Input className=" text-white px-0 py-0 w-[95%] h-full border-b-2 border-r-0 border-l-0 border-t-0 rounded-b-none border-b-white focus-visible:border-b-red-500 focus-visible:ring-transparent transition duration-700" />
+            <Input placeholder="Masukan Judul Anime" className="text-white px-0 py-0 w-[95%] h-full border-b-2 border-r-0 border-l-0 border-t-0 rounded-b-none border-b-white focus-visible:border-b-red-500 focus-visible:ring-transparent transition duration-700" />
             <motion.div
               animate={{
                 boxShadow: [
