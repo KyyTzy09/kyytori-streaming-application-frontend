@@ -8,7 +8,7 @@ import {
 } from "@/common/shadcn/alert-dialog";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
-import { ArrowBigRight, SearchIcon, XIcon } from "lucide-react";
+import { ArrowBigLeft, ArrowBigRight, SearchIcon, XIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useSearchParams } from "next/navigation";
 import React, { ChangeEvent } from "react";
@@ -36,6 +36,21 @@ export default function AnimeSearchDialog({
     search,
     Number(page)
   );
+
+  const paginationItems = [
+    {
+      name: "<Sebelumnya",
+      value: anime?.pagination.prevPage
+        ? Number(anime?.pagination.prevPage)
+        : page !== 1 ? 1 : null,
+    },
+    {
+      name: "Selanjutnya>",
+      value: anime?.pagination.nextPage
+        ? Number(anime?.pagination.nextPage)
+        : null,
+    },
+  ];
 
   React.useEffect(() => {
     setSearch("");
@@ -91,10 +106,52 @@ export default function AnimeSearchDialog({
           </section>
           <div className="w-full flex items-center justify-bertween">
             <p className="text-white text-[12px] md:text-[13px] font-semibold">
-              Ditemukan ({anime?.data.length})
+              Ditemukan ({anime?.data.length || 0})
             </p>
           </div>
           <AnimeCard3 data={anime?.data as Anime[]} isLoading={isLoading} />
+          <section className="w-full flex items-center justify-center gap-2">
+            <Button
+              className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
+              disabled={Number(page) === 1 || Number(page) === 0}
+              onClick={() => {
+                scrollTo({ top: 0, behavior: "smooth" }), setPage(1);
+              }}
+            >
+              <ArrowBigLeft className="text-white w-5 h-5" />
+              MinPage
+            </Button>
+            {paginationItems.map((item) => {
+              return (
+                <Button
+                  className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
+                  disabled={!item.value}
+                  key={item.name}
+                  onClick={() => {
+                    scrollTo({ top: 0, behavior: "smooth" }),
+                      setPage(item.value as number);
+                  }}
+                >
+                  {item.name}
+                </Button>
+              );
+            })}
+            <Button
+              className="text-white p-1 text-[12px] font-semibold bg-red-500 hover:bg-red-400 transition duration-700"
+              disabled={
+                !anime?.pagination ||
+                Number(page) === Number(anime?.pagination.maxPage) ||
+                Number(page) > Number(anime?.pagination.maxPage)
+              }
+              onClick={() => {
+                scrollTo({ top: 0, behavior: "smooth" }),
+                  setPage(Number(anime?.pagination.maxPage));
+              }}
+            >
+              MaxPage
+              <ArrowBigRight className="text-white w-5 h-5" />
+            </Button>
+          </section>
         </div>
       </AlertDialogContent>
     </AlertDialog>
