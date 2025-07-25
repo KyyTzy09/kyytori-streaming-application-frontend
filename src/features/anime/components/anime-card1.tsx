@@ -6,6 +6,7 @@ import { PlayCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { statusColor } from "@/common/helpers/status";
 
 interface AnimeCard1Props {
   data: Anime[];
@@ -94,13 +95,9 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                           </div>
                         )}
                         <div
-                          className={`${
-                            status === "Ongoing"
-                              ? "bg-yellow-400"
-                              : status === "Completed"
-                              ? "bg-green-400"
-                              : "bg-red-500"
-                          } group-hover:text-red-500 group-hover:bg-white absolute top-0 left-0 p-1 rounded-br-sm text-sm font-semibold text-white flex items-center justify-center transition duration-700`}
+                          className={`${statusColor(
+                            status
+                          )} group-hover:text-red-500 group-hover:bg-white absolute top-0 left-0 p-1 rounded-br-sm text-sm font-semibold text-white flex items-center justify-center transition duration-700`}
                         >
                           {status}
                         </div>

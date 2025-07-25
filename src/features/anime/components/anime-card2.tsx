@@ -1,3 +1,4 @@
+import { statusColor } from "@/common/helpers/status";
 import { Card, CardContent } from "@/common/shadcn/card";
 import { Anime } from "@/common/types/anime";
 import CardSkeleton from "@/common/ui/skeleton/card-skeleton";
@@ -42,13 +43,9 @@ export default function AnimeCard2({ data, isLoading }: AnimeCard2Props) {
                     </div>
                   </div>
                   <div
-                    className={`${
-                      status === "Ongoing"
-                        ? "bg-yellow-400"
-                        : status === "Completed"
-                        ? "bg-green-400"
-                        : "bg-red-500"
-                    } group-hover:bg-white absolute top-2 left-2 p-1 rounded-r-sm text-sm font-semibold text-white flex items-center justify-center transition duration-700`}
+                    className={`${statusColor(
+                      status
+                    )} group-hover:bg-white absolute top-2 left-2 p-1 rounded-r-sm text-sm font-semibold text-white flex items-center justify-center transition duration-700`}
                   >
                     {status}
                   </div>

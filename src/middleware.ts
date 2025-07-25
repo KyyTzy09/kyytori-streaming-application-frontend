@@ -1,7 +1,7 @@
 'use server'
 
 import { NextRequest, NextResponse } from "next/server";
-import { Roles } from "./common/constant/role";
+import { Roles } from "./common/enums/role";
 import { getSession } from "./features/auth/hooks/getSession";
 import { User } from "./common/types/user";
 
