@@ -10,7 +10,6 @@ import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { ArrowBigLeft, ArrowBigRight, SearchIcon, XIcon } from "lucide-react";
 import { motion } from "motion/react";
-import { useSearchParams } from "next/navigation";
 import React, { ChangeEvent } from "react";
 import { useGetSearchAnime } from "../hooks/useGetAnime";
 import AnimeCard3 from "./anime-card3";

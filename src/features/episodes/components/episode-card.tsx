@@ -31,6 +31,9 @@ export default function EpisodeCard({
                   ? ep.episode
                   : `Episode ${Number(ep.episode)}`}
               </div>
+              <div className="flex text-sm p-2 text-white font-mono items-center justify-center bg-red-500 group-hover:bg-red-300 transition duration-700 z-10 absolute top-0 left-0 rounded-bl-sm">
+                {ep.createdAt}
+              </div>
               <div className="w-full h-32 relative">
                 <Image
                   src={anime.image || defaultImage}
