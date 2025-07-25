@@ -14,7 +14,7 @@ export default function Card2Skeleton() {
                     <div className='w-full h-10 bg-gray-500 animate-pulse'>
                     </div>
                     <div className='w-full grid grid-cols-3 gap-2 overflow-y-auto'>
-                        {[1,2,3,4].map((item) => {
+                        {[1,2,3].map((item) => {
                             return (
                                 <div key={item} className='flex py-1 px-2 h-8 bg-gray-500 animate-pulse'>
                                 </div>
