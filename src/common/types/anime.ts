@@ -24,8 +24,8 @@ export type Episodes = {
     episode: number
     link: string
     createdAt: string
-
-    Anime: Anime
+    rating : string
+    anime: Anime
     animeId: string
 
     EpsLink: Epslink[]

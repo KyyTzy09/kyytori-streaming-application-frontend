@@ -2,7 +2,7 @@
 
 import { Button } from "@/common/shadcn/button";
 import { Anime } from "@/common/types/anime";
-import AnimeCard2 from "@/features/anime/components/anime-card2";
+import AnimeCard2 from "@/features/anime/components/cards/anime-card2";
 import { useGetCompletedAnime } from "@/features/anime/hooks/useGetAnime";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";

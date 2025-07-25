@@ -1,23 +1,29 @@
 "use client";
 
-import AnimeCard1 from "@/features/anime/components/anime-card1";
+import AnimeCard1 from "@/features/anime/components/cards/anime-card1";
 import { motion } from "motion/react";
 import React from "react";
 import {
   useGetAnimeSchedule,
   useGetCompletedAnime,
   useGetOngoingAnime,
+  useGetTopAnime,
 } from "@/features/anime/hooks/useGetAnime";
-import { Anime } from "@/common/types/anime";
+import { Anime, Episodes } from "@/common/types/anime";
 import AnimeHeader from "@/features/anime/components/anime-header";
 import { Separator } from "@/common/shadcn/separator";
 import { convertDay } from "@/common/helpers/day";
+import Image from "next/image";
+import { defaultImage } from "@/common/constant/image";
+import Link from "next/link";
+import AnimeCard4 from "@/features/anime/components/cards/anime-card4";
 
 export default function HomePage() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
   const { data: completed, isPending: completedLoad } = useGetCompletedAnime();
   const { data: schedule, isPending: scheduleLoad } = useGetAnimeSchedule();
-  console.log(convertDay(new Date()).value)
+  const { data: topRate, isPending: topRateLoad } = useGetTopAnime();
+
   return (
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       {/* Carousel */}
@@ -79,6 +85,13 @@ export default function HomePage() {
         />
       </section>
       <Separator className="px-2 border-red-500 border" />
+      <AnimeHeader
+        front="Top"
+        back="Rating-Anime"
+        url="/home"
+        linkText="Lihat semua"
+      />
+      <AnimeCard4 data={topRate?.data as Episodes[]} isLoading={topRateLoad} />
     </div>
   );
 }

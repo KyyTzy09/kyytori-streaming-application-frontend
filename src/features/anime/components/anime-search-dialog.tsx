@@ -12,7 +12,7 @@ import { ArrowBigLeft, ArrowBigRight, SearchIcon, XIcon } from "lucide-react";
 import { motion } from "motion/react";
 import React, { ChangeEvent } from "react";
 import { useGetSearchAnime } from "../hooks/useGetAnime";
-import AnimeCard3 from "./anime-card3";
+import AnimeCard3 from "./cards/anime-card3";
 import { Anime } from "@/common/types/anime";
 
 interface AnimeSearchDialogProps {

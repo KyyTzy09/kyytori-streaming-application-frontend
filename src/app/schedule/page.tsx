@@ -4,7 +4,7 @@ import { days } from "@/common/constant/day";
 import { convertDay } from "@/common/helpers/day";
 import { Anime } from "@/common/types/anime";
 import NavigationHeader from "@/common/ui/headers/header";
-import AnimeCard1 from "@/features/anime/components/anime-card1";
+import AnimeCard1 from "@/features/anime/components/cards/anime-card1";
 import AnimeHeader from "@/features/anime/components/anime-header";
 import { useGetAnimeSchedule } from "@/features/anime/hooks/useGetAnime";
 import { ArrowBigLeft, Star } from "lucide-react";
