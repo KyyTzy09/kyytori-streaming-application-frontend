@@ -17,7 +17,7 @@ export const animeService = {
     },
 
     async topAnime(data: getPage) {
-        return await apiClient<{ data: Episodes[] }>({ url: `/anime/anime-top?page=${data.page || 1}` })
+        return await apiClient<{ data: Episodes[], pagination : pagination }>({ url: `/anime/anime-top?page=${data.page || 1}` })
     },
 
     async completed(data: getPage) {

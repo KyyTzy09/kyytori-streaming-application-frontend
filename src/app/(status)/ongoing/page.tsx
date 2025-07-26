@@ -33,6 +33,7 @@ export default function OngoingAnimePage() {
         : null,
     },
   ];
+  
   if (ongoing?.data.length === 0) {
     return <NotFound />;
   }
