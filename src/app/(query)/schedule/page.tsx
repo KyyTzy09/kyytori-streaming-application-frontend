@@ -4,13 +4,12 @@ import { days } from "@/common/constant/day";
 import { convertDay } from "@/common/helpers/day";
 import { Anime } from "@/common/types/anime";
 import NavigationHeader from "@/common/ui/headers/header";
-import AnimeCard1 from "@/features/anime/components/cards/anime-card1";
-import AnimeHeader from "@/features/anime/components/anime-header";
 import { useGetAnimeSchedule } from "@/features/anime/hooks/useGetAnime";
 import { ArrowBigLeft, Star } from "lucide-react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import AnimeUpdatedCard from "@/features/anime/components/cards/anime-card-update";
 
 export default function ScheduleAnimePage() {
   const router = useRouter();
@@ -104,7 +103,7 @@ export default function ScheduleAnimePage() {
                   <p className="text-red-500 font-semibold text-lg ml-1">{jad.day}</p>
                 )}
               </div>
-              <AnimeCard1 data={jad.data as Anime[]} isLoading={scheduleLoad} />
+              <AnimeUpdatedCard data={jad.data as Anime[]} isLoading={scheduleLoad} />
             </div>
           );
         })}

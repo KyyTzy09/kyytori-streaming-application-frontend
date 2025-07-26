@@ -14,6 +14,7 @@ import AnimeHeader from "@/features/anime/components/anime-header";
 import { Separator } from "@/common/shadcn/separator";
 import { convertDay } from "@/common/helpers/day";
 import AnimeCard4 from "@/features/anime/components/cards/anime-card4";
+import AnimeUpdatedCard from "@/features/anime/components/cards/anime-card-update";
 
 export default function HomePage() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
@@ -51,7 +52,7 @@ export default function HomePage() {
             linkText="Lihat Jadwal"
           />
         </div>
-        <AnimeCard1
+        <AnimeUpdatedCard
           data={schedule?.data[convertDay(new Date()).value] as Anime[]}
           isLoading={scheduleLoad}
         />
@@ -85,7 +86,7 @@ export default function HomePage() {
       <AnimeHeader
         front="Top"
         back="Rating-Anime"
-        url="/home"
+        url="/rating"
         linkText="Lihat semua"
       />
       <AnimeCard4 data={topRate?.data as Episodes[]} isLoading={topRateLoad} />

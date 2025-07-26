@@ -57,7 +57,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
     <div className="w-full min-h-screen">
       <section className="w-full min-h-screen p-5 flex flex-col">
         <section className="w-full flex items-center justify-between mb-5">
-          <p className="text-white text-lg md:text-xl font-semibold p-1 line-clamp-1">
+          <p className="text-white text-lg font-semibold p-1 line-clamp-1">
             Anime <span className="text-red-500 font-mono">{decodedTitle}</span>
           </p>
           <Link

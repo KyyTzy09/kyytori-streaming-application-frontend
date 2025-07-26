@@ -13,7 +13,7 @@ interface AnimeCard1Props {
   isLoading: boolean;
 }
 
-export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
+export default function AnimeUpdatedCard({ data, isLoading }: AnimeCard1Props) {
   if (isLoading) {
     return <CardSkeleton />;
   }
@@ -89,6 +89,11 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                           height={400}
                           className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                         />
+                        {updatedEps && (
+                          <div className="group-hover:text-white group-hover:bg-red-500 absolute bottom-0 right-0 px-2 rounded-tl-sm bg-black/80 text-sm font-semibold text-red-500 flex items-center justify-center transition duration-700">
+                            Eps selanjutnya {updatedEps}
+                          </div>
+                        )}
                         <div
                           className={`${statusColor(
                             status
