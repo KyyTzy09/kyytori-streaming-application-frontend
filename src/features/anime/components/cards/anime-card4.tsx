@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import AnimeSkeletonCard4 from "../skeleton/anime-skeleton-card4";
 
 interface AnimeCard4Props {
   data: Episodes[];
@@ -11,8 +12,12 @@ interface AnimeCard4Props {
 }
 
 export default function AnimeCard4({ data, isLoading }: AnimeCard4Props) {
+  if (isLoading) {
+    return <AnimeSkeletonCard4 />;
+  }
+
   return (
-    <section className="w-full h-full">
+    <section className="w-full ">
       {data?.length > 0 && (
         <div className="w-full h-[300px] md:h-[400px] flex gap-2 overflow-x-auto scrollbar-hide">
           <motion.div
@@ -75,6 +80,7 @@ export default function AnimeCard4({ data, isLoading }: AnimeCard4Props) {
                     transition={{
                       duration: 0.2,
                       ease: "easeInOut",
+                      delay: i * 0.2,
                     }}
                     className="w-40 md:w-[200px] "
                   >
