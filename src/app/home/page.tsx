@@ -13,9 +13,6 @@ import { Anime, Episodes } from "@/common/types/anime";
 import AnimeHeader from "@/features/anime/components/anime-header";
 import { Separator } from "@/common/shadcn/separator";
 import { convertDay } from "@/common/helpers/day";
-import Image from "next/image";
-import { defaultImage } from "@/common/constant/image";
-import Link from "next/link";
 import AnimeCard4 from "@/features/anime/components/cards/anime-card4";
 
 export default function HomePage() {

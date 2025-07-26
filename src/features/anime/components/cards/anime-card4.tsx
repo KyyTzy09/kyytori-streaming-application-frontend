@@ -11,7 +11,7 @@ interface AnimeCard4Props {
 
 export default function AnimeCard4({ data, isLoading }: AnimeCard4Props) {
   return (
-    <section className="w-full min-h-screen">
+    <section className="w-full h-full">
       {data?.length > 0 && (
         <div className="w-full h-[300px] md:h-[400px] flex gap-2 overflow-x-auto scrollbar-hide">
           <Link
