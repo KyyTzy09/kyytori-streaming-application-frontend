@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import TopEpisodeSkeleton from "./episode-top-skeleton";
 
 interface TopEpisodeCardProps {
   data: Episodes[];
@@ -16,6 +17,9 @@ export default function TopEpisodeCard({
   isLoading,
   page,
 }: TopEpisodeCardProps) {
+  if (isLoading) {
+    return <TopEpisodeSkeleton />;
+  }
   return (
     <div className="w-full flex flex-col items-center justify-between">
       {data?.length! > 0 &&

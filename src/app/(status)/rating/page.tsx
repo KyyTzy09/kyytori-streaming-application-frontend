@@ -1,5 +1,6 @@
 "use client";
 
+import NotFound from "@/app/not-found";
 import { defaultImage } from "@/common/constant/image";
 import { statusColor } from "@/common/helpers/status";
 import { Button } from "@/common/shadcn/button";
@@ -26,6 +27,10 @@ export default function AnimeTopRatingPage() {
   const { data: topRateAnime, isPending: topRateAnimeLoad } = useGetTopAnime(
     Number(page)
   );
+
+  if (topRateAnime?.data.length === 0) {
+    return <NotFound />;
+  }
 
   const paginationItems = [
     {
