@@ -1,17 +1,22 @@
 import { apiClient } from "@/common/helpers/axios"
 import { queryByAnimeId } from "../hooks/useFavorite"
+import { FavoritesAnime } from "@/common/types/favorite"
+import { getCookies } from "@/lib/cookies"
 
 
 export const favoriteService = {
     async getFavoriteAnime(data: queryByAnimeId) {
-        return await apiClient<{ message: string }>({ url: `/favorite/get`, data: { animeId: data.animeId } })
+        const token = await getCookies()
+        return await apiClient<{ message: string, data: FavoritesAnime }>({ url: `/favorite/get/${data.animeId}`, headers: { Authorization: `Bearer ${token}` } })
     },
 
     async addFavorite(data: queryByAnimeId) {
-        return await apiClient<{ message: string }>({ url: `/favorite/add`, method: 'post', data })
+        const token = await getCookies()
+        return await apiClient<{ message: string, data: FavoritesAnime }>({ url: `/favorite/add`, method: 'post', data, headers: { Authorization: `Bearer ${token}` } })
     },
 
     async deleteFavorite(data: queryByAnimeId) {
-        return await apiClient<{ message: string }>({ url: `/favorite/delete`, method: 'delete', data })
+        const token = await getCookies()
+        return await apiClient<{ message: string, data: FavoritesAnime }>({ url: `/favorite/delete`, method: 'delete', data, headers: { Authorization: `Bearer ${token}` } })
     }
 }
