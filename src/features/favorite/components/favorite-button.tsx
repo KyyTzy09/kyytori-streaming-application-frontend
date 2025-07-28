@@ -8,13 +8,16 @@ import {
 } from "@/common/shadcn/hover-card";
 import { Heart } from "lucide-react";
 import React from "react";
+import { useGetFavorite } from "../hooks/useFavorite";
 
 interface FavoriteButtonProps {
   animeId: string;
 }
 
 export default function FavoriteButton({ animeId }: FavoriteButtonProps) {
-    return (
+  const { data: favoriteExist } = useGetFavorite({ animeId });
+
+  return (
     <>
       <HoverCard>
         <HoverCardTrigger asChild>
