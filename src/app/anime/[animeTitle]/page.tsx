@@ -5,9 +5,10 @@ import { animeService } from "@/features/anime/services/anime-service";
 import AnimeRating from "@/features/anime/components/anime.rating";
 import Link from "next/link";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookmarkPlus, Heart } from "lucide-react";
 import { episodeService } from "@/features/episodes/services/eps-service";
 import EpisodeCard from "@/features/episodes/components/episode-card";
+import FavoriteButton from "@/features/favorite/components/favorite-button";
 
 interface detailAnimeProps {
   params: {
@@ -130,14 +131,19 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
         </div>
         <div className="w-full h-full flex items-center relative">
           <div className="hidden md:flex w-52 flex-col absolute z-10 top-0 left-[100px] -translate-y-36">
-            <Image
-              src={detail.image || defaultImage}
-              alt={detail.title || "title"}
-              className="w-full h-80 object-cover"
-              width={300}
-              height={450}
-              quality={100}
-            />
+            <div className="w-full h-80 relative">
+              <Image
+                src={detail.image || defaultImage}
+                alt={detail.title || "title"}
+                className="w-full h-full object-cover"
+                width={300}
+                height={450}
+                quality={100}
+              />
+              <div className="w-6 h-7 absolute bottom-1 right-2">
+                <FavoriteButton />
+              </div>
+            </div>
             {!detail.image && <ImageSkeleton width="full" height={80} />}
             <div className="bg-[#252525] w-full p-2 flex flex-col items-center justify-center">
               <h1 className="text-white font-semibold text-sm md:text-[15px]">

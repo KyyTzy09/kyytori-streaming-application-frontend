@@ -19,7 +19,6 @@ export default function ScheduleAnimePage() {
     return day.name;
   });
 
-  console.log(alldays);
   const todayIndex = new Date().getDay();
 
   const rotatedDay = [
