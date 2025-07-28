@@ -141,7 +141,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                 quality={100}
               />
               <div className="w-6 h-7 absolute bottom-1 right-2">
-                <FavoriteButton />
+                <FavoriteButton animeId={detail.id} />
               </div>
             </div>
             {!detail.image && <ImageSkeleton width="full" height={80} />}

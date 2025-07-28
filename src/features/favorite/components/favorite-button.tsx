@@ -9,12 +9,17 @@ import {
 import { Heart } from "lucide-react";
 import React from "react";
 
-export default function FavoriteButton() {
-  return (
+interface FavoriteButtonProps {
+  animeId: string;
+}
+
+export default function FavoriteButton({ animeId }: FavoriteButtonProps) {
+    return (
     <>
       <HoverCard>
         <HoverCardTrigger asChild>
           <Button
+            onClick={() => {}}
             className={`group flex cursor-pointer items-center justify-center w-full h-full bg-black border-2 border-white hover:border-red-500 font-semibold rounded-full transition duration-700`}
           >
             <Heart
