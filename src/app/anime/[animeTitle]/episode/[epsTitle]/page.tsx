@@ -1,12 +1,23 @@
 "use client";
 
+import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
+import { Textarea } from "@/common/shadcn/textarea";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
 import { useGetDetailAnime } from "@/features/anime/hooks/useGetAnime";
+import CommentInput from "@/features/comment/components/comment-input";
 import { useGetEpsLink } from "@/features/episodes/hooks/useGetEps";
-import { AlertCircleIcon, ArrowLeft, ArrowRight, List } from "lucide-react";
+import {
+  AlertCircleIcon,
+  ArrowLeft,
+  ArrowRight,
+  List,
+  Send,
+} from "lucide-react";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
+import { FaComment } from "react-icons/fa";
 
 export default function Episodepage() {
   const router = useRouter();
@@ -60,7 +71,7 @@ export default function Episodepage() {
           Kembali
         </Button>
       </section>
-      <section className="w-full flex flex-col gap-5 items-center">
+      <div className="w-full flex flex-col gap-5 items-center">
         <div className="w-full grid grid-cols-3 gap-1">
           {epsLink?.data.map((link) => {
             return (
@@ -122,7 +133,8 @@ export default function Episodepage() {
             <span className="text-red-500">Gratis?</span> nonton di{" "}
             <span className="text-red-500">Kyytori</span> aja.
           </p>
-          <div className="mt-2 flex flex-col">
+          {/* Sinopsis Section */}
+          <section className="mt-2 flex flex-col">
             {detail?.data.synopsis.length! > 0 &&
               detail?.data.synopsis.map((sin) => {
                 return (
@@ -134,9 +146,21 @@ export default function Episodepage() {
                   </p>
                 );
               })}
-          </div>
+          </section>
+          {/* Komentar Section */}
+          <section className="w-full flex flex-col items-center mt-5 min-h-screen bg-transparent border-2 border-red-500 rounded-sm overflow-hidden">
+            {/* Header komentar */}
+            <div className="w-full flex flex-col bg-[#232323] p-5 justify-start gap-5">
+              <p className="flex text-white items-center gap-2 justify-start font-bold">
+                <FaComment className="text-white" />
+                Komentar (0)
+              </p>
+              {/* Input komentar */}
+              <CommentInput />
+            </div>
+          </section>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
