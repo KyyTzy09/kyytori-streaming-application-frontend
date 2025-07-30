@@ -5,8 +5,11 @@ import Image from "next/image";
 import React from "react";
 
 export default function CommentCard() {
-  const [showComment, setShowComment] = React.useState<boolean>(false);
-  const [indexCard, setIndexCard] = React.useState<number>();
+  const [indexCard, setIndexCard] = React.useState<number[]>();
+
+  const findIndex = (index: number) => {
+    return indexCard?.includes(index);
+  };
 
   const dummyComment = [
     {
@@ -33,14 +36,17 @@ export default function CommentCard() {
     },
   ];
 
-//   const handleShowComment = (index: number) => {
-//     setIndexCard(index)
-//     if (showComment && indexCard === index) {
-//       setShowComment(false);
-//     } else {
-//       setShowComment(true);
-//     }
-//   };
+  const handleShowComment = (index: number) => {
+    setIndexCard((prev) => {
+      const safePrev = Array.isArray(prev) ? prev : [];
+
+      if (safePrev?.includes(index)) {
+        return prev?.filter((i) => i !== index);
+      } else {
+        return [...safePrev, index];
+      }
+    });
+  };
 
   return (
     <div className="w-full h-full flex flex-col overflow-y-auto gap-5 p-5">
@@ -66,21 +72,25 @@ export default function CommentCard() {
               </p>
               <p
                 className={`${
-                  showComment ? "line-clamp-none" : "line-clamp-1"
+                  findIndex(index)
+                    ? "line-clamp-none"
+                    : "line-clamp-1"
                 }  w-full text-[12px] md:text-[14px] break-all`}
               >
                 {message}
               </p>
-              {/* {message.length > 100 && (
+              {message.length > 100 && (
                 <div className="flex w-full items-center justify-start mt-1">
                   <p
                     onClick={() => handleShowComment(index)}
                     className="font-semibold text-[11px] md:text-[13px] text-gray-500 hover:underline cursor-pointer"
                   >
-                    {showComment ? "Baca Sekilas" : "Baca Selengkapnya..."}
+                    {findIndex(index)
+                      ? "Baca Sekilas..."
+                      : "Baca Selengkapnya..."}
                   </p>
                 </div>
-              )} */}
+              )}
             </div>
           </div>
         );
