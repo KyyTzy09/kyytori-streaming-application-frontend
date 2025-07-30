@@ -1,40 +1,20 @@
 "use client";
 
 import { defaultImage } from "@/common/constant/image";
+import { Comment } from "@/common/types/comment";
 import Image from "next/image";
-import React from "react";
+import React, { use } from "react";
 
-export default function CommentCard() {
+interface CommentCardProps {
+  data: Comment[];
+}
+
+export default function CommentCard({ data }: CommentCardProps) {
   const [indexCard, setIndexCard] = React.useState<number[]>();
 
   const findIndex = (index: number) => {
     return indexCard?.includes(index);
   };
-
-  const dummyComment = [
-    {
-      name: "Fiky nih",
-      message: "Yawis mbok",
-      tanggal: "24-April-2020",
-    },
-    {
-      name: "Fiky nih",
-      message: "Yawis mbok",
-      tanggal: "24-April-2020",
-    },
-    {
-      name: "Fiky nih",
-      message:
-        "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggkjkhiuhuiiuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggkjkhiuhuiiuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggkjkhiuhuiiuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggkjkhiuhuiiuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
-      tanggal: "24-April-2020",
-    },
-    {
-      name: "Fiky nih",
-      message:
-        "Yawis mbok gggggggggggggggggggggggg gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
-      tanggal: "24-April-2020",
-    },
-  ];
 
   const handleShowComment = (index: number) => {
     setIndexCard((prev) => {
@@ -50,7 +30,7 @@ export default function CommentCard() {
 
   return (
     <div className="w-full h-full flex flex-col overflow-y-auto gap-5 p-5">
-      {dummyComment.map(({ name, message, tanggal }, index) => {
+      {data?.map(({ user, createdAt, message }, index) => {
         return (
           <div
             key={index}
@@ -58,7 +38,7 @@ export default function CommentCard() {
           >
             <div className="flex items-start justify-center w-10 h-10">
               <Image
-                src={defaultImage}
+                src={user.avatar || defaultImage}
                 alt="profile"
                 className="w-full h-full object-cover rounded-full"
                 width={320}
@@ -67,14 +47,12 @@ export default function CommentCard() {
             </div>
             <div className="flex flex-col w-full">
               <p className="flex w-full text-gray-500 text-[10px] md:text-[11px] gap-2 items-start justify-start">
-                <span className="text-red-400 font-semibold">@{name}</span>
-                {tanggal}
+                <span className="text-red-400 font-semibold">@{user.userName}</span>
+                {new Date(createdAt).toLocaleString()}
               </p>
               <p
                 className={`${
-                  findIndex(index)
-                    ? "line-clamp-none"
-                    : "line-clamp-1"
+                  findIndex(index) ? "line-clamp-none" : "line-clamp-1"
                 }  w-full text-[12px] md:text-[14px] break-all`}
               >
                 {message}

@@ -3,10 +3,12 @@
 import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
 import { Textarea } from "@/common/shadcn/textarea";
+import { Comment } from "@/common/types/comment";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
 import { useGetDetailAnime } from "@/features/anime/hooks/useGetAnime";
 import CommentCard from "@/features/comment/components/comment-card";
 import CommentInput from "@/features/comment/components/comment-input";
+import { useGetCommentByEpisode } from "@/features/comment/hooks/comment-hooks";
 import { useGetEpsLink } from "@/features/episodes/hooks/useGetEps";
 import {
   AlertCircleIcon,
@@ -15,7 +17,6 @@ import {
   List,
   Send,
 } from "lucide-react";
-import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { FaComment } from "react-icons/fa";
@@ -29,6 +30,7 @@ export default function Episodepage() {
   const decodedEpsTitle = decodeURIComponent(epsTitle);
   const { data: epsLink } = useGetEpsLink(decodedEpsTitle);
   const { data: detail } = useGetDetailAnime(animeTitle);
+  const { data: comment } = useGetCommentByEpisode({ epsTitle });
 
   const [iframe, setIframe] = React.useState<string | undefined>();
 
@@ -160,7 +162,7 @@ export default function Episodepage() {
               <CommentInput />
             </div>
             <div className="w-full">
-              <CommentCard />
+              <CommentCard data={comment?.data as Comment[]} />
             </div>
           </section>
         </div>

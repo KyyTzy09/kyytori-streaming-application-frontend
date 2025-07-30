@@ -6,6 +6,7 @@ import { CommentService } from "../services/comment-service"
 export const useGetCommentByEpisode = (data: { epsTitle: string }) => {
     return useQuery({
         queryKey: ['komentar', data.epsTitle],
-        queryFn: async () => CommentService.getCommentByEps({ epsTitle: data.epsTitle })
+        queryFn: async () => await CommentService.getCommentByEps({ epsTitle: data.epsTitle }),
+        staleTime: 2 * 60 * 1000
     })
 }
