@@ -30,14 +30,16 @@ export default function CommentInput() {
           onChange={changeComment}
           onFocus={() => setOnFocus(true)}
           value={comment}
-          className="bg-white"
+          className="bg-white text-[12px] md:text-sm"
           placeholder={`Tambahkan komentar sebagai Kyynotseph`}
         />
         {onFocus && (
           <div className="flex w-full items-center justify-end gap-2">
             <Button
               type="button"
-              onClick={() => setOnFocus(false)}
+              onClick={() => {
+                setOnFocus(false), setComment("");
+              }}
               className="bg-transparent transition duration-700 hover:bg-red-400"
             >
               Batal

@@ -5,6 +5,7 @@ import { Button } from "@/common/shadcn/button";
 import { Textarea } from "@/common/shadcn/textarea";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
 import { useGetDetailAnime } from "@/features/anime/hooks/useGetAnime";
+import CommentCard from "@/features/comment/components/comment-card";
 import CommentInput from "@/features/comment/components/comment-input";
 import { useGetEpsLink } from "@/features/episodes/hooks/useGetEps";
 import {
@@ -157,6 +158,9 @@ export default function Episodepage() {
               </p>
               {/* Input komentar */}
               <CommentInput />
+            </div>
+            <div className="w-full">
+              <CommentCard />
             </div>
           </section>
         </div>
