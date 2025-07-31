@@ -1,7 +1,9 @@
 "use client";
 
 import { defaultImage } from "@/common/constant/image";
+import { Button } from "@/common/shadcn/button";
 import { Comment } from "@/common/types/comment";
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import React, { use } from "react";
 
@@ -32,43 +34,50 @@ export default function CommentCard({ data }: CommentCardProps) {
     <div className="w-full h-full flex flex-col overflow-y-auto gap-5 p-5">
       {data?.map(({ user, createdAt, message }, index) => {
         return (
-          <div
-            key={index}
-            className="flex w-full h-full bg-white p-2 rounded-sm gap-5"
-          >
-            <div className="flex items-start justify-center w-10 h-10">
-              <Image
-                src={user.avatar || defaultImage}
-                alt="profile"
-                className="w-full h-full object-cover rounded-full"
-                width={320}
-                height={200}
-              />
+          <div key={index} className="flex flex-col w-full h-full gap-3">
+            <div className="flex w-full h-full bg-white p-2 rounded-sm gap-5">
+              <div className="flex items-start justify-center w-10 h-10">
+                <Image
+                  src={user.avatar || defaultImage}
+                  alt="profile"
+                  className="w-full h-full object-cover rounded-full"
+                  width={320}
+                  height={200}
+                />
+              </div>
+              <div className="flex flex-col w-full">
+                <p className="flex w-full text-gray-500 text-[10px] md:text-[11px] gap-2 items-start justify-start">
+                  <span className="text-red-400 font-semibold">
+                    @{user.userName}
+                  </span>
+                  {new Date(createdAt).toLocaleString()}
+                </p>
+                <p
+                  className={`${
+                    findIndex(index) ? "line-clamp-none" : "line-clamp-1"
+                  }  w-full text-[12px] md:text-[14px] break-all`}
+                >
+                  {message}
+                </p>
+                {message.length > 100 && (
+                  <div className="flex w-full items-center justify-start mt-1">
+                    <p
+                      onClick={() => handleShowComment(index)}
+                      className="font-semibold text-[11px] md:text-[13px] text-gray-500 hover:underline cursor-pointer"
+                    >
+                      {findIndex(index)
+                        ? "Baca Sekilas..."
+                        : "Baca Selengkapnya..."}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="flex flex-col w-full">
-              <p className="flex w-full text-gray-500 text-[10px] md:text-[11px] gap-2 items-start justify-start">
-                <span className="text-red-400 font-semibold">@{user.userName}</span>
-                {new Date(createdAt).toLocaleString()}
-              </p>
-              <p
-                className={`${
-                  findIndex(index) ? "line-clamp-none" : "line-clamp-1"
-                }  w-full text-[12px] md:text-[14px] break-all`}
-              >
-                {message}
-              </p>
-              {message.length > 100 && (
-                <div className="flex w-full items-center justify-start mt-1">
-                  <p
-                    onClick={() => handleShowComment(index)}
-                    className="font-semibold text-[11px] md:text-[13px] text-gray-500 hover:underline cursor-pointer"
-                  >
-                    {findIndex(index)
-                      ? "Baca Sekilas..."
-                      : "Baca Selengkapnya..."}
-                  </p>
-                </div>
-              )}
+            <div className="w-full text-start">
+              <Button className="flex items-center text-[10px] md:text-sm justify-center gap-2 text-red-500 font-semibold bg-transparent hover:bg-[#252525] transition duration-700">
+                <ChevronDown />
+                {`(0) Balasan`}
+              </Button>
             </div>
           </div>
         );

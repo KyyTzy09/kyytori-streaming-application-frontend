@@ -1,7 +1,13 @@
 'use client'
 
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { CommentService } from "../services/comment-service"
+
+export const usePostCommentByEpisode = (data: { epsTitle: string }) => {
+    return useMutation({
+        mutationKey: ['komentar',]
+    })
+}
 
 export const useGetCommentByEpisode = (data: { epsTitle: string }) => {
     return useQuery({
