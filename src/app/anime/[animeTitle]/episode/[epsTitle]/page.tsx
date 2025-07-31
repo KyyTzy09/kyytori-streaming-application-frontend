@@ -159,7 +159,7 @@ export default function Episodepage() {
                 Komentar (0)
               </p>
               {/* Input komentar */}
-              <CommentInput />
+              <CommentInput epsTitle={epsTitle} />
             </div>
             <div className="w-full">
               <CommentCard data={comment?.data as Comment[]} />

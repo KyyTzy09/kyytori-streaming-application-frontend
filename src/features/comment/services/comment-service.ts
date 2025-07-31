@@ -15,7 +15,10 @@ export const CommentService = {
             headers: {
                 Authorization: `Bearer ${token}`
             },
-            data,
+            data: {
+                epsTitle: data.epsTitle,
+                message: data.message
+            },
             method: 'post'
         })
     },

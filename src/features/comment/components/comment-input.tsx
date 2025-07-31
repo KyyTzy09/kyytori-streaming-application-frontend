@@ -6,16 +6,38 @@ import { Textarea } from "@/common/shadcn/textarea";
 import { SendIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { usePostComment } from "../hooks/comment-hooks";
+import { toast } from "react-toastify";
 
-export default function CommentInput() {
+interface CommentInputProps {
+  epsTitle: string;
+}
+
+export default function CommentInput({ epsTitle }: CommentInputProps) {
   const [onFocus, setOnFocus] = React.useState<boolean>(false);
   const [comment, setComment] = React.useState<string>("");
 
   const changeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
   };
+
+  const { mutate: postComment, isPending: isPosting } = usePostComment({
+    epsTitle,
+    message: comment,
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    postComment();
+    setComment("");
+    setOnFocus(false);
+  };
+
   return (
-    <form className="w-full h-full flex items-start justify-start gap-5">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full h-full flex items-start justify-start gap-5"
+    >
       <section className="w-10 h-10">
         <Image
           src={defaultImage}
