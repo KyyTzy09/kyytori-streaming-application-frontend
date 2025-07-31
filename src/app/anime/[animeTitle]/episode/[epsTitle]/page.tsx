@@ -4,12 +4,14 @@ import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
 import { Textarea } from "@/common/shadcn/textarea";
 import { Comment } from "@/common/types/comment";
+import { User } from "@/common/types/user";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
 import { useGetDetailAnime } from "@/features/anime/hooks/useGetAnime";
 import CommentCard from "@/features/comment/components/comment-card";
 import CommentInput from "@/features/comment/components/comment-input";
 import { useGetCommentByEpisode } from "@/features/comment/hooks/comment-hooks";
 import { useGetEpsLink } from "@/features/episodes/hooks/useGetEps";
+import { usegetProfile } from "@/features/profile/hooks/profile-hook";
 import {
   AlertCircleIcon,
   ArrowLeft,
@@ -31,6 +33,7 @@ export default function Episodepage() {
   const { data: epsLink } = useGetEpsLink(decodedEpsTitle);
   const { data: detail } = useGetDetailAnime(animeTitle);
   const { data: comment } = useGetCommentByEpisode({ epsTitle });
+  const { data: profile } = usegetProfile();
 
   const [iframe, setIframe] = React.useState<string | undefined>();
 
@@ -159,7 +162,7 @@ export default function Episodepage() {
                 Komentar (0)
               </p>
               {/* Input komentar */}
-              <CommentInput epsTitle={epsTitle} />
+              <CommentInput user={profile?.data as User} epsTitle={epsTitle} />
             </div>
             <div className="w-full">
               <CommentCard data={comment?.data as Comment[]} />

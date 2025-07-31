@@ -8,12 +8,14 @@ import Image from "next/image";
 import React from "react";
 import { usePostComment } from "../hooks/comment-hooks";
 import { toast } from "react-toastify";
+import { Profile, User } from "@/common/types/user";
 
 interface CommentInputProps {
+  user: User;
   epsTitle: string;
 }
 
-export default function CommentInput({ epsTitle }: CommentInputProps) {
+export default function CommentInput({ user, epsTitle }: CommentInputProps) {
   const [onFocus, setOnFocus] = React.useState<boolean>(false);
   const [comment, setComment] = React.useState<string>("");
 
@@ -40,7 +42,7 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
     >
       <section className="w-10 h-10">
         <Image
-          src={defaultImage}
+          src={user?.profile?.avatar || defaultImage}
           alt="profile"
           className="w-full h-full object-cover rounded-full"
           width={320}
@@ -53,7 +55,9 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
           onFocus={() => setOnFocus(true)}
           value={comment}
           className="bg-white text-[12px] md:text-sm"
-          placeholder={`Tambahkan komentar sebagai Kyynotseph`}
+          placeholder={`Tambahkan komentar sebagai ${
+            user?.profile?.userName || "Anda belum login"
+          }`}
         />
         {onFocus && (
           <div className="flex w-full items-center justify-end gap-2">
