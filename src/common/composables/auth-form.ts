@@ -49,8 +49,13 @@ export default function useFormHandle<Tform extends Record<string, string>>(sche
                     }
                 })
                 setFieldError(errors as Partial<Record<keyof Tform, string>>)
+            } else {
+                if (axios.isAxiosError(error)) {
+                    toast.error(error.response?.data?.message || "An unexpected error occurred")
+                } else {
+                    toast.error("An unexpected error occurred")
+                }
             }
-            
         } finally {
             setLoading(false)
         }

@@ -7,6 +7,6 @@ export const usegetProfile = () => {
     return useQuery({
         queryKey: ['profile'],
         queryFn: async () => await profileService.getProfile(),
-        staleTime: 1000 * 60 * 5,
+        staleTime: 1000 * 60 * 1,
     })
 }

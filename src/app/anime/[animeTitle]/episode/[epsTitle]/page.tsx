@@ -159,7 +159,7 @@ export default function Episodepage() {
             <div className="w-full flex flex-col bg-[#232323] p-5 justify-start gap-5">
               <p className="flex text-white items-center gap-2 justify-start font-bold">
                 <FaComment className="text-white" />
-                Komentar (0)
+                Komentar ({comment?.data.length || 0})
               </p>
               {/* Input komentar */}
               <CommentInput user={profile?.data as User} epsTitle={epsTitle} />
