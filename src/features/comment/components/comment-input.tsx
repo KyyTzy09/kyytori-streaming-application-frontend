@@ -66,16 +66,16 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
               onClick={() => {
                 setOnFocus(false), setComment("");
               }}
-              className="bg-transparent transition duration-700 hover:bg-red-400"
+              className="bg-transparent text-[10px] md:text-[12px] transition duration-700 hover:bg-red-400"
             >
               Batal
             </Button>
             <Button
               disabled={comment.length === 0}
               type="submit"
-              className="px-6 flex bg-red-500 items-center justify-center gap-2 hover:bg-red-400 transition duration-700 cursor-pointer"
+              className="px-6 text-[10px] md:text-[12px] flex bg-red-500 items-center justify-center gap-2 hover:bg-red-400 transition duration-700 cursor-pointer"
             >
-              <SendIcon className="text-white h-2" />
+              <SendIcon className="text-white w-1 h-1 md:w-2 md:h-2" />
               Kirim
             </Button>
           </div>

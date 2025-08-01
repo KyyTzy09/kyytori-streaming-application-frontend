@@ -19,7 +19,7 @@ export default function CommentNestedCard({
   }
 
   return (
-    <div className="flex flex-col w-full h-full transition-all duration-500 pl-5">
+    <div className="flex flex-col w-full h-full transition-all duration-500 pl-3 md:pl-5">
       {replyComments?.data.length! > 0 && (
         <CommentCard
           data={replyComments?.data as Comment[]}

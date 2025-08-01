@@ -63,7 +63,7 @@ export default function CommentCard({ data, isLoading }: CommentCardProps) {
         ) => {
           return (
             <div key={index} className="flex flex-col w-full h-full gap-2">
-              <div className="flex w-full h-full bg-white p-2 rounded-sm gap-5">
+              <div className="flex w-full h-full bg-white p-2 rounded-sm gap-2 md:gap-5">
                 <div className="flex items-start justify-center w-10 h-10">
                   <Image
                     src={user.avatar || defaultImage}
@@ -77,13 +77,15 @@ export default function CommentCard({ data, isLoading }: CommentCardProps) {
                   <p className="flex w-full text-[10px] md:text-[11px] items-start justify-start">
                     {parent && (
                       <span className="text-red-500 font-bold">
-                        Membalas {parent.user.userName} {">"}
+                        {parent.user.userName} {">"}
                       </span>
                     )}
                     <span className="text-red-400 font-semibold mr-2">
                       @{user.userName}
                     </span>
-                    {new Date(createdAt).toLocaleString()}
+                    <span className="text-gray-500 font-semibold hidden md:inline">
+                      {new Date(createdAt).toLocaleString()}
+                    </span>
                   </p>
                   <p
                     className={`${
@@ -104,14 +106,19 @@ export default function CommentCard({ data, isLoading }: CommentCardProps) {
                       </p>
                     </div>
                   )}
-                  <div className="w-full flex items-center justify-start gap-3 text-[10px] md:text-[12px] text-gray-500 mt-1">
-                    <p>Suka</p>
-                    <button
-                      className="text-red-500 hover:underline"
-                      onClick={() => handleShowReply(index)}
-                    >
-                      {findShowReplyIndex(index) ? "Batal" : "Balas"}
-                    </button>
+                  <div className="w-full flex items-center justify-between gap-3 text-[10px] md:text-[12px] text-gray-500 mt-1">
+                    <div className="flex items-center gap-2">
+                      <p>Suka</p>
+                      <button
+                        className="text-red-500 hover:underline"
+                        onClick={() => handleShowReply(index)}
+                      >
+                        {findShowReplyIndex(index) ? "Batal" : "Balas"}
+                      </button>
+                    </div>
+                    <span className="text-gray-500 font-semibold inline md:hidden">
+                      {new Date(createdAt).toLocaleString()}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -139,7 +146,7 @@ export default function CommentCard({ data, isLoading }: CommentCardProps) {
                   </div>
                 </>
               )}
-              <div className="w-full pl-8">
+              <div className="w-full pl-4 md:pl-8">
                 {findShowReplyIndex(index) && (
                   <CommentNestedInput
                     parentId={id}

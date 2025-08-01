@@ -70,20 +70,20 @@ export default function CommentNestedInput({
               onClick={() => {
                 setOnFocus(false), setComment("");
               }}
-              className="bg-transparent transition duration-700 hover:bg-red-400"
+              className="bg-transparent text-[10px] md:text-sm transition duration-700 hover:bg-red-400"
             >
               Batal
             </Button>
             <Button
               disabled={comment.length === 0}
               type="submit"
-              className="px-6 flex bg-red-500 items-center justify-center gap-2 hover:bg-red-400 transition duration-700 cursor-pointer"
+              className="px-6 text-[10px] md:text-sm flex bg-red-500 items-center justify-center gap-2 hover:bg-red-400 transition duration-700 cursor-pointer"
             >
               {isPosting ? (
-                <LoaderIcon className="h-4 w-4 animate-spin text-white" />
+                <LoaderIcon className="w-2 h-2 md:h-4 md:w-4 animate-spin text-white" />
               ) : (
                 <>
-                  <SendIcon className="text-white h-2" />
+                  <SendIcon className="text-white w-1 h-1 md:w-2 md:h-2" />
                   Kirim
                 </>
               )}
