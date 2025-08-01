@@ -3,16 +3,20 @@
 import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
 import { Comment } from "@/common/types/comment";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import CommentNestedCard from "./comment-nested-card";
+import CommentSkeletonCard from "./comment-skeleton-card";
 
 interface CommentCardProps {
+  isLoading?: boolean;
   data: Comment[];
 }
 
-export default function CommentCard({ data }: CommentCardProps) {
+export default function CommentCard({ data, isLoading }: CommentCardProps) {
   const [indexCard, setIndexCard] = React.useState<number[]>();
+  const [showReply, setShowReply] = React.useState<boolean>(false);
 
   const findIndex = (index: number) => {
     return indexCard?.includes(index);
@@ -30,9 +34,13 @@ export default function CommentCard({ data }: CommentCardProps) {
     });
   };
 
+  if (isLoading) {
+    return <CommentSkeletonCard />;
+  }
+
   return (
-    <div className="w-full h-full flex flex-col overflow-y-auto gap-5 p-5">
-      {data?.map(({ user, createdAt, message, replies }, index) => {
+    <div className="w-full h-full flex flex-col gap-5 items-center justify-start overflow-y-auto">
+      {data?.map(({ id, user, createdAt, message, parent, replies }, index) => {
         return (
           <div key={index} className="flex flex-col w-full h-full gap-2">
             <div className="flex w-full h-full bg-white p-2 rounded-sm gap-5">
@@ -46,8 +54,9 @@ export default function CommentCard({ data }: CommentCardProps) {
                 />
               </div>
               <div className="flex flex-col w-full">
-                <p className="flex w-full text-gray-500 text-[10px] md:text-[11px] gap-2 items-start justify-start">
-                  <span className="text-red-400 font-semibold">
+                <p className="flex w-full text-[10px] md:text-[11px] items-start justify-start">
+                  {parent && <span className="text-red-500 font-bold">Membalas {parent.user.userName} {">"}</span>}
+                  <span className="text-red-400 font-semibold mr-2">
                     @{user.userName}
                   </span>
                   {new Date(createdAt).toLocaleString()}
@@ -71,15 +80,31 @@ export default function CommentCard({ data }: CommentCardProps) {
                     </p>
                   </div>
                 )}
+                <div className="w-full flex items-center justify-start gap-3 text-[10px] md:text-[12px] text-gray-500 mt-1">
+                  <p>Suka</p>
+                  <p>Balas</p>
+                </div>
               </div>
             </div>
             {replies.length > 0 && (
-              <div className="w-full text-start">
-                <Button className="rounded-lg flex items-center text-[10px] md:text-[12px] justify-center gap-2 text-white font-semibold bg-transparent hover:bg-[#252525] transition duration-700">
-                  <ChevronDown />
-                  ({replies.length}) Balasan
-                </Button>
-              </div>
+              <>
+                <div className="w-full h-full text-start">
+                  <Button
+                    onClick={() => setShowReply((prev) => !prev)}
+                    className="rounded-lg flex items-center text-[10px] md:text-[12px] justify-center gap-2 text-white font-semibold bg-transparent hover:bg-[#252525] transition duration-700"
+                  >
+                    {showReply ? <ChevronUp /> : <ChevronDown />}(
+                    {replies.length}) Balasan
+                  </Button>
+                </div>
+                <div
+                  className={`w-full overflow-hidden transition-all duration-500 ${
+                    showReply ? "max-h-screen" : "max-h-0"
+                  }`}
+                >
+                  <CommentNestedCard parentId={id} />
+                </div>
+              </>
             )}
           </div>
         );

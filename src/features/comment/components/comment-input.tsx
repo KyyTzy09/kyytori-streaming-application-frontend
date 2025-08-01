@@ -9,15 +9,17 @@ import React from "react";
 import { usePostComment } from "../hooks/comment-hooks";
 import { toast } from "react-toastify";
 import { Profile, User } from "@/common/types/user";
+import { usegetProfile } from "@/features/profile/hooks/profile-hook";
 
 interface CommentInputProps {
-  user: User;
   epsTitle: string;
 }
 
-export default function CommentInput({ user, epsTitle }: CommentInputProps) {
+export default function CommentInput({ epsTitle }: CommentInputProps) {
   const [onFocus, setOnFocus] = React.useState<boolean>(false);
   const [comment, setComment] = React.useState<string>("");
+
+  const { data: user } = usegetProfile();
 
   const changeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -42,7 +44,7 @@ export default function CommentInput({ user, epsTitle }: CommentInputProps) {
     >
       <section className="w-10 h-10">
         <Image
-          src={user?.profile?.avatar || defaultImage}
+          src={user?.data?.profile?.avatar || defaultImage}
           alt="profile"
           className="w-full h-full object-cover rounded-full"
           width={320}
@@ -54,9 +56,9 @@ export default function CommentInput({ user, epsTitle }: CommentInputProps) {
           onChange={changeComment}
           onFocus={() => setOnFocus(true)}
           value={comment}
-          className="bg-white text-[12px] md:text-sm"
+          className="bg-white text-[12px] md:text-sm w-full"
           placeholder={`Tambahkan komentar sebagai ${
-            user?.profile?.userName || "Anda belum login"
+            user?.data?.profile?.userName || "Anda belum login"
           }`}
         />
         {onFocus && (

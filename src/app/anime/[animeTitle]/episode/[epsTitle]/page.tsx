@@ -12,13 +12,7 @@ import CommentInput from "@/features/comment/components/comment-input";
 import { useGetCommentByEpisode } from "@/features/comment/hooks/comment-hooks";
 import { useGetEpsLink } from "@/features/episodes/hooks/useGetEps";
 import { usegetProfile } from "@/features/profile/hooks/profile-hook";
-import {
-  AlertCircleIcon,
-  ArrowLeft,
-  ArrowRight,
-  List,
-  Send,
-} from "lucide-react";
+import { AlertCircleIcon, ArrowLeft, ArrowRight, List } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { FaComment } from "react-icons/fa";
@@ -33,7 +27,6 @@ export default function Episodepage() {
   const { data: epsLink } = useGetEpsLink(decodedEpsTitle);
   const { data: detail } = useGetDetailAnime(animeTitle);
   const { data: comment } = useGetCommentByEpisode({ epsTitle });
-  const { data: profile } = usegetProfile();
 
   const [iframe, setIframe] = React.useState<string | undefined>();
 
@@ -162,10 +155,12 @@ export default function Episodepage() {
                 Komentar ({comment?.data.length || 0})
               </p>
               {/* Input komentar */}
-              <CommentInput user={profile?.data as User} epsTitle={epsTitle} />
+              <CommentInput epsTitle={epsTitle} />
             </div>
-            <div className="w-full">
-              <CommentCard data={comment?.data as Comment[]} />
+            <div className="w-full p-5 h-full flex flex-col gap-5 overflow-y-auto">
+              <CommentCard
+                data={comment?.data as Comment[]}
+              />
             </div>
           </section>
         </div>
