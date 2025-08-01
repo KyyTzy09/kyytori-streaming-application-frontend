@@ -33,7 +33,7 @@ export const CommentService = {
             method: 'delete'
         })
     },
-    async postReplyCommentByEps(data: { message: string, epsTitle: string, commentId: string }) {
+    async postReplyCommentByEps(data: { message: string, epsTitle: string, parentId: string }) {
         const token = await getCookies()
         return await apiClient<{ message: string }>({
             url: `/comment/reply`,

@@ -1,32 +1,36 @@
-"use client";
-
 import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
 import { Textarea } from "@/common/shadcn/textarea";
-import { SendIcon } from "lucide-react";
+import { usegetProfile } from "@/features/profile/hooks/profile-hook";
+import { Loader, LoaderIcon, SendIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { usePostComment } from "../hooks/comment-hooks";
-import { usegetProfile } from "@/features/profile/hooks/profile-hook";
+import { usePostReplyComment } from "../hooks/comment-hooks";
 
-interface CommentInputProps {
+interface CommentNestedInputProps {
+  parentId: string;
   epsTitle: string;
+  repliedTo: string;
 }
 
-export default function CommentInput({ epsTitle }: CommentInputProps) {
+export default function CommentNestedInput({
+  parentId,
+  epsTitle,
+  repliedTo,
+}: CommentNestedInputProps) {
   const [onFocus, setOnFocus] = React.useState<boolean>(false);
   const [comment, setComment] = React.useState<string>("");
-
   const { data: user } = usegetProfile();
+  
+  const { mutate: postComment, isPending: isPosting } = usePostReplyComment({
+    parentId,
+    message: comment,
+    epsTitle: epsTitle,
+  });
 
   const changeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
   };
-
-  const { mutate: postComment, isPending: isPosting } = usePostComment({
-    epsTitle,
-    message: comment,
-  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,7 +42,7 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full h-full flex items-start justify-start gap-5"
+      className="w-full h-full flex items-start justify-center gap-5"
     >
       <section className="w-10 h-10">
         <Image
@@ -55,7 +59,7 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
           onFocus={() => setOnFocus(true)}
           value={comment}
           className="bg-white text-[12px] md:text-sm w-full"
-          placeholder={`Tambahkan komentar sebagai ${
+          placeholder={`Balas Komentar ${repliedTo} sebagai ${
             user?.data?.profile?.userName || "Anda belum login"
           }`}
         />
@@ -75,8 +79,14 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
               type="submit"
               className="px-6 flex bg-red-500 items-center justify-center gap-2 hover:bg-red-400 transition duration-700 cursor-pointer"
             >
-              <SendIcon className="text-white h-2" />
-              Kirim
+              {isPosting ? (
+                <LoaderIcon className="h-4 w-4 animate-spin text-white" />
+              ) : (
+                <>
+                  <SendIcon className="text-white h-2" />
+                  Kirim
+                </>
+              )}
             </Button>
           </div>
         )}

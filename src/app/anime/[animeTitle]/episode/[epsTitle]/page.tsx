@@ -147,7 +147,7 @@ export default function Episodepage() {
               })}
           </section>
           {/* Komentar Section */}
-          <section className="w-full flex flex-col items-center mt-5 min-h-screen bg-transparent border-2 border-red-500 rounded-sm overflow-hidden">
+          <section className="w-full h-full flex flex-col items-center mt-5 min-h-screen bg-transparent border-2 border-red-500 rounded-sm overflow-hidden">
             {/* Header komentar */}
             <div className="w-full flex flex-col bg-[#232323] p-5 justify-start gap-5">
               <p className="flex text-white items-center gap-2 justify-start font-bold">

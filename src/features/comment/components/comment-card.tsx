@@ -8,6 +8,7 @@ import Image from "next/image";
 import React from "react";
 import CommentNestedCard from "./comment-nested-card";
 import CommentSkeletonCard from "./comment-skeleton-card";
+import CommentNestedInput from "./comment-nested-input";
 
 interface CommentCardProps {
   isLoading?: boolean;
@@ -16,10 +17,25 @@ interface CommentCardProps {
 
 export default function CommentCard({ data, isLoading }: CommentCardProps) {
   const [indexCard, setIndexCard] = React.useState<number[]>();
-  const [showReply, setShowReply] = React.useState<boolean>(false);
+  const [showReply, setShowReply] = React.useState<number[]>();
 
-  const findIndex = (index: number) => {
+  const findCardIndex = (index: number) => {
     return indexCard?.includes(index);
+  };
+  const findShowReplyIndex = (index: number) => {
+    return showReply?.includes(index);
+  };
+
+  const handleShowReply = (index: number) => {
+    setShowReply((prev) => {
+      const safePrev = Array.isArray(prev) ? prev : [];
+
+      if (safePrev?.includes(index)) {
+        return prev?.filter((i) => i !== index);
+      } else {
+        return [...safePrev, index];
+      }
+    });
   };
 
   const handleShowComment = (index: number) => {
@@ -39,76 +55,103 @@ export default function CommentCard({ data, isLoading }: CommentCardProps) {
   }
 
   return (
-    <div className="w-full h-full flex flex-col gap-5 items-center justify-start overflow-y-auto">
-      {data?.map(({ id, user, createdAt, message, parent, replies }, index) => {
-        return (
-          <div key={index} className="flex flex-col w-full h-full gap-2">
-            <div className="flex w-full h-full bg-white p-2 rounded-sm gap-5">
-              <div className="flex items-start justify-center w-10 h-10">
-                <Image
-                  src={user.avatar || defaultImage}
-                  alt="profile"
-                  className="w-full h-full object-cover rounded-full"
-                  width={320}
-                  height={200}
-                />
-              </div>
-              <div className="flex flex-col w-full">
-                <p className="flex w-full text-[10px] md:text-[11px] items-start justify-start">
-                  {parent && <span className="text-red-500 font-bold">Membalas {parent.user.userName} {">"}</span>}
-                  <span className="text-red-400 font-semibold mr-2">
-                    @{user.userName}
-                  </span>
-                  {new Date(createdAt).toLocaleString()}
-                </p>
-                <p
-                  className={`${
-                    findIndex(index) ? "line-clamp-none" : "line-clamp-1"
-                  }  w-full text-[12px] md:text-[14px] break-all`}
-                >
-                  {message}
-                </p>
-                {message.length > 100 && (
-                  <div className="flex w-full items-center justify-start mt-1">
-                    <p
-                      onClick={() => handleShowComment(index)}
-                      className="font-semibold text-[11px] md:text-[13px] text-gray-500 hover:underline cursor-pointer"
-                    >
-                      {findIndex(index)
-                        ? "Baca Sekilas..."
-                        : "Baca Selengkapnya..."}
-                    </p>
-                  </div>
-                )}
-                <div className="w-full flex items-center justify-start gap-3 text-[10px] md:text-[12px] text-gray-500 mt-1">
-                  <p>Suka</p>
-                  <p>Balas</p>
+    <div className="w-full h-full flex flex-col gap-3 items-center justify-start overflow-y-auto">
+      {data?.map(
+        (
+          { id, user, episodeTitle, createdAt, message, parent, replies },
+          index
+        ) => {
+          return (
+            <div key={index} className="flex flex-col w-full h-full gap-2">
+              <div className="flex w-full h-full bg-white p-2 rounded-sm gap-5">
+                <div className="flex items-start justify-center w-10 h-10">
+                  <Image
+                    src={user.avatar || defaultImage}
+                    alt="profile"
+                    className="w-full h-full object-cover rounded-full"
+                    width={320}
+                    height={200}
+                  />
                 </div>
+                <div className="flex flex-col w-full">
+                  <p className="flex w-full text-[10px] md:text-[11px] items-start justify-start">
+                    {parent && (
+                      <span className="text-red-500 font-bold">
+                        Membalas {parent.user.userName} {">"}
+                      </span>
+                    )}
+                    <span className="text-red-400 font-semibold mr-2">
+                      @{user.userName}
+                    </span>
+                    {new Date(createdAt).toLocaleString()}
+                  </p>
+                  <p
+                    className={`${
+                      findCardIndex(index) ? "line-clamp-none" : "line-clamp-1"
+                    }  w-full text-[12px] md:text-[14px] break-all`}
+                  >
+                    {message}
+                  </p>
+                  {message.length > 100 && (
+                    <div className="flex w-full items-center justify-start mt-1">
+                      <p
+                        onClick={() => handleShowComment(index)}
+                        className="font-semibold text-[11px] md:text-[13px] text-gray-500 hover:underline cursor-pointer"
+                      >
+                        {findCardIndex(index)
+                          ? "Baca Sekilas..."
+                          : "Baca Selengkapnya..."}
+                      </p>
+                    </div>
+                  )}
+                  <div className="w-full flex items-center justify-start gap-3 text-[10px] md:text-[12px] text-gray-500 mt-1">
+                    <p>Suka</p>
+                    <button
+                      className="text-red-500 hover:underline"
+                      onClick={() => handleShowReply(index)}
+                    >
+                      {findShowReplyIndex(index) ? "Batal" : "Balas"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {replies.length > 0 && (
+                <>
+                  <div className="w-full h-full text-start">
+                    <Button
+                      onClick={() => handleShowReply(index)}
+                      className="rounded-lg flex items-center text-[10px] md:text-[12px] justify-center gap-2 text-white font-semibold bg-transparent hover:bg-[#252525] transition duration-700"
+                    >
+                      {findShowReplyIndex(index) ? (
+                        <ChevronUp />
+                      ) : (
+                        <ChevronDown />
+                      )}
+                      ({replies.length}) Balasan
+                    </Button>
+                  </div>
+                  <div
+                    className={`w-full overflow-hidden transition-all duration-500 ${
+                      findShowReplyIndex(index) ? "max-h-screen" : "max-h-0"
+                    }`}
+                  >
+                    <CommentNestedCard parentId={id} />
+                  </div>
+                </>
+              )}
+              <div className="w-full pl-8">
+                {findShowReplyIndex(index) && (
+                  <CommentNestedInput
+                    parentId={id}
+                    epsTitle={episodeTitle}
+                    repliedTo={user.userName}
+                  />
+                )}
               </div>
             </div>
-            {replies.length > 0 && (
-              <>
-                <div className="w-full h-full text-start">
-                  <Button
-                    onClick={() => setShowReply((prev) => !prev)}
-                    className="rounded-lg flex items-center text-[10px] md:text-[12px] justify-center gap-2 text-white font-semibold bg-transparent hover:bg-[#252525] transition duration-700"
-                  >
-                    {showReply ? <ChevronUp /> : <ChevronDown />}(
-                    {replies.length}) Balasan
-                  </Button>
-                </div>
-                <div
-                  className={`w-full overflow-hidden transition-all duration-500 ${
-                    showReply ? "max-h-screen" : "max-h-0"
-                  }`}
-                >
-                  <CommentNestedCard parentId={id} />
-                </div>
-              </>
-            )}
-          </div>
-        );
-      })}
+          );
+        }
+      )}
     </div>
   );
 }

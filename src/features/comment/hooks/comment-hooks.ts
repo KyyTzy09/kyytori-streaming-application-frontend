@@ -51,18 +51,13 @@ export const useGetReplyCommentByParentId = (data: { parentId: string }) => {
     })
 }
 
-export const usePostReplyComment = (data: { message: string, epsTitle: string, commentId: string }) => {
-    let queryClient = useQueryClient()
-    let message = ""
+export const usePostReplyComment = (data: { message: string, epsTitle: string, parentId: string }) => {
+    const queryClient = useQueryClient()
     return useMutation({
-        mutationKey: ['post-reply-komentar', data.epsTitle, data.message, data.commentId],
-        mutationFn: async () => {
-            const response = await CommentService.postReplyCommentByEps(data)
-            message = response.message
-            return response
-        },
+        mutationKey: ['post-reply-komentar', data.epsTitle, data.message, data.parentId],
+        mutationFn: async () => await CommentService.postReplyCommentByEps(data),
         onSuccess: () => {
-            toast.success(message, {
+            toast.success("Balasan berhasil dikirim" + data.parentId, {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -71,10 +66,10 @@ export const usePostReplyComment = (data: { message: string, epsTitle: string, c
                 draggable: true,
                 progress: undefined,
             })
-            queryClient.invalidateQueries({ queryKey: ['reply-komentar', data.commentId] })
+            queryClient.invalidateQueries({ queryKey: ['reply-komentar'] })
         },
         onError: () => {
-            toast.error(message, {
+            toast.error("Gagal mengirim balasan", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -83,7 +78,6 @@ export const usePostReplyComment = (data: { message: string, epsTitle: string, c
                 draggable: true,
                 progress: undefined,
             })
-            queryClient.invalidateQueries({ queryKey: ['reply-komentar', data.commentId] })
         },
     })
 }
