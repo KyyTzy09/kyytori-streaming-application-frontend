@@ -42,3 +42,48 @@ export const useGetCommentByEpisode = (data: { epsTitle: string }) => {
         staleTime: 2 * 60 * 1000
     })
 }
+
+export const useGetReplyCommentByParentId = (data: { parentId: string }) => {
+    return useQuery({
+        queryKey: ['reply-komentar', data.parentId],
+        queryFn: async () => await CommentService.getReplyCommentByParentId({ parentId: data.parentId }),
+        staleTime: 2 * 60 * 1000
+    })
+}
+
+export const usePostReplyComment = (data: { message: string, epsTitle: string, commentId: string }) => {
+    let queryClient = useQueryClient()
+    let message = ""
+    return useMutation({
+        mutationKey: ['post-reply-komentar', data.epsTitle, data.message, data.commentId],
+        mutationFn: async () => {
+            const response = await CommentService.postReplyCommentByEps(data)
+            message = response.message
+            return response
+        },
+        onSuccess: () => {
+            toast.success(message, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            queryClient.invalidateQueries({ queryKey: ['reply-komentar', data.commentId] })
+        },
+        onError: () => {
+            toast.error(message, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            queryClient.invalidateQueries({ queryKey: ['reply-komentar', data.commentId] })
+        },
+    })
+}

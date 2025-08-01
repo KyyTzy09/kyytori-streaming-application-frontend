@@ -5,7 +5,7 @@ import { Button } from "@/common/shadcn/button";
 import { Comment } from "@/common/types/comment";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
-import React, { use } from "react";
+import React from "react";
 
 interface CommentCardProps {
   data: Comment[];
@@ -32,9 +32,9 @@ export default function CommentCard({ data }: CommentCardProps) {
 
   return (
     <div className="w-full h-full flex flex-col overflow-y-auto gap-5 p-5">
-      {data?.map(({ user, createdAt, message }, index) => {
+      {data?.map(({ user, createdAt, message, replies }, index) => {
         return (
-          <div key={index} className="flex flex-col w-full h-full gap-3">
+          <div key={index} className="flex flex-col w-full h-full gap-2">
             <div className="flex w-full h-full bg-white p-2 rounded-sm gap-5">
               <div className="flex items-start justify-center w-10 h-10">
                 <Image
@@ -73,12 +73,14 @@ export default function CommentCard({ data }: CommentCardProps) {
                 )}
               </div>
             </div>
-            <div className="w-full text-start">
-              <Button className="flex items-center text-[10px] md:text-sm justify-center gap-2 text-red-500 font-semibold bg-transparent hover:bg-[#252525] transition duration-700">
-                <ChevronDown />
-                {`(0) Balasan`}
-              </Button>
-            </div>
+            {replies.length > 0 && (
+              <div className="w-full text-start">
+                <Button className="rounded-lg flex items-center text-[10px] md:text-[12px] justify-center gap-2 text-white font-semibold bg-transparent hover:bg-[#252525] transition duration-700">
+                  <ChevronDown />
+                  ({replies.length}) Balasan
+                </Button>
+              </div>
+            )}
           </div>
         );
       })}

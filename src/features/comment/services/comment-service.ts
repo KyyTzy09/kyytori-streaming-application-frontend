@@ -33,4 +33,20 @@ export const CommentService = {
             method: 'delete'
         })
     },
+    async postReplyCommentByEps(data: { message: string, epsTitle: string, commentId: string }) {
+        const token = await getCookies()
+        return await apiClient<{ message: string }>({
+            url: `/comment/reply`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            data,
+            method: 'post'
+        })
+    },
+    async getReplyCommentByParentId(data: { parentId: string }) {
+        return await apiClient<{ data: Comment[] }>({
+            url: `/comment/reply/${data.parentId}`
+        })
+    }
 }
