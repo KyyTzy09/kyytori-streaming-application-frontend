@@ -43,6 +43,41 @@ export const useGetCommentByEpisode = (data: { epsTitle: string }) => {
     })
 }
 
+export const useDeleteComment = (data: { epsTitle: string, commentId: string }) => {
+    const queryClient = useQueryClient()
+    let responseMessage = ""
+    return useMutation({
+        mutationKey: ['delete-komentar', data.epsTitle, data.commentId],
+        mutationFn: async () => {
+            const { message } = await CommentService.deleteCommentByEps(data)
+            responseMessage = message
+            return message
+        },
+        onSuccess: () => {
+            toast.success(responseMessage, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            queryClient.invalidateQueries({ queryKey: ['komentar', data.epsTitle] })
+        },
+        onError: () => {
+            toast.error(responseMessage, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+        }
+    })
+}
 export const useGetReplyCommentByParentId = (data: { parentId: string }) => {
     return useQuery({
         queryKey: ['reply-komentar', data.parentId],
