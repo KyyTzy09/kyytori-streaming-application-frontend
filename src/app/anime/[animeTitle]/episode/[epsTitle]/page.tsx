@@ -149,7 +149,7 @@ export default function Episodepage() {
               })}
           </section>
           {/* Komentar Section */}
-          <section className="w-full h-full flex flex-col items-center mt-5 min-h-screen bg-transparent border-2 border-red-500 rounded-sm overflow-hidden">
+          <section className="w-full h-auto min-h-screen flex flex-col items-center mt-5 bg-transparent border-2 border-red-500 rounded-sm overflow-hidden">
             {/* Header komentar */}
             <div className="w-full flex flex-col bg-[#232323] p-5 justify-start gap-5">
               <p className="flex text-white items-center gap-2 justify-start font-bold">
@@ -159,7 +159,7 @@ export default function Episodepage() {
               {/* Input komentar */}
               <CommentInput epsTitle={epsTitle} />
             </div>
-            <div className="w-full p-5 h-full flex flex-col gap-5 overflow-y-auto">
+            <div className="w-full h-full p-5 min-h-screen flex flex-col gap-5 overflow-y-auto">
               {comment?.data?.length! > 0 && (
                 <CommentCard
                   data={comment?.data as Comment[]}

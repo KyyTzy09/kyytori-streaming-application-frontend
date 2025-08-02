@@ -158,16 +158,19 @@ export default function CommentCard({
                         ({replies?.length ?? 0}) Balasan
                       </Button>
                     </div>
-                    <div
-                      className={`w-full overflow-hidden transition-all duration-500 ${
-                        findShowReplyIndex(index) ? "max-h-screen" : "max-h-0"
-                      }`}
-                    >
-                      <CommentNestedCard parentId={id} />
-                    </div>
                   </>
                 )}
-                <div className="w-full pl-4 md:pl-8">
+                <div
+                  className={`w-full overflow-hidden transition-all duration-500 ${
+                    findShowReplyIndex(index) ? "max-h-screen" : "max-h-0"
+                  }`}
+                >
+                  <CommentNestedCard
+                    isOpen={findShowReplyIndex(index)}
+                    parentId={id}
+                  />
+                </div>
+                <div className="w-full pl-4 md:pl-8 relative">
                   {findShowReplyIndex(index) && (
                     <CommentNestedInput
                       parentId={id}
