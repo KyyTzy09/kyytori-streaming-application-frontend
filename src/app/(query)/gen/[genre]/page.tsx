@@ -4,7 +4,7 @@ import { Button } from "@/common/shadcn/button";
 import { Anime } from "@/common/types/anime";
 import NavigationHeader from "@/common/ui/headers/header";
 import AnimeCard1 from "@/features/anime/components/cards/anime-card1";
-import { useGetAnimeByGenre } from "@/features/genres/hooks/useGetGenres";
+import { useGetAnimeByGenre } from "@/features/genres/hooks/genre-hook";
 import { ArrowBigLeft, ArrowBigRight, ArrowLeft } from "lucide-react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React from "react";

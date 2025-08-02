@@ -1,5 +1,5 @@
 import { apiClient } from "@/common/helpers/axios"
-import { queryByAnimeId } from "../hooks/useFavorite"
+import { queryByAnimeId } from "../hooks/favorite-hook"
 import { FavoritesAnime } from "@/common/types/favorite"
 import { getCookies } from "@/lib/cookies"
 

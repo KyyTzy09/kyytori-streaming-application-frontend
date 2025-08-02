@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useGetReplyCommentByParentId } from "../hooks/comment-hooks";
+import { useGetReplyCommentByParentId } from "../hooks/comment-hook";
 import CommentCard from "./comment-card";
 import { Comment } from "@/common/types/comment";
 import CommentSkeletonCard from "./comment-skeleton-card";

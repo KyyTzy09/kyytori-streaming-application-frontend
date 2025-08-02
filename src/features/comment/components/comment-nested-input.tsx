@@ -5,7 +5,7 @@ import { usegetProfile } from "@/features/profile/hooks/profile-hook";
 import { Loader, LoaderIcon, SendIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { usePostReplyComment } from "../hooks/comment-hooks";
+import { usePostReplyComment } from "../hooks/comment-hook";
 
 interface CommentNestedInputProps {
   parentId: string;

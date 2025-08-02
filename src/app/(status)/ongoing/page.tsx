@@ -3,7 +3,7 @@
 import { Button } from "@/common/shadcn/button";
 import { Anime } from "@/common/types/anime";
 import AnimeCard2 from "@/features/anime/components/cards/anime-card2";
-import { useGetOngoingAnime } from "@/features/anime/hooks/useGetAnime";
+import { useGetOngoingAnime } from "@/features/anime/hooks/anime-hook";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import NotFound from "../../not-found";

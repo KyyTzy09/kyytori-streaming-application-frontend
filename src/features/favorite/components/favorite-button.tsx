@@ -12,7 +12,7 @@ import {
   useDeleteFavorite,
   useGetFavorite,
   usePostFavorite,
-} from "../hooks/useFavorite";
+} from "../hooks/favorite-hook";
 
 import { useQueryClient } from "@tanstack/react-query";
 

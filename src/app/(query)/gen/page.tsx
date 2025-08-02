@@ -2,7 +2,7 @@
 
 import { Button } from "@/common/shadcn/button";
 import NavigationHeader from "@/common/ui/headers/header";
-import { useGetAllGenres } from "@/features/genres/hooks/useGetGenres";
+import { useGetAllGenres } from "@/features/genres/hooks/genre-hook";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";

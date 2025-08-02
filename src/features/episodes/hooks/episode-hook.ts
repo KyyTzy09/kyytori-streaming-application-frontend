@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { episodeService } from "../services/eps-service"
+import { episodeService } from "../services/episode-service"
 
 export const useGetEpsLink = (epsTitle: string) => {
     return useQuery({

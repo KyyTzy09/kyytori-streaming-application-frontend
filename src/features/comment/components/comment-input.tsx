@@ -6,7 +6,7 @@ import { Textarea } from "@/common/shadcn/textarea";
 import { SendIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { usePostComment } from "../hooks/comment-hooks";
+import { usePostComment } from "../hooks/comment-hook";
 import { usegetProfile } from "@/features/profile/hooks/profile-hook";
 
 interface CommentInputProps {
@@ -38,7 +38,7 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full h-full flex items-start justify-start md:gap-5"
+      className="w-full h-full flex items-start justify-start gap-3 md:gap-5"
     >
       <section className="w-10 h-auto">
         <Image

@@ -6,7 +6,7 @@ import AnimeRating from "@/features/anime/components/anime.rating";
 import Link from "next/link";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
 import { ArrowLeft, BookmarkPlus, Heart } from "lucide-react";
-import { episodeService } from "@/features/episodes/services/eps-service";
+import { episodeService } from "@/features/episodes/services/episode-service";
 import EpisodeCard from "@/features/episodes/components/episode-card";
 import FavoriteButton from "@/features/favorite/components/favorite-button";
 

@@ -10,7 +10,7 @@ import AnimeHeader from "@/features/anime/components/anime-header";
 import {
   useGetOngoingAnime,
   useGetTopAnime,
-} from "@/features/anime/hooks/useGetAnime";
+} from "@/features/anime/hooks/anime-hook";
 import TopEpisodeCard from "@/features/episodes/components/episode-top-card";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { motion } from "motion/react";

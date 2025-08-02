@@ -9,7 +9,7 @@ import {
 } from "@/common/shadcn/alert-dialog";
 import { Button } from "@/common/shadcn/button";
 import React from "react";
-import { useDeleteComment } from "../hooks/comment-hooks";
+import { useDeleteComment } from "../hooks/comment-hook";
 
 interface CommentDeleteAlertProps {
   commentId: string;

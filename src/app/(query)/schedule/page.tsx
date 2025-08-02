@@ -4,7 +4,7 @@ import { days } from "@/common/constant/day";
 import { convertDay } from "@/common/helpers/day";
 import { Anime } from "@/common/types/anime";
 import NavigationHeader from "@/common/ui/headers/header";
-import { useGetAnimeSchedule } from "@/features/anime/hooks/useGetAnime";
+import { useGetAnimeSchedule } from "@/features/anime/hooks/anime-hook";
 import { ArrowBigLeft, Star } from "lucide-react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";

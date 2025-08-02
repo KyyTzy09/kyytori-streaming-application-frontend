@@ -3,7 +3,7 @@
 import { Button } from "@/common/shadcn/button";
 import { Anime } from "@/common/types/anime";
 import AnimeCard2 from "@/features/anime/components/cards/anime-card2";
-import { useGetAnimeList } from "@/features/anime/hooks/useGetAnime";
+import { useGetAnimeList } from "@/features/anime/hooks/anime-hook";
 import { animeService } from "@/features/anime/services/anime-service";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";

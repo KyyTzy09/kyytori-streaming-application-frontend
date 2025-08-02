@@ -8,7 +8,7 @@ import {
   useGetCompletedAnime,
   useGetOngoingAnime,
   useGetTopAnime,
-} from "@/features/anime/hooks/useGetAnime";
+} from "@/features/anime/hooks/anime-hook";
 import { Anime, Episodes } from "@/common/types/anime";
 import AnimeHeader from "@/features/anime/components/anime-header";
 import { Separator } from "@/common/shadcn/separator";
