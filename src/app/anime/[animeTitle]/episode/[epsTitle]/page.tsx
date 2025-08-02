@@ -26,7 +26,9 @@ export default function Episodepage() {
   const decodedEpsTitle = decodeURIComponent(epsTitle);
   const { data: epsLink } = useGetEpsLink(decodedEpsTitle);
   const { data: detail } = useGetDetailAnime(animeTitle);
-  const { data: comment } = useGetCommentByEpisode({ epsTitle });
+  const { data: comment, isPending: getComment } = useGetCommentByEpisode({
+    epsTitle,
+  });
 
   const [iframe, setIframe] = React.useState<string | undefined>();
 
@@ -158,9 +160,12 @@ export default function Episodepage() {
               <CommentInput epsTitle={epsTitle} />
             </div>
             <div className="w-full p-5 h-full flex flex-col gap-5 overflow-y-auto">
-              <CommentCard
-                data={comment?.data as Comment[]}
-              />
+              {comment?.data?.length! > 0 && (
+                <CommentCard
+                  data={comment?.data as Comment[]}
+                  isLoading={getComment}
+                />
+              )}
             </div>
           </section>
         </div>

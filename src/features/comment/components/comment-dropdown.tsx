@@ -37,7 +37,8 @@ export default function CommentDropdown({
       name: "Delete",
       disabled:
         userId !== userProfile?.data.id ||
-        userProfile?.data.role !== Roles.Admin,
+        userProfile?.data.role !== Roles.Admin ||
+        !commentId,
       Icon: Trash,
       action: () => setDeleteComment(true),
     },

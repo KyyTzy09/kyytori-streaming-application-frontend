@@ -13,11 +13,7 @@ interface CommentNestedInputProps {
   repliedTo: string;
 }
 
-export default function CommentNestedInput({
-  parentId,
-  epsTitle,
-  repliedTo,
-}: CommentNestedInputProps) {
+export default function CommentNestedInput({ parentId, epsTitle, repliedTo }: CommentNestedInputProps) {
   const [onFocus, setOnFocus] = React.useState<boolean>(false);
   const [comment, setComment] = React.useState<string>("");
   const { data: user } = usegetProfile();
@@ -25,7 +21,7 @@ export default function CommentNestedInput({
   const { mutate: postComment, isPending: isPosting } = usePostReplyComment({
     parentId,
     message: comment,
-    epsTitle: epsTitle,
+    epsTitle,
   });
 
   const changeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
