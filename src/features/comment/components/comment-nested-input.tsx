@@ -58,7 +58,7 @@ export default function CommentNestedInput({
           onChange={changeComment}
           onFocus={() => setOnFocus(true)}
           value={comment}
-          className="bg-white text-[12px] md:text-sm w-full"
+          className="bg-white text-[12px] md:text-sm w-full break-all"
           placeholder={`Balas Komentar ${repliedTo} sebagai ${
             user?.data?.profile?.userName || "Anda belum login"
           }`}

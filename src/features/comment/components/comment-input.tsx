@@ -38,9 +38,9 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full h-full flex items-start justify-start gap-5"
+      className="w-full h-full flex items-start justify-start md:gap-5"
     >
-      <section className="w-10 h-10">
+      <section className="w-10 h-auto">
         <Image
           src={user?.data?.profile?.avatar || defaultImage}
           alt="profile"
@@ -54,7 +54,7 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
           onChange={changeComment}
           onFocus={() => setOnFocus(true)}
           value={comment}
-          className="bg-white text-[12px] md:text-sm w-full"
+          className="bg-white text-[12px] md:text-sm break-all w-full"
           placeholder={`Tambahkan komentar sebagai ${
             user?.data?.profile?.userName || "Anda belum login"
           }`}

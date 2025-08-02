@@ -7,13 +7,12 @@ import { Comment } from "@/common/types/comment";
 
 interface CommentNestedCardProps {
   parentId: string;
+  isOpen: boolean;
 }
 
 export default function CommentNestedCard({
-  parentId,
-}: CommentNestedCardProps) {
-  const { data: replyComments, isPending } = useGetReplyCommentByParentId({
-    parentId });
+  parentId, isOpen }: CommentNestedCardProps) {
+  const { data: replyComments, isPending } = useGetReplyCommentByParentId({ parentId, isOpen });
   if (isPending) {
     return <p>Loading...</p>;
   }

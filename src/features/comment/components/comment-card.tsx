@@ -3,12 +3,13 @@
 import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
 import { Comment } from "@/common/types/comment";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, MoreVerticalIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import CommentNestedCard from "./comment-nested-card";
 import CommentSkeletonCard from "./comment-skeleton-card";
 import CommentNestedInput from "./comment-nested-input";
+import CommentDropdown from "./comment-dropdown";
 
 interface CommentCardProps {
   isLoading?: boolean;
@@ -53,7 +54,6 @@ export default function CommentCard({ data, isLoading }: CommentCardProps) {
   if (isLoading) {
     return <CommentSkeletonCard />;
   }
-
   return (
     <div className="w-full h-full flex flex-col gap-3 items-center justify-start overflow-y-auto">
       {data?.map(
@@ -63,8 +63,8 @@ export default function CommentCard({ data, isLoading }: CommentCardProps) {
         ) => {
           return (
             <div key={index} className="flex flex-col w-full h-full gap-2">
-              <div className="flex w-full h-full bg-white p-2 rounded-sm gap-2 md:gap-5">
-                <div className="flex items-start justify-center w-10 h-10">
+              <div className="flex w-full h-full bg-white p-2 md:pr-3 rounded-sm gap-2 md:gap-5">
+                <div className="flex items-start justify-center w-auto h-10">
                   <Image
                     src={user.avatar || defaultImage}
                     alt="profile"
@@ -74,19 +74,26 @@ export default function CommentCard({ data, isLoading }: CommentCardProps) {
                   />
                 </div>
                 <div className="flex flex-col w-full">
-                  <p className="flex w-full text-[10px] md:text-[11px] items-start justify-start">
-                    {parent && (
-                      <span className="text-red-500 font-bold">
-                        {parent.user.userName} {">"}
+                  <div className="flex items-center justify-between w-full">
+                    <p className="flex w-full text-[10px] md:text-[11px] items-start justify-start">
+                      {parent && (
+                        <span className="text-red-500 font-bold">
+                          {parent.user.userName} {">"}
+                        </span>
+                      )}
+                      <span className="text-red-400 font-semibold mr-2">
+                        @{user.userName}
                       </span>
-                    )}
-                    <span className="text-red-400 font-semibold mr-2">
-                      @{user.userName}
-                    </span>
-                    <span className="text-gray-500 font-semibold hidden md:inline">
-                      {new Date(createdAt).toLocaleString()}
-                    </span>
-                  </p>
+                      <span className="text-gray-500 font-semibold hidden md:inline">
+                        {new Date(createdAt).toLocaleString()}
+                      </span>
+                    </p>
+                    <CommentDropdown
+                      userId={user.userId}
+                      commentId={id}
+                      epsTitle={episodeTitle}
+                    />
+                  </div>
                   <p
                     className={`${
                       findCardIndex(index) ? "line-clamp-none" : "line-clamp-1"
@@ -142,7 +149,10 @@ export default function CommentCard({ data, isLoading }: CommentCardProps) {
                       findShowReplyIndex(index) ? "max-h-screen" : "max-h-0"
                     }`}
                   >
-                    <CommentNestedCard parentId={id} />
+                    <CommentNestedCard
+                      isOpen={findShowReplyIndex(index) || false}
+                      parentId={id}
+                    />
                   </div>
                 </>
               )}

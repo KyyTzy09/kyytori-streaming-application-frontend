@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { CommentService } from "../services/comment-service"
 import { toast } from "react-toastify"
+import { Comment } from "@/common/types/comment"
 
 export const usePostComment = (data: { epsTitle: string, message: string }) => {
     const queryClient = useQueryClient()
@@ -19,7 +20,7 @@ export const usePostComment = (data: { epsTitle: string, message: string }) => {
                 draggable: true,
                 progress: undefined,
             })
-            queryClient.invalidateQueries({ queryKey: ['komentar', data.epsTitle] })
+            queryClient.invalidateQueries({ queryKey: ['komentar', data.epsTitle], exact: true })
         },
         onError: () => {
             toast.error("Gagal mengirim komentar", {
@@ -39,7 +40,7 @@ export const useGetCommentByEpisode = (data: { epsTitle: string }) => {
     return useQuery({
         queryKey: ['komentar', data.epsTitle],
         queryFn: async () => await CommentService.getCommentByEps({ epsTitle: data.epsTitle }),
-        staleTime: 2 * 60 * 1000
+        staleTime: 0,
     })
 }
 
@@ -64,6 +65,7 @@ export const useDeleteComment = (data: { epsTitle: string, commentId: string }) 
                 progress: undefined,
             })
             queryClient.invalidateQueries({ queryKey: ['komentar', data.epsTitle] })
+            queryClient.invalidateQueries({ queryKey: ['reply-komentar'] })
         },
         onError: () => {
             toast.error(responseMessage, {
@@ -78,11 +80,13 @@ export const useDeleteComment = (data: { epsTitle: string, commentId: string }) 
         }
     })
 }
-export const useGetReplyCommentByParentId = (data: { parentId: string }) => {
+
+export const useGetReplyCommentByParentId = (data: { parentId: string, isOpen : boolean }) => {
     return useQuery({
         queryKey: ['reply-komentar', data.parentId],
         queryFn: async () => await CommentService.getReplyCommentByParentId({ parentId: data.parentId }),
-        staleTime: 2 * 60 * 1000
+        staleTime: 0,
+        enabled : data.isOpen && !!data.parentId,
     })
 }
 
@@ -91,8 +95,8 @@ export const usePostReplyComment = (data: { message: string, epsTitle: string, p
     return useMutation({
         mutationKey: ['post-reply-komentar', data.epsTitle, data.message, data.parentId],
         mutationFn: async () => await CommentService.postReplyCommentByEps(data),
-        onSuccess: () => {
-            toast.success("Balasan berhasil dikirim" + data.parentId, {
+        onSuccess: async () => {
+            toast.success("Balasan berhasil dikirim", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -101,7 +105,7 @@ export const usePostReplyComment = (data: { message: string, epsTitle: string, p
                 draggable: true,
                 progress: undefined,
             })
-            queryClient.invalidateQueries({ queryKey: ['reply-komentar'] })
+            queryClient.invalidateQueries({ queryKey: ['reply-komentar']})
         },
         onError: () => {
             toast.error("Gagal mengirim balasan", {
