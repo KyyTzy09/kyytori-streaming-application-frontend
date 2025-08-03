@@ -1,10 +1,7 @@
 "use client";
 
-import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
-import { Textarea } from "@/common/shadcn/textarea";
 import { Comment } from "@/common/types/comment";
-import { User } from "@/common/types/user";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
 import { useGetDetailAnime } from "@/features/anime/hooks/anime-hook";
 import CommentCard from "@/features/comment/components/comment-card";
