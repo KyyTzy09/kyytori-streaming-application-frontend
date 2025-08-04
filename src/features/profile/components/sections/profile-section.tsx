@@ -4,12 +4,13 @@ import { Label } from "@/common/shadcn/label";
 import { User } from "@/common/types/user";
 import AvatarDropDown from "@/features/profile/components/avatar-dropdown";
 import ProfileForm from "@/features/profile/components/profile-form";
-import PreviewImageModal from "../../../common/ui/modals/preview-modal";
+import PreviewImageModal from "../../../../common/ui/modals/preview-modal";
 import { Bookmark, Pencil, Settings } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import Image from "next/image";
 import React from "react";
 import { FaComment } from "react-icons/fa";
+import UpdateEmailSection from "./email-update-section";
 
 interface ProfileSectionProps {
   data: User;
@@ -22,13 +23,13 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
 
   const handleShowInfo = (infoLength: number) => {
     if (!showInfo) {
-      setShowInfo(true)
+      setShowInfo(true);
     } else {
       setShowInfo(false);
     }
   };
   return (
-    <>
+    <div className="w-full flex flex-col gap-5">
       <ProfileForm data={data} isOpen={isOpen} setIsOpenAction={setIsOpen} />
       <AnimatePresence>
         {preview && (
@@ -46,7 +47,7 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
           onClick={() => setIsOpen(true)}
           className="w-5 h-5 md:w-6 md:h-6 hover:text-red-500 cursor-pointer absolute top-2 right-2 transition duration-700"
         />
-        <div className="w-ful h-full flex flex-col md:flex-row items-center gap-5 md:gap-10 mb-5">
+        <div className="w-ful h-full flex flex-col md:flex-row items-start gap-5 md:gap-10 mb-5">
           <div className="group w-52 h-52 md:w-40 md:h-40 rounded-full relative">
             <Image
               src={data.profile.avatar}
@@ -94,6 +95,7 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
           </div>
         </div>
       </section>
-    </>
+      <UpdateEmailSection data={data} />
+    </div>
   );
 }
