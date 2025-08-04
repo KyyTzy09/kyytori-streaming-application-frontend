@@ -1,19 +1,40 @@
 "use client";
 
+import {
+  updateEmailSchema,
+  updateEmailType,
+} from "@/common/schemas/auth-schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
 import { User } from "@/common/types/user";
 import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface updateEmailSectionProps {
   data: User;
 }
 
 export default function UpdateEmailSection({ data }: updateEmailSectionProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<updateEmailType>({
+    resolver: zodResolver(updateEmailSchema),
+  });
+
+  const onSubmit = (data: updateEmailType) => {
+    
+  };
+  
   return (
     <section className="w-full flex flex-col md:grid md:grid-cols-2 items-center justify-start h-full gap-5">
-      <form className="flex flex-col w-full h-full bg-gray-50 p-10 pt-5 gap-5 items-center justify-start rounded-md">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col w-full h-full bg-gray-50 p-10 pt-5 gap-5 items-center justify-start rounded-md"
+      >
         <div className="w-full flex items-center justify-between">
           <p className="flex flex-col text-black font-semibold text-[16px]">
             Perbarui Email !!
@@ -38,23 +59,33 @@ export default function UpdateEmailSection({ data }: updateEmailSectionProps) {
               Email Baru :
             </Label>
             <Input
-              value={data.email}
+              {...register("email")}
               placeholder="Masukan email baru"
               className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full"
             />
+            <p className="w-full text-[12px] text-red-500">
+              {errors.email?.message}
+            </p>
           </div>
           <div className="w-full flex flex-col gap-3">
             <Label className="text-red-500 font-semibold text-sm md:text-[15px]">
               Password :
             </Label>
             <Input
+              {...register("password")}
               type="password"
               placeholder="Masukan password anda"
               className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full"
             />
+            <p className="w-full text-[12px] text-red-500">
+              {errors.password?.message}
+            </p>
           </div>
         </div>
-        <Button type="submit" disabled className="w-full bg-red-500 hover:bg-red-400 transition duration-700">
+        <Button
+          type="submit"
+          className="w-full bg-red-500 hover:bg-red-400 transition duration-700"
+        >
           Perbarui
         </Button>
       </form>

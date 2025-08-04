@@ -15,3 +15,10 @@ export const registerSchema = z.object({
 })
 
 export type registerType = z.infer<typeof registerSchema>
+
+export const updateEmailSchema = z.object({
+    email: z.string().email("Email tidak valid").min(3, "Minimal 3 karakter"),
+    password: z.string().min(4, "Minimal 4 karakter")
+})
+
+export type updateEmailType = z.infer<typeof updateEmailSchema>
