@@ -12,6 +12,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
+import { authService } from "@/features/auth/services/auth.service";
+import { toast } from "react-toastify";
 
 interface updateEmailSectionProps {
   data: User;
@@ -21,12 +23,30 @@ export default function UpdateEmailSection({ data }: updateEmailSectionProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading },
+    formState: { errors, isLoading, isSubmitSuccessful },
   } = useForm<updateEmailType>({
     resolver: zodResolver(updateEmailSchema),
   });
 
-  const onSubmit = (data: updateEmailType) => {};
+  const onSubmit = async (data: updateEmailType) => {
+    await authService.updateUserEmail(data);
+    try {
+      toast("Berhasil mengganti email", {
+        autoClose: 3000,
+        draggable: true,
+        position: "top-right",
+        closeButton: true,
+      });
+    } catch (error: any) {
+      toast(error?.message || "Berhasil mengganti email", {
+        autoClose: 3000,
+        draggable: true,
+        position: "top-right",
+        closeButton: true,
+      });
+    }
+    const { message } = await authService.updateUserEmail(data);
+  };
 
   return (
     <section className="w-full flex flex-col md:grid md:grid-cols-2 items-center justify-start h-full gap-5">

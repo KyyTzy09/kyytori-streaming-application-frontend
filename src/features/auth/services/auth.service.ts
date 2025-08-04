@@ -23,10 +23,10 @@ export const authService = {
 
     async updateUserEmail(data: { email: string, password: string }) {
         const token = await getCookies()
-        return await apiClient<User>({ url: `/auth/email/patch`, method: "patch", data, headers: { Authorization: `Bearer ${token}` } })
+        return await apiClient<{ message: string, data: User }>({ url: `/auth/email/patch`, method: "patch", data, headers: { Authorization: `Bearer ${token}` } })
     },
 
-    async clearSession(){
+    async clearSession() {
         await deleteCookies()
     }
 }
