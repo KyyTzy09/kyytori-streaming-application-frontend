@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
-import { registerService } from "../services/auth.service";
+import { authService } from "../services/auth.service";
 
 export default function SignUpForm() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function SignUpForm() {
     registerSchema,
     { email: "", password: "", firstName: "", lastName: "" },
     async (objectData) => {
-      const data = await registerService(objectData);
+      const data = await authService.register(objectData);
       toast(data.message, {
         type: "success",
         isLoading: Loading,

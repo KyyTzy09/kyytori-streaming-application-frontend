@@ -6,13 +6,12 @@ import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
 import { setCookies } from "@/lib/cookies";
-import { getSession } from "../hooks/getSession";
+import { authService } from "../services/auth.service";
 import { Loader } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
-import { loginService } from "../services/auth.service";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -20,9 +19,9 @@ export default function SignInForm() {
     loginSchema,
     { email: "", password: "" },
     async (objectData) => {
-      const data = await loginService(objectData);
+      const data = await authService.login(objectData);
       await setCookies(data.token);
-      const session = await getSession();
+      const { data:session } = await authService.getSession();
       toast(`Selamat Datang ${session?.profile.userName} !!`, {
         type: "success",
         position: "top-center",

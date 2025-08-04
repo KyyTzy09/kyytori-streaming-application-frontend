@@ -11,6 +11,7 @@ import { User } from "@/common/types/user";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader } from "lucide-react";
 
 interface updateEmailSectionProps {
   data: User;
@@ -20,15 +21,13 @@ export default function UpdateEmailSection({ data }: updateEmailSectionProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isLoading },
   } = useForm<updateEmailType>({
     resolver: zodResolver(updateEmailSchema),
   });
 
-  const onSubmit = (data: updateEmailType) => {
-    
-  };
-  
+  const onSubmit = (data: updateEmailType) => {};
+
   return (
     <section className="w-full flex flex-col md:grid md:grid-cols-2 items-center justify-start h-full gap-5">
       <form
@@ -83,10 +82,11 @@ export default function UpdateEmailSection({ data }: updateEmailSectionProps) {
           </div>
         </div>
         <Button
+          disabled={isLoading}
           type="submit"
-          className="w-full bg-red-500 hover:bg-red-400 transition duration-700"
+          className="flex items-center justify-center w-full bg-red-500 hover:bg-red-400 transition duration-700"
         >
-          Perbarui
+          {isLoading ? <Loader className="w-5 h-5 animate-spin" /> : "Perbarui"}
         </Button>
       </form>
       <div className="flex flex-col w-full h-full bg-gray-50 p-5 px-10 rounded-md"></div>

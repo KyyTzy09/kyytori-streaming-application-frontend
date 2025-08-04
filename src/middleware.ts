@@ -2,12 +2,12 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { Roles } from "./common/enums/role";
-import { getSession } from "./features/auth/hooks/getSession";
+import { authService } from "./features/auth/services/auth.service";
 import { User } from "./common/types/user";
 
 export default async function Middleware(req: NextRequest) {
     const pathName = req.nextUrl.pathname
-    const session = await getSession() as User
+    const session = (await authService.getSession()).data as User
 
     // Cek apakah sudah login atau belum
     if (pathName === "/signin" && session || pathName === "/signup" && session) {

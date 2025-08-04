@@ -3,7 +3,7 @@
 import { Button } from "@/common/shadcn/button";
 import { Separator } from "@/common/shadcn/separator";
 import { User } from "@/common/types/user";
-import { useSignOut } from "@/features/auth/hooks/useSignOut";
+import { useSignOut } from "@/features/auth/hooks/auth-hook";
 import { Bookmark, LucideLogOut, UserIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";

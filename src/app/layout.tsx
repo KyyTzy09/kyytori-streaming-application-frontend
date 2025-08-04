@@ -3,9 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/common/ui/navigations/navbar";
 import { ToastContainer } from "react-toastify";
-import { getSession } from "@/features/auth/hooks/getSession";
 import QueryProvider from "@/common/providers/query-provider";
 import { User } from "@/common/types/user";
+import { authService } from "@/features/auth/services/auth.service";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +27,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data = await getSession();
+  const { data } = await authService.getSession();
   return (
     <html lang="en">
       <body

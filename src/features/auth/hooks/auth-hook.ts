@@ -1,12 +1,9 @@
-'use client'
-
-import { outSessionService } from "../services/auth.service"
 import { toast } from "react-toastify"
-
+import { authService } from "../services/auth.service"
 
 export const useSignOut = async () => {
+    await authService.clearSession()
     try {
-        await outSessionService()
         toast("Logout success", {
             type: "success",
             autoClose: 2000,
