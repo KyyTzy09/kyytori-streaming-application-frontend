@@ -40,7 +40,7 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
       onSubmit={handleSubmit}
       className="w-full h-full flex items-start justify-start gap-3 md:gap-5"
     >
-      <section className="w-10 h-auto">
+      <section className="w-10 h-9 md:h-10">
         <Image
           src={user?.data?.profile?.avatar || defaultImage}
           alt="profile"

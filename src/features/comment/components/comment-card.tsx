@@ -76,7 +76,7 @@ export default function CommentCard({
                   transition={{ duration: 0.2, ease: "easeInOut" }}
                   className="flex w-full h-full bg-white p-2 md:pr-3 rounded-sm gap-2 md:gap-5"
                 >
-                  <div className="flex items-start justify-center w-auto h-10">
+                  <div className="flex items-start justify-center w-auto md:w-10 h-10">
                     <Image
                       src={user.avatar || defaultImage}
                       alt="profile"
