@@ -74,7 +74,7 @@ export default function UpdatePasswordForm({ data }: updatePasswordFormProps) {
           </div>
           <div className="w-full flex flex-col gap-1">
             <Label className="text-red-500 font-semibold text-sm md:text-[15px]">
-              Password :
+              Password Baru :
             </Label>
             <Input
               disabled={!onEdit}
@@ -94,7 +94,7 @@ export default function UpdatePasswordForm({ data }: updatePasswordFormProps) {
           className="flex items-center justify-center w-full bg-red-500 hover:bg-red-400 transition duration-700"
         >
           {/* {onUpdate ? <Loader className="w-5 h-5 animate-spin" /> : "Perbarui"} */}
-          Perbarui
+          Perbarui Password
         </Button>
       </form>
     </form>

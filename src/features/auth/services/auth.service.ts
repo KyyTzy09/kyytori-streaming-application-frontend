@@ -1,5 +1,5 @@
 import { apiClient } from "@/common/helpers/axios";
-import { loginType, registerType } from "@/common/schemas/auth-schema";
+import { loginType, registerType, updatePasswordType } from "@/common/schemas/auth-schema";
 import { User } from "@/common/types/user";
 import { deleteCookies, getCookies } from "@/lib/cookies";
 
@@ -24,6 +24,11 @@ export const authService = {
     async updateUserEmail(data: { email: string, password: string }) {
         const token = await getCookies()
         return await apiClient<{ message: string, data: User }>({ url: `/auth/email/patch`, method: "patch", data, headers: { Authorization: `Bearer ${token}` } })
+    },
+    
+    async updatePassword(data: updatePasswordType) {
+        const token = await getCookies()
+        return await apiClient<{ message: string }>({ url: `/auth/password/patch`, method: "patch", data, headers: { Authorization: `Bearer ${token}` } })
     },
 
     async clearSession() {
