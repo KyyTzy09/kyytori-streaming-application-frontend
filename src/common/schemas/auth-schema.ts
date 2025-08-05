@@ -22,3 +22,10 @@ export const updateEmailSchema = z.object({
 })
 
 export type updateEmailType = z.infer<typeof updateEmailSchema>
+
+export const updatePasswordSchema = z.object({
+    lastPassword: z.string().min(4, "Minimal 4 karakter"),
+    newPassword: z.string().min(4, "Minimal 4 karakter")
+})
+
+export type updatePasswordType = z.infer<typeof updatePasswordSchema>

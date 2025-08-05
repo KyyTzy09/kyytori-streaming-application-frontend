@@ -60,7 +60,7 @@ export default function UpdateEmailForm({ data }: updateEmailFormProps) {
           <Input
             value={data.email}
             disabled
-            className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full"
+            className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full text-[12px] md:text-sm"
           />
         </div>
         <div className="w-full flex flex-col gap-1">
@@ -71,7 +71,7 @@ export default function UpdateEmailForm({ data }: updateEmailFormProps) {
             disabled={!onEdit}
             {...register("email")}
             placeholder="Masukan email baru"
-            className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full"
+            className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full text-[12px] md:text-sm"
           />
           <p className="w-full text-[12px] text-red-500">
             {errors.email?.message}
@@ -86,7 +86,7 @@ export default function UpdateEmailForm({ data }: updateEmailFormProps) {
             {...register("password")}
             type="password"
             placeholder="Masukan password anda"
-            className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full"
+            className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full text-[12px] md:text-sm"
           />
           <p className="w-full text-[12px] text-red-500">
             {errors.password?.message}

@@ -10,6 +10,7 @@ import { AnimatePresence } from "motion/react";
 import Image from "next/image";
 import React from "react";
 import UpdateEmailForm from "../../../auth/components/email-update-form";
+import UpdatePasswordForm from "@/features/auth/components/password-update-form";
 
 interface ProfileSectionProps {
   data: User;
@@ -46,7 +47,7 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
           onClick={() => setIsOpen(true)}
           className="w-5 h-5 md:w-6 md:h-6 hover:text-red-500 cursor-pointer absolute top-2 right-2 transition duration-700"
         />
-        <div className="w-ful h-full flex flex-col md:flex-row items-start gap-5 md:gap-10 mb-5">
+        <div className="w-ful h-full flex flex-col md:flex-row items-center md:items-start gap-5 md:gap-10 mb-5">
           <div className="group w-52 h-52 md:w-40 md:h-40 rounded-full relative">
             <Image
               src={data.profile.avatar}
@@ -94,8 +95,9 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
           </div>
         </div>
       </section>
-      <section className="w-full flex flex-col md:grid md:grid-cols-2 items-center justify-start h-full gap-5">
+      <section className="w-full flex flex-col md:grid md:grid-cols-2 items-center justify-start h-full gap-3">
         <UpdateEmailForm data={data} />
+        <UpdatePasswordForm data={data} />
       </section>
     </div>
   );
