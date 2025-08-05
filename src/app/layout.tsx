@@ -27,7 +27,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { data } = await authService.getSession();
+  const session = (await authService.getSession())?.data;
   return (
     <html lang="en">
       <body
@@ -35,7 +35,7 @@ export default async function RootLayout({
       >
         <QueryProvider>
           <ToastContainer />
-          <Navbar data={data as User} />
+          <Navbar data={(session! as User)} />
           <section className="w-full min-h-screen">{children}</section>
         </QueryProvider>
       </body>

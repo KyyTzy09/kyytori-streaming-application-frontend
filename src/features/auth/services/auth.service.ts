@@ -14,6 +14,9 @@ export const authService = {
 
     async getSession() {
         const token = await getCookies()
+        if (!token) {
+            return
+        }
         return await apiClient<{ data: User }>({
             url: "/user/profile", headers: {
                 Authorization: `Bearer ${token}`
@@ -23,11 +26,17 @@ export const authService = {
 
     async updateUserEmail(data: { email: string, password: string }) {
         const token = await getCookies()
+        if (!token) {
+            return
+        }
         return await apiClient<{ message: string, data: User }>({ url: `/auth/email/patch`, method: "patch", data, headers: { Authorization: `Bearer ${token}` } })
     },
-    
+
     async updatePassword(data: updatePasswordType) {
         const token = await getCookies()
+        if (!token) {
+            return
+        }
         return await apiClient<{ message: string }>({ url: `/auth/password/patch`, method: "patch", data, headers: { Authorization: `Bearer ${token}` } })
     },
 
