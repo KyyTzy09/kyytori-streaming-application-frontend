@@ -29,7 +29,7 @@ export default function PreviewImageModal({
       exit={{ opacity: 0 }}
       className={`${
         isOpen ? "flex" : "hidden"
-      } absolute w-screen h-screen items-center justify-center bg-[#232323] z-10 top-0 bottom-0 left-0 right-0`}
+      } absolute w-screen h-full min-h-screen items-center justify-center bg-[#232323] z-10 top-0 bottom-0 left-0 right-0`}
     >
       <TransformWrapper
         onZoom={(era) => {
@@ -62,7 +62,7 @@ export default function PreviewImageModal({
             className={`select-none cursor-grab object-contain max-h-screen max-w-screen`}
           />
         </TransformComponent>
-        <div className="absolute flex items-center justify-center gap-2 top-1 right-1">
+        <div className="fixed flex items-center justify-center gap-2 top-1 right-1">
           <Button
             onClick={() => setIsPreviewAction(false)}
             className="group w-16 h-16 bg-transparent p-0 flex items-center justify-center hover:bg-transparent"
