@@ -1,10 +1,11 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+    validateStatus: (status) => { return status >= 200 && status <= 401 }
 })
 
-export const apiClient = async <T> (config: AxiosRequestConfig): Promise<T> => {
+export const apiClient = async <T>(config: AxiosRequestConfig): Promise<T> => {
     const { data } = await axiosInstance(config)
     return data
 }

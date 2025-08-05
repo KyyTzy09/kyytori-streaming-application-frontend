@@ -10,7 +10,7 @@ import { AnimatePresence } from "motion/react";
 import Image from "next/image";
 import React from "react";
 import { FaComment } from "react-icons/fa";
-import UpdateEmailSection from "./email-update-section";
+import UpdateEmailSection from "../../../auth/components/email-update-section";
 
 interface ProfileSectionProps {
   data: User;

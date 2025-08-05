@@ -7,7 +7,7 @@ import { User } from "./common/types/user";
 
 export default async function Middleware(req: NextRequest) {
     const pathName = req.nextUrl.pathname
-    const session = (await authService.getSession()).data as User
+    const session = (await authService.getSession())?.data as User
 
     // Cek apakah sudah login atau belum
     if (pathName === "/signin" && session || pathName === "/signup" && session) {

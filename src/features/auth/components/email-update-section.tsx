@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
 import { authService } from "@/features/auth/services/auth.service";
 import { toast } from "react-toastify";
+import { useUpdateEmail } from "../hooks/auth-hook";
 
 interface updateEmailSectionProps {
   data: User;
@@ -23,29 +24,12 @@ export default function UpdateEmailSection({ data }: updateEmailSectionProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading, isSubmitSuccessful },
-  } = useForm<updateEmailType>({
-    resolver: zodResolver(updateEmailSchema),
-  });
+    formState: { errors },
+  } = useForm<updateEmailType>({ resolver: zodResolver(updateEmailSchema) });
+  const { mutate: updateEmail, isPending: onUpdate } = useUpdateEmail();
 
-  const onSubmit = async (data: updateEmailType) => {
-    await authService.updateUserEmail(data);
-    try {
-      toast("Berhasil mengganti email", {
-        autoClose: 3000,
-        draggable: true,
-        position: "top-right",
-        closeButton: true,
-      });
-    } catch (error: any) {
-      toast(error?.message || "Berhasil mengganti email", {
-        autoClose: 3000,
-        draggable: true,
-        position: "top-right",
-        closeButton: true,
-      });
-    }
-    const { message } = await authService.updateUserEmail(data);
+  const onSubmit = (data: updateEmailType) => {
+    updateEmail(data);
   };
 
   return (
@@ -102,11 +86,11 @@ export default function UpdateEmailSection({ data }: updateEmailSectionProps) {
           </div>
         </div>
         <Button
-          disabled={isLoading}
+          disabled={onUpdate}
           type="submit"
           className="flex items-center justify-center w-full bg-red-500 hover:bg-red-400 transition duration-700"
         >
-          {isLoading ? <Loader className="w-5 h-5 animate-spin" /> : "Perbarui"}
+          {onUpdate ? <Loader className="w-5 h-5 animate-spin" /> : "Perbarui"}
         </Button>
       </form>
       <div className="flex flex-col w-full h-full bg-gray-50 p-5 px-10 rounded-md"></div>

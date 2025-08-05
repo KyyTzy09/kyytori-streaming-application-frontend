@@ -3,7 +3,7 @@ import ProfileHeader from "./profile.header";
 import { getSession } from "@/features/auth/hooks/getSession";
 import React from "react";
 import ProfileSection from "./sections/profile-section";
-import UpdateEmailSection from "./sections/email-update-section";
+import UpdateEmailSection from "../../auth/components/email-update-section";
 
 export default async function ProfileView() {
   const data = (await getSession()) as User;
