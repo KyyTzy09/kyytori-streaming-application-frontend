@@ -27,7 +27,7 @@ export const authService = {
     },
 
     async clearSession() {
-        await deleteCookies()
+        return await deleteCookies()
     }
 }
 

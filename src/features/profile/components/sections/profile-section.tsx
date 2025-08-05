@@ -5,12 +5,11 @@ import { User } from "@/common/types/user";
 import AvatarDropDown from "@/features/profile/components/avatar-dropdown";
 import ProfileForm from "@/features/profile/components/profile-form";
 import PreviewImageModal from "../../../../common/ui/modals/preview-modal";
-import { Bookmark, Pencil, Settings } from "lucide-react";
+import { Pencil, Settings } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import Image from "next/image";
 import React from "react";
-import { FaComment } from "react-icons/fa";
-import UpdateEmailSection from "../../../auth/components/email-update-section";
+import UpdateEmailForm from "../../../auth/components/email-update-form";
 
 interface ProfileSectionProps {
   data: User;
@@ -95,7 +94,9 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
           </div>
         </div>
       </section>
-      <UpdateEmailSection data={data} />
+      <section className="w-full flex flex-col md:grid md:grid-cols-2 items-center justify-start h-full gap-5">
+        <UpdateEmailForm data={data} />
+      </section>
     </div>
   );
 }
