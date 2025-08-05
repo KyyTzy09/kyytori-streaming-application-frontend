@@ -1,3 +1,5 @@
+'use client'
+
 import { toast } from "react-toastify"
 import { authService } from "../services/auth.service"
 import { useMutation } from "@tanstack/react-query"

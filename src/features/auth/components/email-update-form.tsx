@@ -11,9 +11,7 @@ import { User } from "@/common/types/user";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Edit, Edit2, Loader } from "lucide-react";
-import { authService } from "@/features/auth/services/auth.service";
-import { toast } from "react-toastify";
+import { Edit, Loader } from "lucide-react";
 import { useUpdateEmail } from "../hooks/auth-hook";
 
 interface updateEmailFormProps {
