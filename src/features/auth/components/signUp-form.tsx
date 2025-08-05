@@ -14,6 +14,8 @@ import { authService } from "../services/auth.service";
 
 export default function SignUpForm() {
   const router = useRouter();
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+
   const { fieldError, handleChange, Loading, handleSubmit } = useFormHandle(
     registerSchema,
     { email: "", password: "", firstName: "", lastName: "" },
@@ -90,6 +92,7 @@ export default function SignUpForm() {
         </Label>
         <Input
           name="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Masukan Password"
           onChange={handleChange}
           className="max-w-[350px] h-12"
@@ -100,6 +103,16 @@ export default function SignUpForm() {
             {fieldError.password}
           </p>
         )}
+        <div className="w-full gap-2 items-center flex justify-start">
+          <Input
+            onChange={() => setShowPassword((prev) => !prev)}
+            type="checkbox"
+            className="w-3 h-3"
+          />
+          <Label className="text-[13px]" htmlFor="check">
+            Lihat Passsword
+          </Label>
+        </div>
       </div>
       <Button
         className="w-full bg-red-600 hover:bg-red-400"
