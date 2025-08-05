@@ -1,7 +1,7 @@
 "use client";
 
 import useFormHandle from "@/common/composables/auth-form";
-import { registerSchema } from "@/common/schemas/auth-schema";
+import { registerSchema, registerType } from "@/common/schemas/auth-schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
@@ -11,28 +11,35 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 import { authService } from "../services/auth.service";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignUp } from "../hooks/auth-hook";
 
 export default function SignUpForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+    },
+    resolver: zodResolver(registerSchema),
+  });
+  const { mutate: onRegisterPost, isPending: onPost } = useSignUp();
 
-  const { fieldError, handleChange, Loading, handleSubmit } = useFormHandle(
-    registerSchema,
-    { email: "", password: "", firstName: "", lastName: "" },
-    async (objectData) => {
-      const data = await authService.register(objectData);
-      toast(data.message, {
-        type: "success",
-        isLoading: Loading,
-        autoClose: 2000,
-        position: "top-center",
-      });
-      router.push("/signin");
-    }
-  );
+  const onSubmit = (data: registerType) => {
+    onRegisterPost(data);
+  };
+
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-5 w-[400px] bg-white rounded-md p-8 shadow-lg "
     >
       <div className="w-full flex items-center gap-1">
@@ -46,61 +53,61 @@ export default function SignUpForm() {
           Nama Depan
         </Label>
         <Input
+          {...register("firstName")}
           name="firstName"
           placeholder="Masukan Nama Depan"
-          onChange={handleChange}
           className="max-w-[350px] h-12"
           required
         />
-        {fieldError.firstName && (
+        {errors.firstName && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
-            {fieldError.firstName}
+            {errors.firstName.message}
           </p>
         )}
         <Label htmlFor="lastName" className="self-start">
           Nama Belakang
         </Label>
         <Input
+          {...register("lastName")}
           name="lastName"
           placeholder="Masukan Nama Belakang"
-          onChange={handleChange}
           className="max-w-[350px] h-12"
           required
         />
-        {fieldError.lastName && (
+        {errors.lastName && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
-            {fieldError.lastName}
+            {errors.lastName.message}
           </p>
         )}
         <Label htmlFor="email" className="self-start">
           Email
         </Label>
         <Input
+          {...register("email")}
           name="email"
           placeholder="Masukan Email"
-          onChange={handleChange}
           className="max-w-[350px] h-12"
           required
         />
-        {fieldError.email && (
+        {errors.email && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
-            {fieldError.email}
+            {errors.email.message}
           </p>
         )}
         <Label htmlFor="password" className="self-start">
           Password
         </Label>
         <Input
+          {...register("password")}
           name="password"
           type={showPassword ? "text" : "password"}
           placeholder="Masukan Password"
-          onChange={handleChange}
           className="max-w-[350px] h-12"
           required
         />
-        {fieldError.password && (
+        {errors.password && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
-            {fieldError.password}
+            {errors.password.message}
           </p>
         )}
         <div className="w-full gap-2 items-center flex justify-start">
@@ -116,14 +123,10 @@ export default function SignUpForm() {
       </div>
       <Button
         className="w-full bg-red-600 hover:bg-red-400"
-        disabled={Loading}
+        disabled={onPost}
         type="submit"
       >
-        {Loading ? (
-          <Loader className="animate-spin" size={20} />
-        ) : (
-          <p>SignUp</p>
-        )}
+        {onPost ? <Loader className="animate-spin" size={20} /> : <p>SignUp</p>}
       </Button>
       <div className="text-[13px] text-gray-600 font-semibold flex w-full justify-center gap-1 items-center">
         <p>sudah punya akun?</p>

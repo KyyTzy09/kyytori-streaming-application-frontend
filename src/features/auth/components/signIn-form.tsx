@@ -1,40 +1,38 @@
 "use client";
 
-import useFormHandle from "@/common/composables/auth-form";
-import { loginSchema } from "@/common/schemas/auth-schema";
+import { loginSchema, loginType } from "@/common/schemas/auth-schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
-import { setCookies } from "@/lib/cookies";
-import { authService } from "../services/auth.service";
 import { Loader } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignIn } from "../hooks/auth-hook";
 
 export default function SignInForm() {
-  const router = useRouter();
-  const [showPassword, setShowPassword] = React.useState<boolean>(false)
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: zodResolver(loginSchema),
+  });
 
-  const { fieldError, handleChange, Loading, handleSubmit } = useFormHandle(
-    loginSchema,
-    { email: "", password: "" },
-    async (objectData) => {
-      const data = await authService.login(objectData);
-      await setCookies(data.token);
-      const { data:session } = await authService.getSession();
-      toast(`Selamat Datang ${session?.profile.userName} !!`, {
-        type: "success",
-        position: "top-center",
-        autoClose: 2000,
-      });
-      router.push("/home");
-    }
-  );
+  const { mutate: postSignIn, isPending: onPost } = useSignIn();
+  const onSubmit = (data: loginType) => {
+    postSignIn(data);
+  };
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-5 w-[400px] bg-white rounded-md p-8 shadow-lg "
     >
       <div className="w-full flex items-center gap-1">
@@ -48,45 +46,47 @@ export default function SignInForm() {
           Email
         </Label>
         <Input
-          name="email"
+          {...register("email")}
           placeholder="Masukan Email"
-          onChange={handleChange}
           className="max-w-[350px] h-12"
         />
-        {fieldError.email && (
+        {errors.email && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
-            {fieldError.email}
+            {errors.email.message}
           </p>
         )}
         <Label htmlFor="password" className="self-start">
           Password
         </Label>
         <Input
-          name="password"
+          {...register("password")}
           type={showPassword ? "text" : "password"}
           placeholder="Masukan Password"
-          onChange={handleChange}
           className="max-w-[350px] h-12"
           required
         />
-        {fieldError.password && (
+        {errors.password && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
-            {fieldError.password}
+            {errors.password.message}
           </p>
         )}
-          <div className="w-full gap-2 items-center flex justify-start">
-            <Input onChange={(checked) => setShowPassword((prev) => !prev)} type="checkbox" className="w-3 h-3"/>
-            <Label className="text-[13px]" htmlFor="check">
-              Lihat Passsword
-            </Label>
-          </div>
+        <div className="w-full gap-2 items-center flex justify-start">
+          <Input
+            onChange={() => setShowPassword((prev) => !prev)}
+            type="checkbox"
+            className="w-3 h-3"
+          />
+          <Label className="text-[13px]" htmlFor="check">
+            Lihat Passsword
+          </Label>
+        </div>
       </div>
       <Button
         className="w-full bg-red-600 hover:bg-red-400"
-        disabled={Loading}
+        disabled={onPost}
         type="submit"
       >
-        {Loading ? <Loader className="animate-spin" size={20} /> : <p>Masuk</p>}
+        {onPost ? <Loader className="animate-spin" size={20} /> : <p>Masuk</p>}
       </Button>
       <div className="text-[13px] text-gray-600 font-semibold flex w-full justify-center gap-1 items-center">
         <p>Belum punya akun?</p>
