@@ -1,6 +1,9 @@
 "use client";
 
-import useProfileForm from "@/common/composables/profile-form";
+import {
+  updateProfileSchema,
+  updateProfileType,
+} from "@/common/schemas/profile-schema";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -12,10 +15,12 @@ import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
 import { Textarea } from "@/common/shadcn/textarea";
 import { User } from "@/common/types/user";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-
+import { useForm } from "react-hook-form";
+import { useUpdateProfile } from "../hooks/profile-hook";
 interface ProfileFormProps {
   data: User;
   isOpen: boolean;
@@ -27,31 +32,34 @@ export default function ProfileForm({
   setIsOpenAction,
   data,
 }: ProfileFormProps) {
-  const [name, setName] = React.useState<string>(data.profile.userName || "");
-  const [info, setInfo] = React.useState<string>(data.profile.info || "");
+  const {
+    register,
+    watch,
+    resetField,
+    handleSubmit,
+    formState: { errors, isSubmitted },
+  } = useForm({
+    defaultValues: {
+      name: data.profile.userName,
+      info: data.profile.info,
+    },
+    resolver: zodResolver(updateProfileSchema),
+  });
 
-  const { isLoading, fieldError, UpdateProfile, updateProfileChange } =
-    useProfileForm();
+  const { mutate: onProfilePatch, isPending: onPatch } = useUpdateProfile();
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateProfileChange({ value: e.target.value, setValue: setName });
-  };
-
-  const handleInfoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    updateProfileChange({ value: e.target.value, setValue: setInfo });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await UpdateProfile({ name, info, setIsOpen: setIsOpenAction });
-  };
-
-  React.useEffect(() => {
-    if (isOpen) {
-      setName(data.profile.userName || "");
-      setInfo(data.profile.info || "");
+  const onSubmit = (data: updateProfileType) => {
+    onProfilePatch(data);
+    if (isSubmitted) {
+      resetField("name");
+      resetField("info");
+      setIsOpenAction(false);
     }
-  }, [isOpen, data.profile.userName, data.profile.info]);
+  };
+
+  // Data
+  const name = watch("name");
+  const info = watch("info");
 
   return (
     <AlertDialog open={isOpen}>
@@ -60,7 +68,7 @@ export default function ProfileForm({
           Update Profile
         </AlertDialogTitle>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="w-full h-full flex flex-col items-center justify-between gap-5"
         >
           <div className="w-48 h-48 md:w-40 md:h-40">
@@ -83,12 +91,11 @@ export default function ProfileForm({
               <Input
                 id="name"
                 className="focus-visible:border-red-600 focus-visible:ring-red-600/70"
-                value={name}
-                onChange={handleNameChange}
+                {...register("name")}
               />
-              {fieldError.name && (
+              {errors.name && (
                 <p className="text-red-600 text-[13px] font-semibold self-start">
-                  {fieldError.name}
+                  {errors.name.message}
                 </p>
               )}
             </div>
@@ -100,14 +107,14 @@ export default function ProfileForm({
                 Info ({info.length} / 300)
               </Label>
               <Textarea
+                {...register("info")}
+                maxLength={300}
                 id="info"
-                className="focus-visible:border-red-500 focus-visible:ring-red-500/70 h-32"
-                value={info}
-                onChange={handleInfoChange}
+                className="focus-visible:border-red-500 focus-visible:ring-red-500/70 min-h-32 h-full break-all"
               />
-              {fieldError.info && (
+              {errors.info && (
                 <p className="text-red-600 text-[13px] font-semibold self-start">
-                  {fieldError.info}
+                  {errors.info.message}
                 </p>
               )}
             </div>
@@ -115,20 +122,22 @@ export default function ProfileForm({
           <div className="w-full flex items-center justify-end gap-2">
             <AlertDialogCancel
               type="button"
-              onClick={() => setIsOpenAction(false)}
+              onClick={() => {
+                setIsOpenAction(false), resetField("name"), resetField("info");
+              }}
               className="bg-red-500 hover:bg-red-300 hover:text-white transition duration-700 p-4 text-white"
             >
               Batal
             </AlertDialogCancel>
             <Button
               disabled={
-                isLoading ||
+                onPatch ||
                 (name === data.profile.userName && info === data.profile.info)
               }
               type="submit"
               className="bg-red-600 hover:bg-red-300 transition duration-700 p-4"
             >
-              {isLoading ? (
+              {onPatch ? (
                 <Loader className="text-white w-5 h-5 animate-spin" />
               ) : (
                 "Simpan"

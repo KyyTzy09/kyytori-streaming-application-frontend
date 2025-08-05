@@ -4,11 +4,11 @@ import { authService } from "@/features/auth/services/auth.service";
 import React from "react";
 
 export default async function DashboardPage() {
-  const { data } = await authService.getSession();
+  const user = (await authService.getSession())?.data;
   return (
     <div className="w-full px-10 py-5 min-h-screen">
-      <ProfileHeader title={`Selamat Datang ${data.profile.userName}👋`} />
-      <ProfileSection data={data} />
+      <ProfileHeader title={`Selamat Datang ${user?.profile.userName}👋`} />
+      <ProfileSection data={user!} />
     </div>
   );
 }
