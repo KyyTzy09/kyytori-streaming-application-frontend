@@ -19,28 +19,63 @@ interface updatePasswordFormProps {
 }
 
 export default function UpdatePasswordForm({ data }: updatePasswordFormProps) {
+  // Submit
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors, isSubmitted },
   } = useForm({
     defaultValues: { newPassword: "", lastPassword: "" },
     resolver: zodResolver(updatePasswordSchema),
   });
   const { mutate: updatePassword, isPending: onUpdate } = useUpdatePassword();
 
+  // State
+  const [showPassword, setShowPassword] = React.useState<number[]>([]);
   const [onEdit, setOnEdit] = React.useState<boolean>(false);
+
+  const findPasswordIndex = (index: number) => {
+    return showPassword?.includes(index);
+  };
+
+  // Handle Event
+  const handleShowPassword = (index: number) => {
+    setShowPassword((prev) => {
+      const safePrev = Array.isArray(prev) ? prev : [];
+
+      if (safePrev?.includes(index)) {
+        return prev?.filter((i) => i !== index);
+      } else {
+        return [...safePrev, index];
+      }
+    });
+  };
+
   const onSubmit = (data: updatePasswordType) => {
     updatePassword(data);
-    if (isSubmitSuccessful) {
+    if (isSubmitted) {
+      setShowPassword([])
       setOnEdit(false);
     }
   };
 
+  const inputItems = [
+    {
+      label: "Password lama",
+      key: "lastPassword",
+      message: errors.lastPassword?.message,
+    },
+    {
+      label: "Password baru",
+      key: "newPassword",
+      message: errors.newPassword?.message,
+    },
+  ];
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col w-full h-full bg-gray-50 p-10 pt-5 gap-5 items-center justify-start rounded-md relative"
+      className="flex flex-col w-full h-full bg-gray-50 p-10 pt-5 gap-5 items-center justify-between rounded-md relative"
     >
       <Edit
         onClick={() => setOnEdit((prev) => !prev)}
@@ -67,36 +102,43 @@ export default function UpdatePasswordForm({ data }: updatePasswordFormProps) {
             className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full text-[12px] md:text-sm"
           />
         </div>
-        <div className="w-full flex flex-col gap-1">
-          <Label className="text-red-500 font-semibold text-sm md:text-[15px]">
-            Password Lama :
-          </Label>
-          <Input
-            disabled={!onEdit}
-            {...register("lastPassword")}
-            type="password"
-            placeholder="Masukan password lama anda"
-            className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full text-[12px] md:text-sm"
-          />
-          <p className="w-full text-[12px] text-red-500">
-            {errors.lastPassword?.message}
-          </p>
-        </div>
-        <div className="w-full flex flex-col gap-1">
-          <Label className="text-red-500 font-semibold text-sm md:text-[15px]">
-            Password Baru :
-          </Label>
-          <Input
-            disabled={!onEdit}
-            {...register("newPassword")}
-            type="password"
-            placeholder="Masukan password baru anda"
-            className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full text-[12px] md:text-sm"
-          />
-          <p className="w-full text-[12px] text-red-500">
-            {errors.newPassword?.message}
-          </p>
-        </div>
+        {inputItems.map(({ key, label, message }, index) => {
+          return (
+            <div key={key} className="w-full flex flex-col gap-1">
+              <Label className="text-red-500 font-semibold text-sm md:text-[15px]">
+                {label} :
+              </Label>
+              <Input
+                disabled={!onEdit}
+                {...register(
+                  key === "newPassword" ? "newPassword" : "lastPassword"
+                )}
+                type={findPasswordIndex(index) ? "text" : "password"}
+                placeholder={`Masukan ${label} anda`}
+                className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full text-[12px] md:text-sm"
+              />
+              {message && (
+                <p className="w-full text-[12px] text-red-500">{message}</p>
+              )}
+              <div className="w-full gap-2 items-center flex justify-start">
+                <Input
+                  disabled={!onEdit}
+                  onChange={() => handleShowPassword(index)}
+                  type="checkbox"
+                  className="w-3 h-3"
+                />
+                <Label
+                  className={`${
+                    onEdit ? "text-black" : "text-gray-400"
+                  }  text-[13px]`}
+                  htmlFor="check"
+                >
+                  Lihat Passsword
+                </Label>
+              </div>
+            </div>
+          );
+        })}
       </div>
       <Button
         disabled={onUpdate || !onEdit}

@@ -25,6 +25,8 @@ export default function UpdateEmailForm({ data }: updateEmailFormProps) {
     formState: { errors },
   } = useForm<updateEmailType>({ resolver: zodResolver(updateEmailSchema) });
   const { mutate: updateEmail, isPending: onUpdate } = useUpdateEmail();
+
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [onEdit, setOnEdit] = React.useState<boolean>(false);
 
   const onSubmit = (data: updateEmailType) => {
@@ -34,7 +36,7 @@ export default function UpdateEmailForm({ data }: updateEmailFormProps) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col w-full h-full bg-gray-50 p-10 pt-5 gap-5 items-center justify-start rounded-md relative"
+      className="flex flex-col w-full h-full bg-gray-50 p-10 pt-5 gap-5 items-center justify-between rounded-md relative"
     >
       <Edit
         onClick={() => setOnEdit((prev) => !prev)}
@@ -82,13 +84,24 @@ export default function UpdateEmailForm({ data }: updateEmailFormProps) {
           <Input
             disabled={!onEdit}
             {...register("password")}
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Masukan password anda"
             className="border-black focus-visible:ring-0 focus-visible:border-gray-500 w-full text-[12px] md:text-sm"
           />
           <p className="w-full text-[12px] text-red-500">
             {errors.password?.message}
           </p>
+          <div className="w-full gap-2 items-center flex justify-start">
+            <Input
+              disabled={!onEdit}
+              onChange={() => setShowPassword((prev) => !prev)}
+              type="checkbox"
+              className="w-3 h-3"
+            />
+            <Label className={`${onEdit ? "text-black" : "text-gray-400"}  text-[13px]`}htmlFor="check">
+              Lihat Passsword
+            </Label>
+          </div>
         </div>
       </div>
       <Button
