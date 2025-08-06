@@ -13,11 +13,15 @@ interface CommentNestedInputProps {
   repliedTo: string;
 }
 
-export default function CommentNestedInput({ parentId, epsTitle, repliedTo }: CommentNestedInputProps) {
+export default function CommentNestedInput({
+  parentId,
+  epsTitle,
+  repliedTo,
+}: CommentNestedInputProps) {
   const [onFocus, setOnFocus] = React.useState<boolean>(false);
   const [comment, setComment] = React.useState<string>("");
   const { data: user } = usegetProfile();
-  
+
   const { mutate: postComment, isPending: isPosting } = usePostReplyComment({
     parentId,
     message: comment,
@@ -38,7 +42,9 @@ export default function CommentNestedInput({ parentId, epsTitle, repliedTo }: Co
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full h-full flex items-start justify-center gap-5"
+      className={`${
+        user?.data ? "flex" : "hidden"
+      } w-full h-full items-start justify-center gap-5`}
     >
       <section className="w-10 h-10">
         <Image

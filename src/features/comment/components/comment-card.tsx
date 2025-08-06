@@ -68,7 +68,7 @@ export default function CommentCard({
             index
           ) => {
             return (
-              <div key={id} className="flex flex-col w-full h-full gap-2">
+              <div key={index} className="flex flex-col w-full h-full gap-2">
                 <motion.div
                   initial={{ translateX: -100, opacity: 0 }}
                   animate={{ translateX: 0, opacity: 100 }}
@@ -90,19 +90,19 @@ export default function CommentCard({
                       <p className="flex w-full text-[10px] md:text-[11px] items-start justify-start">
                         {parent && (
                           <span className="text-red-500 font-bold">
-                            {parent.user.userName} {">"}
+                            {parent?.user?.userName} {">"}
                           </span>
                         )}
                         <span className="text-red-400 font-semibold mr-2">
-                          @{user.userName}
+                          @{user?.userName}
                         </span>
                         <span className="text-gray-500 font-semibold hidden md:inline">
                           {new Date(createdAt).toLocaleString()}
                         </span>
                       </p>
                       <CommentDropdown
-                        userId={user.userId}
-                        commentId={id}
+                        userId={user?.userId}
+                        commentId={id || ""}
                         epsTitle={episodeTitle}
                       />
                     </div>
