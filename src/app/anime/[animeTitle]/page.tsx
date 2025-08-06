@@ -9,6 +9,7 @@ import { ArrowLeft, BookmarkPlus, Heart } from "lucide-react";
 import { episodeService } from "@/features/episodes/services/episode-service";
 import EpisodeCard from "@/features/episodes/components/episode-card";
 import FavoriteButton from "@/features/favorite/components/favorite-button";
+import { authService } from "@/features/auth/services/auth.service";
 
 interface detailAnimeProps {
   params: {
@@ -26,6 +27,8 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
   const { data: episodes } = await episodeService.episodes({
     animeTitle: decodedTitle,
   });
+
+  const user = (await authService.getSession())?.data;
 
   const detailList = [
     {
@@ -141,7 +144,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                 quality={100}
               />
               <div className="w-6 h-7 absolute bottom-1 right-2">
-                <FavoriteButton animeId={detail.id} />
+                <FavoriteButton user={user!} animeId={detail.id} />
               </div>
             </div>
             {!detail.image && <ImageSkeleton width="full" height={80} />}
