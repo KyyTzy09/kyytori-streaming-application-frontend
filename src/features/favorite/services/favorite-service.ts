@@ -5,6 +5,11 @@ import { getCookies } from "@/lib/cookies"
 
 
 export const favoriteService = {
+    async getUserFavorites() {
+        const token = await getCookies()
+        return await apiClient<{ message: string, data: FavoritesAnime }>({ url: `/favorite/user/get`, headers: { Authorization: `Bearer ${token}` } })
+    },
+
     async getFavoriteAnime(data: queryByAnimeId) {
         const token = await getCookies()
         return await apiClient<{ message: string, data: FavoritesAnime }>({ url: `/favorite/get/${data.animeId}`, headers: { Authorization: `Bearer ${token}` } })
