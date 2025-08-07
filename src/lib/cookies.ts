@@ -21,6 +21,5 @@ export async function getCookies() {
 }
 
 export async function deleteCookies() {
-    const cookie = cookies()
-    return (await cookie).delete("session_token")
+    return (await cookies()).delete("session_token")
 }

@@ -35,7 +35,7 @@ export default async function RootLayout({
       >
         <QueryProvider>
           <ToastContainer />
-          <Navbar data={(session! as User)} />
+          <Navbar data={session!} />
           <section className="w-full min-h-screen">{children}</section>
         </QueryProvider>
       </body>

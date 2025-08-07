@@ -2,7 +2,7 @@
 
 import { toast } from "react-toastify"
 import { authService } from "../services/auth.service"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { loginType, registerType, updateEmailType, updatePasswordType } from "@/common/schemas/auth-schema"
 import { useRouter } from "next/navigation"
 import { setCookies } from "@/lib/cookies"
@@ -134,19 +134,25 @@ export const useUpdatePassword = () => {
     })
 }
 
-export const useSignOut = async () => {
-    await authService.clearSession()
-    try {
-        toast("Logout success", {
-            type: "success",
-            autoClose: 2000,
-            position: "top-center"
-        })
-    } catch (error: any) {
-        toast(error.message, {
-            type: "error",
-            autoClose: 2000,
-            position: "top-center"
-        })
-    }
+export const useSignOut = () => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationKey: ["logout-session"],
+        mutationFn: async () => await authService.clearSession(),
+        onSuccess: () => {
+            toast.success("Logout Berhasil", {
+                draggable: true,
+                autoClose: 2000,
+                position: "top-center"
+            })
+            queryClient.invalidateQueries({ queryKey: ['profile'], type: "all" })
+        },
+        onError: () => {
+            toast.error("Logout Gagal", {
+                draggable: true,
+                autoClose: 2000,
+                position: "top-center"
+            })
+        }
+    })
 }

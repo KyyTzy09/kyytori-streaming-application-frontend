@@ -12,7 +12,6 @@ import AlertModal from "../modals/alert-modal";
 
 export default function DashboardSideBar({ data }: { data: User }) {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
   const pathName = usePathname();
 
@@ -34,16 +33,10 @@ export default function DashboardSideBar({ data }: { data: User }) {
     },
   ];
 
+  const { mutate: deleteUser, isPending: isLoading } = useSignOut();
   const handleLogout = async () => {
-    setIsLoading(true);
-    try {
-      await useSignOut();
-      router.push("/");
-    } catch (error) {
-      return;
-    } finally {
-      setIsLoading(false);
-    }
+    deleteUser();
+    router.push("/");
   };
 
   return (

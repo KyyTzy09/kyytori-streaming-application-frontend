@@ -15,11 +15,11 @@ import React from "react";
 import AvatarSkeleton from "./avatar-skeleton";
 import { User } from "@/common/types/user";
 import { FaComment } from "react-icons/fa";
-import { authService } from "@/features/auth/services/auth.service";
 import { useSignOut } from "@/features/auth/hooks/auth-hook";
 
 export default function ProfileDropdown({ user }: { user: User }) {
 
+  const { mutate : signOut } = useSignOut()
   const router = useRouter();
   const items = [
     {
@@ -73,7 +73,7 @@ export default function ProfileDropdown({ user }: { user: User }) {
           );
         })}
         <DropdownMenuItem
-          onClick={async () => await useSignOut()}
+          onClick={() => signOut()}
           className="w-full cursor-pointer focus:bg-red-500 flex items-center justify-start gap-2 transition duration-700 mt-4 border-white border"
         >
           <LogOut className="w-5 h-5 text-white" />
