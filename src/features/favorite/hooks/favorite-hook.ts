@@ -8,6 +8,14 @@ export interface queryByAnimeId {
     animeId: string
 }
 
+export const useGetUserFavorites = () => {
+    return useQuery({
+        queryKey: ['get-userFavorite'],
+        queryFn: async () => await favoriteService.getUserFavorites(),
+        staleTime: 2 * 60 * 1000
+    })
+}
+
 export const useGetFavorite = (data: queryByAnimeId) => {
     return useQuery({
         queryKey: ['get-favorite', data.animeId],
