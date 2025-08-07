@@ -109,8 +109,7 @@ export default function AnimeUpdatedCard({ data, isLoading }: AnimeCard1Props) {
               </motion.div>
             );
           }
-        )
-        .slice(0, 15)}
+        )}
     </div>
   );
 }
