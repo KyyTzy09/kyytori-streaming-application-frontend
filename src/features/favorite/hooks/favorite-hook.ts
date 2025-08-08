@@ -33,6 +33,7 @@ export const usePostFavorite = (data: queryByAnimeId) => {
                 position: "top-right",
                 autoClose: 3000
             })
+            queryClient.invalidateQueries({ queryKey: ["get-userFavorite"] })
             queryClient.invalidateQueries({ queryKey: ["get-favorite", data.animeId], exact: true })
         },
         onError: () => {
@@ -54,8 +55,8 @@ export const useDeleteFavorite = (data: queryByAnimeId) => {
                 position: "top-right",
                 autoClose: 3000
             })
+            queryClient.invalidateQueries({ queryKey: ["get-userFavorite"] })
             queryClient.setQueryData(['get-favorite', data.animeId], { data: null })
-
             queryClient.invalidateQueries({ queryKey: ["get-favorite", data.animeId] })
         },
         onError: () => {
