@@ -79,7 +79,7 @@ export default function DashboardSideBar({ data }: { data: User }) {
                   onClick={() => router.push(item.path)}
                   key={item.name}
                   className={`w-full justify-start items-center flex px-5 hover:bg-red-800 ${
-                    pathName === item.path || pathName.startsWith(item.path)
+                    pathName === item.path && pathName.startsWith(item.path)
                       ? "bg-red-800 opacity-80"
                       : "bg-transparent"
                   }`}
