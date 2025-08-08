@@ -11,7 +11,7 @@ interface AnimeFavoriteCardProps {
 
 export default function AnimeFavoriteCard({ data }: AnimeFavoriteCardProps) {
   return (
-    <div className="w-full h-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+    <div className="w-full h-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3">
       {data?.length > 0 &&
         data?.map(
           (
@@ -38,7 +38,7 @@ export default function AnimeFavoriteCard({ data }: AnimeFavoriteCardProps) {
                 <div className="absolute top-0 right-0 bg-red-500 text-sm px-2 rounded-bl-sm z-20 text-white font-mono">
                   <p className="">{type}</p>
                 </div>
-                <div className="w-full h-48 sm:h-64 p-1">
+                <div className="w-full h-52 sm:h-64 p-1">
                   <Image
                     src={animeCover || defaultImage}
                     alt={animeTitle}
