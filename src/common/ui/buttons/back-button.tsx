@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/common/shadcn/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowBigLeft, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -13,7 +13,7 @@ export default function BackButton() {
       onClick={() => router.back()}
     >
       Kembali
-      <ArrowLeft />
+      <ArrowBigLeft />
     </Button>
   );
 }
