@@ -28,8 +28,8 @@ export const usePostComment = (data: { epsTitle: string, message: string }) => {
     return useMutation({
         mutationKey: ['post-komentar', data.epsTitle, data.message],
         mutationFn: async () => await CommentService.postCommentByEps(data),
-        onSuccess: ({ message }) => {
-            toast.success(message || "Komentar berhasil dikirim", {
+        onSuccess: (response) => {
+            toast.success(response?.message || "Komentar berhasil dikirim", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -60,7 +60,7 @@ export const usePostReplyComment = (data: { message: string, epsTitle: string, p
         mutationKey: ['post-reply-komentar', data.epsTitle, data.message, data.parentId],
         mutationFn: async () => await CommentService.postReplyCommentByEps(data),
         onSuccess: async (apiData) => {
-            toast.success(apiData.message, {
+            toast.success(apiData?.message, {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -92,8 +92,8 @@ export const useDeleteComment = (data: { epsTitle: string, commentId: string }) 
     return useMutation({
         mutationKey: ['delete-komentar', data.epsTitle, data.commentId],
         mutationFn: async () => await CommentService.deleteCommentByEps(data),
-        onSuccess: async ({ message }) => {
-            toast.success(message || "Berhasil menghapus komentar", {
+        onSuccess: async (response) => {
+            toast.success(response?.message || "Berhasil menghapus komentar", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,

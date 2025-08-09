@@ -13,7 +13,7 @@ export const useSignIn = () => {
         mutationKey: ["signIn-post"],
         mutationFn: async (data: loginType) => await authService.login(data),
         onSuccess: async (response) => {
-            await setCookies(response.token);
+            await setCookies(response?.token!);
             const session = (await authService.getSession())?.data;
             toast.success(`Selamat Datang ${session?.profile.userName} !!`, {
                 position: "top-right",
@@ -26,8 +26,8 @@ export const useSignIn = () => {
             })
             router.push("/home")
         },
-        onError: () => {
-            toast.error("Login gagal", {
+        onError: ({ message }) => {
+            toast.error(message, {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
