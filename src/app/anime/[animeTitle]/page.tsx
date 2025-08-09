@@ -10,6 +10,7 @@ import { episodeService } from "@/features/episodes/services/episode-service";
 import EpisodeCard from "@/features/episodes/components/episode-card";
 import FavoriteButton from "@/features/favorite/components/favorite-button";
 import { authService } from "@/features/auth/services/auth.service";
+import BackButton from "@/common/ui/buttons/back-button";
 
 interface detailAnimeProps {
   params: {
@@ -64,13 +65,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
           <p className="text-white text-lg font-semibold p-1 line-clamp-1">
             Anime <span className="text-red-500 font-mono">{decodedTitle}</span>
           </p>
-          <Link
-            href={"/home"}
-            className="flex text-sm text-white px-2 py-1 items-center justify-center gap-2 bg-red-500 hover:bg-red-400 rounded-sm font-semibold"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Kembali
-          </Link>
+          <BackButton/>
         </section>
         <div className="w-full h-[400px] relative flex">
           <Image

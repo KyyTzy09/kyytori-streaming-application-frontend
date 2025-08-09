@@ -2,6 +2,7 @@
 
 import { Button } from "@/common/shadcn/button";
 import { Comment } from "@/common/types/comment";
+import BackButton from "@/common/ui/buttons/back-button";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
 import { useGetDetailAnime } from "@/features/anime/hooks/anime-hook";
 import CommentCard from "@/features/comment/components/comment-card";
@@ -61,13 +62,7 @@ export default function Episodepage() {
         <p className="font-semibold text-xl line-clamp-1 text-red-500">
           {decodeURIComponent(epsTitle.replace(/\-+/g, " "))}
         </p>
-        <Button
-          onClick={() => router.push(`/anime/${animeTitle}`)}
-          className="bg-red-500 hover:bg-red-400 px-1 md:px-3 py-1 transition duration-700 text-[12px] md:text-sm"
-        >
-          <ArrowLeft strokeWidth={2} />
-          Kembali
-        </Button>
+        <BackButton/>
       </section>
       <div className="w-full flex flex-col gap-5 items-center">
         <div className="w-full grid grid-cols-3 gap-1">
