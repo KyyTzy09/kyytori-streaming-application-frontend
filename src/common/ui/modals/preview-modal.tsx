@@ -25,11 +25,11 @@ export default function PreviewImageModal({
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 100, scale: 1 }}
+      animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0 }}
       className={`${
         isOpen ? "flex" : "hidden"
-      } absolute w-screen h-full min-h-screen items-center justify-center bg-[#232323] z-10 top-0 bottom-0 left-0 right-0`}
+      } fixed p-4 sm:p-10 w-full min-h-screen items-center justify-center bg-[#232323] z-50 top-0 bottom-0 left-0 right-0`}
     >
       <TransformWrapper
         onZoom={(era) => {
@@ -59,7 +59,7 @@ export default function PreviewImageModal({
             width={Width}
             height={height}
             draggable={false}
-            className={`select-none cursor-grab object-contain max-h-screen max-w-screen`}
+            className="select-none cursor-grab object-contain max-h-[90vh] max-w-[100vv] sm:max-w-[90vw]"
           />
         </TransformComponent>
         <div className="fixed flex items-center justify-center gap-2 top-1 right-1">

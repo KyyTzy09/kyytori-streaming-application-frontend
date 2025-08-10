@@ -40,7 +40,7 @@ export default function UserCommentCard({
               animate={{ translateY: 0, opacity: 100 }}
               transition={{ delay: 0.1 * index }}
               className="flex items-center gap-4 p-4 rounded-md relative bg-white"
-              key={commentId}
+              key={commentId || index}
             >
               <Link
                 href={`/anime/${animeLink}/episode/${episode}`}
