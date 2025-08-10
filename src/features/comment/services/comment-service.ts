@@ -3,6 +3,11 @@ import { Comment } from "@/common/types/comment"
 import { getCookies } from "@/lib/cookies"
 
 export const CommentService = {
+    async getUserComment() {
+        const token = await getCookies()
+        return await apiClient<{ data: Comment[] }>({ url: '/comment/user/get', headers: { Authorization: `Bearer ${token}` } })
+    },
+
     async getCommentByEps(data: { epsTitle: string }) {
         return await apiClient<{ data: Comment[] }>({
             url: `/comment/get/${data.epsTitle}`
@@ -35,7 +40,7 @@ export const CommentService = {
     },
     async postReplyCommentByEps(data: { message: string, epsTitle: string, parentId: string }) {
         const token = await getCookies()
-        return await apiClient<{ message: string, data : Comment }>({
+        return await apiClient<{ message: string, data: Comment }>({
             url: `/comment/reply`,
             headers: {
                 Authorization: `Bearer ${token}`
