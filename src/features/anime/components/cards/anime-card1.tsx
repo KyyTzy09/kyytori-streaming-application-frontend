@@ -81,7 +81,7 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                       </div>
                     </div>
                     <CardContent className="w-full flex flex-col p-2">
-                      <div className="w-full h-40 md:h-60 overflow-hidden relative">
+                      <div className="w-full h-40 sm:h-44 md:h-60 overflow-hidden relative">
                         <Image
                           src={image}
                           alt={title}
@@ -92,7 +92,7 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
                         <div
                           className={`${statusColor(
                             status
-                          )} group-hover:text-red-500 group-hover:bg-white absolute top-0 left-0 p-1 rounded-br-sm text-sm font-semibold text-white flex items-center justify-center transition duration-700`}
+                          )} group-hover:text-red-500 group-hover:bg-white absolute top-0 left-0 p-1 rounded-br-sm text-[10px] md:text-sm font-semibold text-white flex items-center justify-center transition duration-700`}
                         >
                           {status}
                         </div>

@@ -9,8 +9,8 @@ export default function FavoriteSkeletonCard() {
             key={item}
             className="w-full h-auto items-center justify-between flex flex-col gap-2"
           >
-            <div className="w-full h-52 sm:h-64 bg-gray-500 animate-pulse rounded-sm"></div>
-            <div className="w-full h-12 bg-gray-500 animate-pulse rounded-sm"></div>
+            <div className="w-full h-52 sm:h-64 bg-gray-600 animate-pulse rounded-sm"></div>
+            <div className="w-full h-12 bg-gray-600 animate-pulse rounded-sm"></div>
           </div>
         );
       })}
