@@ -3,12 +3,21 @@ import { EyeIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import CommentSkeletonCard2 from "../skeleton/comment-skeleton-card2";
 
 interface UserCommentCardProps {
   data: Comment[];
+  isLoading: boolean;
 }
 
-export default function UserCommentCard({ data }: UserCommentCardProps) {
+export default function UserCommentCard({
+  data,
+  isLoading,
+}: UserCommentCardProps) {
+  if (isLoading) {
+    return <CommentSkeletonCard2 />;
+  }
+
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
       {data?.map(

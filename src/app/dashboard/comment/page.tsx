@@ -10,8 +10,8 @@ export default function CommentPage() {
   return (
     <div className="w-full flex flex-col min-h-screen p-5">
       <CommentHeader komentarLength={comment?.data?.length || 0} />
-      <div className="w-full flex min-h-screen">
-        <UserCommentCard data={comment?.data!} />
+      <div className="w-full flex flex-col min-h-screen">
+        <UserCommentCard data={comment?.data!} isLoading={isPending} />
       </div>
     </div>
   );
