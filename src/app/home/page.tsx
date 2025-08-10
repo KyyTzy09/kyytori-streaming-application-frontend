@@ -15,6 +15,7 @@ import { Separator } from "@/common/shadcn/separator";
 import { convertDay } from "@/common/helpers/day";
 import AnimeCard4 from "@/features/anime/components/cards/anime-card4";
 import AnimeUpdatedCard from "@/features/anime/components/cards/anime-card-update";
+import AnimeCarousel from "@/features/anime/components/anime-carousel";
 
 export default function HomePage() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
@@ -25,7 +26,9 @@ export default function HomePage() {
   return (
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       {/* Carousel */}
-      <section className="w-full h-40 md:h-52 bg-gray-600 animate-pulse"></section>
+      <section className="w-full h-full">
+        <AnimeCarousel data={topRate?.data!} />
+      </section>
       {/* Jadwal anime hari ini */}
       <motion.div
         animate={{
