@@ -36,11 +36,11 @@ export default function UserCommentCard({
         ) => {
           return (
             <motion.div
+              key={index}
               initial={{ translateY: 100, opacity: 0 }}
               animate={{ translateY: 0, opacity: 100 }}
               transition={{ delay: 0.1 * index }}
               className="flex items-center gap-4 p-4 rounded-md relative bg-white"
-              key={commentId || index}
             >
               <Link
                 href={`/anime/${animeLink}/episode/${episode}`}

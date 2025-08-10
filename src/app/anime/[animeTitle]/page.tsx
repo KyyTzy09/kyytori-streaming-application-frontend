@@ -21,40 +21,44 @@ interface detailAnimeProps {
 export default async function DetailAnime({ params }: detailAnimeProps) {
   const { animeTitle } = await params;
   const decodedTitle = decodeURIComponent(animeTitle);
-  const { data: detail } = await animeService.detail({
-    animeTitle: decodedTitle,
-  });
+  const detail = (
+    await animeService.detail({
+      animeTitle: decodedTitle,
+    })
+  )?.data;
 
-  const { data: episodes } = await episodeService.episodes({
-    animeTitle: decodedTitle,
-  });
+  const episodes = (
+    await episodeService.episodes({
+      animeTitle: decodedTitle,
+    })
+  )?.data;
 
   const user = (await authService.getSession())?.data;
 
   const detailList = [
     {
       name: "Status :",
-      value: detail.status,
+      value: detail?.status,
     },
     {
       name: "Durasi :",
-      value: detail.duration,
+      value: detail?.duration,
     },
     {
       name: "Season",
-      value: detail.season,
+      value: detail?.season,
     },
     {
       name: "Tanggal rilis :",
-      value: detail.realeseAt,
+      value: detail?.realeseAt,
     },
     {
       name: "Type :",
-      value: detail.type,
+      value: detail?.type,
     },
     {
       name: "Episodes :",
-      value: detail.episode || episodes.length,
+      value: detail?.episode || episodes?.length,
     },
   ];
 
@@ -65,12 +69,12 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
           <p className="text-white text-lg font-semibold p-1 line-clamp-1">
             Anime <span className="text-red-500 font-mono">{decodedTitle}</span>
           </p>
-          <BackButton/>
+          <BackButton />
         </section>
         <div className="w-full h-[400px] relative flex">
           <Image
-            src={detail.image || defaultImage}
-            alt={detail.title || "title"}
+            src={detail?.image || defaultImage}
+            alt={detail?.title || "title"}
             className="w-full h-full object-cover"
             width={300}
             height={450}
@@ -79,10 +83,10 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
           <div className="absolute w-full h-full bg-black/88 hidden md:block">
             <div className="w-full flex flex-col justify-center items-center p-2 gap-5">
               <p className="text-white font-semibold drop-shadow-white drop-shadow-sm text-4xl">
-                {detail.title}
+                {detail?.title}
               </p>
               <p className="text-red-500 font-semibold text-[18px] drop-shadow-red-500 drop-shadow-sm">
-                {detail.titleJap || detail.titleEng || ""}
+                {detail?.titleJap || detail?.titleEng || ""}
               </p>
 
               {/* list detail anime */}
@@ -103,8 +107,8 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                 })}
               </div>
               <div className="w-[34rem] flex flex-wrap gap-2 items-center justify-start">
-                {detail.genres.length > 0 &&
-                  detail.genres.map((gen) => {
+                {detail?.genres?.length! > 0 &&
+                  detail?.genres.map((gen) => {
                     return (
                       <Link
                         href={`/gen/${gen.genreName}`}
@@ -118,7 +122,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
               </div>
               <p className="text-white max-w-[34rem]">
                 <span className="text-white font-semibold">
-                  Nonton/Streaming Anime {detail.title}
+                  Nonton/Streaming Anime {detail?.title}
                   {", "}
                 </span>{" "}
                 Episode terbaru, terlengkap dan update tercepat cuma di{" "}
@@ -131,32 +135,32 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
           <div className="hidden md:flex w-52 flex-col absolute z-10 top-0 left-[100px] -translate-y-36">
             <div className="w-full h-80 relative">
               <Image
-                src={detail.image || defaultImage}
-                alt={detail.title || "title"}
+                src={detail?.image || defaultImage}
+                alt={detail?.title || "title"}
                 className="w-full h-full object-cover"
                 width={300}
                 height={450}
                 quality={100}
               />
               <div className="w-6 h-7 absolute bottom-1 right-2">
-                <FavoriteButton user={user!} animeId={detail.id} />
+                <FavoriteButton user={user!} animeId={detail?.id!} />
               </div>
             </div>
-            {!detail.image && <ImageSkeleton width="full" height={80} />}
+            {detail?.image && <ImageSkeleton width="full" height={80} />}
             <div className="bg-[#252525] w-full p-2 flex flex-col items-center justify-center">
               <h1 className="text-white font-semibold text-sm md:text-[15px]">
-                Rating {detail.rating}
+                Rating {detail?.rating}
               </h1>
-              <AnimeRating rating={detail.rating ?? 0} />
+              <AnimeRating rating={detail?.rating! ?? 0} />
             </div>
           </div>
           <div className="w-full md:pl-[24rem] py-3">
             <p className="text-red-500 font-semibold text-xl mb-4">
-              {detail.title}
+              {detail?.title}
             </p>
             <div className="w-full flex flex-col items-center gap-3">
-              {detail.synopsis.length > 0 &&
-                detail.synopsis.map((sin) => {
+              {detail?.synopsis.length! > 0 &&
+                detail?.synopsis.map((sin) => {
                   return (
                     <p key={sin.id} className="text-white text-justify">
                       {sin.text}
@@ -170,12 +174,12 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
       {/* Episodes section */}
       <section className="w-full h-full bg-[#232323] mt-20 p-5">
         <p className="text-red-500 font-bold text-xl">
-          Episode ({episodes.length}):
+          Episode ({episodes?.length}):
         </p>
         <EpisodeCard
           animeTitle={animeTitle}
-          episodes={episodes}
-          anime={detail}
+          episodes={episodes!}
+          anime={detail!}
         />
       </section>
     </div>
