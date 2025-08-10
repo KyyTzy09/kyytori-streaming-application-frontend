@@ -5,12 +5,21 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import FavoriteSkeletonCard from "./favorite-skeleton-card";
 
 interface AnimeFavoriteCardProps {
   data: FavoritesAnime[];
+  isLoading: boolean;
 }
 
-export default function AnimeFavoriteCard({ data }: AnimeFavoriteCardProps) {
+export default function AnimeFavoriteCard({
+  data,
+  isLoading,
+}: AnimeFavoriteCardProps) {
+  if (isLoading) {
+    return <FavoriteSkeletonCard />;
+  }
+  
   return (
     <div className="w-full h-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3">
       {data?.length > 0 &&
@@ -35,7 +44,7 @@ export default function AnimeFavoriteCard({ data }: AnimeFavoriteCardProps) {
                 key={index}
                 className="w-full h-full"
                 initial={{ translateY: 100, opacity: 0 }}
-                animate={{ translateY: 0, opacity : 100 }}
+                animate={{ translateY: 0, opacity: 100 }}
                 transition={{ delay: 0.2 * index }}
               >
                 <Link

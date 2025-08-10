@@ -11,7 +11,7 @@ export default function FavoritePage() {
     <div className="w-full min-h-screen p-5">
       <FavoriteHeader favoriteLength={favorite?.data.length!} />
       <div className="w-full h-full bg-gray-50 shadow shadow-black rounded-md p-5">
-        <AnimeFavoriteCard data={favorite?.data!} />
+        <AnimeFavoriteCard data={favorite?.data!} isLoading={isPending} />
       </div>
     </div>
   );
