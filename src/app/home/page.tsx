@@ -27,7 +27,7 @@ export default function HomePage() {
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       {/* Carousel */}
       <section className="w-full h-full">
-        <AnimeCarousel data={topRate?.data!} />
+        <AnimeCarousel data={topRate?.data!} isLoading={topRateLoad} />
       </section>
       {/* Jadwal anime hari ini */}
       <motion.div

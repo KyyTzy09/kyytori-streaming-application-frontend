@@ -10,14 +10,19 @@ import Link from "next/link";
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { statusColor } from "@/common/helpers/status";
+import AnimeSkeletonCarousel from "./skeleton/anime-skeleton-carousel";
 
 interface AnimeCarouselProps {
   data: Episodes[];
+  isLoading: boolean;
 }
 
-export default function AnimeCarousel({ data }: AnimeCarouselProps) {
+export default function AnimeCarousel({ data, isLoading }: AnimeCarouselProps) {
   const [isHover, setIsHover] = React.useState<boolean>(false);
 
+  if (isLoading) {
+    return <AnimeSkeletonCarousel />;
+  }
   return (
     <Carousel
       plugins={[Autoplay({ delay: 5000, stopOnInteraction: isHover })]}
@@ -91,10 +96,12 @@ export default function AnimeCarousel({ data }: AnimeCarouselProps) {
                       {episode} Eps
                     </p>
                     <p className="flex items-center justify-center gap-2 text-white text-[10px] md:text-sm font-semibold bg-red-500 p-2 px-3 rounded-sm">
-                      <Timer className="w-4 h-4"/>{duration}
+                      <Timer className="w-4 h-4" />
+                      {duration || "Unknown"}
                     </p>
                     <p className="hidden md:flex items-center justify-center gap-2 text-white text-[10px] md:text-sm font-semibold bg-red-500 p-2 px-3 rounded-sm">
-                      <Sun className="w-4 h-4"/>{season}
+                      <Sun className="w-4 h-4" />
+                      {season || "Unknown"}
                     </p>
                   </div>
                 </section>
