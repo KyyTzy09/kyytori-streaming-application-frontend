@@ -5,7 +5,7 @@ export default function CommentSkeletonCard2() {
     <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
       {Array.from({ length: 15 }).map((_, item) => {
         return (
-          <div className="w-full flex items-center gap-4 p-4 relative">
+          <div key={item} className="w-full flex items-center gap-4 p-4 relative">
             <div className="flex justify-between w-20 h-20">
               <div className="rounded-md min-w-[80px] h-full bg-gray-600 animate-pulse"></div>
               <div className="absolute bottom-1 left-16 rounded-full w-10 h-10 bg-gray-600 animate-pulse"></div>
