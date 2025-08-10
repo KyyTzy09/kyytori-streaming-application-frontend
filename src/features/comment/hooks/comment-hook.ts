@@ -8,9 +8,9 @@ import { toast } from "react-toastify"
 // Get
 export const useGetUserComment = () => {
     return useQuery({
-        queryKey : ['user-komentar'],
-        queryFn : async () => await CommentService.getUserComment(),
-        staleTime : 1 * 60 * 60
+        queryKey: ['user-komentar'],
+        queryFn: async () => await CommentService.getUserComment(),
+        staleTime: 1 * 60 * 60
     })
 }
 
@@ -47,6 +47,7 @@ export const usePostComment = (data: { epsTitle: string, message: string }) => {
                 progress: undefined,
             })
             queryClient.invalidateQueries({ queryKey: ['komentar', data.epsTitle] })
+            queryClient.invalidateQueries({ queryKey: ['user-komentar'] })
         },
         onError: ({ message }) => {
             toast.error(message || "Gagal mengirim komentar", {
@@ -77,6 +78,7 @@ export const usePostReplyComment = (data: { message: string, epsTitle: string, p
                 draggable: true,
                 progress: undefined,
             })
+            queryClient.invalidateQueries({ queryKey: ['komentar', data.epsTitle] })
             queryClient.invalidateQueries({ queryKey: ['komentar', data.epsTitle] })
             queryClient.refetchQueries({ queryKey: ['reply-komentar'], type: "active" })
         },
@@ -110,6 +112,7 @@ export const useDeleteComment = (data: { epsTitle: string, commentId: string }) 
                 draggable: true,
                 progress: undefined,
             })
+            queryClient.invalidateQueries({ queryKey: ['komentar', data.epsTitle] })
             queryClient.resetQueries({ queryKey: ['komentar', data.epsTitle] })
             queryClient.invalidateQueries({ queryKey: ['reply-komentar'] })
         },
