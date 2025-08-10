@@ -12,7 +12,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit, Loader } from "lucide-react";
-import { useUpdateEmail } from "../hooks/auth-hook";
+import { useUpdateEmail } from "../../hooks/auth-hook";
 
 interface updateEmailFormProps {
   data: User;

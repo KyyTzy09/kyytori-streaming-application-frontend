@@ -11,7 +11,7 @@ import { Edit, Eye, Trash } from "lucide-react";
 import React from "react";
 import AlertModal from "@/common/ui/modals/alert-modal";
 import { defaultImage } from "@/common/constant/image";
-import AvatarForm from "./avatar-form";
+import AvatarForm from "../forms/avatar-form";
 import useProfileForm from "@/common/composables/profile-form";
 
 interface AvatarDropDownProps {

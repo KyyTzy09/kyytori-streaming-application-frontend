@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { useGetReplyCommentByParentId } from "../hooks/comment-hook";
+import { useGetReplyCommentByParentId } from "../../hooks/comment-hook";
 import CommentCard from "./comment-card";
 import { Comment } from "@/common/types/comment";
-import CommentSkeletonCard from "./comment-skeleton-card";
-import CommentNestedInput from "./comment-nested-input";
+import CommentSkeletonCard from "../skeleton/comment-skeleton-card";
+import CommentNestedInput from "../inputs/comment-nested-input";
 
 interface CommentNestedCardProps {
   parentId: string;

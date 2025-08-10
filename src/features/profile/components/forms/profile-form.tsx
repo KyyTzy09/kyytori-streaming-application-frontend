@@ -20,7 +20,7 @@ import { Loader } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useUpdateProfile } from "../hooks/profile-hook";
+import { useUpdateProfile } from "../../hooks/profile-hook";
 interface ProfileFormProps {
   data: User;
   isOpen: boolean;

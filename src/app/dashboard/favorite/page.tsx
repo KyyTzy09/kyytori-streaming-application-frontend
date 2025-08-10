@@ -1,6 +1,6 @@
 "use client";
 
-import AnimeFavoriteCard from "@/features/favorite/components/favorite-anime-card";
+import AnimeFavoriteCard from "@/features/favorite/components/cards/favorite-anime-card";
 import FavoriteHeader from "@/features/favorite/components/favorite-header";
 import { useGetUserFavorites } from "@/features/favorite/hooks/favorite-hook";
 import React from "react";

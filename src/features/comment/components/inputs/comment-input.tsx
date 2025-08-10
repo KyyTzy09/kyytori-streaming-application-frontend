@@ -6,7 +6,7 @@ import { Textarea } from "@/common/shadcn/textarea";
 import { SendIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { usePostComment } from "../hooks/comment-hook";
+import { usePostComment } from "../../hooks/comment-hook";
 import { usegetProfile } from "@/features/profile/hooks/profile-hook";
 import UnauthorizedModal from "@/common/ui/modals/unauthorized-modal";
 

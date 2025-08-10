@@ -7,9 +7,9 @@ import { ChevronDown, ChevronUp, MoreVerticalIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import CommentNestedCard from "./comment-nested-card";
-import CommentSkeletonCard from "./comment-skeleton-card";
-import CommentNestedInput from "./comment-nested-input";
-import CommentDropdown from "./comment-dropdown";
+import CommentSkeletonCard from "../skeleton/comment-skeleton-card";
+import CommentNestedInput from "../inputs/comment-nested-input";
+import CommentDropdown from "../modals/comment-dropdown";
 import { motion } from "motion/react";
 
 interface CommentCardProps {

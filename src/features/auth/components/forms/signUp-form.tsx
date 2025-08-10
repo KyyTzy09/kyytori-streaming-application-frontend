@@ -1,6 +1,7 @@
 "use client";
 
-import { loginSchema, loginType } from "@/common/schemas/auth-schema";
+import useFormHandle from "@/common/composables/auth-form";
+import { registerSchema, registerType } from "@/common/schemas/auth-schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
@@ -8,11 +9,13 @@ import { Loader } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSignIn } from "../hooks/auth-hook";
+import { useSignUp } from "../../hooks/auth-hook";
 
-export default function SignInForm() {
+export default function SignUpForm() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const {
     register,
@@ -21,15 +24,18 @@ export default function SignInForm() {
   } = useForm({
     defaultValues: {
       email: "",
+      firstName: "",
+      lastName: "",
       password: "",
     },
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
   });
+  const { mutate: onRegisterPost, isPending: onPost } = useSignUp();
 
-  const { mutate: postSignIn, isPending: onPost } = useSignIn();
-  const onSubmit = (data: loginType) => {
-    postSignIn(data);
+  const onSubmit = (data: registerType) => {
+    onRegisterPost(data);
   };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -37,18 +43,50 @@ export default function SignInForm() {
     >
       <div className="w-full flex items-center gap-1">
         <h1 className="text-2xl font-semibold">
-          Masuk Ke{" "}
+          Daftar ke{" "}
           <span className="text-xl font-bold text-red-600">KyyTori</span>
         </h1>
       </div>
       <div className="w-full flex flex-col gap-3 items-center">
+        <Label htmlFor="firstName" className="self-start">
+          Nama Depan
+        </Label>
+        <Input
+          {...register("firstName")}
+          name="firstName"
+          placeholder="Masukan Nama Depan"
+          className="max-w-[350px] h-12"
+          required
+        />
+        {errors.firstName && (
+          <p className="text-red-600 text-[13px] font-semibold self-start">
+            {errors.firstName.message}
+          </p>
+        )}
+        <Label htmlFor="lastName" className="self-start">
+          Nama Belakang
+        </Label>
+        <Input
+          {...register("lastName")}
+          name="lastName"
+          placeholder="Masukan Nama Belakang"
+          className="max-w-[350px] h-12"
+          required
+        />
+        {errors.lastName && (
+          <p className="text-red-600 text-[13px] font-semibold self-start">
+            {errors.lastName.message}
+          </p>
+        )}
         <Label htmlFor="email" className="self-start">
           Email
         </Label>
         <Input
           {...register("email")}
+          name="email"
           placeholder="Masukan Email"
           className="max-w-[350px] h-12"
+          required
         />
         {errors.email && (
           <p className="text-red-600 text-[13px] font-semibold self-start">
@@ -60,6 +98,7 @@ export default function SignInForm() {
         </Label>
         <Input
           {...register("password")}
+          name="password"
           type={showPassword ? "text" : "password"}
           placeholder="Masukan Password"
           className="max-w-[350px] h-12"
@@ -86,12 +125,12 @@ export default function SignInForm() {
         disabled={onPost}
         type="submit"
       >
-        {onPost ? <Loader className="animate-spin" size={20} /> : <p>Masuk</p>}
+        {onPost ? <Loader className="animate-spin" size={20} /> : <p>SignUp</p>}
       </Button>
       <div className="text-[13px] text-gray-600 font-semibold flex w-full justify-center gap-1 items-center">
-        <p>Belum punya akun?</p>
-        <Link href={"/signup"} className="text-[#9e1313] hover:underline">
-          Daftar
+        <p>sudah punya akun?</p>
+        <Link href={"/signin"} className="text-[#9e1313] hover:underline">
+          Masuk
         </Link>
       </div>
     </form>

@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import FavoriteSkeletonCard from "./favorite-skeleton-card";
+import FavoriteSkeletonCard from "../skeletons/favorite-skeleton-card";
 
 interface AnimeFavoriteCardProps {
   data: FavoritesAnime[];

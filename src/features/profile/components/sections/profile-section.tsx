@@ -2,15 +2,15 @@
 
 import { Label } from "@/common/shadcn/label";
 import { User } from "@/common/types/user";
-import AvatarDropDown from "@/features/profile/components/avatar-dropdown";
-import ProfileForm from "@/features/profile/components/profile-form";
+import AvatarDropDown from "../interact/avatar-dropdown";
+import ProfileForm from "../forms/profile-form";
 import PreviewImageModal from "../../../../common/ui/modals/preview-modal";
 import { Pencil, Settings } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import Image from "next/image";
 import React from "react";
-import UpdateEmailForm from "../../../auth/components/email-update-form";
-import UpdatePasswordForm from "@/features/auth/components/password-update-form";
+import UpdateEmailForm from "../../../auth/components/forms/email-update-form";
+import UpdatePasswordForm from "@/features/auth/components/forms/password-update-form";
 
 interface ProfileSectionProps {
   data: User;

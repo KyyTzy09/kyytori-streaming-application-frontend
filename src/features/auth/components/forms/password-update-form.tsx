@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit, Loader } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useUpdatePassword } from "../hooks/auth-hook";
+import { useUpdatePassword } from "../../hooks/auth-hook"; 
 
 interface updatePasswordFormProps {
   data: User;

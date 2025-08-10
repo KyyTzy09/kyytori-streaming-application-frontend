@@ -1,7 +1,7 @@
 "use client";
 
 import CommentHeader from "@/features/comment/components/comment-header";
-import UserCommentCard from "@/features/comment/components/comment-user-card";
+import UserCommentCard from "@/features/comment/components/cards/comment-user-card";
 import { useGetUserComment } from "@/features/comment/hooks/comment-hook";
 import React from "react";
 

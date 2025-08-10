@@ -1,4 +1,4 @@
-import SignUpForm from "@/features/auth/components/signUp-form";
+import SignUpForm from "@/features/auth/components/forms/signUp-form";
 import React from "react";
 
 export default function RegisterPage() {

@@ -1,4 +1,4 @@
-import SignInForm from "@/features/auth/components/signIn-form";
+import SignInForm from "@/features/auth/components/forms/signIn-form";
 import React from "react";
 
 export default function LoginPage() {

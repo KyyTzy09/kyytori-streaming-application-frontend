@@ -12,7 +12,7 @@ import {
 import { Bookmark, Command, LogOut, Menu, UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
-import AvatarSkeleton from "./avatar-skeleton";
+import AvatarSkeleton from "../skeletons/avatar-skeleton";
 import { User } from "@/common/types/user";
 import { FaComment } from "react-icons/fa";
 import { useSignOut } from "@/features/auth/hooks/auth-hook";

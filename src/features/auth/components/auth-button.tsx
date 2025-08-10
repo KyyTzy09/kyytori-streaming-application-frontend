@@ -4,7 +4,7 @@ import { Button } from "@/common/shadcn/button";
 import { LogIn } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
-import ProfileDropdown from "../../profile/components/profile-dropdown";
+import ProfileDropdown from "@/features/profile/components/interact/profile-dropdown";
 import { User } from "@/common/types/user";
 
 export default function AuthButton({ data }: { data: User }) {
