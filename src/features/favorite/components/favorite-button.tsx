@@ -39,7 +39,7 @@ export default function FavoriteButton({ animeId, user }: FavoriteButtonProps) {
     animeId,
   });
 
-  const handleFavorite = async () => {
+  const handleFavorite = () => {
     if (user) {
       if (!favoriteExist?.data) {
         addFavorite();
@@ -51,6 +51,7 @@ export default function FavoriteButton({ animeId, user }: FavoriteButtonProps) {
     }
   };
 
+  const isFavorited = !!favoriteExist?.data;
   const isLoading = adding || removing || getting;
 
   return (
@@ -70,7 +71,7 @@ export default function FavoriteButton({ animeId, user }: FavoriteButtonProps) {
             <Heart
               strokeWidth={1}
               className={`${
-                favoriteExist?.data
+                isFavorited
                   ? "fill-red-500 group-hover:fill-white group-hover:text-white w-full h-full text-red-500 transition duration-700"
                   : "fill-white group-hover:fill-red-500 group-hover:text-red-500 w-full h-full text-white transition duration-700"
               }`}
@@ -80,9 +81,7 @@ export default function FavoriteButton({ animeId, user }: FavoriteButtonProps) {
         <HoverCardContent className="w-20 bg-[#232323] p-1 border-red-500">
           <div className="w-full flex">
             <p className="text-white font-semibold text-[10px] text-center">
-              {favoriteExist?.data
-                ? "Hapus Dari Favorit"
-                : "Tambahkan Ke Favorit"}
+              {isFavorited ? "Hapus Dari Favorit" : "Tambahkan Ke Favorit"}
             </p>
           </div>
         </HoverCardContent>

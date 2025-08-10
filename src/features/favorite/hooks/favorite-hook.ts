@@ -19,7 +19,8 @@ export const useGetUserFavorites = () => {
 export const useGetFavorite = (data: queryByAnimeId) => {
     return useQuery({
         queryKey: ['get-favorite', data.animeId],
-        queryFn: async () => favoriteService.getFavoriteAnime({ animeId: data.animeId })
+        queryFn: async () => favoriteService.getFavoriteAnime({ animeId: data.animeId }),
+        staleTime: 1 * 60 * 1000
     })
 }
 
@@ -34,7 +35,7 @@ export const usePostFavorite = (data: queryByAnimeId) => {
                 autoClose: 3000
             })
             queryClient.invalidateQueries({ queryKey: ["get-userFavorite"] })
-            queryClient.invalidateQueries({ queryKey: ["get-favorite", data.animeId], exact: true })
+            queryClient.refetchQueries({ queryKey: ["get-favorite", data.animeId], type: "active" })
         },
         onError: () => {
             toast.error(`Gagal Menambahkan Ke favorit`, {
@@ -56,8 +57,8 @@ export const useDeleteFavorite = (data: queryByAnimeId) => {
                 autoClose: 3000
             })
             queryClient.invalidateQueries({ queryKey: ["get-userFavorite"] })
-            queryClient.setQueryData(['get-favorite', data.animeId], { data: null })
-            queryClient.invalidateQueries({ queryKey: ["get-favorite", data.animeId] })
+            queryClient.setQueriesData({ queryKey: ['get-favorite', data.animeId], type: "all" }, { data: null })
+            queryClient.refetchQueries({ queryKey: ["get-favorite", data.animeId], type: "all" })
         },
         onError: () => {
             toast.error(`Gagal Menghapus Dari Favorit`, {
