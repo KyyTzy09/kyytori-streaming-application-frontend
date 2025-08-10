@@ -12,7 +12,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit, Loader } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useUpdatePassword } from "../../hooks/auth-hook"; 
+import { useUpdatePassword } from "../../hooks/auth-hook";
+import { motion } from "motion/react";
 
 interface updatePasswordFormProps {
   data: User;
@@ -54,7 +55,7 @@ export default function UpdatePasswordForm({ data }: updatePasswordFormProps) {
   const onSubmit = (data: updatePasswordType) => {
     updatePassword(data);
     if (isSubmitted) {
-      setShowPassword([])
+      setShowPassword([]);
       setOnEdit(false);
     }
   };
@@ -73,7 +74,10 @@ export default function UpdatePasswordForm({ data }: updatePasswordFormProps) {
   ];
 
   return (
-    <form
+    <motion.form
+      initial={{ translateX: 200, opacity: 0 }}
+      animate={{ translateX: 0, opacity: 100 }}
+      exit={{ translateX: 200, opacity: 0 }}
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col w-full h-full bg-gray-50 p-10 pt-5 gap-5 items-center justify-between rounded-md relative"
     >
@@ -151,6 +155,6 @@ export default function UpdatePasswordForm({ data }: updatePasswordFormProps) {
           "Perbarui Password"
         )}
       </Button>
-    </form>
+    </motion.form>
   );
 }

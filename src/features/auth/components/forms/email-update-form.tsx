@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit, Loader } from "lucide-react";
 import { useUpdateEmail } from "../../hooks/auth-hook";
+import { motion } from "motion/react";
 
 interface updateEmailFormProps {
   data: User;
@@ -34,7 +35,10 @@ export default function UpdateEmailForm({ data }: updateEmailFormProps) {
   };
 
   return (
-    <form
+    <motion.form
+      initial={{ translateX: -200, opacity: 0 }}
+      animate={{ translateX: 0, opacity: 100 }}
+      exit={{ translateX: -200, opacity: 0 }}
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col w-full h-full bg-gray-50 p-10 pt-5 gap-5 items-center justify-between rounded-md relative"
     >
@@ -98,7 +102,12 @@ export default function UpdateEmailForm({ data }: updateEmailFormProps) {
               type="checkbox"
               className="w-3 h-3"
             />
-            <Label className={`${onEdit ? "text-black" : "text-gray-400"}  text-[13px]`}htmlFor="check">
+            <Label
+              className={`${
+                onEdit ? "text-black" : "text-gray-400"
+              }  text-[13px]`}
+              htmlFor="check"
+            >
               Lihat Passsword
             </Label>
           </div>
@@ -111,6 +120,6 @@ export default function UpdateEmailForm({ data }: updateEmailFormProps) {
       >
         {onUpdate ? <Loader className="w-5 h-5 animate-spin" /> : "Perbarui"}
       </Button>
-    </form>
+    </motion.form>
   );
 }
