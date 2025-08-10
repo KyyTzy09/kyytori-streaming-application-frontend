@@ -45,7 +45,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
       value: detail?.duration,
     },
     {
-      name: "Season",
+      name: "Season :",
       value: detail?.season,
     },
     {
@@ -71,7 +71,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
           </p>
           <BackButton />
         </section>
-        <div className="w-full h-[400px] relative flex">
+        <div className="w-full items-center h-[400px] relative flex">
           <Image
             src={detail?.image || defaultImage}
             alt={detail?.title || "title"}
@@ -80,7 +80,66 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
             height={450}
             quality={100}
           />
-          <div className="absolute w-full h-full bg-black/88 hidden md:block">
+          <section className="absolute w-full h-full bg-black/88 block sm:hidden">
+            <div className="absolute w-6 h-7 top-1 right-2">
+              <FavoriteButton animeId={detail?.id!} user={user!} />
+            </div>
+            <div className="w-full flex flex-col justify-center items-center p-2 gap-10">
+              <div className="w-full flex flex-col gap-2 items-center justify-center">
+                <p className="text-white font-semibold drop-shadow-white drop-shadow-sm text-3xl">
+                  {detail?.title}
+                </p>
+                <p className="text-red-500 font-semibold text-[16px] drop-shadow-red-500 drop-shadow-sm">
+                  {detail?.titleJap || detail?.titleEng || ""}
+                </p>
+              </div>
+              {/* list detail anime */}
+              <div className="grid grid-cols-2 w-full p-1 items-center gap-1">
+                {detailList.map((li) => {
+                  return (
+                    <div
+                      key={li.name}
+                      className="w-full flex items-center justify-center gap-2"
+                    >
+                      <p className="text-white font-bold flex items-center gap-1 text-[10px]">
+                        <span className="text-red-500 text-[10px]">■</span>
+                        {li.name}
+                      </p>
+                      <p className="text-red-500 font-mono text-[10px]">
+                        {li.value}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="w-full flex flex-wrap gap-2 items-center justify-center">
+                {detail?.genres?.length! > 0 &&
+                  detail?.genres.map((gen) => {
+                    return (
+                      <Link
+                        href={`/gen/${gen.genreName}`}
+                        key={gen.genreName}
+                        className="flex text-[12px] items-center justify-center text-white p-1 font-mono rounded-sm bg-black/70 border-red-500 border drop-shadow-red-500 drop-shadow-sm hover:bg-red-500 hover:text-white transition duration-700"
+                      >
+                        {gen.genreName}
+                      </Link>
+                    );
+                  })}
+              </div>
+              <p className="text-white w-full text-center">
+                <span className="text-white font-semibold">
+                  Nonton/Streaming Anime {detail?.title}
+                  {", "}
+                </span>{" "}
+                Episode terbaru, terlengkap dan update tercepat cuma di{" "}
+                <span className="text-red-500 font-semibold">Kyytori</span>
+              </p>
+            </div>
+            <div className="absolute bottom-0 w-full flex items-center justify-center bg-white py-1 ">
+              <AnimeRating rating={detail?.rating! ?? 0} />
+            </div>
+          </section>
+          <div className="absolute w-full h-full bg-black/88 hidden sm:block">
             <div className="w-full flex flex-col justify-center items-center p-2 gap-5">
               <p className="text-white font-semibold drop-shadow-white drop-shadow-sm text-4xl">
                 {detail?.title}
@@ -88,7 +147,6 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
               <p className="text-red-500 font-semibold text-[18px] drop-shadow-red-500 drop-shadow-sm">
                 {detail?.titleJap || detail?.titleEng || ""}
               </p>
-
               {/* list detail anime */}
               <div className="grid grid-cols-2 w-[34rem] gap-x-2 p-1 items-center justify-center">
                 {detailList.map((li) => {
@@ -131,8 +189,8 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
             </div>
           </div>
         </div>
-        <div className="w-full h-full flex items-center relative">
-          <div className="hidden md:flex w-52 flex-col absolute z-10 top-0 left-[100px] -translate-y-36">
+        <div className="w-full h-full items-center relative flex">
+          <div className="hidden lg:flex w-52 flex-col absolute z-10 lg:top-0 lg:left-[100px] -translate-y-5 xl:-translate-y-36">
             <div className="w-full h-80 relative">
               <Image
                 src={detail?.image || defaultImage}
@@ -146,7 +204,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                 <FavoriteButton user={user!} animeId={detail?.id!} />
               </div>
             </div>
-            {detail?.image && <ImageSkeleton width="full" height={80} />}
+            {!detail?.image && <ImageSkeleton width="full" height={80} />}
             <div className="bg-[#252525] w-full p-2 flex flex-col items-center justify-center">
               <h1 className="text-white font-semibold text-sm md:text-[15px]">
                 Rating {detail?.rating}
@@ -154,7 +212,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
               <AnimeRating rating={detail?.rating! ?? 0} />
             </div>
           </div>
-          <div className="w-full md:pl-[24rem] py-3">
+          <div className="w-full lg:pl-[24rem] py-3">
             <p className="text-red-500 font-semibold text-xl mb-4">
               {detail?.title}
             </p>
@@ -173,7 +231,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
       </section>
       {/* Episodes section */}
       <section className="w-full h-full bg-[#232323] mt-20 p-5">
-        <p className="text-red-500 font-bold text-xl">
+        <p className="text-red-500 font-bold text-sm md:text-xl">
           Episode ({episodes?.length}):
         </p>
         <EpisodeCard

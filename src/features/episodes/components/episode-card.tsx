@@ -16,8 +16,6 @@ export default function EpisodeCard({
   episodes,
   anime,
 }: EpisodeCardProps) {
-  let ep;
-  console.log(Number(new Date().getDate()));
   return (
     <div className="w-full py-2 grid grid-cols-2 md:grid-cols-4 mt-10 gap-5">
       {episodes.length > 0 ? (
@@ -28,12 +26,12 @@ export default function EpisodeCard({
               key={ep.title}
               className="group w-full flex flex-col items-center justify-start gap-3 bg-black/70 border-red-600 border rounded-md overflow-hidden relative"
             >
-              <div className="flex text-sm p-2 text-white font-mono items-center justify-center bg-red-500 group-hover:bg-red-300 transition duration-700 z-10 absolute top-0 right-0 rounded-bl-sm">
+              <div className="flex  text-[10px] sm:text-sm p-1 sm:p-2 text-white font-mono items-center justify-center bg-red-500 group-hover:bg-red-300 transition duration-700 z-10 absolute top-0 right-0 rounded-bl-sm">
                 {isNaN(Number(ep.episode))
                   ? ep.episode
                   : `Eps ${Number(ep.episode)}`}
               </div>
-              <div className="flex text-sm p-2 text-white font-mono items-center justify-center bg-red-500 group-hover:bg-red-300 transition duration-700 z-10 absolute top-0 left-0 rounded-br-sm">
+              <div className="flex text-[10px] sm:text-sm p-1 sm:p-2 text-white font-mono items-center justify-center bg-red-500 group-hover:bg-red-300 transition duration-700 z-10 absolute top-0 left-0 rounded-br-sm">
                 {Number(ep.createdAt.split(",")[0].split(" ")[1]) ===
                 Number(new Date().getDate())
                   ? "Hari Ini"
