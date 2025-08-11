@@ -20,7 +20,7 @@ export const useGetFavorite = (data: queryByAnimeId) => {
     return useQuery({
         queryKey: ['get-favorite', data.animeId],
         queryFn: async () => favoriteService.getFavoriteAnime({ animeId: data.animeId }),
-        staleTime: 1 * 60 * 1000
+        staleTime: 2 * 60 * 1000
     })
 }
 
