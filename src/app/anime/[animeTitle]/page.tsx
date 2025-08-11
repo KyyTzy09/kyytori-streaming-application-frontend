@@ -81,12 +81,9 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
             quality={100}
           />
           <section className="absolute w-full h-full bg-black/88 block sm:hidden">
-            <div className="absolute w-6 h-7 top-1 right-2">
-              <FavoriteButton animeId={detail?.id!} user={user!} />
-            </div>
-            <div className="w-full flex flex-col justify-center items-center p-2 gap-10">
+            <div className="w-full flex flex-col justify-between items-center p-2 gap-10">
               <div className="w-full flex flex-col gap-2 items-center justify-center">
-                <p className="text-white font-semibold drop-shadow-white drop-shadow-sm text-3xl">
+                <p className="text-white font-semibold drop-shadow-white drop-shadow-sm text-center text-2xl">
                   {detail?.title}
                 </p>
                 <p className="text-red-500 font-semibold text-[16px] drop-shadow-red-500 drop-shadow-sm">
@@ -135,10 +132,16 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                 <span className="text-red-500 font-semibold">Kyytori</span>
               </p>
             </div>
-            <div className="absolute bottom-0 w-full flex items-center justify-center bg-white py-1 ">
-              <AnimeRating rating={detail?.rating! ?? 0} />
+            <div className="absolute bottom-0 w-full flex items-center justify-end bg-white py-1">
+              <div className="w-[60%] justify-between h-full flex items-center">
+                <AnimeRating rating={detail?.rating! ?? 0} />
+                <div className="w-6 h-7 mr-2">
+                  <FavoriteButton animeId={detail?.id!} user={user!} />
+                </div>
+              </div>
             </div>
           </section>
+          {/* Layar Besar*/}
           <div className="absolute w-full h-full bg-black/88 hidden sm:block">
             <div className="w-full flex flex-col justify-center items-center p-2 gap-5">
               <p className="text-white font-semibold drop-shadow-white drop-shadow-sm text-4xl">
