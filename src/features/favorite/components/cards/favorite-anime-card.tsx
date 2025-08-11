@@ -42,14 +42,14 @@ export default function AnimeFavoriteCard({
             return (
               <motion.div
                 key={index}
-                className="w-full h-full"
+                className="group w-full h-full"
                 initial={{ translateY: 100, opacity: 0 }}
                 animate={{ translateY: 0, opacity: 100 }}
                 transition={{ delay: 0.2 * index }}
               >
                 <Link
                   href={`/anime/${link}`}
-                  className="group w-full h-auto items-center justify-between flex flex-col bg-[#232323] overflow-hidden rounded-sm relative"
+                  className="w-full h-auto items-center justify-between flex flex-col bg-[#232323] group-hover:bg-[#353535] group-hover:opacity-70 overflow-hidden rounded-sm relative transition duration-700"
                 >
                   <div className="absolute top-0 right-0 bg-red-500 text-[13px] sm:text-sm px-2 rounded-bl-sm z-20 text-white font-mono">
                     <p className="">{type}</p>
@@ -63,7 +63,7 @@ export default function AnimeFavoriteCard({
                       className="w-full h-full object-cover rounded-sm group-hover:scale-110 transition-transform"
                     />
                   </div>
-                  <div className="w-full h-10 md:h-12 p-1 bg-[#232323] overflow-hidden z-20">
+                  <div className="w-full h-10 md:h-12 p-1 bg-[#232323] group-hover:bg-[#353535] overflow-hidden z-20 transition duration-700">
                     <p className="text-white font-semibold text-center text-[10px] sm:text-sm line-clamp-2">
                       {animeTitle}
                     </p>
