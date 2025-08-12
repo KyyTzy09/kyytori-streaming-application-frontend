@@ -12,10 +12,11 @@ import {
 import { Anime, Episodes } from "@/common/types/anime";
 import AnimeHeader from "@/features/anime/components/anime-header";
 import { Separator } from "@/common/shadcn/separator";
-import { convertDay } from "@/common/helpers/day";
 import AnimeCard4 from "@/features/anime/components/cards/anime-card4";
-import AnimeUpdatedCard from "@/features/anime/components/cards/anime-card-update";
 import AnimeCarousel from "@/features/anime/components/anime-carousel";
+import ScheduleAnimeSection from "@/features/anime/components/sections/schedule-section";
+import { convertDay } from "@/common/helpers/day";
+import AnimeUpdatedCard from "@/features/anime/components/cards/anime-card-update";
 
 export default function HomePage() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
@@ -30,37 +31,7 @@ export default function HomePage() {
         <AnimeCarousel data={topRate?.data!} isLoading={topRateLoad} />
       </section>
       {/* Jadwal anime hari ini */}
-      <motion.div
-        animate={{
-          boxShadow: [
-            "0 0 10px rgba(255,0,0,0.5)",
-            "0 0 20px rgba(255,0,0,0.9)",
-            "0 0 10px rgba(255,0,0,0.5)",
-          ],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="w-full h-full rounded-sm flex flex-col gap-2 border border-red-500 p-2 relative overflow-hidden"
-      >
-        <div className="bg-red-500 h-2 absolute bottom-0 right-0 translate-x-[43.5rem] w-full -rotate-45"></div>
-        <div className="bg-red-500 h-2 absolute bottom-0 right-0 translate-x-[45rem] w-full -rotate-45"></div>
-        <div className="w-full flex px-1">
-          <AnimeHeader
-            front="Anime Update Hari Ini"
-            back={`(${convertDay(new Date()).name})🔥🔥`}
-            url="/schedule"
-            linkText="Lihat Jadwal"
-          />
-        </div>
-        <AnimeUpdatedCard
-          data={schedule?.data[convertDay(new Date()).value] as Anime[]}
-          isLoading={scheduleLoad}
-        />
-      </motion.div>
-
+      <ScheduleAnimeSection data={schedule?.data!} isLoading={scheduleLoad} />
       {/* Anime Ongoing */}
       <AnimeHeader
         front="Anime"
