@@ -62,7 +62,7 @@ export default function AnimeCarousel({ data, isLoading }: AnimeCarouselProps) {
                   height={300}
                   className="w-full h-52 md:h-72 object-cover opacity-80 rounded-md"
                 />
-                <section className="absolute z-20 flex flex-col w-full h-full bg-black/70 p-5 gap-1">
+                <section className="absolute z-20 flex flex-col w-full h-full bg-black/60 p-5 gap-1">
                   <div className="w-full flex items-center justify-between">
                     <p className="text-red-500 sm:max-w-[300px] md:max-w-[90%] truncate font-semibold text-lg md:text-[30px] drop-shadow-md drop-shadow-red-500 line-clamp-1">
                       {titleJap || title}
@@ -95,7 +95,7 @@ export default function AnimeCarousel({ data, isLoading }: AnimeCarouselProps) {
                     <p className="flex items-center justify-center gap-2 text-white text-[10px] md:text-sm font-semibold bg-red-500 p-2 px-3 rounded-sm">
                       {episode} Eps
                     </p>
-                    <p className="flex items-center justify-center gap-2 text-white text-[10px] md:text-sm font-semibold bg-red-500 p-2 px-3 rounded-sm">
+                    <p className="hidden md:flex items-center justify-center gap-2 text-white text-[10px] md:text-sm font-semibold bg-red-500 p-2 px-3 rounded-sm">
                       <Timer className="w-4 h-4" />
                       {duration || "Unknown"}
                     </p>

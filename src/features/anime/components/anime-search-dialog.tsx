@@ -41,7 +41,9 @@ export default function AnimeSearchDialog({
       name: "<Sebelumnya",
       value: anime?.pagination.prevPage
         ? Number(anime?.pagination.prevPage)
-        : page !== 1 ? 1 : null,
+        : page !== 1
+        ? 1
+        : null,
     },
     {
       name: "Selanjutnya>",
@@ -77,7 +79,7 @@ export default function AnimeSearchDialog({
               value={search}
               onChange={handleChange}
               placeholder="Masukan Judul Anime"
-              className="text-white px-0 py-0 w-[95%] h-full border-b-2 border-r-0 border-l-0 border-t-0 rounded-b-none border-b-white focus-visible:border-b-red-500 focus-visible:ring-transparent transition duration-700"
+              className="text-white px-0 py-0 w-[90%] sm:w-[95%] h-full border-b-2 border-r-0 border-l-0 border-t-0 rounded-b-none border-b-white focus-visible:border-b-red-500 focus-visible:ring-transparent transition duration-700"
             />
             <motion.div
               animate={{
@@ -98,18 +100,20 @@ export default function AnimeSearchDialog({
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="w-[7%] h-full flex items-end border-red-500 border-2 rounded-sm rounded-bl-none"
+              className="w-[10%] sm:w-[7%] h-full flex items-end border-red-500 border-2 rounded-sm rounded-bl-none"
             >
               <SearchIcon strokeWidth={2} className="w-full p-1 h-full" />
             </motion.div>
           </section>
-          <div className="w-full flex items-center justify-bertween">
+          <div className="w-full flex items-center justify-between">
             <p className="text-white text-[12px] md:text-[13px] font-semibold">
               Ditemukan ({anime?.data.length || 0})
             </p>
           </div>
-          <AnimeCard3 data={anime?.data as Anime[]} isLoading={isLoading} />
-          <section className="w-full flex items-center justify-center gap-2">
+          <div className="w-full">
+            <AnimeCard3 data={anime?.data as Anime[]} isLoading={isLoading} />
+          </div>
+          <section className="w-full flex flex-wrap items-center justify-center gap-2">
             <Button
               className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
               disabled={Number(page) === 1 || Number(page) === 0}
@@ -117,7 +121,7 @@ export default function AnimeSearchDialog({
                 scrollTo({ top: 0, behavior: "smooth" }), setPage(1);
               }}
             >
-              <ArrowBigLeft className="text-white w-5 h-5" />
+              <ArrowBigLeft className="text-white w-4 h-4" />
               MinPage
             </Button>
             {paginationItems.map((item) => {
@@ -148,7 +152,7 @@ export default function AnimeSearchDialog({
               }}
             >
               MaxPage
-              <ArrowBigRight className="text-white w-5 h-5" />
+              <ArrowBigRight className="text-white w-4 h-4" />
             </Button>
           </section>
         </div>

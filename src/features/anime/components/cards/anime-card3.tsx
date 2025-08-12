@@ -38,7 +38,7 @@ export default function AnimeCard3({ data, isLoading }: AnimeCard3Props) {
               >
                 <Link
                   href={`/anime/${link}`}
-                  className="flex items-center justify-between w-full h-40 gap-2 p-2 hover:bg-[#232323] transition duration-500"
+                  className="flex items-center justify-between w-full h-36 sm:h-40 gap-2 p-2 hover:bg-[#232323] transition duration-500"
                 >
                   <div className="w-32 max-w-[25%] h-full relative">
                     <Image
@@ -62,7 +62,7 @@ export default function AnimeCard3({ data, isLoading }: AnimeCard3Props) {
                       {type}
                     </div>
                   </div>
-                  <div className="flex flex-col items-start justify-start w-[75%] h-40 overflow-hidden gap-2">
+                  <div className="flex flex-col items-start justify-start w-[75%] h-full sm:h-40 overflow-hidden gap-2">
                     <p className="font-semibold text-red-500">{title}</p>
                     {synopsis.length > 0 && (
                       <p className="w-full text-white line-clamp-2 text-start text-[10px] md:text-sm break-all">
@@ -71,7 +71,7 @@ export default function AnimeCard3({ data, isLoading }: AnimeCard3Props) {
                     )}
                     <div className="w-full grid grid-cols-3 gap-2 overflow-y-auto">
                       {genres.length > 0 &&
-                        genres.slice(0, 3).map(({ genreName }) => {
+                        genres.slice(0, 2).map(({ genreName }) => {
                           return (
                             <div
                               key={genreName}

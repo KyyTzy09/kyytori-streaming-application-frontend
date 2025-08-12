@@ -132,7 +132,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                 <span className="text-red-500 font-semibold">Kyytori</span>
               </p>
             </div>
-            <div className="absolute bottom-0 w-full flex items-center justify-end bg-white py-1">
+            <div className="absolute bottom-0 w-full flex items-center justify-end bg-[#232323] py-1">
               <div className="w-[60%] justify-between h-full flex items-center">
                 <AnimeRating rating={detail?.rating! ?? 0} />
                 <div className="w-6 h-7 mr-2">
