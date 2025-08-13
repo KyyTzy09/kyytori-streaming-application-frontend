@@ -11,6 +11,7 @@ import EpisodeCard from "@/features/episodes/components/episode-card";
 import FavoriteButton from "@/features/favorite/components/favorite-button";
 import { authService } from "@/features/auth/services/auth.service";
 import BackButton from "@/common/ui/buttons/back-button";
+import { checkSession } from "@/lib/session";
 
 interface detailAnimeProps {
   params: {
@@ -33,7 +34,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
     })
   )?.data;
 
-  const user = (await authService.getSession())?.data;
+  const user = (await checkSession())?.data;
 
   const detailList = [
     {
@@ -136,7 +137,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
               <div className="w-[60%] justify-between h-full flex items-center">
                 <AnimeRating rating={detail?.rating! ?? 0} />
                 <div className="w-6 h-7 mr-2">
-                  <FavoriteButton animeId={detail?.id!} user={user!} />
+                  <FavoriteButton animeId={detail?.id!} user={user?.data!} />
                 </div>
               </div>
             </div>
@@ -204,7 +205,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                 quality={100}
               />
               <div className="w-6 h-7 absolute bottom-1 right-2">
-                <FavoriteButton user={user!} animeId={detail?.id!} />
+                <FavoriteButton user={user?.data!} animeId={detail?.id!} />
               </div>
             </div>
             {!detail?.image && <ImageSkeleton width="full" height={80} />}

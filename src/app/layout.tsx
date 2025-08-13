@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import QueryProvider from "@/common/providers/query-provider";
 import { User } from "@/common/types/user";
 import { authService } from "@/features/auth/services/auth.service";
+import { checkSession } from "@/lib/session";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = (await authService.getSession())?.data;
+  const session = await checkSession()
   return (
     <html lang="en">
       <body
@@ -35,7 +36,7 @@ export default async function RootLayout({
       >
         <QueryProvider>
           <ToastContainer />
-          <Navbar data={session!} />
+          <Navbar data={session?.data.data!} />
           <section className="w-full min-h-screen">{children}</section>
         </QueryProvider>
       </body>
