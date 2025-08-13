@@ -26,7 +26,7 @@ export default function UserCommentCard({
             id: commentId,
             episodeTitle: episode,
             message,
-            updateAt,
+            createdAt,
             episode: {
               anime: { link: animeLink, title: animeTitle, image: animeCover },
             },
@@ -68,8 +68,8 @@ export default function UserCommentCard({
               <div className="flex flex-col h-full">
                 <p className="text-xs text-gray-600 items-center">
                   ●{" "}
-                  {updateAt
-                    ? new Date(updateAt).toLocaleString()
+                  {createdAt
+                    ? new Date(createdAt).toLocaleString()
                     : "Tanggal Tidak diketahui"}
                 </p>
                 <p className="font-semibold line-clamp-1">{animeTitle}</p>

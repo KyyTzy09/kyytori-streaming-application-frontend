@@ -15,5 +15,5 @@ export type Comment = {
     episode: Episodes
 
     createdAt: Date
-    updateAt: Date
+    updatedAt: Date
 }
