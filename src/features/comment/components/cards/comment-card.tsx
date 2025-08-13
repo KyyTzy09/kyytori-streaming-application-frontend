@@ -11,6 +11,7 @@ import CommentSkeletonCard from "../skeleton/comment-skeleton-card";
 import CommentNestedInput from "../inputs/comment-nested-input";
 import CommentDropdown from "../modals/comment-dropdown";
 import { motion } from "motion/react";
+import ProfileHover from "@/features/profile/components/interact/profile-hover";
 
 interface CommentCardProps {
   isLoading?: boolean;
@@ -77,13 +78,15 @@ export default function CommentCard({
                   className="flex w-full h-full bg-white p-2 md:pr-3 rounded-sm gap-2 md:gap-5"
                 >
                   <div className="flex items-start justify-center w-auto md:w-10 h-10">
-                    <Image
-                      src={user.avatar || defaultImage}
-                      alt="profile"
-                      className="w-full h-full object-cover rounded-full"
-                      width={320}
-                      height={200}
-                    />
+                    <ProfileHover user={user}>
+                      <Image
+                        src={user.avatar || defaultImage}
+                        alt="profile"
+                        className="w-full h-full object-cover rounded-full"
+                        width={320}
+                        height={200}
+                      />
+                    </ProfileHover>
                   </div>
                   <div className="flex flex-col w-full">
                     <div className="flex items-center justify-between w-full">

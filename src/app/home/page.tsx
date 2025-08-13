@@ -1,7 +1,6 @@
 "use client";
 
 import AnimeCard1 from "@/features/anime/components/cards/anime-card1";
-import { motion } from "motion/react";
 import React from "react";
 import {
   useGetAnimeSchedule,
@@ -15,8 +14,6 @@ import { Separator } from "@/common/shadcn/separator";
 import AnimeCard4 from "@/features/anime/components/cards/anime-card4";
 import AnimeCarousel from "@/features/anime/components/anime-carousel";
 import ScheduleAnimeSection from "@/features/anime/components/sections/schedule-section";
-import { convertDay } from "@/common/helpers/day";
-import AnimeUpdatedCard from "@/features/anime/components/cards/anime-card-update";
 
 export default function HomePage() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
