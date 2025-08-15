@@ -9,7 +9,7 @@ export const CommentService = {
     },
 
     async getCommentByEps(data: { epsTitle: string }) {
-        return await apiClient<{ data: Comment[] }>({
+        return await apiClient<{ data: Comment[], count: number }>({
             url: `/comment/get/${data.epsTitle}`
         })
     },
