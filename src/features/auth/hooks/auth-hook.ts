@@ -146,7 +146,7 @@ export const useSignOut = () => {
                 autoClose: 2000,
                 position: "top-center"
             })
-            queryClient.invalidateQueries({ queryKey: ['profile'] })
+            queryClient.resetQueries({ queryKey: ['profile'], type :"all" })
             router.refresh()
         },
         onError: ({message}) => {
