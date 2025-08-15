@@ -173,7 +173,7 @@ export default function CommentCard({
                     parentId={id}
                   />
                 </div>
-                <div className="w-full pl-4 md:pl-8 relative">
+                <div className="w-full pl-4 md:pl-8 transition-all duration-500 relative">
                   {findShowReplyIndex(index) && (
                     <CommentNestedInput
                       parentId={id}

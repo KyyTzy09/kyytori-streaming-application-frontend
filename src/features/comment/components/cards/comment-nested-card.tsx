@@ -5,7 +5,6 @@ import { useGetReplyCommentByParentId } from "../../hooks/comment-hook";
 import CommentCard from "./comment-card";
 import { Comment } from "@/common/types/comment";
 import CommentSkeletonCard from "../skeleton/comment-skeleton-card";
-import CommentNestedInput from "../inputs/comment-nested-input";
 
 interface CommentNestedCardProps {
   parentId: string;
@@ -23,7 +22,7 @@ export default function CommentNestedCard({
   });
 
   return (
-    <div className="flex flex-col w-full h-full transition-all duration-500 pl-3 md:pl-5">
+    <div className="flex flex-col w-full h-full pl-3 md:pl-5 border-l border-y border-gray-500">
       {replyComments?.data?.length! > 0 && (
         <CommentCard
           data={replyComments?.data as Comment[]}
