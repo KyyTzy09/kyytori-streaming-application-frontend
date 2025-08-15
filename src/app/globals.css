@@ -73,16 +73,18 @@
 .shine-wrapper {
   position: relative;
   overflow: hidden;
-  border-radius: 0.75rem; /* rounded-xl */
+  border-radius: 0.75rem;
   background-image: linear-gradient(
-    135deg,
-    transparent 25%,
-    rgba(255, 255, 255, 0.15) 50%,
-    transparent 75%,
-    transparent 100%
+  135deg,
+  transparent 47%,
+  rgba(255, 255, 255, 0.4) 49%,
+  rgba(255, 255, 255, 0.6) 50%,
+  rgba(255, 255, 255, 0.4) 55%,
+  transparent 60%
   );
+  background-repeat: no-repeat;
   background-size: 250% 250%;
-  animation: shineMove 4s linear infinite;
+  animation: shineMove 1.6s linear infinite;
 }
 
 

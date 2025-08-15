@@ -1,4 +1,5 @@
 import React from "react";
+import ShineEffectWrapper from "../shine-wrapper";
 
 interface imageSkeletonProps {
   width: number | string;
@@ -6,5 +7,5 @@ interface imageSkeletonProps {
 }
 
 export default function ImageSkeleton({ width, height }: imageSkeletonProps) {
-  return <div className={`bg-gray-600 w-${width} h-${height} animate-pulse`}></div>;
+  return <ShineEffectWrapper className={`bg-gray-600 w-${width} h-${height} animate-pulse`}></ShineEffectWrapper>;
 }

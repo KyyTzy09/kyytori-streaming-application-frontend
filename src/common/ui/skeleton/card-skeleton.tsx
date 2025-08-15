@@ -1,4 +1,5 @@
 import React from "react";
+import ShineEffectWrapper from "../shine-wrapper";
 
 export default function CardSkeleton() {
   return (
@@ -6,8 +7,8 @@ export default function CardSkeleton() {
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((num) => {
         return (
           <div key={num} className="w-full h-full flex flex-col gap-1">
-            <div className="w-full h-40 md:h-60 bg-gray-600 animate-pulse"></div>
-            <div className="w-full h-5 bg-gray-600 animate-pulse"></div>
+            <ShineEffectWrapper className="w-full h-40 md:h-60 bg-gray-600 animate-pulse"></ShineEffectWrapper>
+            <ShineEffectWrapper className="w-full h-5 bg-gray-600 animate-pulse"></ShineEffectWrapper>
           </div>
         );
       })}

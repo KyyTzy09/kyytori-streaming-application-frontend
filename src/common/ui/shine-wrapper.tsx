@@ -1,21 +1,19 @@
 import React from "react";
 
 interface ShineEffectWrapperProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
-  duration?: number;
 }
 
-export const ShineEffectWrapper: React.FC<ShineEffectWrapperProps> = ({
+export default function ShineEffectWrapper({
   children,
-  className = "",
-  duration = 3,
-}) => {
+  className,
+}: ShineEffectWrapperProps) {
   return (
     <div
-      className={`shine-wrapper relative overflow-hidden rounded-xl ${className}`}
+      className={`shine-wrapper ${className}`}
     >
       {children}
     </div>
   );
-};
+}

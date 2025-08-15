@@ -12,7 +12,7 @@ import Image from "next/image";
 import React from "react";
 import { usegetProfile } from "../../hooks/profile-hook";
 import { useRouter } from "next/navigation";
-import { ShineEffectWrapper } from "@/common/ui/shine-wrapper";
+import ShineEffectWrapper from "@/common/ui/shine-wrapper";
 
 interface ProfileHoverProps {
   children: React.ReactNode;
