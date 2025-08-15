@@ -69,7 +69,14 @@ export default function CommentCard({
             index
           ) => {
             return (
-              <div key={index} className="flex flex-col w-full h-full gap-2">
+              <div
+                key={index}
+                className={`flex flex-col w-full h-full gap-2 ${
+                  findShowReplyIndex(index)
+                    ? "border-l border-y border-gray-500"
+                    : ""
+                }`}
+              >
                 <motion.div
                   initial={{ translateX: -100, opacity: 0 }}
                   animate={{ translateX: 0, opacity: 100 }}
