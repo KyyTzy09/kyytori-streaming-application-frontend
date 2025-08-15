@@ -19,5 +19,9 @@ export const profileService = {
                 Authorization: `Bearer ${token}`
             }
         })
+    },
+
+    async getSomeoneProfile(data: { userId: string }) {
+        return await apiClient<{ data: User }>({ url : `/user/profile/${data.userId}` })
     }
 }

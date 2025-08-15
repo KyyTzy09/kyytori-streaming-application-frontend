@@ -7,8 +7,9 @@ import NavigationHeader from "@/common/ui/headers/header";
 
 interface ProfileHeaderProps {
   title: string;
+  description: string;
 }
-export default function ProfileHeader({ title }: ProfileHeaderProps) {
+export default function ProfileHeader({ title, description }: ProfileHeaderProps) {
   const router = useRouter();
   const pathName = usePathname();
   const handleAction = () => {
@@ -17,7 +18,7 @@ export default function ProfileHeader({ title }: ProfileHeaderProps) {
   };
   return (
     <NavigationHeader
-      description="Lihat informasi tentang dirimu"
+      description={description}
       title={title}
       actionText="Kembali"
       action={handleAction}

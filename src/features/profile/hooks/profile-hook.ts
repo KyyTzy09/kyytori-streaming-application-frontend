@@ -44,3 +44,11 @@ export const useUpdateProfile = () => {
         }
     })
 }
+
+export const useGetSomeoneProfile = (data: { userId: string }) => {
+    return useQuery({
+        queryKey: ['profile-someone', data.userId],
+        queryFn: async () => await profileService.getSomeoneProfile(data),
+        staleTime : 2 * 60 * 1000
+    })
+}

@@ -5,6 +5,8 @@ export type User = {
     email: string
     role: Roles
     profile: Profile
+    createdAt: Date
+    updatedAt: Date
 }
 
 export type Profile = {
@@ -12,4 +14,6 @@ export type Profile = {
     userName: string
     info: string
     avatar: string
+    createdAt: Date
+    updatedAt: Date
 }
