@@ -2,15 +2,17 @@
 
 import { defaultImage } from "@/common/constant/image";
 import PreviewImageModal from "@/common/ui/modals/preview-modal";
+import { useGetUserFavorites } from "@/features/favorite/hooks/favorite-hook";
 import AvatarDropDown from "@/features/profile/components/interact/avatar-dropdown";
 import ProfileHeader from "@/features/profile/components/profile.header";
 import {
   usegetProfile,
   useGetSomeoneProfile,
 } from "@/features/profile/hooks/profile-hook";
-import { Calendar, EyeIcon, Mail, Timer } from "lucide-react";
+import { Calendar, EyeIcon, Mail } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import React from "react";
 
@@ -19,7 +21,9 @@ export default function ProfileUserPage() {
   const [showInfo, setShowInfo] = React.useState<boolean>(false);
 
   const { userId } = useParams<{ userId: string }>();
+  const { data: selfProfile } = usegetProfile();
   const { data: profile } = useGetSomeoneProfile({ userId });
+  const { data: favorites } = useGetUserFavorites();
 
   const handleShowInfo = (infoLength: number) => {
     if (!showInfo) {
@@ -28,7 +32,7 @@ export default function ProfileUserPage() {
       setShowInfo(false);
     }
   };
-  
+
   return (
     <>
       <AnimatePresence>
@@ -42,10 +46,10 @@ export default function ProfileUserPage() {
           />
         )}
       </AnimatePresence>
-      <div className="w-full min-h-screen p-5">
+      <div className="w-full flex flex-col gap-5 min-h-screen p-3 md:p-5">
         <ProfileHeader
           description={`Berisi informasi ${profile?.data.profile.userName}`}
-          title={`Profil ${profile?.data.profile.userName}`}
+          title={`Selamat datang, ${profile?.data.profile.userName}`}
         />
         <motion.section
           initial={{ translateY: -200, opacity: 0 }}
@@ -53,6 +57,7 @@ export default function ProfileUserPage() {
           exit={{ translateY: -200, opacity: 0 }}
           className="w-full h-full bg-gray-50 p-3 md:p-5 rounded-md relative"
         >
+          <div className="absolute w-full h-1/2 bg-gradient-to-br from-black via-red-500 to-gray-900 top-0 left-0 rounded-t-sm z-0"></div>
           <div className="w-ful h-full flex flex-col md:flex-row items-center md:items-start gap-5 md:gap-10 mb-5">
             <div className="group w-32 h-32 sm:w-40 sm:h-40 rounded-full relative">
               <Image
@@ -72,18 +77,25 @@ export default function ProfileUserPage() {
             <div
               className={`${
                 showInfo ? "h-full" : "h-40"
-              }w-full flex flex-col items-center md:items-start justify-start max-w-[80%] mt-4 gap-3`}
+              }w-full flex flex-col items-center md:items-start justify-start max-w-[80%] mt-4 gap-3 relative`}
             >
-              <div className="w-full flex justify-start items-center gap-2">
-                <p className="text-gray-500 flex items-center justify-center gap-2">
-                  <Mail className="w-5 h-5" /> {profile?.data.email}
-                </p>
-                <p className="text-gray-500 flex items-center justify-center gap-2">
-                  <Calendar className="w-5 h-5" /> Bergabung pada:{" "}
+              <div className="w-full hidden md:flex justify-start items-start md:items-center gap-2">
+                <Link
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile?.data.email}&su=${selfProfile?.data.email}&body=Hai, saya ${selfProfile?.data.email}`}
+                  target="_blank"
+                  className="text-white flex items-center justify-center gap-2"
+                >
+                  <Mail className="w-6 h-6 bg-red-500 rounded-full p-1 text-white" />
+                  {profile?.data.email}
+                </Link>
+
+                <p className="text-white flex items-center justify-center gap-2">
+                  <Calendar className="w-6 h-6 bg-red-500 rounded-full p-1 text-white" />{" "}
+                  Bergabung pada:{" "}
                   {new Date(profile?.data?.createdAt!).toLocaleDateString()}
                 </p>
               </div>
-              <p className="text-red-500 text-lg font-bold">
+              <p className="text-red-500 md:text-white text-lg font-bold">
                 {profile?.data?.profile.userName}
               </p>
               <p
@@ -109,7 +121,21 @@ export default function ProfileUserPage() {
               )}
             </div>
           </div>
+          <div className="w-full md:hidden flex justify-center items-center gap-2">
+            <p className="text-gray-500 flex items-center justify-center gap-2 text-[10px] sm:text-[14px]">
+              <Mail className="w-6 h-6 bg-red-500 rounded-full p-1 text-white" />{" "}
+              {profile?.data.email}
+            </p>
+            <p className="text-gray-500 flex items-center justify-center gap-2 text-[10px] sm:text-[14px]">
+              <Calendar className="w-6 h-6 bg-red-500 rounded-full p-1 text-white" />{" "}
+              Bergabung pada:{" "}
+              {new Date(profile?.data?.createdAt!).toLocaleDateString()}
+            </p>
+          </div>
         </motion.section>
+        <motion.div className="w-full h-full flex bg-gray-50 p-3 md:p-5 rounded-md relative">
+          <div className="w-[30%] h-full bg-red-500"></div>
+        </motion.div>
       </div>
     </>
   );
