@@ -24,6 +24,14 @@ export const useGetFavorite = (data: queryByAnimeId) => {
     })
 }
 
+export const useGetOtherPersonFavorites = (data: { userId: string }) => {
+    return useQuery({
+        queryKey: ['get-othersFavorites', data.userId],
+        queryFn: async () => favoriteService.getOtherPerson(data),
+        staleTime : 2 * 60 * 1000
+    })
+}
+
 export const usePostFavorite = (data: queryByAnimeId) => {
     const queryClient = useQueryClient();
     return useMutation({

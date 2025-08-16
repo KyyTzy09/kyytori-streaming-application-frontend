@@ -3,7 +3,7 @@
 import { defaultImage } from "@/common/constant/image";
 import PreviewImageModal from "@/common/ui/modals/preview-modal";
 import AnimeFavoriteCard2 from "@/features/favorite/components/cards/favorite-anime-card2";
-import { useGetUserFavorites } from "@/features/favorite/hooks/favorite-hook";
+import { useGetOtherPersonFavorites, useGetUserFavorites } from "@/features/favorite/hooks/favorite-hook";
 import AvatarDropDown from "@/features/profile/components/interact/avatar-dropdown";
 import ProfileHeader from "@/features/profile/components/profile.header";
 import {
@@ -24,7 +24,7 @@ export default function ProfileUserPage() {
   const { userId } = useParams<{ userId: string }>();
   const { data: selfProfile } = usegetProfile();
   const { data: profile } = useGetSomeoneProfile({ userId });
-  const { data: favorites, isPending: gettingFav } = useGetUserFavorites();
+  const { data: favorites, isPending: gettingFav } = useGetOtherPersonFavorites({ userId });
 
   const handleShowInfo = (infoLength: number) => {
     if (!showInfo) {

@@ -15,6 +15,10 @@ export const favoriteService = {
         return await apiClient<{ message: string, data: FavoritesAnime }>({ url: `/favorite/get/${data.animeId}`, headers: { Authorization: `Bearer ${token}` } })
     },
 
+    async getOtherPerson(data: { userId: string }) {
+        return await apiClient<{ message: string, data: FavoritesAnime[] }>({ url: `/favorite/others-user/get/${data.userId}` })
+    },
+    
     async addFavorite(data: queryByAnimeId) {
         const token = await getCookies()
         return await apiClient<{ message: string, data: FavoritesAnime }>({ url: `/favorite/add`, method: 'post', data, headers: { Authorization: `Bearer ${token}` } })
