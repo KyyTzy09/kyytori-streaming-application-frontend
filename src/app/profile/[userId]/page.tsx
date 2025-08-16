@@ -2,6 +2,7 @@
 
 import { defaultImage } from "@/common/constant/image";
 import PreviewImageModal from "@/common/ui/modals/preview-modal";
+import AnimeFavoriteCard2 from "@/features/favorite/components/cards/favorite-anime-card2";
 import { useGetUserFavorites } from "@/features/favorite/hooks/favorite-hook";
 import AvatarDropDown from "@/features/profile/components/interact/avatar-dropdown";
 import ProfileHeader from "@/features/profile/components/profile.header";
@@ -23,7 +24,7 @@ export default function ProfileUserPage() {
   const { userId } = useParams<{ userId: string }>();
   const { data: selfProfile } = usegetProfile();
   const { data: profile } = useGetSomeoneProfile({ userId });
-  const { data: favorites } = useGetUserFavorites();
+  const { data: favorites, isPending: gettingFav } = useGetUserFavorites();
 
   const handleShowInfo = (infoLength: number) => {
     if (!showInfo) {
@@ -133,8 +134,34 @@ export default function ProfileUserPage() {
             </p>
           </div>
         </motion.section>
-        <motion.div className="w-full h-full flex bg-gray-50 p-3 md:p-5 rounded-md relative">
-          <div className="w-[30%] h-full bg-red-500"></div>
+        <motion.div className="w-full h-full flex flex-col bg-gray-50 p-3 md:p-5 rounded-md relative gap-5">
+          <div className="w-full flex justify-between">
+            <p className="text-red-500 font-bold">
+              Favorite Anime ({favorites?.data.length || 0})
+            </p>
+            {/* Toggle mode */}
+          </div>
+          <div className="w-full">
+            {favorites?.data.length! > 0 ? (
+              <AnimeFavoriteCard2
+                data={favorites?.data!}
+                isPending={gettingFav}
+              />
+            ) : (
+              <div className="flex flex-col gap-2 items-center justify-center w-full h-full bg-gray-200 rounded-b-sm">
+                <Image
+                  src={"/img/not-found-404.png"}
+                  alt="404"
+                  width={300}
+                  height={300}
+                  className="w-56 h-56 md:w-80 md:h-80"
+                />
+                <p className="text-black font-semibold text-sm md:text-lg">
+                  Belum ada anime yang ditambahkan
+                </p>
+              </div>
+            )}
+          </div>
         </motion.div>
       </div>
     </>

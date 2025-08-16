@@ -12,7 +12,7 @@ interface FavoriteAnimeCard2Props {
   isPending: boolean;
 }
 
-export default function FavoriteAnimeCard2({
+export default function AnimeFavoriteCard2({
   data,
   isPending,
 }: FavoriteAnimeCard2Props) {
