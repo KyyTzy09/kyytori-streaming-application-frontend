@@ -142,25 +142,10 @@ export default function ProfileUserPage() {
             {/* Toggle mode */}
           </div>
           <div className="w-full">
-            {favorites?.data.length! > 0 ? (
-              <AnimeFavoriteCard2
-                data={favorites?.data!}
-                isPending={gettingFav}
-              />
-            ) : (
-              <div className="flex flex-col gap-2 items-center justify-center w-full h-full bg-gray-200 rounded-b-sm">
-                <Image
-                  src={"/img/not-found-404.png"}
-                  alt="404"
-                  width={300}
-                  height={300}
-                  className="w-56 h-56 md:w-80 md:h-80"
-                />
-                <p className="text-black font-semibold text-sm md:text-lg">
-                  Belum ada anime yang ditambahkan
-                </p>
-              </div>
-            )}
+            <AnimeFavoriteCard2
+              data={favorites?.data || []}
+              isPending={gettingFav}
+            />
           </div>
         </motion.div>
       </div>
