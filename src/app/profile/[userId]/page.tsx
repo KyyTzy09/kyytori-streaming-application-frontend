@@ -57,7 +57,7 @@ export default function ProfileUserPage() {
           exit={{ translateY: -200, opacity: 0 }}
           className="w-full h-full bg-gray-50 p-3 md:p-5 rounded-md relative"
         >
-          <div className="absolute w-full h-1/2 bg-gradient-to-br from-black via-red-500 to-gray-900 top-0 left-0 rounded-t-sm z-0"></div>
+          <div className="absolute w-full h-1/2 bg-gradient-to-br from-red-500 via-red-700 to-gray-900 top-0 left-0 rounded-t-sm z-0"></div>
           <div className="w-ful h-full flex flex-col md:flex-row items-center md:items-start gap-5 md:gap-10 mb-5">
             <div className="group w-32 h-32 sm:w-40 sm:h-40 rounded-full relative">
               <Image
