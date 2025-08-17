@@ -64,9 +64,9 @@ export default function AnimeCarousel({ data, isLoading }: AnimeCarouselProps) {
                   className="w-full h-52 md:h-72 object-cover opacity-80 rounded-md"
                 />
                 <section className="absolute z-20 flex flex-col w-full h-full bg-black/60 p-5 gap-1">
-                  <div className="w-full flex items-center justify-between">
+                  <div className="w-full flex items-start justify-between">
                     <div className="w-full flex flex-col">
-                      <p className="text-red-500 sm:max-w-[300px] md:max-w-[90%] truncate font-semibold text-lg md:text-[30px] drop-shadow-md drop-shadow-red-500 line-clamp-1">
+                      <p className="text-red-500 max-w-[240px] sm:max-w-[300px] md:max-w-[90%] truncate font-semibold text-lg md:text-[30px] drop-shadow-md drop-shadow-red-500 line-clamp-1">
                         {title}
                       </p>
                       <p className="text-white sm:max-w-[300px] md:max-w-[90%] truncate font-semibold text-sm md:text-[18px] drop-shadow-md drop-shadow-white line-clamp-1">

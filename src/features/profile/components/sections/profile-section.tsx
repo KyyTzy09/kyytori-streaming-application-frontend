@@ -5,7 +5,7 @@ import { User } from "@/common/types/user";
 import AvatarDropDown from "../interact/avatar-dropdown";
 import ProfileForm from "../forms/profile-form";
 import PreviewImageModal from "../../../../common/ui/modals/preview-modal";
-import { Heart, HeartIcon, Pencil, Settings } from "lucide-react";
+import { Calendar, Heart, HeartIcon, Mail, Pencil, Settings } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import React from "react";
@@ -51,15 +51,16 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
         exit={{ translateY: -200, opacity: 0 }}
         className="w-full h-full bg-gray-50 p-3 md:p-5 rounded-md relative"
       >
+        <div className="absolute w-full h-[35%] md:h-1/2 bg-gradient-to-br from-red-500 via-red-700 to-gray-900 top-0 left-0 rounded-t-sm z-0"></div>
         <Settings
           onClick={() => setIsOpen(true)}
-          className="w-5 h-5 md:w-6 md:h-6 hover:text-red-500 cursor-pointer absolute top-2 right-2 transition duration-700"
+          className="w-5 h-5 md:w-6 md:h-6 text-white z-10 hover:text-red-500 cursor-pointer absolute top-2 right-2 transition duration-700"
         />
-        <div className="w-ful h-full flex flex-col md:flex-row items-center md:items-start gap-5 md:gap-10 mb-5">
+        <div className="w-ful h-full flex flex-col md:flex-row items-center md:items-start gap-5 md:gap-10 mb-5 relative">
           <div className="group w-32 h-32 sm:w-40 sm:h-40 rounded-full relative">
             <Image
               src={data.profile.avatar}
-              alt={data.profile.userName || "Name"}
+              alt={data.profile.userName || "Nama"}
               width={400}
               height={400}
               className="w-full h-full object-cover rounded-full"
@@ -78,7 +79,18 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
               showInfo ? "h-full" : "h-40"
             }w-full flex flex-col items-center md:items-start justify-start max-w-[80%] mt-4 gap-3`}
           >
-            <p className="text-red-500 text-lg font-bold">
+            <div className="w-full hidden md:flex justify-start items-start md:items-center gap-2">
+              <p className="text-white flex items-center justify-center gap-2">
+                <Mail className="w-6 h-6 bg-red-500 rounded-full p-1 text-white" />
+                {data?.email}
+              </p>
+              <p className="text-white flex items-center justify-center gap-2">
+                <Calendar className="w-6 h-6 bg-red-500 rounded-full p-1 text-white" />{" "}
+                Bergabung pada:{" "}
+                {new Date(data?.createdAt!).toLocaleDateString()}
+              </p>
+            </div>
+            <p className="text-red-500 md:text-white text-lg font-bold">
               {data.profile.userName}
             </p>
             <p
