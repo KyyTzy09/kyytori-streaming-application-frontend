@@ -21,12 +21,11 @@ interface ProfileHoverProps {
 
 export default function ProfileHover({
   children,
-  user: { userId, avatar, info, userName },
+  user: { userId, avatar, info, userName, createdAt },
 }: ProfileHoverProps) {
   // Hooks
   const { data: profile } = usegetProfile();
   const router = useRouter();
-
   // Method
   const handleRoute = () => {
     if (profile?.data.id === userId) {
@@ -60,6 +59,9 @@ export default function ProfileHover({
               </p>
               <p className="text-gray-300 font-semibold text-[10px] line-clamp-1">
                 {info}
+              </p>
+              <p className="text-gray-300 font-semibold text-[10px] line-clamp-1">
+                Bergabung pada {new Date(createdAt).toLocaleDateString()}
               </p>
             </div>
           </div>
