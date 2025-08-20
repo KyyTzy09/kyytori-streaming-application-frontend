@@ -21,7 +21,7 @@ export default function Navbar({ data }: { data: User }) {
         pathname.startsWith("/dashboard") && "hidden"
       }`}
     >
-      <div className="w-full h-full flex flex-col md:flex-wrap items-center justify-center p-6 md:p-8">
+      <div className="w-full h-full flex flex-col md:flex-wrap items-center justify-between md:justify-center p-6 md:p-8">
         <div className="w-full flex items-center justify-between">
           <Link
             href={"/home"}
