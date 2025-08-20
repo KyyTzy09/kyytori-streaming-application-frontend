@@ -10,7 +10,7 @@ export default function PopularAnimeMainSection() {
   return (
     <div className="w-full py-20 bg-black text-white flex flex-col items-center gap-12">
       <h2 className="text-3xl font-bold text-red-500">Anime Populer</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl w-full">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:max-w-6xl w-full p-5 md:p-0">
         {topRate?.data.length! > 0 && !topRateLoad
           ? topRate?.data?.slice(0, 8).map(({ anime: { image, title } }, i) => (
               <div
