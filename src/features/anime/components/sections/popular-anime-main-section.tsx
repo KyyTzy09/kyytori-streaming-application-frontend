@@ -4,6 +4,7 @@ import React from "react";
 import { useGetTopAnime } from "../../hooks/anime-hook";
 import Image from "next/image";
 import ShineEffectWrapper from "@/common/ui/shine-wrapper";
+import { motion } from "motion/react";
 
 export default function PopularAnimeMainSection() {
   const { data: topRate, isPending: topRateLoad } = useGetTopAnime();
@@ -13,7 +14,14 @@ export default function PopularAnimeMainSection() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:max-w-6xl w-full p-5 md:p-0">
         {topRate?.data.length! > 0 && !topRateLoad
           ? topRate?.data?.slice(0, 8).map(({ anime: { image, title } }, i) => (
-              <div
+              <motion.div
+                initial={{ opacity: 0, translateY: 100 }}
+                animate={{ opacity: 100, translateY: 0 }}
+                transition={{
+                  duration: 0.2,
+                  delay: i * 0.1,
+                  ease: "easeInOut",
+                }}
                 key={i}
                 className="relative group rounded-lg overflow-hidden shadow-lg hover:scale-105 transition"
               >
@@ -27,9 +35,9 @@ export default function PopularAnimeMainSection() {
                 <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-2 text-center opacity-0 group-hover:opacity-100 transition">
                   <p className="text-sm font-semibold line-clamp-1">{title}</p>
                 </div>
-              </div>
+              </motion.div>
             ))
-          : Array.from({ length: 5 }).map((_, index) => {
+          : Array.from({ length: 8 }).map((_, index) => {
               return (
                 <ShineEffectWrapper
                   key={index}

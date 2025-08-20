@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { Play, Star, Zap, MonitorPlay, Search } from "lucide-react";
 import PopularAnimeMainSection from "@/features/anime/components/sections/popular-anime-main-section";
+import { motion } from "motion/react";
 
 export default function LandingPage() {
   const superiorityitems = [
@@ -38,37 +41,61 @@ export default function LandingPage() {
         />
         {/* Left text */}
         <div className="w-full md:w-1/2 flex items-center px-6 md:px-28 py-20 md:py-32">
-          <div className="flex flex-col gap-4">
-            <p className="text-center md:text-start text-2xl md:text-4xl font-bold text-red-500">
+          <motion.div
+            className="flex flex-col gap-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.p
+              className="text-center md:text-start text-2xl md:text-4xl font-bold text-red-500"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               KyyTori
-            </p>
-            <p className="font-medium text-white text-sm md:text-base text-center md:text-justify leading-relaxed">
+            </motion.p>
+            <motion.p
+              className="font-medium text-white text-sm md:text-base text-center md:text-justify leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               KyyTori adalah website streaming anime dengan episode terlengkap
               dan update tercepat. Akses kapan saja dan dimana saja secara
               gratis. Tunggu apa lagi? Temukan dan tonton anime favoritmu hanya
               di Kyytori !!
-            </p>
-            <Link
-              href={"/home"}
-              className="self-center bg-red-500 px-4 py-3 hover:bg-red-400 hover:scale-105 flex gap-2 items-center justify-center md:justify-between md:self-start mt-4 rounded-md transition duration-500"
+            </motion.p>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="self-center md:self-start"
             >
-              <span className="text-white text-sm md:text-base font-semibold">
-                Mulai Sekarang
-              </span>
-              <Play className="w-4 h-4 text-white" />
-            </Link>
-          </div>
+              <Link
+                href={"/home"}
+                className="bg-red-500 px-4 py-3 flex gap-2 items-center justify-center rounded-md transition duration-500 text-white font-semibold"
+              >
+                <span className="text-sm md:text-base">Mulai Sekarang</span>
+                <Play className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
         {/* Right image */}
-        <div className="w-full md:w-1/2 flex items-center justify-center mt-8 md:mt-28 px-6">
+        <motion.div
+          className="w-full md:w-1/2 flex items-center justify-center mt-8 md:mt-28 px-6"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
           <img
             src="/img/kotorii.webp"
             alt="kyytori mascot"
             className="w-[80%] md:w-[90%] h-auto object-contain"
           />
-        </div>
+        </motion.div>
       </section>
-
       {/* Superiority section */}
       <section className="w-full py-16 md:py-20 bg-[#121111] text-white flex flex-col items-center gap-10 px-6">
         <h2 className="text-2xl md:text-3xl font-bold text-red-500">
@@ -76,34 +103,44 @@ export default function LandingPage() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl w-full">
           {superiorityitems.map(({ title, description, Icon }, index) => (
-            <div
+            <motion.div
               key={index}
-              className="flex flex-col items-center gap-3 text-center p-6 rounded-lg bg-black/40 hover:scale-105 transition"
+              className="flex flex-col items-center gap-3 text-center p-6 rounded-lg bg-black/40"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
             >
               <Icon className="w-8 h-8 md:w-10 md:h-10 text-red-500" />
               <h3 className="font-semibold text-base md:text-lg">{title}</h3>
               <p className="text-xs md:text-sm text-gray-300">{description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
-
       {/* Popular anime */}
       <PopularAnimeMainSection />
-
       {/* CTA */}
-      <div className="w-full py-12 md:py-16 bg-[#121111] flex flex-col items-center gap-6 text-white px-6 text-center">
+      <motion.div
+        className="w-full py-12 md:py-16 bg-[#121111] flex flex-col items-center gap-6 text-white px-6 text-center"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
         <h2 className="text-xl md:text-3xl font-bold">
           Siap Nonton Anime Favoritmu?
         </h2>
-        <Link
-          href={"/home"}
-          className="bg-red-500 px-5 py-3 rounded-md hover:bg-red-400 transition hover:scale-105 font-semibold text-sm md:text-base"
-        >
-          Mulai Nonton Sekarang
-        </Link>
-      </div>
-
+        <motion.div whileHover={{ scale: 1.05 }}>
+          <Link
+            href={"/home"}
+            className="bg-red-500 px-5 py-3 rounded-md hover:bg-red-400 transition font-semibold text-sm md:text-base"
+          >
+            Mulai Nonton Sekarang
+          </Link>
+        </motion.div>
+      </motion.div>
       {/* Footer */}
       <footer className="w-full py-6 bg-black text-center text-gray-400 text-xs md:text-sm">
         © {new Date().getFullYear()} Kyytori. All rights reserved.
