@@ -28,14 +28,14 @@ export default function AnimeCard4({ data, isLoading }: AnimeCard4Props) {
               duration: 0.2,
               ease: "easeInOut",
             }}
-            className="w-40 md:w-[200px] h-full shrink-0"
+            className="group w-40 md:w-[200px] h-full shrink-0 overflow-hidden"
           >
             <Link
               href={`/anime/${data[0].anime?.link}/episode/${data[0].link}`}
-              className="w-full h-full relative rounded-md overflow-hidden hover:opacity-75 transition duration-700"
+              className="w-full h-full relative rounded-md overflow-hidden hover:opacity-60 transition duration-700"
             >
               <Image
-                className="w-full h-full object-cover opacity-100"
+                className="w-full h-full object-cover opacity-100 group-hover:scale-110 transition-all"
                 src={data[0].anime?.image || defaultImage}
                 alt={data[0].anime?.title || "title"}
                 width={400}
@@ -82,14 +82,14 @@ export default function AnimeCard4({ data, isLoading }: AnimeCard4Props) {
                       ease: "easeInOut",
                       delay: i * 0.2,
                     }}
-                    className="w-40 md:w-[200px] "
+                    className="group w-40 md:w-[200px] overflow-hidden"
                   >
                     <Link
                       href={`/anime/${anime?.link}/episode/${link}`}
-                      className="w-full relative shrink-0 hover:opacity-75 transition duration-700"
+                      className="w-full relative shrink-0 hover:opacity-60 transition duration-700"
                     >
                       <Image
-                        className="w-full h-full object-cover rounded-md"
+                        className="w-full h-full object-cover rounded-md group-hover:scale-110 transition-all"
                         src={anime?.image || defaultImage}
                         alt={anime?.title || "title"}
                         width={400}
