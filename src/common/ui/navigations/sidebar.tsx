@@ -17,17 +17,17 @@ export default function DashboardSideBar({ data }: { data: User }) {
 
   const sideBarItems = [
     {
-      name: "Profile",
+      name: "Profil",
       path: "/dashboard",
       icon: UserIcon,
     },
     {
-      name: "Favorite",
+      name: "Favorit",
       path: "/dashboard/favorite",
       icon: Bookmark,
     },
     {
-      name: "Comment",
+      name: "Komentar",
       path: "/dashboard/comment",
       icon: FaComment,
     },
@@ -50,7 +50,7 @@ export default function DashboardSideBar({ data }: { data: User }) {
         description="Tindakan tidak dapat dibatalkan"
       />
       {data && (
-        <aside className="bg-red-600 w-full h-full flex flex-col items-center rounded-r-sm pb-5">
+        <aside className="bg-gradient-to-br from-gray-900 via-red-700 to-red-500 w-full h-full flex flex-col items-center rounded-r-sm">
           <section className="w-full flex bg-transparent pl-5 pt-5 items-center justify-center gap-2">
             <div className="h-10 w-12">
               <img
@@ -68,34 +68,48 @@ export default function DashboardSideBar({ data }: { data: User }) {
               </p>
             </div>
           </section>
-          <Separator className="my-5 border" />
-          <section className="w-full flex flex-col h-full justify-between">
+          <Separator className="mt-5 border" />
+          <section className="pt-5 w-full flex flex-col h-full justify-between bg-gray-200 pb-5">
             <div className="w-full flex flex-col px-3 gap-2">
-              <p className="text-white font-semibold text-[15px] w-full px-3">
+              <p className="text-red-600 font-bold text-[15px] w-full px-3">
                 Sidebar Menu
               </p>
               {sideBarItems.map((item) => (
                 <Button
                   onClick={() => router.push(item.path)}
                   key={item.name}
-                  className={`w-full justify-start items-center flex px-5 hover:bg-red-800 ${
+                  className={`w-full justify-start items-center flex px-5 hover:bg-red-600 shadow-md ${
                     pathName === item.path && pathName.startsWith(item.path)
-                      ? "bg-red-800 opacity-80"
-                      : "bg-transparent"
+                      ? "bg-red-600 opacity-80"
+                      : "bg-white"
                   }`}
                 >
-                  <item.icon className="w-5 h-5" />
-                  <p className="text-white font-semibold">{item.name}</p>
+                  <item.icon
+                    className={`w-5 h-5 text-black  ${
+                      pathName === item.path && pathName.startsWith(item.path)
+                        ? "text-white fill-white"
+                        : "text-black"
+                    }`}
+                  />
+                  <p
+                    className={`${
+                      pathName === item.path && pathName.startsWith(item.path)
+                        ? "text-white"
+                        : "text-black"
+                    } font-semibold`}
+                  >
+                    {item.name}
+                  </p>
                 </Button>
               ))}
             </div>
             <div className="w-full flex flex-col px-3 gap-2 items-center">
               <Button
                 onClick={() => setIsOpen(true)}
-                className="w-full bg-transparent justify-start items-start flex px-5"
+                className="w-full bg-white justify-start items-start flex px-5 hover:bg-red-500"
               >
-                <LucideLogOut className="w-5 h-5" />
-                <p className="text-white font-semibold">Logout</p>
+                <LucideLogOut className="w-5 h-5 text-black" />
+                <p className="text-black font-semibold">Logout</p>
               </Button>
             </div>
           </section>

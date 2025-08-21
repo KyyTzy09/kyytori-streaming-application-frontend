@@ -98,17 +98,22 @@ export default function LandingPage() {
       </section>
       {/* Superiority section */}
       <section className="w-full py-16 md:py-20 bg-[#121111] text-white flex flex-col items-center gap-10 px-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-red-500">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-2xl md:text-3xl font-bold text-red-500"
+        >
           Kenapa Pilih Kyytori?
-        </h2>
+        </motion.h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl w-full">
           {superiorityitems.map(({ title, description, Icon }, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center gap-3 text-center p-6 rounded-lg bg-black/40"
+              className="flex flex-col items-center gap-3 text-center p-6 rounded-lg bg-black/40 animate-glow"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             >
