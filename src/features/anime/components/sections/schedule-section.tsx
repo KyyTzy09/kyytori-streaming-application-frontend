@@ -36,7 +36,7 @@ export default function ScheduleAnimeSection({
       <div className="bg-red-500 h-2 absolute bottom-0 right-0 translate-x-[45rem] w-full -rotate-45"></div>
       <div className="w-full flex px-1">
         <AnimeHeader
-          front="Anime Update Hari Ini"
+          front="Anime Hari ini"
           back={`(${convertDay(new Date()).name})🔥🔥`}
           url="/schedule"
           linkText="Lihat Jadwal"

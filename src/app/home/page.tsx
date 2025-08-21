@@ -14,6 +14,7 @@ import { Separator } from "@/common/shadcn/separator";
 import AnimeCard4 from "@/features/anime/components/cards/anime-card4";
 import AnimeCarousel from "@/features/anime/components/anime-carousel";
 import ScheduleAnimeSection from "@/features/anime/components/sections/schedule-section";
+import GenresAnimeSection from "@/features/anime/components/sections/genre-anime-section";
 
 export default function HomePage() {
   const { data: ongoing, isPending: ongoingLoad } = useGetOngoingAnime();
@@ -61,6 +62,8 @@ export default function HomePage() {
         linkText="Lihat semua"
       />
       <AnimeCard4 data={topRate?.data as Episodes[]} isLoading={topRateLoad} />
+      <Separator className="px-2 border-red-500 border" />
+      <GenresAnimeSection />
     </div>
   );
 }
