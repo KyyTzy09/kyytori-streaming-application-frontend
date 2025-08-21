@@ -2,6 +2,7 @@
 
 import { Button } from "@/common/shadcn/button";
 import NavigationHeader from "@/common/ui/headers/header";
+import ShineEffectWrapper from "@/common/ui/shine-wrapper";
 import { useGetAllGenres } from "@/features/genres/hooks/genre-hook";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -10,7 +11,7 @@ import React from "react";
 export default function GenresPage() {
   const router = useRouter();
 
-  const { data: genres } = useGetAllGenres();
+  const { data: genres, isPending } = useGetAllGenres();
   const handleBack = () => {
     router.back();
   };
@@ -25,19 +26,27 @@ export default function GenresPage() {
       />
       <section className="w-full flex flex-col">
         <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-          {genres?.data.length! > 0 &&
-            genres?.data.map((gen) => {
-              return (
-                <Button
-                  key={gen.name}
-                  onClick={() => router.push(`/gen/${gen.name}`)}
-                  className="w-full rounded-sm cursor-pointer flex items-center justify-between p-2 bg-transparent border-2 border-red-500 font-semibold text-white  hover:border-white hover:text-red-500 hover:scale-105 transition duration-700"
-                >
-                  <p className="text-[12px] md:text-sm">{gen.name}</p>
-                  <p className="text-[12px] md:text-sm">{gen.count}</p>
-                </Button>
-              );
-            })}
+          {!isPending && genres?.data.length! > 0
+            ? genres?.data.map((gen) => {
+                return (
+                  <Button
+                    key={gen.name}
+                    onClick={() => router.push(`/gen/${gen.name}`)}
+                    className="w-full rounded-sm cursor-pointer flex items-center justify-between p-2 bg-transparent border-2 border-red-500 font-semibold text-white  hover:border-white hover:text-red-500 hover:scale-105 transition duration-700"
+                  >
+                    <p className="text-[12px] md:text-sm">{gen.name}</p>
+                    <p className="text-[12px] md:text-sm">{gen.count}</p>
+                  </Button>
+                );
+              })
+            : Array.from({ length:35 }).map((_, index) => {
+                return (
+                  <ShineEffectWrapper
+                    key={index}
+                    className="w-full h-10 bg-gray-500 rounded-sm"
+                  ></ShineEffectWrapper>
+                );
+              })}
         </div>
       </section>
     </div>
