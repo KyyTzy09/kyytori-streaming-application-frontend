@@ -1,7 +1,7 @@
 import { defaultImage } from "@/common/constant/image";
 import { statusColor } from "@/common/helpers/status";
 import { Anime } from "@/common/types/anime";
-import Card2Skeleton from "@/common/ui/skeleton/card2-skeleton";
+import Card2Skeleton from "../skeleton/card2-skeleton";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";

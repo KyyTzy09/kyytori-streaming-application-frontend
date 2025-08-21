@@ -1,5 +1,5 @@
 import React from "react";
-import ShineEffectWrapper from "../shine-wrapper";
+import ShineEffectWrapper from "@/common/ui/shine-wrapper";
 
 export default function Card2Skeleton() {
   return (
