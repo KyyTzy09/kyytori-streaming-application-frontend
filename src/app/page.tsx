@@ -1,4 +1,4 @@
-import LandingPage from "@/common/ui/pages/main-pages";
+import LandingPage from "@/common/ui/view/main-view";
 import React from "react";
 
 export default function MainPage() {
