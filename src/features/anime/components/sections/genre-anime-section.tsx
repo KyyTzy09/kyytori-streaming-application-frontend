@@ -8,8 +8,7 @@ import {
 } from "@/features/genres/hooks/genre-hook";
 import { Button } from "@/common/shadcn/button";
 import ShineEffectWrapper from "@/common/ui/shine-wrapper";
-import { motion } from "motion/react";
-import AnimeCard1 from "../cards/anime-card1";
+import AnimeCard5 from "../cards/anime-card5";
 
 export default function GenresAnimeSection() {
   // State
@@ -61,7 +60,7 @@ export default function GenresAnimeSection() {
               })}
         </div>
         <div className="flex w-full">
-          <AnimeCard1
+          <AnimeCard5
             data={anime?.data.slice(0, 14) as []}
             isLoading={genreLoad}
           />
