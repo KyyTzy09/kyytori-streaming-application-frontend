@@ -16,3 +16,11 @@ export const useGetAnimeByGenre = (data: { genre: string, page?: number }) => {
         staleTime: 2 * 60 * 1000
     })
 }
+
+export const useGetTopGenre = () => {
+    return useQuery({
+        queryKey: ["top-genre"],
+        queryFn: async () => await genreService.getTopGenre(),
+        staleTime: 2 * 60 * 1000
+    })
+}
