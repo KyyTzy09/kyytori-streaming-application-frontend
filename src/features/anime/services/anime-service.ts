@@ -1,5 +1,5 @@
 import { apiClient } from "@/common/helpers/axios"
-import { Anime, Episodes, Epslink, scheduleType } from "../../../common/types/anime"
+import { Anime, Episodes, scheduleType } from "../../../common/types/anime"
 
 interface getPage {
     page?: number

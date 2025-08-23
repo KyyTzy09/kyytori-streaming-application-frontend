@@ -10,7 +10,7 @@ import { Separator } from "@/common/shadcn/separator";
 import { Profile } from "@/common/types/user";
 import Image from "next/image";
 import React from "react";
-import { usegetProfile } from "../../hooks/profile-hook";
+import { useGetProfile } from "../../hooks/profile-hook";
 import { useRouter } from "next/navigation";
 import ShineEffectWrapper from "@/common/ui/shine-wrapper";
 
@@ -24,7 +24,7 @@ export default function ProfileHover({
   user: { userId, avatar, info, userName, createdAt },
 }: ProfileHoverProps) {
   // Hooks
-  const { data: profile } = usegetProfile();
+  const { data: profile } = useGetProfile();
   const router = useRouter();
   // Method
   const handleRoute = () => {

@@ -56,6 +56,7 @@ export default function useProfileForm() {
                     position: "top-center"
                 })
             }
+            throw error
         } finally {
             setIsLoading(false)
         }
@@ -100,6 +101,7 @@ export default function useProfileForm() {
                     position: "top-center"
                 })
             }
+            console.log(error);
         } finally {
             setIsLoading(false)
             data.setIsOpen(false)
@@ -113,6 +115,7 @@ export default function useProfileForm() {
             await apiClient({ url: "/profile/delete-avatar", headers: { Authorization: `Bearer ${token}` } })
             router.refresh();
         } catch (error) {
+            console.log(error);
             return;
         } finally {
             setIsLoading(false);

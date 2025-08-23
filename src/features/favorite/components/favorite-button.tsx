@@ -13,10 +13,7 @@ import {
   useGetFavorite,
   usePostFavorite,
 } from "../hooks/favorite-hook";
-
-import { useQueryClient } from "@tanstack/react-query";
 import { User } from "@/common/types/user";
-import { boolean } from "zod";
 import UnauthorizedModal from "@/common/ui/modals/unauthorized-modal";
 
 interface FavoriteButtonProps {

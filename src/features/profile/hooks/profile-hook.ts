@@ -6,7 +6,7 @@ import { updateProfileType } from "@/common/schemas/profile-schema"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 
-export const usegetProfile = () => {
+export const useGetProfile = () => {
     return useQuery({
         queryKey: ['profile'],
         queryFn: async () => await profileService.getProfile(),

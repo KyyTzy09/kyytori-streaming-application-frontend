@@ -2,7 +2,6 @@ import { motion } from "motion/react";
 import { Card, CardContent } from "@/common/shadcn/card";
 import { Anime } from "@/common/types/anime";
 import CardSkeleton from "../skeleton/anime-skeleton-card";
-import { PlayCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

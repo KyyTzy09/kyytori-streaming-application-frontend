@@ -2,7 +2,7 @@ import { defaultImage } from "@/common/constant/image";
 import { statusColor } from "@/common/helpers/status";
 import { Anime } from "@/common/types/anime";
 import Card2Skeleton from "../skeleton/anime-skeleton-card2";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

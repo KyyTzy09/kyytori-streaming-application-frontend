@@ -2,8 +2,6 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { Roles } from "./common/enums/role";
-import { authService } from "./features/auth/services/auth.service";
-import { User } from "./common/types/user";
 import { checkSession } from "./lib/session";
 
 export default async function Middleware(req: NextRequest) {

@@ -1,5 +1,6 @@
 "use client";
 
+import { FavoritesAnime } from "@/common/types/favorite";
 import AnimeFavoriteCard from "@/features/favorite/components/cards/favorite-anime-card";
 import FavoriteHeader from "@/features/favorite/components/favorite-header";
 import { useGetUserFavorites } from "@/features/favorite/hooks/favorite-hook";
@@ -15,7 +16,10 @@ export default function FavoritePage() {
           favorite?.data.length! > 0 ? "bg-gray-50" : "bg-transparent"
         } shadow shadow-black rounded-md p-5`}
       >
-        <AnimeFavoriteCard data={favorite?.data || []} isLoading={isPending} />
+        <AnimeFavoriteCard
+          data={favorite?.data as FavoritesAnime[]}
+          isLoading={isPending}
+        />
       </div>
     </div>
   );

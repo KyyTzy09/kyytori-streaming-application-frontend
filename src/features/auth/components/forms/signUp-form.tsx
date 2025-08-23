@@ -1,21 +1,17 @@
 "use client";
 
-import useFormHandle from "@/common/composables/auth-form";
 import { registerSchema, registerType } from "@/common/schemas/auth-schema";
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
 import { Loader } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
-import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUp } from "../../hooks/auth-hook";
 
 export default function SignUpForm() {
-  const router = useRouter();
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const {
     register,

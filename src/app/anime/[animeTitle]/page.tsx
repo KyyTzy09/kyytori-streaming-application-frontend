@@ -5,16 +5,18 @@ import { animeService } from "@/features/anime/services/anime-service";
 import AnimeRating from "@/features/anime/components/anime.rating";
 import Link from "next/link";
 import ImageSkeleton from "@/common/ui/skeleton/image-skeleton";
-import { ArrowLeft, BookmarkPlus, Heart } from "lucide-react";
 import { episodeService } from "@/features/episodes/services/episode-service";
 import EpisodeCard from "@/features/episodes/components/episode-card";
 import FavoriteButton from "@/features/favorite/components/favorite-button";
-import { authService } from "@/features/auth/services/auth.service";
 import BackButton from "@/common/ui/buttons/back-button";
 import { checkSession } from "@/lib/session";
 
-export default async function DetailAnime({ params }: { params: { animeTitle: string; } }) {
-  const animeTitle = params.animeTitle;
+type DetailAnimeProps = {
+  params: Promise<{ animeTitle: string }>;
+};
+
+export default async function DetailAnime({ params }: DetailAnimeProps) {
+  const animeTitle = (await params).animeTitle;
   const decodedTitle = decodeURIComponent(animeTitle);
   const detail = (
     await animeService.detail({

@@ -19,7 +19,6 @@ export default function AnimeListPage() {
   const {
     data: Anime,
     isLoading: AnimeLoading,
-    isError: AnimeError,
   } = useGetAnimeList(Number(page));
 
   const paginationItems = [

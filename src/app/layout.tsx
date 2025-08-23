@@ -4,8 +4,6 @@ import "./globals.css";
 import Navbar from "@/common/ui/navigations/navbar";
 import { ToastContainer } from "react-toastify";
 import QueryProvider from "@/common/providers/query-provider";
-import { User } from "@/common/types/user";
-import { authService } from "@/features/auth/services/auth.service";
 import { checkSession } from "@/lib/session";
 
 const geistSans = Geist({

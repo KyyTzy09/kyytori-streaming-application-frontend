@@ -71,7 +71,7 @@ export default function FavoriteCommentSection() {
           </>
         ) : (
           <>
-            {comments?.data.length! > 0 && (
+            {(comments?.data.length as number) > 0 && (
               <div className="w-full flex flex-col min-h-screen items-center justify-start">
                 <div className="w-full flex items-center justify-between py-5">
                   <p className="text-red-500 text-sm font-semibold">

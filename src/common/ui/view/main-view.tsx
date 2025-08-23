@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Play, Star, Zap, MonitorPlay, Search } from "lucide-react";
 import PopularAnimeMainSection from "@/features/anime/components/sections/popular-anime-main-section";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 export default function LandingPage() {
   const superiorityitems = [
@@ -89,9 +90,11 @@ export default function LandingPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <img
+          <Image
             src="/img/kotorii.webp"
             alt="kyytori mascot"
+            width={320}
+            height={200}
             className="w-[80%] md:w-[90%] h-auto object-contain"
           />
         </motion.div>

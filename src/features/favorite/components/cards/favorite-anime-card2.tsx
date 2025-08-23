@@ -1,5 +1,5 @@
 import { statusColor } from "@/common/helpers/status";
-import { Card, CardContent } from "@/common/shadcn/card";
+import { CardContent } from "@/common/shadcn/card";
 import { FavoritesAnime } from "@/common/types/favorite";
 import CardSkeleton from "@/features/anime/components/skeleton/anime-skeleton-card";
 import { PlayCircleIcon } from "lucide-react";

@@ -3,7 +3,7 @@
 import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
 import { Comment } from "@/common/types/comment";
-import { ChevronDown, ChevronUp, MoreVerticalIcon } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import CommentNestedCard from "./comment-nested-card";

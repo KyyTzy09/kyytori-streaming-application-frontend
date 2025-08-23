@@ -1,9 +1,3 @@
-// status === "Ongoing"
-//     ? "bg-yellow-400"
-//     : status === "Completed"
-//         ? "bg-green-400"
-//         : "bg-red-500"
-
 import { Status } from "../enums/status"
 
 

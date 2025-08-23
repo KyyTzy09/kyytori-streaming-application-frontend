@@ -1,6 +1,5 @@
 "use client";
 
-import { Search } from "lucide-react";
 import React from "react";
 import AuthButton from "@/features/auth/components/auth-button";
 import { User } from "@/common/types/user";

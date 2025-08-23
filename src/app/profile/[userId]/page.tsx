@@ -1,16 +1,13 @@
 "use client";
 
 import { defaultImage } from "@/common/constant/image";
+import { FavoritesAnime } from "@/common/types/favorite";
 import PreviewImageModal from "@/common/ui/modals/preview-modal";
 import AnimeFavoriteCard2 from "@/features/favorite/components/cards/favorite-anime-card2";
-import {
-  useGetOtherPersonFavorites,
-  useGetUserFavorites,
-} from "@/features/favorite/hooks/favorite-hook";
-import AvatarDropDown from "@/features/profile/components/interact/avatar-dropdown";
+import { useGetOtherPersonFavorites } from "@/features/favorite/hooks/favorite-hook";
 import ProfileHeader from "@/features/profile/components/profile.header";
 import {
-  usegetProfile,
+  useGetProfile,
   useGetSomeoneProfile,
 } from "@/features/profile/hooks/profile-hook";
 import { Calendar, EyeIcon, Mail } from "lucide-react";
@@ -25,14 +22,14 @@ export default function ProfileUserPage() {
   const [showInfo, setShowInfo] = React.useState<boolean>(false);
 
   const { userId } = useParams<{ userId: string }>();
-  const { data: selfProfile } = usegetProfile();
+  const { data: selfProfile } = useGetProfile();
   const { data: profile } = useGetSomeoneProfile({ userId });
   const { data: favorites, isPending: gettingFav } = useGetOtherPersonFavorites(
     { userId }
   );
 
   const handleShowInfo = (infoLength: number) => {
-    if (!showInfo) {
+    if (!showInfo && infoLength > 200) {
       setShowInfo(true);
     } else {
       setShowInfo(false);
@@ -97,7 +94,7 @@ export default function ProfileUserPage() {
                 <p className="text-white flex items-center justify-center gap-2">
                   <Calendar className="w-6 h-6 bg-red-500 rounded-full p-1 text-white" />{" "}
                   Bergabung pada:{" "}
-                  {new Date(profile?.data?.createdAt!).toLocaleDateString()}
+                  {new Date(profile?.data?.createdAt || 0).toLocaleDateString()}
                 </p>
               </div>
               <p className="text-red-500 md:text-white text-lg font-bold">
@@ -112,11 +109,11 @@ export default function ProfileUserPage() {
               >
                 {profile?.data.profile?.info}
               </p>
-              {profile?.data.profile?.info.length! > 200 && (
+              {profile?.data.profile?.info.length as number > 200 && (
                 <div className="md:hidden w-full flex items-center justify-end">
                   <p
                     onClick={() =>
-                      handleShowInfo(profile?.data.profile.info.length!)
+                      handleShowInfo(profile?.data.profile.info.length || 0)
                     }
                     className="text-[12px] md:text-sm hover:underline hover:cursor-pointer"
                   >
@@ -134,7 +131,7 @@ export default function ProfileUserPage() {
             <p className="text-gray-500 flex items-center justify-center gap-2 text-[10px] sm:text-[14px]">
               <Calendar className="w-6 h-6 bg-red-500 rounded-full p-1 text-white" />{" "}
               Bergabung pada:{" "}
-              {new Date(profile?.data?.createdAt!).toLocaleDateString()}
+              {new Date(profile?.data?.createdAt || 0).toLocaleDateString()}
             </p>
           </div>
         </motion.section>
@@ -147,7 +144,7 @@ export default function ProfileUserPage() {
           </div>
           <div className="w-full">
             <AnimeFavoriteCard2
-              data={favorites?.data || []}
+              data={favorites?.data as FavoritesAnime[]}
               isPending={gettingFav}
             />
           </div>

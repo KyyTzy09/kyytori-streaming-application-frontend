@@ -9,7 +9,6 @@ import CommentCard from "@/features/comment/components/cards/comment-card";
 import CommentInput from "@/features/comment/components/inputs/comment-input";
 import { useGetCommentByEpisode } from "@/features/comment/hooks/comment-hook";
 import { useGetEpsLink } from "@/features/episodes/hooks/episode-hook";
-import { usegetProfile } from "@/features/profile/hooks/profile-hook";
 import { AlertCircleIcon, ArrowLeft, ArrowRight, List } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";

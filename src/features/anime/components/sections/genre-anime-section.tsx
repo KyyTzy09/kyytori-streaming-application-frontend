@@ -37,7 +37,7 @@ export default function GenresAnimeSection() {
       </section>
       <section className="w-full flex flex-col gap-5">
         <div className="w-full grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-3">
-          {!isPending && genres?.data.length! > 0
+          {!isPending && genres?.data.length as number > 0
             ? genres?.data.map(({ name }) => {
                 return (
                   <Button

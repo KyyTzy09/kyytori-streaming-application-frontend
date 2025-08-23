@@ -1,5 +1,4 @@
 import { defaultImage } from "@/common/constant/image";
-import { Anime } from "@/common/types/anime";
 import { FavoritesAnime } from "@/common/types/favorite";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -27,18 +26,7 @@ export default function AnimeFavoriteCard({
           {data?.length > 0 &&
             data?.map(
               (
-                {
-                  user,
-                  anime: {
-                    id: animeId,
-                    image: animeCover,
-                    title: animeTitle,
-                    link,
-                    status,
-                    rating,
-                    type,
-                  },
-                },
+                { anime: { image: animeCover, title: animeTitle, link, type } },
                 index
               ) => {
                 return (

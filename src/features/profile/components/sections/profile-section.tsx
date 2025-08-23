@@ -1,18 +1,15 @@
 "use client";
 
-import { Label } from "@/common/shadcn/label";
 import { User } from "@/common/types/user";
 import AvatarDropDown from "../interact/avatar-dropdown";
 import ProfileForm from "../forms/profile-form";
 import PreviewImageModal from "../../../../common/ui/modals/preview-modal";
-import { Calendar, Heart, HeartIcon, Mail, Pencil, Settings } from "lucide-react";
+import { Calendar, Mail, Pencil, Settings } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import React from "react";
 import UpdateEmailForm from "../../../auth/components/forms/email-update-form";
 import UpdatePasswordForm from "@/features/auth/components/forms/password-update-form";
-import { Separator } from "@/common/shadcn/separator";
-import { Button } from "@/common/shadcn/button";
 import FavoriteCommentSection from "./favorite-comment-section";
 
 interface ProfileSectionProps {
@@ -25,12 +22,13 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
   const [showInfo, setShowInfo] = React.useState<boolean>(false);
 
   const handleShowInfo = (infoLength: number) => {
-    if (!showInfo) {
+    if (!showInfo && infoLength > 200) {
       setShowInfo(true);
     } else {
       setShowInfo(false);
     }
   };
+
   return (
     <div className="w-full flex flex-col gap-5">
       <ProfileForm data={data} isOpen={isOpen} setIsOpenAction={setIsOpen} />
@@ -87,7 +85,7 @@ export default function ProfileSection({ data }: ProfileSectionProps) {
               <p className="text-white flex items-center justify-center gap-2">
                 <Calendar className="w-6 h-6 bg-red-500 rounded-full p-1 text-white" />{" "}
                 Bergabung pada:{" "}
-                {new Date(data?.createdAt!).toLocaleDateString()}
+                {new Date(data?.createdAt).toLocaleDateString()}
               </p>
             </div>
             <p className="text-red-500 md:text-white text-lg font-bold">

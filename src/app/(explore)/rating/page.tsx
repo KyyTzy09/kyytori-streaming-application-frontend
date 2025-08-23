@@ -1,20 +1,12 @@
 "use client";
 
 import NotFound from "@/app/not-found";
-import { defaultImage } from "@/common/constant/image";
-import { statusColor } from "@/common/helpers/status";
 import { Button } from "@/common/shadcn/button";
 import { Episodes } from "@/common/types/anime";
 import AnimeHeader from "@/features/anime/components/anime-header";
-import {
-  useGetOngoingAnime,
-  useGetTopAnime,
-} from "@/features/anime/hooks/anime-hook";
+import { useGetTopAnime } from "@/features/anime/hooks/anime-hook";
 import TopEpisodeCard from "@/features/episodes/components/episode-top-card";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import { motion } from "motion/react";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 

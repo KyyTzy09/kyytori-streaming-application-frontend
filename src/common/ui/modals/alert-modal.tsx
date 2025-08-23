@@ -13,7 +13,7 @@ import React from "react";
 interface alertModalProps {
   isOpen: boolean;
   isLoading: boolean;
-  setIsOpenAction: any;
+  setIsOpenAction: (value: boolean) => void;
   alertAction: () => void;
   title: string;
   description: string;

@@ -4,7 +4,7 @@ import CommentHeader from "@/features/comment/components/comment-header";
 import UserCommentCard from "@/features/comment/components/cards/comment-user-card";
 import { useGetUserComment } from "@/features/comment/hooks/comment-hook";
 import React from "react";
-import Image from "next/image";
+import { Comment } from "@/common/types/comment";
 
 export default function CommentPage() {
   const { data: comment, isPending } = useGetUserComment();
@@ -12,7 +12,7 @@ export default function CommentPage() {
     <div className="w-full flex flex-col min-h-screen p-5">
       <CommentHeader komentarLength={comment?.data?.length || 0} />
       <div className="w-full flex flex-col min-h-screen">
-        <UserCommentCard data={comment?.data!} isLoading={isPending} />
+        <UserCommentCard data={comment?.data as Comment[]} isLoading={isPending} />
       </div>
     </div>
   );

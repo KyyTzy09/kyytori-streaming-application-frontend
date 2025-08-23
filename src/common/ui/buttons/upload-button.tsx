@@ -3,7 +3,7 @@
 import { Button } from "@/common/shadcn/button";
 import { Input } from "@/common/shadcn/input";
 import { Label } from "@/common/shadcn/label";
-import { ImageDownIcon, Trash, Trash2 } from "lucide-react";
+import { ImageDownIcon, Trash2 } from "lucide-react";
 import React from "react";
 
 interface ImageUploaderProps {

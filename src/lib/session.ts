@@ -15,7 +15,8 @@ export const checkSession = async () => {
                 Authorization: `Bearer ${token}`
             }
         })
-    } catch (error) {
+    } catch (err) {
+        console.log(err)
         return
     }
 }

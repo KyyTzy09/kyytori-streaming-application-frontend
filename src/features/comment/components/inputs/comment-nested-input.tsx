@@ -1,8 +1,8 @@
 import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
 import { Textarea } from "@/common/shadcn/textarea";
-import { usegetProfile } from "@/features/profile/hooks/profile-hook";
-import { Loader, LoaderIcon, SendIcon } from "lucide-react";
+import { useGetProfile } from "@/features/profile/hooks/profile-hook";
+import { LoaderIcon, SendIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { usePostReplyComment } from "../../hooks/comment-hook";
@@ -20,7 +20,7 @@ export default function CommentNestedInput({
 }: CommentNestedInputProps) {
   const [onFocus, setOnFocus] = React.useState<boolean>(false);
   const [comment, setComment] = React.useState<string>("");
-  const { data: user } = usegetProfile();
+  const { data: user } = useGetProfile();
 
   const { mutate: postComment, isPending: isPosting } = usePostReplyComment({
     parentId,
@@ -77,7 +77,7 @@ export default function CommentNestedInput({
               Batal
             </Button>
             <Button
-              disabled={comment.length === 0}
+              disabled={comment.length === 0 || isPosting}
               type="submit"
               className="px-6 text-[10px] md:text-sm flex bg-red-500 items-center justify-center gap-2 hover:bg-red-400 transition duration-700 cursor-pointer"
             >

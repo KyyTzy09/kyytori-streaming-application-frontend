@@ -23,7 +23,7 @@ export default function TopEpisodeCard({
   return (
     <div className="w-full flex flex-col items-center justify-between">
       {data?.length! > 0 &&
-        data?.map(({ title, animeId, rating, anime }, i) => {
+        data?.map(({ title, rating, anime }, i) => {
           return (
             <motion.div
               initial={{ opacity: 0, translateX: -100 }}

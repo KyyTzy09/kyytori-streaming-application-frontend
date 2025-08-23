@@ -42,7 +42,7 @@ export default function UserCommentCard({
             ) => {
               return (
                 <motion.div
-                  key={index}
+                  key={commentId}
                   initial={{ translateY: 100, opacity: 0 }}
                   animate={{ translateY: 0, opacity: 100 }}
                   transition={{ delay: 0.1 * index }}

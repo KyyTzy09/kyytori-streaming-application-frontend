@@ -70,7 +70,7 @@ export default function AnimeCard4({ data, isLoading }: AnimeCard4Props) {
           <div className="grid grid-rows-2 grid-flow-col h-full gap-2">
             {data
               ?.slice(1, data.length)
-              .map(({ anime, episode, link, title, rating }, i) => {
+              .map(({ anime, episode, link, rating }, i) => {
                 return (
                   <motion.div
                     key={i}

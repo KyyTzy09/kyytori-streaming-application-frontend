@@ -3,11 +3,11 @@
 import { defaultImage } from "@/common/constant/image";
 import { Button } from "@/common/shadcn/button";
 import { Textarea } from "@/common/shadcn/textarea";
-import { SendIcon } from "lucide-react";
+import { LoaderIcon, SendIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { usePostComment } from "../../hooks/comment-hook";
-import { usegetProfile } from "@/features/profile/hooks/profile-hook";
+import { useGetProfile } from "@/features/profile/hooks/profile-hook";
 import UnauthorizedModal from "@/common/ui/modals/unauthorized-modal";
 
 interface CommentInputProps {
@@ -19,7 +19,7 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
   const [comment, setComment] = React.useState<string>("");
   const [isLogin, setIsLogin] = React.useState<boolean>(false);
 
-  const { data: user } = usegetProfile();
+  const { data: user } = useGetProfile();
 
   const changeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (user?.data) {
@@ -87,12 +87,21 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
                 Batal
               </Button>
               <Button
-                disabled={comment.length === 0}
+                disabled={comment.length === 0 || isPosting}
                 type="submit"
                 className="px-6 text-[10px] md:text-[12px] flex bg-red-500 items-center justify-center gap-2 hover:bg-red-400 transition duration-700 cursor-pointer"
               >
-                <SendIcon className="text-white w-1 h-1 md:w-2 md:h-2" />
-                Kirim
+                {isPosting ? (
+                  <>
+                    <LoaderIcon />
+                    Mengirim...
+                  </>
+                ) : (
+                  <>
+                    <SendIcon className="text-white w-1 h-1 md:w-2 md:h-2" />
+                    Kirim
+                  </>
+                )}
               </Button>
             </div>
           )}

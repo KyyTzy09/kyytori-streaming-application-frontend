@@ -1,6 +1,7 @@
 import Rating from "@mui/material/Rating";
 import React from "react";
 
+export const dynamic = "force-dynamic";
 interface AnimeRatingProps {
   rating: string;
 }

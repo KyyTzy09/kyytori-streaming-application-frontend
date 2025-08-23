@@ -9,7 +9,7 @@ import {
 import { AlertCircleIcon, MoreVerticalIcon, Trash } from "lucide-react";
 import React from "react";
 import CommentDeleteAlert from "./comment-delete-alert";
-import { usegetProfile } from "@/features/profile/hooks/profile-hook";
+import { useGetProfile } from "@/features/profile/hooks/profile-hook";
 import { Roles } from "@/common/enums/role";
 
 interface CommentDropdownProps {
@@ -23,7 +23,7 @@ export default function CommentDropdown({
   commentId,
   epsTitle,
 }: CommentDropdownProps) {
-  const { data: userProfile } = usegetProfile();
+  const { data: userProfile } = useGetProfile();
   const [deleteComment, setDeleteComment] = React.useState<boolean>(false);
 
   const items = [

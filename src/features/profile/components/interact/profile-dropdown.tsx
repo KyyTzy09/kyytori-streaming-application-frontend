@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/common/shadcn/dropdown-menu";
-import { Bookmark, Command, LogOut, Menu, Settings, UserIcon } from "lucide-react";
+import { Bookmark, LogOut, Menu, Settings, UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import AvatarSkeleton from "../skeletons/avatar-skeleton";

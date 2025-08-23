@@ -5,7 +5,7 @@ import React from "react";
 import AnimeHeader from "../anime-header";
 import { convertDay } from "@/common/helpers/day";
 import AnimeUpdatedCard from "../cards/anime-card-update";
-import { Anime, scheduleType } from "@/common/types/anime";
+import { scheduleType } from "@/common/types/anime";
 
 interface scheduleAnimeSectionProps {
   data: scheduleType;

@@ -76,7 +76,7 @@ export const useUpdateEmail = () => {
     return useMutation({
         mutationKey: ["email-patch"],
         mutationFn: async (data: updateEmailType) => await authService.updateUserEmail(data),
-        onSuccess: () => {
+        onSuccess: async() => {
             toast.success("berhasil memperbarui email", {
                 position: "top-right",
                 autoClose: 2000,
@@ -86,8 +86,8 @@ export const useUpdateEmail = () => {
                 draggable: true,
                 progress: undefined,
             })
+            await deleteCookies()
             router.refresh()
-            useSignOut()
         },
         onError: (error) => {
             toast.error(error.message || "Gagal memperbarui email", {

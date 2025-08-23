@@ -1,11 +1,8 @@
 import {
   AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/common/shadcn/alert-dialog";
 import { Button } from "@/common/shadcn/button";
 import React from "react";
