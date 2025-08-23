@@ -1,71 +1,57 @@
 "use client";
 
-import NotFound from "@/app/not-found";
-import { defaultImage } from "@/common/constant/image";
-import { statusColor } from "@/common/helpers/status";
 import { Button } from "@/common/shadcn/button";
-import { Episodes } from "@/common/types/anime";
-import Card2Skeleton from "@/common/ui/skeleton/card2-skeleton";
-import AnimeHeader from "@/features/anime/components/anime-header";
-import {
-  useGetOngoingAnime,
-  useGetTopAnime,
-} from "@/features/anime/hooks/anime-hook";
-import TopEpisodeCard from "@/features/episodes/components/episode-top-card";
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import { motion } from "motion/react";
-import Image from "next/image";
-import Link from "next/link";
+import { Anime } from "@/common/types/anime";
+import AnimeCard2 from "@/features/anime/components/cards/anime-card2";
+import { useGetOngoingAnime } from "@/features/anime/hooks/anime-hook";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+import NotFound from "../../not-found";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
+import AnimeHeader from "@/features/anime/components/anime-header";
 
-export default function AnimeTopRatingPage() {
+export default function OngoingAnimePage() {
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const searchParam = useSearchParams();
 
-  const page = searchParam.get("page");
-  const { data: topRateAnime, isPending: topRateAnimeLoad } = useGetTopAnime(
+  const page = searchParams.get("page");
+  const { data: ongoing, isLoading: onGoingLoad } = useGetOngoingAnime(
     Number(page)
   );
-
-  if (topRateAnime?.data.length === 0) {
-    return <NotFound />;
-  }
 
   const paginationItems = [
     {
       name: "Sebelumnya",
-      value: topRateAnime?.pagination.prevPage
-        ? ` /rating?page=${topRateAnime?.pagination.prevPage}`
+      value: ongoing?.pagination.prevPage
+        ? ` /ongoing?page=${ongoing?.pagination.prevPage}`
         : null,
     },
     {
       name: "Selanjutnya",
-      value: topRateAnime?.pagination.nextPage
-        ? `/rating?page=${topRateAnime?.pagination.nextPage}`
+      value: ongoing?.pagination.nextPage
+        ? `/ongoing?page=${ongoing?.pagination.nextPage}`
         : null,
     },
   ];
 
+  if (ongoing?.data.length === 0) {
+    return <NotFound />;
+  }
   return (
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       <AnimeHeader
-        front="Top"
-        back="Rating-Anime"
+        front="Anime"
+        back="On-going"
         url="/home"
         linkText="Kembali"
       />
-      <TopEpisodeCard
-        data={topRateAnime?.data as Episodes[]}
-        isLoading={topRateAnimeLoad}
-        page={Number(page)}
-      />
+      <AnimeCard2 data={ongoing?.data as Anime[]} isLoading={onGoingLoad} />
       <section className="w-full flex items-center justify-center gap-5">
         <Button
           className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
-          disabled={!Number(page) || Number(page) === 1}
+          disabled={Number(page) === 1 || Number(page) === 0}
           onClick={() => {
-            scrollTo({ top: 0, behavior: "smooth" }), router.push(`/rating`);
+            scrollTo({ top: 0, behavior: "smooth" }), router.push(`/ongoing`);
           }}
         >
           <ArrowBigLeft className="text-white w-5 h-5" />
@@ -89,13 +75,13 @@ export default function AnimeTopRatingPage() {
         <Button
           className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
           disabled={
-            !Number(topRateAnime?.pagination.maxPage) ||
-            Number(page) === Number(topRateAnime?.pagination.maxPage) ||
-            Number(page) > Number(topRateAnime?.pagination.maxPage)
+            !Number(ongoing?.pagination.maxPage) ||
+            Number(page) === Number(ongoing?.pagination.maxPage) ||
+            Number(page) > Number(ongoing?.pagination.maxPage)
           }
           onClick={() => {
             scrollTo({ top: 0, behavior: "smooth" }),
-              router.push(`/rating?page=${topRateAnime?.pagination.maxPage}`);
+              router.push(`/ongoing?page=${ongoing?.pagination.maxPage}`);
           }}
         >
           MaxPage

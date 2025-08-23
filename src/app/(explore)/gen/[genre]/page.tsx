@@ -3,7 +3,7 @@
 import { Button } from "@/common/shadcn/button";
 import { Anime } from "@/common/types/anime";
 import NavigationHeader from "@/common/ui/headers/header";
-import AnimeCard1 from "@/features/anime/components/cards/anime-card1";
+import AnimeCard5 from "@/features/anime/components/cards/anime-card5";
 import { useGetAnimeByGenre } from "@/features/genres/hooks/genre-hook";
 import { ArrowBigLeft, ArrowBigRight, ArrowLeft } from "lucide-react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -48,7 +48,7 @@ export default function AnimeByGenrePage({ params }: AnimeByGenrePageProps) {
   };
 
   return (
-    <div className="w-full flex flex-col min-h-screen p-5">
+    <div className="w-full flex flex-col min-h-screen p-5 gap-10">
       <NavigationHeader
         title={`Ditemukan (${anime?.data.length || 0})`}
         description={`Berikut hasil pencarian anime dengan genre ${decodedGenre}`}
@@ -57,7 +57,7 @@ export default function AnimeByGenrePage({ params }: AnimeByGenrePageProps) {
         actionText="Kembali"
       />
       <div className="w-full flex">
-        <AnimeCard1 data={anime?.data as Anime[]} isLoading={genreLoad} />
+        <AnimeCard5 data={anime?.data as Anime[]} isLoading={genreLoad} />
       </div>
       <section className="w-full flex items-center justify-center gap-5">
         <Button
@@ -89,6 +89,7 @@ export default function AnimeByGenrePage({ params }: AnimeByGenrePageProps) {
         <Button
           className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
           disabled={
+            !Number(anime?.pagination.maxPage) ||
             Number(page) === Number(anime?.pagination.maxPage) ||
             Number(page) > Number(anime?.pagination.maxPage)
           }
