@@ -1,6 +1,5 @@
 "use client";
 
-import { defaultImage } from "@/common/constant/image";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -25,14 +24,18 @@ export default function AnimeSearchDialog({
   setActive,
 }: AnimeSearchDialogProps) {
   const [search, setSearch] = React.useState<string>("");
+  const [debounce, setDebounce] = React.useState<string>("");
   const [page, setPage] = React.useState<number>(1);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
+    setTimeout(() => {
+      setDebounce(e.target.value);
+    }, 1000);
   };
 
   const { data: anime, isPending: isLoading } = useGetSearchAnime(
-    search,
+    debounce,
     Number(page)
   );
 
