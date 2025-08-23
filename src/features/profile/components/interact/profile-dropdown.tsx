@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/common/shadcn/dropdown-menu";
-import { Bookmark, Command, LogOut, Menu, UserIcon } from "lucide-react";
+import { Bookmark, Command, LogOut, Menu, Settings, UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import AvatarSkeleton from "../skeletons/avatar-skeleton";
@@ -18,8 +18,7 @@ import { FaComment } from "react-icons/fa";
 import { useSignOut } from "@/features/auth/hooks/auth-hook";
 
 export default function ProfileDropdown({ user }: { user: User }) {
-
-  const { mutate : signOut } = useSignOut()
+  const { mutate: signOut } = useSignOut();
   const router = useRouter();
   const items = [
     {
@@ -72,6 +71,13 @@ export default function ProfileDropdown({ user }: { user: User }) {
             </DropdownMenuItem>
           );
         })}
+        <DropdownMenuItem
+          onClick={() => router.push("/dashboard/setting")}
+          className="w-full cursor-pointer focus:bg-red-500 flex md:hidden items-center justify-start gap-2 transition duration-700"
+        >
+          <Settings className="w-5 h-5 text-white" />
+          <p className="text-white font-semibold">Pengaturan</p>
+        </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => signOut()}
           className="w-full cursor-pointer focus:bg-red-500 flex items-center justify-start gap-2 transition duration-700 mt-4 border-white border"
