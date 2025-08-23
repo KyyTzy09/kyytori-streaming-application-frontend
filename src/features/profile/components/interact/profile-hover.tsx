@@ -47,7 +47,7 @@ export default function ProfileHover({
             <div className="w-1/4 h-full">
               <Image
                 src={avatar}
-                alt={userName || "dss"}
+                alt={userName || "nama"}
                 width={300}
                 height={300}
                 className="w-12 h-full rounded-full object-cover"

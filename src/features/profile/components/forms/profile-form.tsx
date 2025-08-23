@@ -65,7 +65,7 @@ export default function ProfileForm({
     <AlertDialog open={isOpen}>
       <AlertDialogContent className="bg-white">
         <AlertDialogTitle className="text-red-600 font-semibold">
-          Update Profile
+          Perbarui Profil
         </AlertDialogTitle>
         <form
           onSubmit={handleSubmit(onSubmit)}

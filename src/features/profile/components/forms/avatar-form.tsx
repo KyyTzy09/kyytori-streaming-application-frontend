@@ -38,7 +38,7 @@ export default function AvatarForm({
     <AlertDialog open={isOpen}>
       <AlertDialogContent className="w-[200px] p-5">
         <AlertDialogTitle className="text-red-500 font-semibold text-sm">
-          Update Avatar (1:1)
+          Perbarui Avatar (1:1)
         </AlertDialogTitle>
         <form
           onSubmit={handleSubmit}
@@ -63,7 +63,7 @@ export default function AvatarForm({
               {isLoading ? (
                 <Loader className="text-white w-5 h-5 animate-spin" />
               ) : (
-                "Upload"
+                "Unggah"
               )}
             </Button>
           </div>

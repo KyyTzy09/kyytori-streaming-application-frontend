@@ -23,17 +23,17 @@ export default function ProfileDropdown({ user }: { user: User }) {
   const router = useRouter();
   const items = [
     {
-      name: "Profile",
+      name: "Profil",
       path: "/dashboard",
       icon: UserIcon,
     },
     {
-      name: "Favorite",
+      name: "Favorit",
       path: "/dashboard/favorite",
       icon: Bookmark,
     },
     {
-      name: "Comment",
+      name: "Komentar",
       path: "/dashboard/comment",
       icon: FaComment,
     },
@@ -56,7 +56,7 @@ export default function ProfileDropdown({ user }: { user: User }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mr-2 md:mr-10 bg-[#252525] border-red-500 text-white font-semibold">
         <DropdownMenuLabel className="w-full flex justify-between items-center">
-          <p>Option</p>
+          <p>Opsi</p>
           <Menu className="w-4 h-4" />
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-red-500" />

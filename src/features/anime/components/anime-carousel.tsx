@@ -103,11 +103,11 @@ export default function AnimeCarousel({ data, isLoading }: AnimeCarouselProps) {
                     </p>
                     <p className="hidden md:flex items-center justify-center gap-2 text-white text-[10px] md:text-sm font-semibold bg-red-500 p-2 px-3 rounded-sm">
                       <Timer className="w-4 h-4" />
-                      {duration || "Unknown"}
+                      {duration || "Tidak Diketahui"}
                     </p>
                     <p className="hidden md:flex items-center justify-center gap-2 text-white text-[10px] md:text-sm font-semibold bg-red-500 p-2 px-3 rounded-sm">
                       <Sun className="w-4 h-4" />
-                      {season || "Unknown"}
+                      {season || "Tidak Diketahui"}
                     </p>
                   </div>
                 </section>
