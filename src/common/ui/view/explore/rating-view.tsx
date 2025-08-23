@@ -51,7 +51,7 @@ export default function AnimeTopRatingView() {
         isLoading={topRateAnimeLoad}
         page={Number(page)}
       />
-      <section className="w-full flex items-center justify-center gap-5">
+      <section className="w-full flex items-center justify-center gap-2 md:gap-5">
         <Button
           className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
           disabled={!Number(page) || Number(page) === 1}

@@ -46,7 +46,7 @@ export default function CompletedAnimeView() {
         linkText="Kembali"
       />
       <AnimeCard2 data={completed?.data as Anime[]} isLoading={completedLoad} />
-      <section className="w-full flex items-center justify-center gap-5">
+      <section className="w-full flex items-center justify-center gap-3">
         <Button
           className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
           disabled={Number(page) === 1 || Number(page) === 0}

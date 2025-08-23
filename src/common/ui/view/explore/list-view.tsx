@@ -56,7 +56,7 @@ export default function AnimeListView() {
       <section className="w-full flex items-center justify-between">
         <AnimeCard2 data={Anime?.data as Anime[]} isLoading={AnimeLoading} />
       </section>
-      <section className="w-full flex items-center justify-center gap-5">
+      <section className="w-full flex items-center justify-center gap-2 md:gap-5">
         {paginationItems.map((item) => {
           return (
             <Button
