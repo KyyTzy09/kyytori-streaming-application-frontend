@@ -149,10 +149,6 @@ export default function LandingPage() {
           </Link>
         </motion.div>
       </motion.div>
-      {/* Footer */}
-      <footer className="w-full py-6 bg-black text-center text-gray-400 text-xs md:text-sm">
-        © {new Date().getFullYear()} Kyytori. All rights reserved.
-      </footer>
     </div>
   );
 }
