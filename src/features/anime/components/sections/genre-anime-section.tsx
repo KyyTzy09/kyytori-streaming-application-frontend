@@ -12,7 +12,7 @@ import AnimeCard5 from "../cards/anime-card5";
 
 export default function GenresAnimeSection() {
   // State
-  const [selectedGenre, setSelectedGenre] = React.useState("Reincarnation");
+  const [selectedGenre, setSelectedGenre] = React.useState("Action");
 
   // Data
   const { data: genres, isPending } = useGetTopGenre();
