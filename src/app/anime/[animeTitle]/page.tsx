@@ -13,14 +13,8 @@ import { authService } from "@/features/auth/services/auth.service";
 import BackButton from "@/common/ui/buttons/back-button";
 import { checkSession } from "@/lib/session";
 
-interface detailAnimeProps {
-  params: {
-    animeTitle: string;
-  };
-}
-
-export default async function DetailAnime({ params }: detailAnimeProps) {
-  const { animeTitle } = await params;
+export default async function DetailAnime({ params }: { params: { animeTitle: string; } }) {
+  const animeTitle = params.animeTitle;
   const decodedTitle = decodeURIComponent(animeTitle);
   const detail = (
     await animeService.detail({

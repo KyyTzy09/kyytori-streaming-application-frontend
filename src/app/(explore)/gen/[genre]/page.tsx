@@ -9,19 +9,13 @@ import { ArrowBigLeft, ArrowBigRight, ArrowLeft } from "lucide-react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-interface AnimeByGenrePageProps {
-  params: {
-    genre: string;
-  };
-}
-
-export default function AnimeByGenrePage({ params }: AnimeByGenrePageProps) {
+export default function AnimeByGenrePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const { genre } = useParams<{ genre: string }>();
+  const { genre } = useParams();
   const page = searchParams.get("page");
-  const decodedGenre = decodeURIComponent(genre);
+  const decodedGenre = decodeURIComponent(genre as string);
 
   const { data: anime, isPending: genreLoad } = useGetAnimeByGenre({
     genre: decodedGenre,
