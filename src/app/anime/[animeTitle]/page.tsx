@@ -133,7 +133,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
                 <span className="text-red-500 font-semibold">Kyytori</span>
               </p>
             </div>
-            <div className="absolute bottom-0 w-full flex items-center justify-end bg-[#232323] py-1">
+            <div className="w-full flex items-center justify-end bg-[#232323] py-1">
               <div className="w-[60%] justify-between h-full flex items-center">
                 <AnimeRating rating={detail?.rating! ?? 0} />
                 <div className="w-6 h-7 mr-2">
@@ -193,7 +193,7 @@ export default async function DetailAnime({ params }: detailAnimeProps) {
             </div>
           </div>
         </div>
-        <div className="w-full h-full items-center relative flex">
+        <div className="w-full h-full items-center relative flex mt-5">
           <div className="hidden lg:flex w-52 flex-col absolute z-10 lg:top-0 lg:left-[100px] -translate-y-5 xl:-translate-y-36">
             <div className="w-full h-80 relative">
               <Image
