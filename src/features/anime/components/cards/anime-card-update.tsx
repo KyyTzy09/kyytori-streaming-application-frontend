@@ -38,7 +38,7 @@ export default function AnimeUpdatedCard({ data, isLoading }: AnimeCard1Props) {
           ) => {
             return (
               <motion.div
-                key={title}
+                key={id}
                 initial={{ opacity: 0, translateY: 100 }}
                 animate={{ opacity: 100, translateY: 0 }}
                 exit={{ opacity: 0, translateY: 100 }}
@@ -50,7 +50,6 @@ export default function AnimeUpdatedCard({ data, isLoading }: AnimeCard1Props) {
               >
                 <Link href={`/anime/${link}`}>
                   <Card
-                    key={id}
                     className="group bg-transparent p-0 rounded border-none relative"
                   >
                     <div className="absolute p-2 md:p-4 z-10 rounded-sm translate-y-10 opacity-0 flex flex-col justify-between gap-2 w-full group-hover:opacity-100 group-hover:translate-y-0 bg-black/90 top-0 bottom-0 transition duration-700">

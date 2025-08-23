@@ -54,7 +54,7 @@ export default function GenresAnimeSection() {
                 return (
                   <ShineEffectWrapper
                     key={index}
-                    className="w-28 h-10 bg-gray-500 rounded-sm"
+                    className="w-28 h-10 bg-gray-600 rounded-sm"
                   ></ShineEffectWrapper>
                 );
               })}

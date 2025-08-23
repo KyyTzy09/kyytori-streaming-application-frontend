@@ -21,7 +21,7 @@ export default function AnimeCard3({ data, isLoading }: AnimeCard3Props) {
       {data.length > 0 &&
         data.map(
           (
-            {image, genres, link, status, synopsis, title, type },
+            { id, image, genres, link, status, synopsis, title, type, },
             i
           ) => {
             return (
@@ -34,7 +34,7 @@ export default function AnimeCard3({ data, isLoading }: AnimeCard3Props) {
                   delay: i * 0.1,
                   ease: "easeInOut",
                 }}
-                key={title}
+                key={id}
               >
                 <Link
                   href={`/anime/${link}`}

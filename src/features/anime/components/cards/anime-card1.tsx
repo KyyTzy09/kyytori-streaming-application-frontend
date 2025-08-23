@@ -38,7 +38,7 @@ export default function AnimeCard1({ data, isLoading }: AnimeCard1Props) {
           ) => {
             return (
               <motion.div
-                key={title}
+                key={id}
                 initial={{ opacity: 0, translateY: 100 }}
                 animate={{ opacity: 100, translateY: 0 }}
                 exit={{ opacity: 0, translateY: 100 }}
