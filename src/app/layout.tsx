@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   description: "Streaming anime website",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
