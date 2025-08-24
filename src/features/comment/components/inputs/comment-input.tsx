@@ -71,8 +71,10 @@ export default function CommentInput({ epsTitle }: CommentInputProps) {
             onFocus={handleFocus}
             value={comment}
             className="bg-white text-[12px] md:text-sm break-all w-full"
-            placeholder={`Tambahkan komentar sebagai ${
-              user?.data?.profile?.userName || ""
+            placeholder={`${
+              user?.data?.profile?.userName
+                ? `Tambahkan komentar sebagai ${user?.data?.profile?.userName}`
+                : "Tambahkan Komentar"
             }`}
           />
           {onFocus && (

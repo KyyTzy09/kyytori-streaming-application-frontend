@@ -9,6 +9,7 @@ import {
 import { Button } from "@/common/shadcn/button";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { LogInIcon } from "lucide-react";
 
 interface UnauthorizedModalProps {
   isOpen: boolean;
@@ -24,10 +25,10 @@ export default function UnauthorizedModal({
     <AlertDialog open={isOpen}>
       <AlertDialogContent>
         <AlertDialogTitle className="text-red-600 font-semibold">
-          Anda Belum Login !!
+          Anda Belum Masuk !!
         </AlertDialogTitle>
         <AlertDialogDescription>
-          Anda Perlu Login Untuk Mengakses Fitur Ini
+          Anda Perlu Masuk Untuk Mengakses Fitur Ini
         </AlertDialogDescription>
         <div className="mt-5 w-full flex items-center justify-end gap-2">
           <Button
@@ -37,7 +38,8 @@ export default function UnauthorizedModal({
             Batal
           </Button>
           <Button onClick={() => router.push('/signin')} className="bg-red-600 hover:bg-red-300 transition duration-700 px-9 cursor-pointer">
-            Login
+            Masuk
+            <LogInIcon/>
           </Button>
         </div>
       </AlertDialogContent>
