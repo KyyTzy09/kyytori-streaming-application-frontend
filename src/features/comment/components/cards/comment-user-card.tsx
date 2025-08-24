@@ -10,17 +10,10 @@ interface UserCommentCardProps {
   isLoading: boolean;
 }
 
-export default function UserCommentCard({
-  data,
-  isLoading,
-}: UserCommentCardProps) {
-  if (isLoading) {
-    return <CommentSkeletonCard2 />;
-  }
-
+export default function UserCommentCard({ data, isLoading }: UserCommentCardProps) {
   return (
     <>
-      {!isLoading && data?.length! > 0 ? (
+      {data?.length! > 0 ? (
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
           {data?.map(
             (
@@ -89,7 +82,7 @@ export default function UserCommentCard({
       ) : isLoading ? (
         <CommentSkeletonCard2 />
       ) : (
-        <div className="flex flex-col items-center justify-center w-full min-h-screen">
+        <div className="flex flex-col items-center justify-center w-full">
           <Image
             src={"/img/not-found-404.png"}
             alt="404"
@@ -97,7 +90,7 @@ export default function UserCommentCard({
             height={300}
             className="w-56 h-56 md:w-80 md:h-80"
           />
-          <p className="text-white font-semibold text-lg">
+          <p className="text-white font-semibold text-sm md:text-lg">
             Anda belum menambahkan komentar apapun
           </p>
         </div>

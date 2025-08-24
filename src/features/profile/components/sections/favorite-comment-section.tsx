@@ -2,6 +2,8 @@
 
 import { Button } from "@/common/shadcn/button";
 import { Separator } from "@/common/shadcn/separator";
+import { Comment } from "@/common/types/comment";
+import { FavoritesAnime } from "@/common/types/favorite";
 import UserCommentCard from "@/features/comment/components/cards/comment-user-card";
 import { useGetUserComment } from "@/features/comment/hooks/comment-hook";
 import AnimeFavoriteCard from "@/features/favorite/components/cards/favorite-anime-card";
@@ -52,41 +54,37 @@ export default function FavoriteCommentSection() {
       <div className="w-full">
         {previewType === "fav" ? (
           <>
-            {favorites?.data.length! > 0 && (
-              <div className="w-full flex flex-col min-h-screen items-center justify-start">
-                <div className="w-full flex items-center justify-between py-5">
-                  <p className="text-red-500 text-sm font-semibold">
-                    Anime{" "}
-                    <span className="text-white">
-                      Favorit (<span>{favorites?.data.length || 0})</span>
-                    </span>
-                  </p>
-                </div>
-                <AnimeFavoriteCard
-                  data={favorites?.data!}
-                  isLoading={getFavoritesData}
-                />
+            <div className="w-full flex flex-col h-full items-center justify-start">
+              <div className="w-full flex items-center justify-between py-5">
+                <p className="text-red-500 text-sm font-semibold">
+                  Anime{" "}
+                  <span className="text-white">
+                    Favorit (<span>{favorites?.data.length || 0})</span>
+                  </span>
+                </p>
               </div>
-            )}
+              <AnimeFavoriteCard
+                data={favorites?.data as FavoritesAnime[]}
+                isLoading={getFavoritesData}
+              />
+            </div>
           </>
         ) : (
           <>
-            {(comments?.data.length as number) > 0 && (
-              <div className="w-full flex flex-col min-h-screen items-center justify-start">
-                <div className="w-full flex items-center justify-between py-5">
-                  <p className="text-red-500 text-sm font-semibold">
-                    Komentar{" "}
-                    <span className="text-white">
-                      Ditambahkan (<span>{comments?.data.length || 0})</span>
-                    </span>
-                  </p>
-                </div>
-                <UserCommentCard
-                  data={comments?.data!}
-                  isLoading={getCommentsData}
-                />
+            <div className="w-full flex flex-col h-full items-center justify-start">
+              <div className="w-full flex items-center justify-between py-5">
+                <p className="text-red-500 text-sm font-semibold">
+                  Komentar{" "}
+                  <span className="text-white">
+                    Ditambahkan (<span>{comments?.data.length || 0})</span>
+                  </span>
+                </p>
               </div>
-            )}
+              <UserCommentCard
+                data={comments?.data as Comment[]}
+                isLoading={getCommentsData}
+              />
+            </div>
           </>
         )}
       </div>

@@ -21,7 +21,7 @@ export default function AnimeFavoriteCard({
 
   return (
     <>
-      {data.length > 0 ? (
+      {data?.length > 0 ? (
         <div className="w-full h-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
           {data?.length > 0 &&
             data?.map(
@@ -67,7 +67,7 @@ export default function AnimeFavoriteCard({
       ) : isLoading ? (
         <FavoriteSkeletonCard />
       ) : (
-        <div className="flex flex-col items-center justify-center w-full min-h-screen">
+        <div className="flex flex-col items-center justify-center w-full">
           <Image
             src={"/img/not-found-404.png"}
             alt="404"
@@ -75,7 +75,7 @@ export default function AnimeFavoriteCard({
             height={300}
             className="w-56 h-56 md:w-80 md:h-80"
           />
-          <p className="text-white font-semibold text-lg">
+          <p className="text-white font-semibold text-sm md:text-lg">
             Anda belum menambahkan anime apapun
           </p>
         </div>

@@ -13,8 +13,8 @@ export default function FavoritePage() {
       <FavoriteHeader favoriteLength={favorite?.data?.length! || 0} />
       <div
         className={`w-full h-full ${
-          favorite?.data.length! > 0 ? "bg-gray-50" : "bg-transparent"
-        } shadow shadow-black rounded-md p-5`}
+          favorite?.data.length! > 0 ? "bg-gray-50 shadow-black " : "bg-transparent"
+        } shadowrounded-md p-5`}
       >
         <AnimeFavoriteCard
           data={favorite?.data as FavoritesAnime[]}

@@ -13,29 +13,10 @@ interface FavoriteAnimeCard2Props {
   isPending: boolean;
 }
 
-export default function AnimeFavoriteCard2({
-  data,
-  isPending,
-}: FavoriteAnimeCard2Props) {
-  if (isPending) {
-    return <CardSkeleton />;
-  }
+export default function AnimeFavoriteCard2({ data, isPending }: FavoriteAnimeCard2Props) {
   return (
     <>
-      {data?.length === 0 ? (
-        <div className="flex flex-col gap-2 items-center justify-center w-full bg-gray-200 rounded-b-sm pb-5">
-          <Image
-            src={"/img/not-found-404.png"}
-            alt="404"
-            width={300}
-            height={300}
-            className="w-56 h-56 md:w-80 md:h-80"
-          />
-          <p className="text-black font-semibold text-sm md:text-lg">
-            Belum ada anime yang ditambahkan
-          </p>
-        </div>
-      ) : (
+      {data?.length > 0 ? (
         <div className="w-full gap-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
           {data?.map(
             ({ anime: { id, title, link, image, type, status } }, index) => {
@@ -80,6 +61,21 @@ export default function AnimeFavoriteCard2({
               );
             }
           )}
+        </div>
+      ) : isPending ? (
+        <CardSkeleton />
+      ) : (
+        <div className="flex flex-col gap-2 items-center justify-center w-full bg-gray-200 rounded-b-sm pb-5">
+          <Image
+            src={"/img/not-found-404.png"}
+            alt="404"
+            width={300}
+            height={300}
+            className="w-56 h-56 md:w-80 md:h-80"
+          />
+          <p className="text-black font-semibold text-sm md:text-lg">
+            Belum ada anime yang ditambahkan
+          </p>
         </div>
       )}
     </>

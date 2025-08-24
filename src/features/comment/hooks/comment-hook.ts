@@ -10,7 +10,8 @@ export const useGetUserComment = () => {
     return useQuery({
         queryKey: ['user-komentar'],
         queryFn: async () => await CommentService.getUserComment(),
-        staleTime: 1 * 60 * 60
+        staleTime: 1 * 60 * 60,
+        retry : 1
     })
 }
 

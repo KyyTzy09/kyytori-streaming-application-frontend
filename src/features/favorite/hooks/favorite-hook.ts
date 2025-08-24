@@ -12,7 +12,8 @@ export const useGetUserFavorites = () => {
     return useQuery({
         queryKey: ['get-userFavorite'],
         queryFn: async () => await favoriteService.getUserFavorites(),
-        staleTime: 2 * 60 * 1000
+        staleTime: 2 * 60 * 1000,
+        retry : 1
     })
 }
 
