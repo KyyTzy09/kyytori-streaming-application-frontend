@@ -68,7 +68,7 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
           </p>
           <BackButton />
         </section>
-        <div className="w-full items-center h-[400px] relative flex">
+        <div className="w-full items-center h-full sm:h-[400px] relative flex">
           <Image
             src={detail?.image || defaultImage}
             alt={detail?.title || "title"}
@@ -77,13 +77,13 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
             height={450}
             quality={100}
           />
-          <section className="absolute w-full h-full bg-black/88 block sm:hidden">
+          <section className="absolute flex flex-col w-full h-full bg-black/88 sm:hidden justify-between">
             <div className="w-full flex flex-col justify-between items-center p-2 gap-10">
               <div className="w-full flex flex-col gap-2 items-center justify-center">
                 <p className="text-white font-semibold drop-shadow-white drop-shadow-sm text-center text-2xl">
                   {detail?.title}
                 </p>
-                <p className="text-red-500 font-semibold text-[16px] drop-shadow-red-500 drop-shadow-sm">
+                <p className="text-red-500 text-center font-semibold text-[16px] drop-shadow-red-500 drop-shadow-sm">
                   {detail?.titleJap || detail?.titleEng || ""}
                 </p>
               </div>
@@ -129,18 +129,18 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
                 <span className="text-red-500 font-semibold">Kyytori</span>
               </p>
             </div>
-            <div className="w-full flex items-center justify-end bg-[#232323] py-1 relative z-10">
-              <div className="w-[60%] justify-between h-full flex items-center">
+            <div className="w-full flex items-center justify-center bg-[#232323] py-1 px-2 gap-2 relative z-20">
+              <div className="flex items-center">
                 <AnimeRating rating={detail?.rating! ?? 0} />
-                <div className="w-6 h-7 mr-2">
-                  <FavoriteButton animeId={detail?.id!} user={user?.data!} />
-                </div>
+              </div>
+              <div className="flex w-6 h-7">
+                <FavoriteButton animeId={detail?.id!} user={user?.data!} />
               </div>
             </div>
           </section>
           {/* Layar Besar*/}
           <div className="absolute w-full h-full bg-black/88 hidden sm:block">
-            <div className="w-full flex flex-col justify-center items-center p-2 gap-5">
+            <div className="w-full flex flex-col justify-center items-center p-2 gap-3">
               <p className="text-white font-semibold drop-shadow-white drop-shadow-sm text-4xl">
                 {detail?.title}
               </p>

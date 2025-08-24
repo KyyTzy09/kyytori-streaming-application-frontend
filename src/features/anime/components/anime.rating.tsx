@@ -7,5 +7,21 @@ interface AnimeRatingProps {
 }
 
 export default function AnimeRating({ rating }: AnimeRatingProps) {
-  return <Rating defaultValue={Number(rating) / 2} precision={0.1} readOnly />;
+  return (
+    <Rating
+      defaultValue={Number(rating) / 2}
+      precision={0.1}
+      sx={{
+        "&": {
+          color: "#FACC15", 
+          strokeWidth: 0.8, 
+        },
+        "& .MuiRating-iconEmpty": {
+          color: "#FFFFFF",
+          strokeWidth: 0.8,
+        },
+      }}
+      readOnly
+    />
+  );
 }
