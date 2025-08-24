@@ -17,7 +17,7 @@ export default function AnimeUpdatedCard({ data, isLoading }: AnimeCard1Props) {
     return <CardSkeleton />;
   }
   return (
-    <div className="w-full gap-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+    <div className="w-full gap-1 lg:gap-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
       {data
         ?.map(
           (
@@ -54,7 +54,7 @@ export default function AnimeUpdatedCard({ data, isLoading }: AnimeCard1Props) {
                     <div className="absolute p-2 md:p-4 z-10 rounded-sm translate-y-10 opacity-0 flex flex-col justify-between gap-2 w-full group-hover:opacity-100 group-hover:translate-y-0 bg-black/90 top-0 bottom-0 transition duration-700">
                       <div className="w-full flex flex-col gap-2">
                         <p className="text-red-500 font-semibold text-[13px] md:text-[16px] line-clamp-2 md:line-clamp-none text-center">
-                          {titleJap || titleEng || title}
+                          {title}
                         </p>
                         {synopsis?.length > 0 && (
                           <p className="text-white line-clamp-3 text-start text-[10px] md:text-sm">
@@ -69,7 +69,7 @@ export default function AnimeUpdatedCard({ data, isLoading }: AnimeCard1Props) {
                               return (
                                 <p
                                   key={gen.genreName}
-                                  className="text-white flex items-center line-clamp-1 text-center justify-center text-[7px] md:text-[9px] p-1 font-semibold bg-red-500 rounded-sm"
+                                  className="w-full text-white flex items-center line-clamp-1 text-center justify-center text-[7px] md:text-[9px] p-1 font-semibold bg-red-500 rounded-sm"
                                 >
                                   {gen.genreName || ""}
                                 </p>
@@ -78,8 +78,8 @@ export default function AnimeUpdatedCard({ data, isLoading }: AnimeCard1Props) {
                             .slice(0, 4)}
                       </div>
                     </div>
-                    <CardContent className="w-full flex flex-col p-2">
-                      <div className="w-full h-40 sm:h-44 md:h-60 overflow-hidden relative">
+                    <CardContent className="w-full flex flex-col p-1 xl:p-2">
+                      <div className="w-full h-36 sm:h-52 md:h-56 lg:h-60 overflow-hidden relative">
                         <Image
                           src={image}
                           alt={title}

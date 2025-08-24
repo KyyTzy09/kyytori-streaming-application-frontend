@@ -16,7 +16,7 @@ export default function AnimeCard5({ data, isLoading }: AnimeCard1Props) {
     return <Card3Skeleton />;
   }
   return (
-    <div className="w-full gap-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+    <div className="w-full gap-1 lg:gap-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
       {data
         ?.map(
           (
@@ -58,8 +58,8 @@ export default function AnimeCard5({ data, isLoading }: AnimeCard1Props) {
                         )}
                       </div>
                     </div>
-                    <CardContent className="w-full flex flex-col p-2">
-                      <div className="w-full h-40 sm:h-44 md:h-64 overflow-hidden relative">
+                    <CardContent className="w-full flex flex-col p-1 xl:p-2">
+                      <div className="w-full h-36 sm:h-52 md:h-56 lg:h-60 overflow-hidden relative">
                         <Image
                           src={image}
                           alt={title}

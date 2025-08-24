@@ -37,7 +37,7 @@ export default function HomePage() {
         url="/ongoing"
         linkText="Lihat semua"
       />
-      <section className="w-full min-h-screen">
+      <section className="w-full h-full">
         <AnimeCard1 data={ongoing?.data as Anime[]} isLoading={ongoingLoad} />
       </section>
       <Separator className="px-2 border-red-500 border" />
@@ -48,7 +48,7 @@ export default function HomePage() {
         url="/completed"
         linkText="Lihat semua"
       />
-      <section className="w-full min-h-screen">
+      <section className="w-full h-full">
         <AnimeCard1
           data={completed?.data as Anime[]}
           isLoading={completedLoad}

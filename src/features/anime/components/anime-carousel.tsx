@@ -61,7 +61,7 @@ export default function AnimeCarousel({ data, isLoading }: AnimeCarouselProps) {
                   alt="Belum kerender"
                   width={300}
                   height={300}
-                  className="w-full h-52 md:h-72 object-cover opacity-80 rounded-md"
+                  className="w-full h-52 sm:h-60 md:h-72 object-cover opacity-80 rounded-md"
                 />
                 <section className="absolute z-20 flex flex-col w-full h-full bg-black/60 p-5 gap-1">
                   <div className="w-full flex items-start justify-between">

@@ -21,7 +21,7 @@ export default function GenresAnimeSection() {
   });
 
   return (
-    <div className="flex flex-col w-full h-full min-h-screen gap-2">
+    <div className="flex flex-col w-full h-full gap-2">
       <section className="flex w-full items-center justify-between">
         <div className="w-full flex flex-col items-start">
           <AnimeHeader

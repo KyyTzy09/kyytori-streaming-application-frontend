@@ -17,7 +17,7 @@ export default function AnimeCard2({ data, isLoading }: AnimeCard2Props) {
     return <CardSkeleton />;
   }
   return (
-    <div className="w-full gap-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+    <div className="w-full gap-1 lg:gap-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
       {data
         ?.map(({ id, title, link, image, type, status }) => {
           return (
@@ -29,8 +29,8 @@ export default function AnimeCard2({ data, isLoading }: AnimeCard2Props) {
                 <div className="absolute w-full z-10 rounded-sm scale-95 opacity-0 flex items-center justify-center gap-2 group-hover:opacity-100 group-hover:scale-100 bg-black/90 top-0 bottom-0 transition duration-500">
                   <PlayCircle className="w-8 h-8 md:w-12 md:h-12 text-white group-hover:text-red-500 transition duration-700" />
                 </div>
-                <CardContent className="w-full flex flex-col p-2">
-                  <div className="w-full h-40 sm:w-44 md:h-60 overflow-hidden relative">
+                <CardContent className="w-full flex flex-col p-1 xl:p-2">
+                  <div className="w-full h-36 sm:h-52 md:h-56 lg:h-60 overflow-hidden relative">
                     <Image
                       src={image}
                       alt={title}
