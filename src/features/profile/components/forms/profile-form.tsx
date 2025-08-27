@@ -38,7 +38,7 @@ export default function ProfileForm({
     reset,
     resetField,
     handleSubmit,
-    formState: { errors, isSubmitted },
+    formState: { errors } ,
   } = useForm({
     defaultValues: {
       name: data.profile.userName,
@@ -50,12 +50,11 @@ export default function ProfileForm({
   const {
     mutate: onProfilePatch,
     isPending: onPatch,
-    isSuccess: onPatchSuccess,
   } = useUpdateProfile();
 
   const onSubmit = (data: updateProfileType) => {
     onProfilePatch(data);
-    if (onPatchSuccess) {
+    if (!onPatch) {
       setIsOpenAction(false);
     }
   };
