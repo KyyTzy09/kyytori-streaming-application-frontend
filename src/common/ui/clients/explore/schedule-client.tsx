@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import AnimeUpdatedCard from "@/features/anime/components/cards/anime-card-update";
 
-export default function ScheduleAnimeView() {
+export default function ScheduleAnimeClient() {
   const router = useRouter();
   const { data: schedule, isPending: scheduleLoad } = useGetAnimeSchedule();
 

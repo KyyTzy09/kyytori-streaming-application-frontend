@@ -1,7 +1,5 @@
-import React from "react";
-import ScheduleAnimeView from "@/common/ui/view/explore/schedule-view";
+import ScheduleAnimeClient from "@/common/ui/clients/explore/schedule-client";
 
-export const dynamic = "force-dynamic";
 export default function ScheduleAnimePage() {
-  return <ScheduleAnimeView />;
+  return <ScheduleAnimeClient />;
 }

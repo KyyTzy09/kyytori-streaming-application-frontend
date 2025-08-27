@@ -1,7 +1,5 @@
-import React from "react";
-import OngoingAnimeView from "@/common/ui/view/explore/ongoing-view";
+import OngoingAnimeClient from "@/common/ui/clients/explore/ongoing-client";
 
-export const dynamic = "force-dynamic"; 
 export default function OngoingAnimePage() {
-  return <OngoingAnimeView/>
+  return <OngoingAnimeClient />;
 }

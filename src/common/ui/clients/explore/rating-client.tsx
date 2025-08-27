@@ -1,57 +1,62 @@
 "use client";
 
+import NotFound from "@/app/not-found";
 import { Button } from "@/common/shadcn/button";
-import { Anime } from "@/common/types/anime";
-import AnimeCard2 from "@/features/anime/components/cards/anime-card2";
-import { useGetCompletedAnime } from "@/features/anime/hooks/anime-hook";
+import { Episodes } from "@/common/types/anime";
+import AnimeHeader from "@/features/anime/components/anime-header";
+import { useGetTopAnime } from "@/features/anime/hooks/anime-hook";
+import TopEpisodeCard from "@/features/episodes/components/episode-top-card";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import NotFound from "@/app/not-found";
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import AnimeHeader from "@/features/anime/components/anime-header";
 
-export default function CompletedAnimeView() {
-  const searchParams = useSearchParams();
+export default function AnimeTopRatingClient() {
   const router = useRouter();
+  const searchParam = useSearchParams();
 
-  const page = searchParams.get("page");
-  const { data: completed, isLoading: completedLoad } = useGetCompletedAnime(
+  const page = searchParam.get("page");
+  const { data: topRateAnime, isPending: topRateAnimeLoad } = useGetTopAnime(
     Number(page)
   );
+
+  if (topRateAnime?.data.length === 0) {
+    return <NotFound />;
+  }
 
   const paginationItems = [
     {
       name: "Sebelumnya",
-      value: completed?.pagination.prevPage
-        ? ` /completed?page=${completed?.pagination.prevPage}`
+      value: topRateAnime?.pagination.prevPage
+        ? ` /rating?page=${topRateAnime?.pagination.prevPage}`
         : null,
     },
     {
       name: "Selanjutnya",
-      value: completed?.pagination.nextPage
-        ? `/completed?page=${completed?.pagination.nextPage}`
+      value: topRateAnime?.pagination.nextPage
+        ? `/rating?page=${topRateAnime?.pagination.nextPage}`
         : null,
     },
   ];
 
-  if (completed?.data.length === 0) {
-    return <NotFound />;
-  }
   return (
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       <AnimeHeader
-        front="Anime"
-        back="Completed"
+        front="Top"
+        back="Rating-Anime"
         url="/home"
         linkText="Kembali"
       />
-      <AnimeCard2 data={completed?.data as Anime[]} isLoading={completedLoad} />
-      <section className="w-full flex items-center justify-center gap-3">
+      <TopEpisodeCard
+        data={topRateAnime?.data as Episodes[]}
+        isLoading={topRateAnimeLoad}
+        page={Number(page)}
+      />
+      <section className="w-full flex items-center justify-center gap-2 md:gap-5">
         <Button
           className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
-          disabled={Number(page) === 1 || Number(page) === 0}
+          disabled={!Number(page) || Number(page) === 1}
           onClick={() => {
-            scrollTo({ top: 0, behavior: "smooth" }), router.push(`/completed`);
+            scrollTo({ top: 0, behavior: "smooth" }), router.push(`/rating`);
           }}
         >
           <ArrowBigLeft className="text-white w-5 h-5" />
@@ -75,13 +80,13 @@ export default function CompletedAnimeView() {
         <Button
           className="text-white font-semibold bg-red-500 hover:bg-red-400 transition duration-700 text-[10px] md:text-sm"
           disabled={
-            !Number(completed?.pagination.maxPage) ||
-            Number(page) === Number(completed?.pagination.maxPage) ||
-            Number(page) > Number(completed?.pagination.maxPage)
+            !Number(topRateAnime?.pagination.maxPage) ||
+            Number(page) === Number(topRateAnime?.pagination.maxPage) ||
+            Number(page) > Number(topRateAnime?.pagination.maxPage)
           }
           onClick={() => {
             scrollTo({ top: 0, behavior: "smooth" }),
-              router.push(`/completed?page=${completed?.pagination.maxPage}`);
+              router.push(`/rating?page=${topRateAnime?.pagination.maxPage}`);
           }}
         >
           MaxPage

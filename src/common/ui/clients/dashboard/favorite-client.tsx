@@ -1,0 +1,26 @@
+"use client";
+
+import { FavoritesAnime } from "@/common/types/favorite";
+import AnimeFavoriteCard from "@/features/favorite/components/cards/favorite-anime-card";
+import FavoriteHeader from "@/features/favorite/components/favorite-header";
+import { useGetUserFavorites } from "@/features/favorite/hooks/favorite-hook";
+import React from "react";
+
+export default function FavoriteClient() {
+  const { data: favorite, isPending } = useGetUserFavorites();
+  return (
+    <div className="w-full min-h-screen p-5">
+      <FavoriteHeader favoriteLength={favorite?.data?.length! || 0} />
+      <div
+        className={`w-full h-full ${
+          favorite?.data.length! > 0 ? "bg-gray-50 shadow-black " : "bg-transparent"
+        } shadowrounded-md p-5`}
+      >
+        <AnimeFavoriteCard
+          data={favorite?.data as FavoritesAnime[]}
+          isLoading={isPending}
+        />
+      </div>
+    </div>
+  );
+}

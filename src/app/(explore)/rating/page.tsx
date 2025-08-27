@@ -1,7 +1,5 @@
-import AnimeTopRatingView from "@/common/ui/view/explore/rating-view";
-import React from "react";
+import AnimeTopRatingClient from "@/common/ui/clients/explore/rating-client";
 
-export const dynamic = "force-dynamic";
 export default function AnimeTopRatingPage() {
-  return <AnimeTopRatingView />;
+  return <AnimeTopRatingClient />;
 }

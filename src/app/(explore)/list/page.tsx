@@ -1,6 +1,5 @@
-import AnimeListView from "@/common/ui/view/explore/list-view";
+import AnimeListClient from "@/common/ui/clients/explore/list-client";
 
-export const dynamic = "force-dynamic";
 export default function AnimeListPage() {
-  return <AnimeListView />;
+  return <AnimeListClient />;
 }

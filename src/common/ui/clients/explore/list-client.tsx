@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import NotFound from "@/app/not-found";
 
-export default function AnimeListView() {
+export default function AnimeListClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
 

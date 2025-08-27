@@ -1,6 +1,5 @@
-import CompletedAnimeView from "@/common/ui/view/explore/completed-view";
+import CompletedAnimeClient from "@/common/ui/clients/explore/completed-client";
 
-export const dynamic = "force-dynamic";
 export default function CompletedAnimePage() {
-  return <CompletedAnimeView/>
+  return <CompletedAnimeClient/>
 }

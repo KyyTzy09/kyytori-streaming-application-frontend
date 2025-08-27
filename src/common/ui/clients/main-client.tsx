@@ -6,7 +6,7 @@ import PopularAnimeMainSection from "@/features/anime/components/sections/popula
 import { motion } from "motion/react";
 import Image from "next/image";
 
-export default function LandingPage() {
+export default function MainClient() {
   const superiorityitems = [
     {
       title: "Update Super Cepat",
