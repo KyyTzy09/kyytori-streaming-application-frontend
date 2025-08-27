@@ -35,6 +35,7 @@ export default function ProfileForm({
   const {
     register,
     watch,
+    reset,
     resetField,
     handleSubmit,
     formState: { errors, isSubmitted },
@@ -46,13 +47,15 @@ export default function ProfileForm({
     resolver: zodResolver(updateProfileSchema),
   });
 
-  const { mutate: onProfilePatch, isPending: onPatch } = useUpdateProfile();
+  const {
+    mutate: onProfilePatch,
+    isPending: onPatch,
+    isSuccess: onPatchSuccess,
+  } = useUpdateProfile();
 
   const onSubmit = (data: updateProfileType) => {
     onProfilePatch(data);
-    if (isSubmitted) {
-      resetField("name");
-      resetField("info");
+    if (onPatchSuccess) {
       setIsOpenAction(false);
     }
   };
@@ -60,6 +63,13 @@ export default function ProfileForm({
   // Data
   const name = watch("name");
   const info = watch("info");
+
+  React.useEffect(() => {
+    reset({
+      name: data?.profile.userName,
+      info: data?.profile.info,
+    });
+  }, [data, reset]);
 
   return (
     <AlertDialog open={isOpen}>
