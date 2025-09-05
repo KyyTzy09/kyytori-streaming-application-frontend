@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
 import { Card, CardContent } from "@/common/shadcn/card";
 import { Anime } from "@/common/types/anime";
-import CardSkeleton from "../skeleton/anime-skeleton-card";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { statusColor } from "@/common/helpers/status";
 import CountDownTime from "@/common/ui/countdown-time";
 import { Timer } from "lucide-react";
+import Card3Skeleton from "../skeleton/anime-skeleton-card3";
 
 interface AnimeCard1Props {
   data: Anime[];
@@ -94,7 +94,7 @@ export default function AnimeUpdatedCard({ data, isLoading }: AnimeCard1Props) {
           )}
         </div>
       ) : isLoading ? (
-        <CardSkeleton />
+        <Card3Skeleton />
       ) : (
         <div className="flex flex-col items-center justify-center w-full">
           <Image
