@@ -68,18 +68,18 @@ export default function ScheduleAnimeClient() {
   return (
     <div className="w-full min-h-screen p-5">
       <NavigationHeader
-        description="Catatan: Jadwal ini mungkin tidak sepenuhnya akurat."
+        description="Jadwal ini hanya estimasi berdasarkan update terakhir minggu lalu. Jadi kemungkinan episode minggu ini rilis lebih cepat atau mungkin bisa terlambat."
         title={"Jadwal anime"}
         actionText="Kembali"
         action={handleBack}
         Icon={ArrowBigLeft}
       />
       <div className="w-full">
-        {sortedJadwal.map((jad) => {
+        {sortedJadwal.map(({ data: anime, day }) => {
           return (
-            <div key={jad.day} className="w-full">
+            <div key={day} className="w-full">
               <div className="w-full flex justify-between items-center my-5">
-                {jad.day === convertDay(new Date()).name ? (
+                {day === convertDay(new Date()).name ? (
                   <motion.p
                     animate={{
                       boxShadow: [
@@ -93,16 +93,21 @@ export default function ScheduleAnimeClient() {
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    className={`flex items-center justify-center gap-2 bg-red-500 rounded-sm px-3 py-1 text-white font-semibold text-lg ml-1 border-white border`}
+                    className={`flex items-center justify-center gap-2 bg-red-500 rounded-sm px-3 py-1 text-white font-semibold text-[15px] md:text-lg ml-1 border-white border`}
                   >
-                    <Star className="w-4 h-4" fill="yellow"/>
-                    {jad.day}
+                    <Star className="w-4 h-4" fill="yellow" />
+                    {day} ({anime?.length || 0})
                   </motion.p>
                 ) : (
-                  <p className="text-red-500 font-semibold text-lg ml-1">{jad.day}</p>
+                  <p className="text-white font-semibold text-[15px] md:text-lg ml-1">
+                    {day} ({anime?.length || 0})
+                  </p>
                 )}
               </div>
-              <AnimeUpdatedCard data={jad.data as Anime[]} isLoading={scheduleLoad} />
+              <AnimeUpdatedCard
+                data={anime as Anime[]}
+                isLoading={scheduleLoad}
+              />
             </div>
           );
         })}

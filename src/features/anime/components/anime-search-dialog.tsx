@@ -31,7 +31,7 @@ export default function AnimeSearchDialog({
     setSearch(e.target.value);
     setTimeout(() => {
       setDebounce(e.target.value);
-    }, 1000);
+    }, 2000);
   };
 
   const { data: anime, isPending: isLoading } = useGetSearchAnime(

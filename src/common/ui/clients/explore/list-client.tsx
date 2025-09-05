@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import NotFound from "@/app/not-found";
+import BackButton from "../../buttons/back-button";
 
 export default function AnimeListClient() {
   const searchParams = useSearchParams();
@@ -16,10 +17,9 @@ export default function AnimeListClient() {
 
   const page = searchParams.get("page");
 
-  const {
-    data: Anime,
-    isLoading: AnimeLoading,
-  } = useGetAnimeList(Number(page));
+  const { data: Anime, isLoading: AnimeLoading } = useGetAnimeList(
+    Number(page)
+  );
 
   const paginationItems = [
     {
@@ -43,15 +43,9 @@ export default function AnimeListClient() {
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
       <section className="w-full flex items-center justify-between">
         <p className="text-white text-lg md:text-xl font-semibold p-1">
-          Anime-<span className="text-red-500 font-mono">List</span>
+          Anime <span className="text-red-500 font-mono">List</span>
         </p>
-        <Link
-          href={"/home"}
-          className="flex text-sm text-white px-2 py-1 items-center justify-center gap-2 bg-red-500 hover:bg-red-400 rounded-sm font-semibold"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Kembali
-        </Link>
+        <BackButton />
       </section>
       <section className="w-full flex items-center justify-between">
         <AnimeCard2 data={Anime?.data as Anime[]} isLoading={AnimeLoading} />

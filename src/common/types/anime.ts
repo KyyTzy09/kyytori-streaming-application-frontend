@@ -8,6 +8,8 @@ export type Anime = {
 
     synopsis: Synopsis[]
     updatedEps: number | string
+    updatedStatus: string
+
     episode: number
     link: string
     type: string

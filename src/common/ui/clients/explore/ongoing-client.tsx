@@ -9,6 +9,7 @@ import React from "react";
 import NotFound from "@/app/not-found";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import AnimeHeader from "@/features/anime/components/anime-header";
+import BackButton from "../../buttons/back-button";
 
 export default function OngoingAnimeClient() {
   const searchParams = useSearchParams();
@@ -39,12 +40,12 @@ export default function OngoingAnimeClient() {
   }
   return (
     <div className="w-full flex flex-col p-3 md:p-5 items-center gap-5">
-      <AnimeHeader
-        front="Anime"
-        back="On-going"
-        url="/home"
-        linkText="Kembali"
-      />
+      <section className="w-full flex items-center justify-between">
+        <p className="text-white text-lg md:text-xl font-semibold p-1">
+          Anime <span className="text-red-500 font-mono">Ongoing</span>
+        </p>
+        <BackButton />
+      </section>
       <AnimeCard2 data={ongoing?.data as Anime[]} isLoading={onGoingLoad} />
       <section className="w-full flex items-center justify-center gap-2 md:gap-5">
         <Button

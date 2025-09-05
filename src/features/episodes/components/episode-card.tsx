@@ -33,10 +33,14 @@ export default function EpisodeCard({
               </div>
               <div className="flex text-[10px] sm:text-sm p-1 sm:p-2 text-white font-mono items-center justify-center bg-red-500 group-hover:bg-red-300 transition duration-700 z-10 absolute top-0 left-0 rounded-br-sm">
                 {Number(ep.createdAt.split(",")[0].split(" ")[1]) ===
-                Number(new Date().getDate())
+                Number(new Date().getDate()) &&
+                Number(ep.createdAt.split(", ")[1].split(" ")[0]) ===
+                  Number(new Date().getFullYear())
                   ? "Hari Ini"
                   : Number(ep.createdAt.split(",")[0].split(" ")[1]) ===
-                    Number(new Date().getDate() - 1)
+                      Number(new Date().getDate() - 1) &&
+                    Number(ep.createdAt.split(", ")[1].split(" ")[0]) ===
+                      Number(new Date().getFullYear())
                   ? "Kemarin"
                   : ep.createdAt}
               </div>

@@ -9,7 +9,7 @@ export default function BackButton() {
   const router = useRouter()
     return (
     <Button
-      className="flex items-center justify-center bg-red-500 hover:bg-red-300 text-white font-semibold transition duration-700"
+      className="flex items-center justify-center bg-red-500 hover:bg-red-300 text-white fill-white font-semibold transition duration-700"
       onClick={() => router.back()}
     >
       Kembali
