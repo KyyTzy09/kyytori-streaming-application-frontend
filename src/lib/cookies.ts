@@ -7,7 +7,7 @@ export async function setCookies(token: string) {
     const isProduction = process.env.NODE_ENV === "production";
     (await cookie).set("session_token", token, {
         httpOnly: true,
-        maxAge: 24 * 60 * 60,
+        maxAge: 30* 24 * 60 * 60,
         secure: isProduction ? true : false,
         sameSite: "lax",
         path: "/"
