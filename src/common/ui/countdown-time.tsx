@@ -16,8 +16,12 @@ export default function CountDownTime({
       const now = Math.floor(Date.now() / 1000);
       const diff = Number(realeaseTimeStamp) - now;
 
-      if (diff <= 0) {
-        setTimeLeft("Sudah Rilis");
+      if (diff <= 0 && realeaseTimeStamp !== "Sudah Rilis") {
+        setTimeLeft("Delay");
+        clearInterval(interval);
+        return;
+      } else if (isNaN(Number(realeaseTimeStamp))) {
+        setTimeLeft(realeaseTimeStamp);
         clearInterval(interval);
         return;
       }
