@@ -9,10 +9,12 @@ import { deleteCookies, setCookies } from "@/lib/cookies"
 
 export const useSignIn = () => {
     const router = useRouter()
+    const queryClient = useQueryClient()
     return useMutation({
         mutationKey: ["signIn-post"],
         mutationFn: async (data: loginType) => await authService.login(data),
         onSuccess: async (response) => {
+            queryClient.invalidateQueries()
             await setCookies(response?.token!);
             const session = (await authService.getSession())?.data;
             toast.success(`Selamat Datang ${session?.profile.userName} !!`, {
@@ -24,6 +26,7 @@ export const useSignIn = () => {
                 draggable: true,
                 progress: undefined,
             })
+            router.refresh()
             router.push("/home")
         },
         onError: ({ message }) => {
@@ -76,7 +79,7 @@ export const useUpdateEmail = () => {
     return useMutation({
         mutationKey: ["email-patch"],
         mutationFn: async (data: updateEmailType) => await authService.updateUserEmail(data),
-        onSuccess: async() => {
+        onSuccess: async () => {
             toast.success("berhasil memperbarui email", {
                 position: "top-right",
                 autoClose: 2000,
@@ -146,10 +149,10 @@ export const useSignOut = () => {
                 autoClose: 2000,
                 position: "top-center"
             })
-            queryClient.resetQueries({ queryKey: ['profile'], type :"all" })
+            queryClient.resetQueries({ queryKey: ['profile'], type: "all" })
             router.refresh()
         },
-        onError: ({message}) => {
+        onError: ({ message }) => {
             toast.error(message || "Logout Gagal", {
                 draggable: true,
                 autoClose: 2000,
