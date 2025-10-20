@@ -61,20 +61,20 @@ export default function EpisodeClient() {
         <p className="font-semibold text-xl line-clamp-1 text-red-500">
           {decodeURIComponent(epsTitle.replace(/\-+/g, " "))}
         </p>
-        <BackButton/>
+        <BackButton />
       </section>
       <div className="w-full flex flex-col gap-5 items-center">
         <div className="w-full grid grid-cols-3 gap-1">
-          {epsLink?.data.map((link) => {
+          {epsLink?.data.map((link, i) => {
             return (
               <Button
+                key={i}
                 className={`bg-transparent border-red-500 border hover:bg-red-500 transition duration-700 p-1 text-sm ${
                   iframe === link.url && "bg-red-500 border-white"
                 }`}
                 onClick={() => {
                   setIframe(link.url);
                 }}
-                key={link.id}
                 disabled={iframe === link.url}
               >
                 {link.name}

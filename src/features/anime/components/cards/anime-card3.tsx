@@ -18,8 +18,8 @@ export default function AnimeCard3({ data, isLoading }: AnimeCard3Props) {
   }
   return (
     <div className="w-full h-80 flex flex-col overflow-y-auto gap-5">
-      {data.length > 0 &&
-        data.map(
+      {data?.length > 0 &&
+        data?.map(
           (
             { id, image, genres, link, status, synopsis, title, type, },
             i

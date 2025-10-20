@@ -234,11 +234,13 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
         <p className="text-red-500 font-bold text-sm md:text-xl">
           Episode ({episodes?.length}):
         </p>
-        <EpisodeCard
-          animeTitle={animeTitle}
-          episodes={episodes!}
-          anime={detail!}
-        />
+        {episodes?.length! > 0 && (
+          <EpisodeCard
+            animeTitle={animeTitle}
+            episodes={episodes!}
+            anime={detail!}
+          />
+        )}
       </section>
     </div>
   );
