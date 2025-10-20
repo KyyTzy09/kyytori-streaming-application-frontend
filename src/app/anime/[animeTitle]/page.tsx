@@ -30,8 +30,6 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
     })
   )?.data;
 
-  const user = (await checkSession())?.data;
-
   const detailList = [
     {
       name: "Status :",
@@ -108,7 +106,7 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
               </div>
               <div className="w-full flex flex-wrap gap-2 items-center justify-center">
                 {detail?.genres?.length! > 0 &&
-                  detail?.genres.map((gen) => {
+                  detail?.genres?.map((gen) => {
                     return (
                       <Link
                         href={`/gen/${gen.genreName}`}
@@ -134,7 +132,7 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
                 <AnimeRating rating={detail?.rating! ?? 0} />
               </div>
               <div className="flex w-6 h-7">
-                <FavoriteButton animeId={detail?.id!} user={user?.data!} />
+                <FavoriteButton animeId={detail?.id!} />
               </div>
             </div>
           </section>
@@ -165,7 +163,7 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
                 })}
               </div>
               <div className="w-[34rem] flex flex-wrap gap-2 items-center justify-start">
-                {detail?.genres?.length! > 0 &&
+                {(detail?.genres?.length as number) > 0 &&
                   detail?.genres.map((gen) => {
                     return (
                       <Link
@@ -201,7 +199,7 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
                 quality={100}
               />
               <div className="w-6 h-7 absolute bottom-1 right-2">
-                <FavoriteButton user={user?.data!} animeId={detail?.id!} />
+                <FavoriteButton animeId={detail?.id!} />
               </div>
             </div>
             {!detail?.image && <ImageSkeleton width="full" height={80} />}
@@ -217,7 +215,7 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
               {detail?.title}
             </p>
             <div className="w-full flex flex-col items-center gap-3">
-              {detail?.synopsis.length! > 0 &&
+              {detail?.synopsis?.length! > 0 &&
                 detail?.synopsis.map((sin) => {
                   return (
                     <p key={sin.id} className="text-white text-justify">
@@ -232,7 +230,7 @@ export default async function DetailAnime({ params }: DetailAnimeProps) {
       {/* Episodes section */}
       <section className="w-full h-full bg-[#232323] mt-20 p-5">
         <p className="text-red-500 font-bold text-sm md:text-xl">
-          Episode ({episodes?.length}):
+          Episode ({episodes?.length || 0})
         </p>
         {episodes?.length! > 0 && (
           <EpisodeCard

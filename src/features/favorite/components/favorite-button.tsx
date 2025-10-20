@@ -13,16 +13,16 @@ import {
   useGetFavorite,
   usePostFavorite,
 } from "../hooks/favorite-hook";
-import { User } from "@/common/types/user";
 import UnauthorizedModal from "@/common/ui/modals/unauthorized-modal";
+import { useGetProfile } from "@/features/profile/hooks/profile-hook";
 
 interface FavoriteButtonProps {
   animeId: string;
-  user: User;
 }
 
-export default function FavoriteButton({ animeId, user }: FavoriteButtonProps) {
+export default function FavoriteButton({ animeId }: FavoriteButtonProps) {
   const [isLogin, setIsLogin] = React.useState<boolean>(false);
+  const { data: user } = useGetProfile();
 
   const { data: favoriteExist, isPending: getting } = useGetFavorite({
     animeId,
@@ -37,7 +37,7 @@ export default function FavoriteButton({ animeId, user }: FavoriteButtonProps) {
   });
 
   const handleFavorite = () => {
-    if (user) {
+    if (user?.data) {
       if (!favoriteExist?.data) {
         addFavorite();
       } else {
